@@ -21,6 +21,8 @@
 
 # To run the api
 
+run mongod ( mongodb server )
+
 Navigate to Project
 	hit  :  python manage.py runserver
 
