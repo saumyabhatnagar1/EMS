@@ -5,7 +5,7 @@ from .services import accountService
 import json
 
 def index(request):
-    return HttpResponse("Hello World")
+    return JsonResponse({"message":"Hello from Server!"})
 
 @csrf_exempt
 def createUser(request):
