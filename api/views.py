@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from .services import accountService
+from .services import accountService, principleService
+
 
 import json
 
@@ -21,8 +22,20 @@ def createUser(request):
 
 @csrf_exempt
 def login(request):
+    if principleService.isLoggedIn():
+        return JsonResponse(principleService.getUser())
     if request.method != 'POST' or len(request.body) <= 2:
             return JsonResponse({'status':404,'message':'INVALID_REQUEST'})
     user_data = json.loads(request.body)
-    account = accountService.getUser(user_data)
-    return JsonResponse({"email":account["email"],"name":account["name"]})
+    json_res = accountService.getUser(user_data)
+    if json_res!=None:
+        json_res["status"] = 200
+        return JsonResponse(json_res)
+    else:
+        return JsonResponse({"status":404,"message":"INVALID CREDENTIALS"})
+
+@csrf_exempt
+def logout(request):
+    if principleService.isLoggedIn():
+        principleService.removeCurrentUser()
+    return JsonResponse({"status":205,"message":"logout success"})

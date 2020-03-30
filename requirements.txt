@@ -6,6 +6,7 @@ chardet==3.0.4
 cryptography==2.2.2
 cycler==0.10.0
 Django==2.0.6
+django-cors-headers==3.2.1
 dnspython==1.16.0
 idna==2.7
 image==1.5.24
