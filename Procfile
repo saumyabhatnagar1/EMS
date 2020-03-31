@@ -1,1 +1,1 @@
-web: gunicorn ems.wsgi
+web: gunicorn EMS.wsgi
