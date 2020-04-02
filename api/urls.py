@@ -1,10 +1,11 @@
 from django.urls import path
 
+from api.controller import accountController
 from . import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('login/',views.login,name = 'login'),
-    path('createUser/',views.createUser,name='create User'),
-    path('logout/',views.logout,name='Logout')
+    path('', accountController.index, name='index'),
+    path('login/', accountController.login, name='login'),
+    path('createUser/', accountController.createUser, name='create User'),
+    path('logout/', accountController.logout, name='Logout')
 ]
