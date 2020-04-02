@@ -8,6 +8,11 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { TimesheetsComponent } from './timesheets/timesheets.component';
+import { CalendarCommonModule, CalendarMonthModule } from 'angular-calendar';
+
 
 @NgModule({
   declarations: [
@@ -15,14 +20,24 @@ import { NavbarComponent } from './navbar/navbar.component';
     RegisterComponent,
     LoginComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    TimesheetsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }),
+    CalendarCommonModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }),
+    CalendarMonthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
