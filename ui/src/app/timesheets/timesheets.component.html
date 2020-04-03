@@ -1,21 +1,34 @@
 <div class="container">
-  <div style="box-shadow: 0 1px 0 #bdbdbd, 0 2px 0 #fff, 0 3px 0 #bdbdbd, 0 4px 0 #fff, 0 5px 0 #bdbdbd, 0 0 0 1px
-  #bdbdbd;width:22%;border-radius: 0.6em;">
-    <div style="color: #fff;
-  background-color: #fd9f1b;
-  border-bottom: 1px dashed #f37302;
-  box-shadow: 0 2px 0 #fd9f1b;border-top-left-radius:0.6em;border-top-right-radius:0.6em;" align="center">
-      <h6>{{year}}</h6>
-      <h3>{{month}}</h3>
+  <div class="row">
+    <div class="col-sm">
+      <div style="box-shadow: 0 1px 0 #bdbdbd, 0 2px 0 #fff, 0 3px 0 #bdbdbd, 0 4px 0 #fff, 0 5px 0 #bdbdbd, 0 0 0 1px
+      #bdbdbd;width:50%;border-radius: 0.6em;" class="">
+        <div style="color: #fff;
+      background-color: #fd9f1b;
+      border-bottom: 1px dashed #f37302;
+      box-shadow: 0 2px 0 #fd9f1b;border-top-left-radius:0.6em;border-top-right-radius:0.6em;" align="center">
+          <h6>{{year}}</h6>
+          <h3>{{month}}</h3>
+        </div>
+        <div align="center">
+          <h1>{{date}}</h1>
+          <h4>{{day}}</h4>
+        </div>
+      </div>
     </div>
-    <div align="center">
-      <h1>{{date}}</h1>
-      <h4>{{day}}</h4>
-    </div>
-  </div>
+    <div class="col-sm">
+      Status
+      <h4>{{message}}</h4>
+      <form [formGroup] = "timings" (ngSubmit)="saveTimeSheet()">
+        <label>In-Time : HH MM</label>
+        <input type="number" min = "0" max="24" formControlName="in_hours">
+        <input type="number" min="0" max="59" formControlName="in_minutes">
 
-  <div>
-    Status
-    <h4>You are not submitted in-out time today!</h4>
+        <label>Out-Time : HH MM</label>
+        <input type="number" min = "0" max="24" formControlName="out_hours">
+        <input type="number" min="0" max="59" formControlName="out_minutes">
+        <button class="btn btn-primary" type="submit"  [disabled]="timings.invalid || isSubmitted">Submit</button>
+      </form>
+    </div>
   </div>
 </div>

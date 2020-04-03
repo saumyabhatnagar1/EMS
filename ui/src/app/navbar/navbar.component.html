@@ -16,6 +16,10 @@
       </li>
 
       <li class="nav-item" [hidden]="isLoggedIn">
+        <a class="nav-link" routerLink="/timesheets">Timesheets</a>
+      </li>
+
+      <li class="nav-item" [hidden]="isLoggedIn">
         <a class="nav-link" (click) = "logout()">Logout</a>
       </li>
 

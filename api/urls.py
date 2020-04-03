@@ -1,11 +1,14 @@
 from django.urls import path
 
-from api.controller import accountController
-from . import views
+from api.controllers import accountController, timesheetsController
 
 urlpatterns = [
     path('', accountController.index, name='index'),
     path('login/', accountController.login, name='login'),
     path('createUser/', accountController.createUser, name='create User'),
-    path('logout/', accountController.logout, name='Logout')
+    path('logout/', accountController.logout, name='Logout'),
+
+    path('timesheets/', timesheetsController.index, name='time sheets'),
+    path('timesheets/add', timesheetsController.add, name='add time sheet'),
+    path('timesheets/find', timesheetsController.find, name='find time sheet')
 ]

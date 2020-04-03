@@ -9,7 +9,7 @@ def authenticate(account, password):
 def createUser(account):
     account["role"] = "USER"
     if accountMapper.findByEmail(account["email"]) is None:
-        id = accountMapper.insert(account)
+        id = accountMapper.save(account)
         return id
     return None
 
