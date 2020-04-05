@@ -18,6 +18,12 @@ export class PrincipleService {
     return username;
   }
 
+  getRole(){
+      let user = JSON.parse(localStorage.getItem(this.key+'principle'));
+      const role = user && user.role || undefined;
+      return role;
+    }
+
   delete(){
     localStorage.removeItem(this.key+'principle');
   }

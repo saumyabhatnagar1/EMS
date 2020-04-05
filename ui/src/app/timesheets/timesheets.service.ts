@@ -15,4 +15,12 @@ export class TimesheetsService {
   findTimeSheet(data){
       return this.http.post(this.globals.baseApiUrl+'timesheets/find',data);
   }
+
+  adminFindTimeSheet(data){
+        return this.http.post(this.globals.baseApiUrl+'timesheets/admin/find',data);
+  }
+
+  adminUpdateTimeSheet(data){
+      return this.http.post(this.globals.baseApiUrl+'timesheets/admin/update',data);
+  }
 }

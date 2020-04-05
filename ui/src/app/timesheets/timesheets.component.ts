@@ -18,7 +18,9 @@ export class TimesheetsComponent implements OnInit {
   public in_time:any;
   public out_time:any;
   public id:any;
+  public username:string;
   public isSubmitted:boolean = false;
+  public isAdmin:boolean=false;
   public timings = new FormGroup({
     in_hours : new FormControl('',Validators.required),
     in_minutes : new FormControl('',Validators.required),
@@ -29,14 +31,30 @@ export class TimesheetsComponent implements OnInit {
   constructor(private principle:PrincipleService, private timesheetsService:TimesheetsService) { }
 
   ngOnInit(): void {
-      this.day = this.getDay();
-      this.date = this.getDate();
-      this.month = this.getMonth();
-      this.year = this.getYear();
-      this.fetchSheet();
+      this.updateCurrentDate(this.today.getFullYear(),this.today.getMonth(),this.today.getDate(),this.today.getDay())
+      this.fetchSheet(this.principle.getUsername(),this.date,this.month,this.year);
+      //admin view
+      if(this.principle.getRole() =="ADMIN"){
+          this.isAdmin = true;
+      }
   }
-  fetchSheet(){
-      let data = {"username":this.principle.getUsername(), "date": this.date, "month": this.month, "year": this.year}
+  findRecord(username,date,month,year){
+    console.log(username,date,month,year)
+  }
+  onDateSelect(selectedDate){
+    //console.log(selectedDate)
+    let date = new Date(selectedDate.year,selectedDate.month-1,selectedDate.day);
+    this.updateCurrentDate(date.getFullYear(),date.getMonth(),date.getDate(),date.getDay());
+  }
+  updateCurrentDate(year,month,date,day){
+    //console.log(year,month,date,day)
+    this.year = year;
+    this.month = this.getMonth(month);
+    this.date = date;
+    this.day = this.getDay(day);
+  }
+  fetchSheet(username,date,month,year){
+      let data = {"username":username || this.principle.getUsername(), "date": date, "month": month, "year": year}
       this.timesheetsService.findTimeSheet(JSON.stringify(data)).subscribe(
         res =>{
           console.log(res)
@@ -54,8 +72,9 @@ export class TimesheetsComponent implements OnInit {
   }
 
   saveTimeSheet(){
+
     let data = {
-               "username":this.principle.getUsername(),
+               "username":this.username || this.principle.getUsername(),
                "day":this.day,
                "date":this.date,
                "month":this.month,
@@ -67,17 +86,25 @@ export class TimesheetsComponent implements OnInit {
                "createdOn":this.today
              };
     //console.log(data);
-    this.timesheetsService.addTimeSheet(data).subscribe(
-    res=>{
-       console.log(res);
-    },err=>{
-        console.log(err)
-    });
-    this.fetchSheet();
+    if(this.id == undefined){
+        this.timesheetsService.addTimeSheet(data).subscribe(
+           res=>{
+              console.log(res);
+           },err=>{
+               console.log(err)
+        });
+    }else{
+        this.timesheetsService.adminUpdateTimeSheet(data).subscribe(
+            res=>{
+               console.log(res);
+            },err=>{
+                console.log(err)
+         });
+    }
   }
 
-  getDay(){
-    let day = this.today.getDay();
+  getDay(day){
+    //let day = this.today.getDay();
     switch(day){
       case 0:
         return "Sunday";
@@ -100,8 +127,8 @@ export class TimesheetsComponent implements OnInit {
     return this.today.getDate();
   }
 
-  getMonth(){
-    switch(this.today.getMonth()){
+  getMonth(month){
+    switch(month){
         case 0:
             return "January";
         case 1:

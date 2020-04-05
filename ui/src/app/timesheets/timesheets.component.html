@@ -27,8 +27,16 @@
         <label>Out-Time : HH MM</label>
         <input type="number" min = "0" max="24" formControlName="out_hours">
         <input type="number" min="0" max="59" formControlName="out_minutes">
-        <button class="btn btn-primary" type="submit"  [disabled]="timings.invalid || isSubmitted">Submit</button>
+        <button  class="btn btn-primary" type="submit"  [disabled]="timings.invalid">Save</button>
       </form>
     </div>
+  </div>
+  <br>
+  <div class ="row" >
+      <div class="col-sm">
+        <ngb-datepicker (dateSelect)="onDateSelect($event)"></ngb-datepicker><br/>
+          <input required [hidden]="!isAdmin" type="text" [(ngModel)]="username" placeholder="Enter Username"/><br/>
+          <button class="btn btn-primary" (click)="fetchSheet(username,date,month,year)">Fetch</button>
+      </div>
   </div>
 </div>

@@ -12,6 +12,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { TimesheetsComponent } from './timesheets/timesheets.component';
 import { CalendarCommonModule, CalendarMonthModule } from 'angular-calendar';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { CalendarCommonModule, CalendarMonthModule } from 'angular-calendar';
       provide: DateAdapter,
       useFactory: adapterFactory
     }),
-    CalendarMonthModule
+    CalendarMonthModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
