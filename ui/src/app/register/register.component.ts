@@ -13,6 +13,13 @@ export class RegisterComponent implements OnInit {
       name: new FormControl('',Validators.required),
       email: new FormControl('',[Validators.required,Validators.email]),
       password: new FormControl('',Validators.required),
+      date:new FormControl(''),
+      gender:new FormControl(),
+      'house no':new FormControl(),
+      'street no':new FormControl(),
+      addressline:new FormControl(),
+      'mobile no':new FormControl(),
+      country:new FormControl()
     });
   constructor(private _registerService:RegisterService) {
 
@@ -35,5 +42,10 @@ export class RegisterComponent implements OnInit {
       },err=>{
           console.log(err)
       });
+      
+    }
+
+  onSubmit(){
+    console.log(this.accountForm.value)
   }
 }
