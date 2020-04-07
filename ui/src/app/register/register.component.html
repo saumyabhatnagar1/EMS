@@ -25,6 +25,7 @@
 <hr>
  <b><h2> Personal Information </h2></b><br>
 
+<<<<<<< HEAD
  <div class="form-group">
  <label>
    Name
@@ -102,6 +103,24 @@
 
 
  <button (click)="onSubmit()"  class="btn btn-primary" type="submit" >Submit</button>
+=======
+  <label>
+    Name :
+    <input type="text" formControlName="name">
+  </label>
+  <br>
+  <label>
+    Email :
+    <input type="email" formControlName="email">
+  </label>
+<br>
+  <label>
+    Password :
+    <input type="password" formControlName="password">
+  </label>
+<br>
+  <button class="btn btn-primary" type="submit" [disabled]="!accountForm.valid">Submit</button>
+>>>>>>> 00c7332576d7c455163efe8cd552adf91d698eea
 </form>
 
 </div>
