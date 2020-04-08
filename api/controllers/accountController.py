@@ -42,3 +42,20 @@ def logout(request):
 
 def index(request):
     return JsonResponse({"msg": "hello"})
+
+
+@csrf_exempt
+def getUserProfile(request):
+    if not principleService.isLoggedIn():
+        return JsonResponse({"status": 401, "message": "MUST LOG FIRST"})
+    if request.method != 'POST':
+        return JsonResponse({'status': 404, 'message': 'INVALID_REQUEST'})
+    user_data = json.loads(request.body)
+    account = accountService.getUserProfile(user_data["email"])
+    if account is not None:
+        account = dict(account)
+        del account["_id"]
+        del account["password"]
+        return JsonResponse(account, safe=False)
+    else:
+        return JsonResponse({"status": 400, "message": "SOMETHING WENT WRONG"})

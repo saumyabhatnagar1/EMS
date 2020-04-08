@@ -6,6 +6,7 @@ urlpatterns = [
     path('', accountController.index, name='index'),
     path('login/', accountController.login, name='login'),
     path('createUser/', accountController.createUser, name='create User'),
+    path('account/profile', accountController.getUserProfile, name='profile'),
     path('logout/', accountController.logout, name='Logout'),
 
     path('timesheets/', timesheetsController.index, name='time sheets'),

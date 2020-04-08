@@ -21,3 +21,10 @@ def getUser(user_data):
         principleService.setRole(account["role"])
         return principleService.getUser()
     return None
+
+
+def getUserProfile(email):
+    account = accountMapper.findByEmail(email)
+    if account is not None:
+        return account
+    return None
