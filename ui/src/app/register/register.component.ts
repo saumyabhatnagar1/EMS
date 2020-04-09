@@ -13,13 +13,13 @@ export class RegisterComponent implements OnInit {
       name: new FormControl('',Validators.required),
       email: new FormControl('',[Validators.required,Validators.email]),
       password: new FormControl('',[Validators.required,Validators.minLength(8)]),
-      date:new FormControl(''),
-      gender:new FormControl(),
-      'house no':new FormControl(),
-      'street no':new FormControl(),
-      addressline:new FormControl(),
-      'mobile no':new FormControl('',[Validators.required,Validators.pattern('^((\\+??-?)|0)?[0-9]{10}$')]),
-      country:new FormControl()
+      date:new FormControl('',Validators.required),
+      gender:new FormControl('',Validators.required),
+      'house no':new FormControl('',Validators.required),
+      'street no':new FormControl('',Validators.required),
+      addressline:new FormControl('',Validators.required),
+      'mobile no':new FormControl('',[Validators.required,Validators.pattern('^((\\??-?)|0)?[0-9]{10}$')]),
+      country:new FormControl('',Validators.required)
     });
   constructor(private _registerService:RegisterService) {
 
@@ -54,6 +54,27 @@ export class RegisterComponent implements OnInit {
     }
     get phnumber(){
       return this.accountForm.get('mobile no')
+    }
+    get name(){
+      return this.accountForm.get('name')
+    }
+    get date(){
+      return this.accountForm.get('date')
+    }
+    get gender(){
+      return this.accountForm.get('gender')
+    }
+    get houseno(){
+      return this.accountForm.get('house no')
+    }
+    get streetno(){
+      return this.accountForm.get('street no')
+    }
+    get addressline(){
+      return this.accountForm.get('addressline')
+    }
+    get country(){
+      return this.accountForm.get('country')
     }
 
   onSubmit(){

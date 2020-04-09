@@ -45,6 +45,9 @@
    <input type="name" formControlName="name" placeholder = "Full Name" class="form-control">
  </label>
 </div>
+<div class="alert alert-danger" *ngIf="name.touched&&name.invalid">
+  <div *ngIf="name.errors.required">Name is required</div>
+</div>
 
 
 
@@ -54,6 +57,10 @@
    <input type="date" formControlName="date" class="form-control">
  </label>
 </div>
+<div class="alert alert-danger" *ngIf="date.touched&&date.invalid">
+  <div *ngIf="date.errors.required">Date is required</div>
+</div>
+
 
 
 
@@ -67,6 +74,10 @@
     </select>
  </label>
 </div>
+<div class="alert alert-danger" *ngIf="gender.touched&&gender.invalid">
+  <div *ngIf="gender.errors.required">Gender field is required</div>
+</div>
+
 
 
 
@@ -76,6 +87,10 @@
    <input type="houseno" formControlName="house no" placeholder = "House Number" class="form-control">
  </label>
 </div>
+<div *ngIf="houseno.touched&&houseno.invalid" class="alert alert-danger">
+  <div *ngIf="houseno.errors.required">House no. is required</div>
+</div>
+
 
 
 
@@ -85,6 +100,10 @@
    <input type="streetno" formControlName="street no" placeholder = "Street Number" class="form-control">
  </label>
 </div>
+<div class="alert alert-danger" *ngIf="streetno.touched&&streetno.invalid">
+  <div *ngIf="streetno.errors.required">Street Number field is required</div>
+</div>
+
 
 
 <div class="form-group">
@@ -93,6 +112,10 @@
    <input type="addressline" formControlName="addressline" placeholder = "Adress Line 1" class="form-control">
  </label>
 </div>
+<div class="alert alert-danger" *ngIf="addressline.touched&&addressline.invalid">
+  <div *ngIf="addressline.errors.required">Address field os required</div>
+</div>
+
 
 
 
@@ -115,6 +138,10 @@
    <input type='country' placeholder="country" formControlName="country" class="form-control">
  </label>
 </div>
+<div class="alert alert-danger" *ngIf="country.touched&&country.invalid">
+  <div *ngIf="country.errors.required">Country Field is required</div>
+</div>
+
  <button (click)="onSubmit()"  class="btn btn-primary" type="submit" >Submit</button>
 </form>
 
