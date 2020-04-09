@@ -5,6 +5,8 @@ import {LoginComponent} from './login/login.component';
 import {HomeComponent} from './home/home.component';
 import { TimesheetsComponent } from './timesheets/timesheets.component';
 import {ProfileComponent} from './profile/profile.component';
+import { LeavesComponent } from './leaves/leaves.component';
+
 
 const routes: Routes =
 [
@@ -12,7 +14,9 @@ const routes: Routes =
   { path :'login', component:LoginComponent},
   {path : '',component:HomeComponent},
   {path : 'timesheets',component:TimesheetsComponent},
-  {path : 'profile',component : ProfileComponent}
+  {path : 'profile',component : ProfileComponent},
+  {path : 'leaves' , component : LeavesComponent}
+
 
 ];
 

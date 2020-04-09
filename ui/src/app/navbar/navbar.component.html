@@ -15,6 +15,26 @@
         <a class="nav-link" routerLink='/profile'>{{username}}</a>
       </li>
 
+
+      <li  class="nav-item dropdown"  [hidden]="isLoggedIn">
+        <a class ="nav-link dropdown-toggle" href=# id="navbarDropdown"
+        role="button" data-toggle="dropdown">Leave Request</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink='/leaves'>New Request</a>
+          <a class="dropdown-item" routerLink='/'>Status</a>
+        </div>
+
+        <!-- <div class="nav-item"  data-toggle="dropdown" class="carpet" class="navbar-brand">
+          Leave Request
+        </div>
+
+        <ul class="navbar-nav mr-auto">
+          <li><a class="nav-link" routerLink='/leaves'>New Request</a></li>
+          <li><a class="nav-link" routerLink='/'>status</a></li>
+        </ul> -->
+      </li>
+
+
       <li class="nav-item" [hidden]="isLoggedIn">
         <a class="nav-link" routerLink="/timesheets">Timesheets</a>
       </li>

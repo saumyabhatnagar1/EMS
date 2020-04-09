@@ -13,6 +13,8 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { TimesheetsComponent } from './timesheets/timesheets.component';
 import { CalendarCommonModule, CalendarMonthModule } from 'angular-calendar';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { LeavesComponent } from './leaves/leaves.component';
+
 
 
 @NgModule({
@@ -22,7 +24,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     LoginComponent,
     HomeComponent,
     NavbarComponent,
-    TimesheetsComponent
+    TimesheetsComponent,
+    LeavesComponent
   ],
   imports: [
     BrowserModule,
