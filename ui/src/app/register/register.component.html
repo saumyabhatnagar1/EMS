@@ -10,7 +10,9 @@
         <input type="email" formControlName="email" placeholder = "Email Address" class="form-control">
       </label>
     </div>
-  </div>
+  </div>  
+  
+  
 
   <div class="col">
     <div class="form-group">
@@ -19,7 +21,19 @@
         <input type="password" formControlName="password" placeholder = "Password" class="form-control">
       </label>
     </div>
+  
   </div>
+  <br>
+</div>
+
+  <div class="alert alert-danger" *ngIf="password.touched&&password.invalid">
+    <div *ngIf="password.errors.required">Password is required</div>
+    <div *ngIf="password.errors.minlength">Password must be of atleast 8 characters</div>
+  </div>
+<div  class="alert alert-danger" *ngIf="email.touched&&email.invalid">
+  <div *ngIf="email.errors.email">Email is not valid.</div>
+  <div *ngIf="email.errors.required">Email is required</div>
+
 </div>
 
 <hr>
@@ -46,8 +60,8 @@
 <div class="form-group">
  <label>
    Gender
-   <select placeholder="Gender" class="form-control">
-     <option>Male</option>
+   <select  formControlName="gender" placeholder="Gender" class="form-control" >
+     <option selected >Male</option>
      <option>Female</option>
      <option>Others</option>
     </select>
@@ -88,13 +102,17 @@
    <input type="mobileno" formControlName="mobile no" placeholder = "Mobile Number" class="form-control">
  </label>
 </div>
+<div class="alert alert-danger" *ngIf="phnumber.touched&&phnumber.invalid">
+  <div *ngIf="phnumber.errors.pattern">Phone number is invalid</div>
+  <div *ngIf="phnumber.errors.required">Phone number is required</div>
+</div>
 
 
 
 <div class="form-group">
  <label>
    Country
-   <input type='country' placeholder="country" class="form-control">
+   <input type='country' placeholder="country" formControlName="country" class="form-control">
  </label>
 </div>
  <button (click)="onSubmit()"  class="btn btn-primary" type="submit" >Submit</button>

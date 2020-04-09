@@ -12,13 +12,13 @@ export class RegisterComponent implements OnInit {
   public accountForm = new FormGroup({
       name: new FormControl('',Validators.required),
       email: new FormControl('',[Validators.required,Validators.email]),
-      password: new FormControl('',Validators.required),
+      password: new FormControl('',[Validators.required,Validators.minLength(8)]),
       date:new FormControl(''),
       gender:new FormControl(),
       'house no':new FormControl(),
       'street no':new FormControl(),
       addressline:new FormControl(),
-      'mobile no':new FormControl(),
+      'mobile no':new FormControl('',[Validators.required,Validators.pattern('^((\\+??-?)|0)?[0-9]{10}$')]),
       country:new FormControl()
     });
   constructor(private _registerService:RegisterService) {
@@ -43,6 +43,17 @@ export class RegisterComponent implements OnInit {
           console.log(err)
       });
       
+    }
+
+
+    get email(){
+      return this.accountForm.get('email')
+    }
+    get password(){
+      return this.accountForm.get('password')
+    }
+    get phnumber(){
+      return this.accountForm.get('mobile no')
     }
 
   onSubmit(){
