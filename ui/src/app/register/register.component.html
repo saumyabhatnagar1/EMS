@@ -10,9 +10,9 @@
         <input type="email" formControlName="email" placeholder = "Email Address" class="form-control">
       </label>
     </div>
-  </div>  
-  
-  
+  </div>
+
+
 
   <div class="col">
     <div class="form-group">
@@ -21,7 +21,7 @@
         <input type="password" formControlName="password" placeholder = "Password" class="form-control">
       </label>
     </div>
-  
+
   </div>
   <br>
 </div>
@@ -84,11 +84,11 @@
 <div class="form-group">
  <label >
    House No.
-   <input type="houseno" formControlName="house no" placeholder = "House Number" class="form-control">
+   <input type="houseNumber" formControlName="houseNumber" placeholder = "House Number" class="form-control">
  </label>
 </div>
-<div *ngIf="houseno.touched&&houseno.invalid" class="alert alert-danger">
-  <div *ngIf="houseno.errors.required">House no. is required</div>
+<div *ngIf="houseNumber.touched&&houseNumber.invalid" class="alert alert-danger">
+  <div *ngIf="houseNumber.errors.required">House number is required</div>
 </div>
 
 
@@ -97,23 +97,23 @@
 <div class="form-group">
  <label>
    Street
-   <input type="streetno" formControlName="street no" placeholder = "Street Number" class="form-control">
+   <input type="street" formControlName="street" placeholder = "Street Name" class="form-control">
  </label>
 </div>
-<div class="alert alert-danger" *ngIf="streetno.touched&&streetno.invalid">
-  <div *ngIf="streetno.errors.required">Street Number field is required</div>
+<div class="alert alert-danger" *ngIf="street.touched&&street.invalid">
+  <div *ngIf="street.errors.required">Street Name field is required</div>
 </div>
 
 
 
 <div class="form-group">
  <label>
-   Adress Line 1
-   <input type="addressline" formControlName="addressline" placeholder = "Adress Line 1" class="form-control">
+   Address Line 1
+   <input type="addressLine" formControlName="addressLine" placeholder = "Address Line 1" class="form-control">
  </label>
 </div>
-<div class="alert alert-danger" *ngIf="addressline.touched&&addressline.invalid">
-  <div *ngIf="addressline.errors.required">Address field os required</div>
+<div class="alert alert-danger" *ngIf="addressLine.touched&&addressLine.invalid">
+  <div *ngIf="addressLine.errors.required">Address field is required</div>
 </div>
 
 
@@ -122,12 +122,12 @@
 <div class="form-group">
  <label>
    Mobile Number
-   <input type="mobileno" formControlName="mobile no" placeholder = "Mobile Number" class="form-control">
+   <input type="mobileNumber" formControlName="mobileNumber" placeholder = "Mobile Number" class="form-control">
  </label>
 </div>
-<div class="alert alert-danger" *ngIf="phnumber.touched&&phnumber.invalid">
-  <div *ngIf="phnumber.errors.pattern">Phone number is invalid</div>
-  <div *ngIf="phnumber.errors.required">Phone number is required</div>
+<div class="alert alert-danger" *ngIf="mobileNumber.touched&&mobileNumber.invalid">
+  <div *ngIf="mobileNumber.errors.pattern">Phone number is invalid</div>
+  <div *ngIf="mobileNumber.errors.required">Phone number is required</div>
 </div>
 
 
@@ -142,7 +142,7 @@
   <div *ngIf="country.errors.required">Country Field is required</div>
 </div>
 
- <button (click)="onSubmit()"  class="btn btn-primary" type="submit" >Submit</button>
+ <button (click)="onSubmit()"  class="btn btn-primary" [disabled]="accountForm.invalid" type="submit" >Submit</button>
 </form>
 
 </div>

@@ -15,10 +15,10 @@ export class RegisterComponent implements OnInit {
       password: new FormControl('',[Validators.required,Validators.minLength(8)]),
       date:new FormControl('',Validators.required),
       gender:new FormControl('',Validators.required),
-      'house no':new FormControl('',Validators.required),
-      'street no':new FormControl('',Validators.required),
-      addressline:new FormControl('',Validators.required),
-      'mobile no':new FormControl('',[Validators.required,Validators.pattern('^((\\??-?)|0)?[0-9]{10}$')]),
+      houseNumber:new FormControl('',Validators.required),
+      street:new FormControl('',Validators.required),
+      addressLine:new FormControl('',Validators.required),
+      mobileNumber:new FormControl('',[Validators.required,Validators.pattern('^((\\??-?)|0)?[0-9]{10}$')]),
       country:new FormControl('',Validators.required)
     });
   constructor(private _registerService:RegisterService) {
@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
       },err=>{
           console.log(err)
       });
-      
+
     }
 
 
@@ -52,8 +52,8 @@ export class RegisterComponent implements OnInit {
     get password(){
       return this.accountForm.get('password')
     }
-    get phnumber(){
-      return this.accountForm.get('mobile no')
+    get mobileNumber(){
+      return this.accountForm.get('mobileNumber')
     }
     get name(){
       return this.accountForm.get('name')
@@ -64,14 +64,14 @@ export class RegisterComponent implements OnInit {
     get gender(){
       return this.accountForm.get('gender')
     }
-    get houseno(){
-      return this.accountForm.get('house no')
+    get houseNumber(){
+      return this.accountForm.get('houseNumber')
     }
-    get streetno(){
-      return this.accountForm.get('street no')
+    get street(){
+      return this.accountForm.get('street')
     }
-    get addressline(){
-      return this.accountForm.get('addressline')
+    get addressLine(){
+      return this.accountForm.get('addressLine')
     }
     get country(){
       return this.accountForm.get('country')
