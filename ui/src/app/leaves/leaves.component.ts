@@ -19,9 +19,10 @@ export class LeavesComponent implements OnInit {
     return this.dateForm.get('dateLeave');
   }
   
+  mssg:boolean;
   onConfirm()
   {
-    
+    this.mssg=true;
     console.log(this.dateForm.get('dateLeave').value)
 
     
