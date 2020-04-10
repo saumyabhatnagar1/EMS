@@ -3,7 +3,32 @@
 
 
 <div *ngIf="(command == 'STATUS')">
-  //add html code for status
+
+  <table>
+    <thead>
+      <th>Date</th>
+      <th>Status</th>
+      <th>Action</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let leave of leaves">
+        <td>{{leave.date}}</td>
+        <td>{{leave.status}}</td>
+        <td>{{leave.action}}</td>
+      </tr>
+      <tr *ngFor="let leave of leaves">
+        <td>{{leave.date}}</td>
+        <td>{{leave.status}}</td>
+        <td>{{leave.action}}</td>
+      </tr>
+      <tr *ngFor="let leave of leaves">
+        <td>{{leave.date}}</td>
+        <td>{{leave.status}}</td>
+        <td>{{leave.action}}</td>
+      </tr>
+
+    </tbody>
+  </table>
 </div>
 
 
