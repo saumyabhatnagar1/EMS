@@ -2,10 +2,11 @@
 
 
 
-<div *ngIf="(command == 'status')">
-
-  <table align="center" style="width: 50%;text-align: center;">
-    <thead>
+<div *ngIf="(command == 'STATUS')">
+<div class="jumbotron">
+  <h1>Leave Request Status</h1>
+  <table align="center" class="table table-hover">
+    <thead class="thead-dark">
       <th>Date</th>
       <th>Status</th>
       <th>Action</th>
@@ -14,12 +15,13 @@
       <tr *ngFor="let leave of leaves;index as i">
         <td>{{leave.date}}</td>
         <td>{{leave.status}}</td>
-        <td><button class="btn btn-primary" data-toggle="modal" data-target="#myModal2" (click)="count=i;">More</button></td>
+        <td><button class="btn btn-dark" data-toggle="modal" data-target="#myModal2" (click)="count=i;">More</button></td>
       </tr>
     
 
     </tbody>
   </table>
+</div>
 </div>
 
 <div class="modal fade" id="myModal2">
