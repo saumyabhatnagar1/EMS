@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
   <a class="navbar-brand" href="#">EMS</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+          aria-controls="navbarCollapse"
           aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -16,12 +17,12 @@
       </li>
 
 
-      <li  class="nav-item dropdown"  [hidden]="isLoggedIn">
-        <a class ="nav-link dropdown-toggle" href=# id="navbarDropdown"
-        role="button" data-toggle="dropdown">Leave Request</a>
+      <li class="nav-item dropdown" [hidden]="isLoggedIn">
+        <a class="nav-link dropdown-toggle" href=# id="navbarDropdown"
+           role="button" data-toggle="dropdown">Leave Request</a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" routerLink='/leaves'>New Request</a>
-          <a class="dropdown-item" routerLink='/'>Status</a>
+          <a class="dropdown-item" [routerLink]="['/leaves','NEW']" >New Request</a>
+          <a class="dropdown-item" [routerLink]="['/leaves','STATUS']">Status</a>
         </div>
       </li>
 
@@ -31,7 +32,7 @@
       </li>
 
       <li class="nav-item" [hidden]="isLoggedIn">
-        <a class="nav-link" (click) = "logout()">Logout</a>
+        <a class="nav-link" (click)="logout()">Logout</a>
       </li>
 
       <li class="nav-item" [hidden]="!isLoggedIn">

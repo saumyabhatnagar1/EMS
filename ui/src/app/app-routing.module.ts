@@ -15,7 +15,7 @@ const routes: Routes =
   {path : '',component:HomeComponent},
   {path : 'timesheets',component:TimesheetsComponent},
   {path : 'profile',component : ProfileComponent},
-  {path : 'leaves' , component : LeavesComponent}
+  {path : 'leaves/:command' , component : LeavesComponent}
 
 
 ];
