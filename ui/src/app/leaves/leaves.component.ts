@@ -8,7 +8,7 @@ import {ActivatedRoute } from '@angular/router';
   styleUrls: ['./leaves.component.css']
 })
 export class LeavesComponent implements OnInit {
-  private command:string;
+  public command:string;
   constructor(private activeRoute:ActivatedRoute) { }
 
   public dateForm=new FormGroup({
@@ -18,14 +18,11 @@ export class LeavesComponent implements OnInit {
   get dateLeave(){
     return this.dateForm.get('dateLeave');
   }
-  
   mssg:boolean;
   onConfirm()
   {
     this.mssg=true;
     console.log(this.dateForm.get('dateLeave').value)
-
-    
   }
 
 

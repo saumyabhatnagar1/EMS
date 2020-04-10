@@ -2,33 +2,36 @@
 
 
 
+<div *ngIf="(command == 'STATUS')">
+  //add html code for status
+</div>
 
-<div class="container1  jumbotron">
+
+<div class="container1  jumbotron" *ngIf="(command == 'NEW' )">
   <div class="row">
     <form class = "main-form " [formGroup]="dateForm">
       <h2>Leave Date</h2>
       <hr>
     <div class="form-group">
-      
+
       <label>
         DATE
       </label>
-      
+
         <input type="date" formControlName="dateLeave" class="form-control " >
 
-      
+
     </div>
     <div class="alert alert-danger" *ngIf="dateLeave.touched&&dateLeave.invalid">
       <div *ngIf="dateLeave.errors.required">Date is required</div>
     </div>
     <button class="btn btn-primary mb-3" data-toggle="modal"  data-target="#myModal"> Apply</button>
-
-    <div class="alert alert-success " *ngIf="mssg">Application submitted 
+    <div class="alert alert-success " *ngIf="mssg">Application submitted
       <div class="close" (click)="(mssg=false)" style="cursor: pointer;">&times;</div>
     </div>
     </form>
 
- 
+
   <div class="modal fade" id="myModal">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
