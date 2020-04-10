@@ -9,10 +9,12 @@ import {ActivatedRoute } from '@angular/router';
 })
 export class LeavesComponent implements OnInit {
   public command:string;
+  public name:string='Naveen Gaddi'
+  public count:number=0;
   leaves = [
-    {date: '01-April-2020', status : 'Approved', action : 'More'},
-    {date: '23-April-2020', status : 'Pending', action : 'More'},
-    {date: '25-April-2020', status : 'Approved', action : 'More'},
+    {date: '01-April-2020', status : 'Approved By Admin',reason:'Casual Leave'},
+    {date: '23-April-2020', status : 'Pending', reason:'Casual leave'},
+    {date: '25-April-2020', status : 'Approved By Admin', reason:'Emergency Leave',},
   ];
   constructor(private activeRoute:ActivatedRoute) { }
 

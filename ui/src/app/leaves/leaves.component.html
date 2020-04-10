@@ -2,34 +2,53 @@
 
 
 
-<div *ngIf="(command == 'STATUS')">
+<div *ngIf="(command == 'status')">
 
-  <table>
+  <table align="center" style="width: 50%;text-align: center;">
     <thead>
       <th>Date</th>
       <th>Status</th>
       <th>Action</th>
     </thead>
     <tbody>
-      <tr *ngFor="let leave of leaves">
+      <tr *ngFor="let leave of leaves;index as i">
         <td>{{leave.date}}</td>
         <td>{{leave.status}}</td>
-        <td>{{leave.action}}</td>
+        <td><button class="btn btn-primary" data-toggle="modal" data-target="#myModal2" (click)="count=i;">More</button></td>
       </tr>
-      <!-- <tr *ngFor="let leave of leaves">
-        <td>{{leave.date}}</td>
-        <td>{{leave.status}}</td>
-        <td>{{leave.action}}</td>
-      </tr>
-      <tr *ngFor="let leave of leaves">
-        <td>{{leave.date}}</td>
-        <td>{{leave.status}}</td>
-        <td>{{leave.action}}</td>
-      </tr> -->
+    
 
     </tbody>
   </table>
 </div>
+
+<div class="modal fade" id="myModal2">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Leave Status</h4>
+        <button class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div  class="modal-body">
+  
+        <p><b>Name</b>:{{name}}</p>
+        <p><b>Leave on</b>:{{leaves[count].date}}</p>
+        <p><b>Status</b>:{{leaves[count].status}}</p>
+        <p><b>Reason</b>:{{leaves[count].reason}}</p>
+          
+
+      </div>
+      <div class="modal-footer">
+          <button class="btn btn-secondary" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
 
 
 <div class="container1  jumbotron" *ngIf="(command == 'NEW' )">
