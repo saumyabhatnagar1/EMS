@@ -25,6 +25,8 @@
     "bootstrap": "^4.4.1",
     "date-fns": "^2.11.1",
     "jquery": "^3.4.1",
+    "jw-angular-pagination": "^1.1.0",
+    "ngx-pagination": "^5.0.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

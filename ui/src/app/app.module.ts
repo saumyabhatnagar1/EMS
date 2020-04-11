@@ -14,6 +14,7 @@ import { TimesheetsComponent } from './timesheets/timesheets.component';
 import { CalendarCommonModule, CalendarMonthModule } from 'angular-calendar';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { LeavesComponent } from './leaves/leaves.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -25,13 +26,14 @@ import { LeavesComponent } from './leaves/leaves.component';
     HomeComponent,
     NavbarComponent,
     TimesheetsComponent,
-    LeavesComponent
+    LeavesComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    NgxPaginationModule,
     ReactiveFormsModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
