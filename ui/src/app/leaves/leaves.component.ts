@@ -14,22 +14,28 @@ export class LeavesComponent implements OnInit {
   public name:string='Naveen Gaddi'
   public count:number=0;
   public page:number =1;
+  public remainingLeaves:number=21;
   leaves = [];
   pageOfItems: Array<any>;
   constructor(private activeRoute:ActivatedRoute) { }
 
   public dateForm=new FormGroup({
-    dateLeave:new FormControl('',Validators.required)
+    dateLeave:new FormControl('',Validators.required),
+    reason:new FormControl('',Validators.required)
   })
 
+  get reason(){
+    return this.dateForm.get('reason');
+  }
   get dateLeave(){
     return this.dateForm.get('dateLeave');
   }
   mssg:boolean;
   onConfirm()
   {
-    this.mssg=true;
-    console.log(this.dateForm.get('dateLeave').value)
+    
+    console.log(this.dateForm.get('dateLeave').value )
+    console.log(this.dateForm.get('reason').value)
   }
 
   //taking messages from notification component

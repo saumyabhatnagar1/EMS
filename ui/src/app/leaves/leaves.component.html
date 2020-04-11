@@ -1,3 +1,19 @@
+<link rel="stylesheet" href= 
+"https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> 
+    <script src= 
+"https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"> 
+    </script> 
+    <script src= 
+"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"> 
+    </script> 
+    <script src= 
+"https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"> 
+    </script> 
+
+  
+
+
+
 
 
 
@@ -13,7 +29,7 @@
       <th>Action</th>
     </thead>
     <div class="pagination-previous" [class.disabled]="p.isFirstPage()">
-      <a *ngIf="!p.isFirstPage()" (click)="p.previous()"> < </a>
+      <a *ngIf="!p.isFirstPage()" (click)="p.previous()">  </a>
   </div>
     <tbody>
       <tr *ngFor="let leave of leaves|paginate : {id :'listing_pagination',
@@ -21,7 +37,7 @@
        currentPage: page};index as i">
         <td>{{leave.date}}</td>
         <td>{{leave.status}}</td>
-        <td><button class="btn btn-dark" data-toggle="modal" data-target="#myModal2" (click)="count=i;">More</button></td>
+        <td><button class="btn btn-dark" data-toggle="modal" data-target="#LeaveDetails" (click)="count=i;">More</button></td>
       </tr>
 
 
@@ -34,7 +50,7 @@
 </pagination-template>
 </div>
 
-<div class="modal fade" id="myModal2">
+<div class="modal fade" id="LeaveDetails">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
@@ -65,30 +81,46 @@
 
 <div class="container1  jumbotron" *ngIf="(command == 'NEW' )">
   <div class="row">
-    <form class = "main-form " [formGroup]="dateForm">
+    <form class = "main-form " [formGroup]="dateForm" name="dateForm" #f="ngForm">
       <h2>Leave Date</h2>
       <hr>
     <div class="form-group">
 
       <label>
         DATE
+        
+        
+        <input  type="date" placeholder="date" formControlName="dateLeave" class="form-control " >
       </label>
-
-        <input type="date" formControlName="dateLeave" class="form-control " >
-
+        <br>
+      <label>Reason
+        <select formControlName="reason" class="form-control">
+          <option selected >Casual Leave</option>
+          <option>Emergency Leave</option>
+          <option>Other Reason</option>
+        </select>
+      </label>
+      <br>
 
     </div>
     <div class="alert alert-danger" *ngIf="dateLeave.touched&&dateLeave.invalid">
       <div *ngIf="dateLeave.errors.required">Date is required</div>
     </div>
-    <button class="btn btn-primary mb-3" data-toggle="modal"  data-target="#myModal"> Apply</button>
-    <div class="alert alert-success " *ngIf="mssg">{{leavesMessage}}
-      <div class="close" (click)="(mssg=false)" style="cursor: pointer;">&times;</div>
+    <div class="alert alert-danger" *ngIf="reason.touched&&reason.invalid">
+      <div *ngIf="reason.errors.required">Reason is required</div>
     </div>
+    <button class="btn btn-primary mb-3" data-toggle="modal"  data-target="#confirmBox" [disabled]="!f.valid" > Apply</button>
+    
     </form>
 
 
-  <div class="modal fade" id="myModal">
+
+
+
+    
+
+
+  <div class="modal fade" id="confirmBox">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
         <div class="modal-header">
@@ -99,11 +131,28 @@
           Are you Sure?
         </div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" (click)="onConfirm()" data-dismiss="modal" style="background-color:green;">Yes</button>
-          <button class="btn btn-secondary" data-dismiss="modal" style="background-color: red;">No</button>
+          <button class="btn btn-secondary" (click)="onConfirm()" data-dismiss="modal" style="background-color:green;" data-target="#statusBox" data-toggle="modal" >Yes</button>
+          <button class="btn btn-secondary" data-dismiss="modal" style="background-color: red;" >No</button>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
+<div  class="modal" id="statusBox">
+  <div style="position: absolute; top: 0;right: 0;" class="modal-dialog modal-sm mr-2 alert alert-success ">
+    <div class="modal-content">
+      <div class="modal-body" style="padding: 15px;">
+        <button class="close" data-dismiss="modal">&times;</button>
+        <h4>Leave Application Submitted!!!</h4>
+      </div>
+    </div>
+  </div>
 </div>
+</div>
+
+
+
+
+
