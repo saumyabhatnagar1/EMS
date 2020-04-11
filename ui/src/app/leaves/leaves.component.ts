@@ -1,6 +1,7 @@
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute } from '@angular/router';
+import { NotificationsComponent } from '../notifications/notifications.component';
 
 
 @Component({
@@ -31,6 +32,10 @@ export class LeavesComponent implements OnInit {
     console.log(this.dateForm.get('dateLeave').value)
   }
 
+  //taking messages from notification component
+ notifications = new NotificationsComponent();
+
+ leavesMessage = this.notifications.leavesMessage
 
 
   ngOnInit(): void {

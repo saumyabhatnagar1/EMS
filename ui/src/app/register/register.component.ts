@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterService } from './register.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { NotificationsComponent } from '../notifications/notifications.component';
 
 @Component({
   selector: 'app-register',
@@ -28,16 +29,24 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
 
   }
+
+ //taking messages from notification component
+ notifications = new NotificationsComponent();
+
+ registerSuccessMessage = this.notifications.registerSuccessMessage
+ registerAlreadyUserMessage = this.notifications.registerAlreadyUserMessage
+ registerFailMessage = this.notifications.registerFailMessage
+
   createAccount(){
       const accountJson = JSON.stringify(this.accountForm.value);
       this._registerService.createAccount(accountJson).subscribe(
       res=>{
           if(res["status"] == 201){
-            this.message = "Account created!!!"
+            this.message = this.registerSuccessMessage
           }else if(res["status"] == 409){
-             this.message = "Email already exists!!!";
+             this.message = this.registerAlreadyUserMessage
           }else{
-             this.message = "Something went wrong please try again!!";
+             this.message = this.registerFailMessage
           }
       },err=>{
           console.log(err)

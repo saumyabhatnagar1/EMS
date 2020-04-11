@@ -15,6 +15,7 @@ import { CalendarCommonModule, CalendarMonthModule } from 'angular-calendar';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { LeavesComponent } from './leaves/leaves.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 
 
@@ -27,6 +28,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     NavbarComponent,
     TimesheetsComponent,
     LeavesComponent,
+    NotificationsComponent,
   ],
   imports: [
     BrowserModule,
