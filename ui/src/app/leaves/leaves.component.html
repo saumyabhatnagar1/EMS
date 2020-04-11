@@ -10,13 +10,6 @@
 "https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"> 
     </script> 
 
-  
-
-
-
-
-
-
 
 <div *ngIf="(command == 'STATUS')">
   <pagination-template #p="paginationApi">
@@ -79,42 +72,62 @@
 
 
 
+
+
+
 <div class="container1  jumbotron" *ngIf="(command == 'NEW' )">
   <div class="row">
-    <form class = "main-form " [formGroup]="dateForm" name="dateForm" #f="ngForm">
-      <h2>Leave Date</h2>
-      <hr>
-    <div class="form-group">
+    
+    <div class="col-sm-5">
+      <div style="box-shadow: 0 1px 0 #bdbdbd, 0 2px 0 #fff, 0 3px 0 #bdbdbd, 0 4px 0 #fff, 0 5px 0 #bdbdbd, 0 0 0 1px
+      #bdbdbd;width:100%;border-radius: 0.6em; position: relative; right: 90%;" class="">
+        <div style="color: #fff;
+      background-color: #fd9f1b;
+      border-bottom: 1px dashed #f37302;
+      box-shadow: 0 2px 0 #fd9f1b;border-top-left-radius:0.6em;border-top-right-radius:0.6em;" align="center">
+          <h2>Remaining Leaves</h2>
+          
+        </div>
+        <div align="center">
+          <h2 style="padding-bottom: 30px;padding-top: 20px;">{{remainingLeaves}}</h2>
+          
+        </div>
+      </div>
+    </div>
 
-      <label>
-        DATE
-        
-        
-        <input  type="date" placeholder="date" formControlName="dateLeave" class="form-control " >
-      </label>
+    <div class="col-sm-3">
+      <form class = "main-form " [formGroup]="dateForm" name="dateForm" #f="ngForm">
+        <h2>Leave Date</h2>
+        <hr>
+      <div class="form-group">
+
+        <label>
+         DATE
+          <input  type="date" placeholder="date" formControlName="dateLeave" class="form-control " >
+        </label>
+          <br>
+        <label>Reason
+          <select formControlName="reason" class="form-control">
+            <option selected >Casual Leave</option>
+            <option>Emergency Leave</option>
+            <option>Other Reason</option>
+          </select>
+        </label>
         <br>
-      <label>Reason
-        <select formControlName="reason" class="form-control">
-          <option selected >Casual Leave</option>
-          <option>Emergency Leave</option>
-          <option>Other Reason</option>
-        </select>
-      </label>
-      <br>
 
-    </div>
-    <div class="alert alert-danger" *ngIf="dateLeave.touched&&dateLeave.invalid">
-      <div *ngIf="dateLeave.errors.required">Date is required</div>
-    </div>
-    <div class="alert alert-danger" *ngIf="reason.touched&&reason.invalid">
-      <div *ngIf="reason.errors.required">Reason is required</div>
-    </div>
-    <button class="btn btn-primary mb-3" data-toggle="modal"  data-target="#confirmBox" [disabled]="!f.valid" > Apply</button>
+      </div>
+      <div class="alert alert-danger" *ngIf="dateLeave.touched&&dateLeave.invalid">
+        <div *ngIf="dateLeave.errors.required">Date is required</div>
+      </div>
+      <div class="alert alert-danger" *ngIf="reason.touched&&reason.invalid">
+        <div *ngIf="reason.errors.required">Reason is required</div>
+      </div>
+      <button class="btn btn-primary mb-3" data-toggle="modal"  data-target="#confirmBox" [disabled]="!f.valid" > Apply</button>
     
     </form>
 
-
-
+    
+  
 
 
     
@@ -138,6 +151,7 @@
     </div>
   </div>
 </div>
+</div>
 
 
 <div  class="modal" id="statusBox">
@@ -151,8 +165,3 @@
   </div>
 </div>
 </div>
-
-
-
-
-
