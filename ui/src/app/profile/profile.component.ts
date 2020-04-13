@@ -12,6 +12,12 @@ import { Router} from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
   public message:any;
+  public designation:string =  "Web Developer"
+  public bankAccountNumber: string = "09720180111";
+  public bankIfscCode: string = "KCCB0NRM097";
+  public bankMicrNumber : string = "380126029";
+
+
 
   constructor(private profileService:ProfileService, private principle:PrincipleService,private router:Router) { }
   ngOnInit(): void {

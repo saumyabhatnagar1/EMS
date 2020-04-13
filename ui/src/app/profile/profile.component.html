@@ -6,6 +6,7 @@
 				<div class="profile-usertitle">
 					<div class="profile-usertitle-name">
 						<h1> {{message.name}} </h1>	
+						<h2 style="padding-top: 20px;"> {{designation}}</h2>
 					</div>
 				</div>
 				
@@ -28,7 +29,7 @@
 		<div class="col-md-8">
             <div class="profile-content">
 
-                    <h2 class="about">About</h2>
+                    <h2 class="about">Personal Details</h2>
 
 					<ul>
                         <li>
@@ -50,6 +51,19 @@
 							Country : {{message.country}}
 						</li>
 
+						
+							<h2 class="bankDetails">Bank Details</h2>
+						
+						<li>
+							Account Number : {{bankAccountNumber}}
+						</li>
+
+						<li>
+							IFSC Code : {{bankIfscCode}}
+						</li>
+						<li>
+							MICR Number : {{bankMicrNumber}}
+						</li>
 					</ul>
 				</div>
 		</div>

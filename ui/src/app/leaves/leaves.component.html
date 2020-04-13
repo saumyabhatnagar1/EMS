@@ -14,6 +14,7 @@
 <div *ngIf="(command == 'STATUS')">
   <pagination-template #p="paginationApi">
 <div class="jumbotron">
+  <div class="status-content">
   <h1>Leave Request Status</h1>
   <table align="center" class="table table-hover">
     <thead class="thead-dark">
@@ -28,18 +29,21 @@
       <tr *ngFor="let leave of leaves|paginate : {id :'listing_pagination',
        itemsPerPage : 5,
        currentPage: page};index as i">
-        <td>{{leave.date}}</td>
-        <td>{{leave.status}}</td>
+        <td class="leaveTableData">{{leave.date}}</td>
+        <td class="leaveTableData">{{leave.status}}</td>
         <td><button class="btn btn-dark" data-toggle="modal" data-target="#LeaveDetails" (click)="count=i;">More</button></td>
       </tr>
 
 
     </tbody>
   </table>
+
+    <div>
+      <pagination-controls class="my-pagination" id="listing_pagination"  maxSize="5" directionLinks = "true" (pageChange)="page = $event"></pagination-controls>
+    </div>
+    </div>
 </div>
-<div>
-<pagination-controls class="my-pagination" id="listing_pagination"  maxSize="5" directionLinks = "true" (pageChange)="page = $event"></pagination-controls>
-</div>
+
 </pagination-template>
 </div>
 
@@ -48,7 +52,6 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4>Leave Status</h4>
-        <button class="close" data-dismiss="modal">&times;</button>
       </div>
       <div  class="modal-body">
 
@@ -95,7 +98,7 @@
       </div>
     </div>
 
-    <div class="col-sm-3">
+    <div class="col-sm-5">
       <form class = "main-form " [formGroup]="dateForm" name="dateForm" #f="ngForm">
         <h2>Leave Date</h2>
         <hr>
@@ -103,12 +106,12 @@
 
         <label>
          DATE
-          <input  type="date" placeholder="date" formControlName="dateLeave" class="form-control " >
+          <input  type="date" placeholder="date" formControlName="dateLeave" class="form-control " style="width: 180px;" >
         </label>
           <br>
         <label>Reason
-          <select formControlName="reason" class="form-control">
-            <option selected >Casual Leave</option>
+          <select formControlName="reason" class="form-control" style="width: 180px;">
+            <option selected>Casual Leave</option>
             <option>Emergency Leave</option>
             <option>Other Reason</option>
           </select>
