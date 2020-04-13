@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, TemplateRef,OnInit} from '@angular/core';
+import {NotificationService} from '../common/services/notification.service';
 
 @Component({
   selector: 'app-notifications',
@@ -13,9 +14,13 @@ export class NotificationsComponent implements OnInit {
   public registerAlreadyUserMessage : string = "Email already exists!!"
   public registerFailMessage : string = "Something went wrong please try again!!"
 
-  constructor() { }
+  public message:string;
+  public className:string;
+
+  constructor(public notificationService: NotificationService) {}
+
 
   ngOnInit(): void {
-  }
 
+  }
 }

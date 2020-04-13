@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RegisterService } from './register.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NotificationsComponent } from '../notifications/notifications.component';
+import { NotificationService} from '../common/services/notification.service';
 
 @Component({
   selector: 'app-register',
@@ -22,34 +23,29 @@ export class RegisterComponent implements OnInit {
       mobileNumber:new FormControl('',[Validators.required,Validators.pattern('^((\\??-?)|0)?[0-9]{10}$')]),
       country:new FormControl('',Validators.required)
     });
-  constructor(private _registerService:RegisterService) {
-
+  constructor(private _registerService:RegisterService, private notificationService:NotificationService) {
+        
   }
 
   ngOnInit(): void {
 
+
   }
-
- //taking messages from notification component
- notifications = new NotificationsComponent();
-
- registerSuccessMessage = this.notifications.registerSuccessMessage
- registerAlreadyUserMessage = this.notifications.registerAlreadyUserMessage
- registerFailMessage = this.notifications.registerFailMessage
 
   createAccount(){
       const accountJson = JSON.stringify(this.accountForm.value);
       this._registerService.createAccount(accountJson).subscribe(
       res=>{
           if(res["status"] == 201){
-            this.message = this.registerSuccessMessage
+              this.notificationService.showSuccess("Account registered successfully");
           }else if(res["status"] == 409){
-             this.message = this.registerAlreadyUserMessage
+              this.notificationService.showWarning("Account already exists!");
           }else{
-             this.message = this.registerFailMessage
+             this.notificationService.showFailed("Account registration failed!")
           }
       },err=>{
-          console.log(err)
+          console.log(err);
+          this.notificationService.showFailed("Account registration failed!")
       });
 
     }

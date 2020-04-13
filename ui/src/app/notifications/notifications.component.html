@@ -1,1 +1,3 @@
-<p>notifications works!</p>
+<ngb-toast  style='position: fixed;right: 0;' [autohide]="true" [delay]="10000" [ngClass]="notificationService.className" *ngIf="(notificationService.message != undefined)" (hide)="notificationService.remove()">
+  {{notificationService.message}}
+</ngb-toast>

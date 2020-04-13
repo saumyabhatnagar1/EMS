@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {PrincipleService} from '../util/principle.service';
 import { AuthService } from '../util/auth.service';
+import { NotificationService} from '../common/services/notification.service';
+
 
 @Component({
   selector: 'app-home',
@@ -9,7 +11,7 @@ import { AuthService } from '../util/auth.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private principle:PrincipleService) { }
+  constructor(private principle:PrincipleService, private notificationService:NotificationService) { }
 
   ngOnInit(): void {
 
