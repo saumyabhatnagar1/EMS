@@ -1,0 +1,16 @@
+.main-form{
+  width: 400px;
+  margin: auto;
+}
+
+.card{
+  border-color: lightblue;
+}
+
+#avatar{
+  border-radius: 50%;
+  width:100px;
+  height:100px;
+  background-image: url("C:\Users\dell\Desktop\EMS1\test\EMS\ui\src\app\help\a.png");
+  background-size: cover;
+}

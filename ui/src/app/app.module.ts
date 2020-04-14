@@ -16,6 +16,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { LeavesComponent } from './leaves/leaves.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { HelpComponent } from './help/help.component';
 
 
 
@@ -29,6 +30,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
     TimesheetsComponent,
     LeavesComponent,
     NotificationsComponent,
+    HelpComponent,
   ],
   imports: [
     BrowserModule,

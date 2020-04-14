@@ -1,0 +1,198 @@
+
+
+<div class="jumbotron">
+  <form class="main-form" [formGroup]="queryForm" >
+  <b><h1>Enquiry Form</h1></b><br>
+
+
+    <div class="form-group">
+      <label>
+        Email
+        <input type="email" formControlName="email" placeholder = "Email Address" class="form-control">
+      </label>
+    </div>
+
+    <div  class="alert alert-danger" *ngIf="email.touched&&email.invalid">
+      <div *ngIf="email.errors.email">Email is not valid.</div>
+      <div *ngIf="email.errors.required">Email is required</div>
+
+    </div>
+
+
+    <div class="form-group">
+      <label>
+        Name
+        <input type="name" formControlName="name" placeholder = "name" class="form-control">
+      </label>
+    </div>
+
+    <div class="alert alert-danger" *ngIf="name.touched&&name.invalid">
+      <div *ngIf="name.errors.required">Name is required</div>
+    </div>
+
+
+    <div class="form-group">
+      <label>
+        Mobile Number
+        <input type="mobileNumber" formControlName="mobileNumber" placeholder = "Mobile Number" class="form-control">
+      </label>
+     </div>
+
+     <div class="alert alert-danger" *ngIf="mobileNumber.touched&&mobileNumber.invalid">
+      <div *ngIf="mobileNumber.errors.pattern">Mobile number is invalid</div>
+      <div *ngIf="mobileNumber.errors.required">Mobile number is required</div>
+    </div>
+
+     <div class="form-group">
+ <label>
+   Type Of Query
+   <select  formControlName="typeofquery" placeholder="typeofquery" class="form-control" >
+     <option selected >Technical</option>
+     <option>Marketting</option>
+     <option>Management</option>
+    </select>
+ </label>
+</div>
+
+<div class="alert alert-danger" *ngIf="typeofquery.touched&&typeofquery.invalid">
+  <div *ngIf="typeofquery.errors.required">Type of query field is required</div>
+</div>
+
+<div class="form-group">
+  <label>
+    Query
+    <input type="query" formControlName="query" placeholder = "query" class="form-control">
+  </label>
+ </div>
+
+ <div class="alert alert-danger" *ngIf="query.touched&&query.invalid">
+  <div *ngIf="query.errors.required">query field is required</div>
+</div>
+
+ <button (click)="onSubmit()"  class="btn btn-primary"  type="submit" >Submit</button>
+</form>
+</div>
+
+
+
+<div class="container">
+  <div><h2>Department Head</h2></div><br>
+  <!-- <div class="card" style="width:400px"> -->
+    <!-- <img class="card-img-top" src="C:\Users\dell\Desktop\EMS1\test\EMS\ui\src\download.jpg" alt="Card image" style="width:100%"> -->
+    <!-- <div class="row mt-5 justify-content-center">
+      <div class="card card-custom mx-2 mb-3"> -->
+
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="card card-accent-success mb-3" style="max-width: 18rem">
+
+      <div class="card-header" id ="avatar"></div>
+
+      <ul class = 'card-text'>
+
+      <li>Dwayne Jhon</li>
+      <li>Web Devloper & Technical head</li>
+      <li> dhruv@gmail.com</li>
+      </ul>
+
+      <!-- <a href="#" class="btn btn-primary" style="max-width: 10rem;">See Profile</a> -->
+      <a href="#" class="card-link" style="text-align: center">Visit Profile</a>
+
+  </div>
+  </div>
+
+
+  <!-- <div class="card" style="width:400px"> -->
+    <!-- <div class="card card-custom mx-2 mb-3"> -->
+    <!-- <div class="card-body"> -->
+      <div class="col-sm-4">
+        <div class="card" style="max-width: 18rem">
+      <div class="card-header" id="avatar"></div>
+      <ul class = 'card-text'>
+        <li>Shane Pattinson</li>
+        <li>MERN stack developer & Marketing head</li>
+        <li> shane12@gmail.com</li>
+        </ul>
+      <!-- <a href="#" class="btn btn-primary"  style="max-width: 10rem;">See Profile</a> -->
+      <a href="#" class="card-link" style="text-align: center">Visit Profile</a>
+    <!-- </div> -->
+  </div>
+</div>
+
+  <!-- <div class="card card-custom mx-2 mb-3"> -->
+    <!-- <div class="card-body"> -->
+
+      <div class="col-sm-4">
+        <div class="card" style="max-width: 18rem">
+      <div class="card-header" id="avatar"></div>
+      <ul class = 'card-text'>
+        <li>Thomas dane</li>
+        <li>Full stack developer & Management head</li>
+        <li>thomas@gmail.com</li>
+        </ul>
+      <!-- <a href="#" class="btn btn-primary" style="max-width: 10rem;">See Profile</a> -->
+      <a href="#" class="card-link" style="text-align: center">Visit Profile</a>
+    <!-- </div> -->
+  </div>
+      </div>
+    </div>
+    <br>
+
+  <!--  <div class="card card-custom mx-2 mb-3">
+     <div class="card-body"> -->
+      <div class="row">
+      <div class="col-sm-4">
+        <div class="card" style="max-width: 18rem">
+      <div class="card-header" id="avatar"></div>
+      <ul class = 'card-text'>
+        <li>Shidan sazz</li>
+        <li>Data Engineer &Finance head</li>
+        <li>shn@gmail.com</li>
+        </ul>
+      <!-- <a href="#" class="btn btn-primary" style="max-width: 10rem;">See Profile</a> -->
+      <a href="#" class="card-link" style="text-align: center">Visit Profile</a>
+    <!-- </div> -->
+  </div>
+      </div>
+
+  <!-- <div class="card card-custom mx-2 mb-3"> -->
+    <!-- <div class="card-body"> -->
+
+      <div class="col-sm-4">
+        <div class="card" style="max-width: 18rem">
+      <div class="card-header" id="avatar"></div>
+      <ul class = 'card-text'>
+        <li>Harris jazz</li>
+        <li>Android Developer & operations head</li>
+        <li>haas@gmail.com</li>
+        </ul>
+      <!-- <a href="#" class="btn btn-primary" style="max-width: 10rem;">See Profile</a> -->
+      <a href="#" class="card-link" style="text-align: center">Visit Profile</a>
+    <!-- </div> -->
+  </div>
+</div>
+
+  <!-- <div class="card card-custom mx-2 mb-3"> -->
+    <!-- <div class="card-body"> -->
+      <div class="col-sm-4">
+        <div class="card" style="max-width: 18rem">
+      <div class="card-header" id="avatar"></div>
+      <ul class = 'card-text'>
+        <li>Sam jackson</li>
+        <li>Data scientist & sports head</li>
+        <li>sam@gmail.com</li>
+        </ul>
+      <!-- <a href="#" class="btn btn-primary" style="max-width: 10rem;">See Profile</a> -->
+      <a href="#" class="card-link" style="text-align: center">Visit Profile</a>
+    <!-- </div> -->
+  </div>
+</div>
+</div>
+<br>
+  <!-- <div class="card card-custom mx-2 mb-3"> -->
+    <!-- <div class="card-body"> -->
+
+</div>
+
+
+

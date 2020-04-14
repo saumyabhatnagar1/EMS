@@ -6,6 +6,7 @@ import {HomeComponent} from './home/home.component';
 import { TimesheetsComponent } from './timesheets/timesheets.component';
 import {ProfileComponent} from './profile/profile.component';
 import { LeavesComponent } from './leaves/leaves.component';
+import { HelpComponent } from './help/help.component';
 
 
 const routes: Routes =
@@ -15,7 +16,8 @@ const routes: Routes =
   {path : '',component:HomeComponent},
   {path : 'timesheets',component:TimesheetsComponent},
   {path : 'profile',component : ProfileComponent},
-  {path : 'leaves/:command' , component : LeavesComponent}
+  {path : 'leaves/:command' , component : LeavesComponent},
+  {path : 'help', component : HelpComponent}
 
 
 ];
