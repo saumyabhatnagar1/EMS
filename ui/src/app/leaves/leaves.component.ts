@@ -21,7 +21,7 @@ export class LeavesComponent implements OnInit {
   leaves = [];
   pageOfItems: Array<any>;
   constructor(private activeRoute:ActivatedRoute,private notificationService:NotificationService,private leavesservice:LeavesService,public principle:PrincipleService) { }
-
+  
 
   
   public dateForm=new FormGroup({
@@ -54,6 +54,7 @@ export class LeavesComponent implements OnInit {
       this.activeRoute.paramMap.subscribe(params=>{
           this.command = params.get('command');
           console.log(this.command);
+        
       })
       this.leaves = [
         {date: '01-April-2020', status : 'Approved By Admin',reason:'Casual Leave'},
@@ -78,6 +79,7 @@ export class LeavesComponent implements OnInit {
         {date: '25-April-2020', status : 'Approved By Admin', reason:'Emergency Leave',},
         {date: '25-April-2020', status : 'Approved By Admin', reason:'Emergency Leave',},
         ];
+        this.add_leaves();
 
   }
   onChangePage(pageOfItems: Array<any>) {
@@ -85,7 +87,7 @@ export class LeavesComponent implements OnInit {
     this.pageOfItems = pageOfItems;
 }
 public message:any;
- get_leaves(){
+ add_leaves(){
   let body={
     email:this.principle.getUsername(),
     reason:this.reason,
@@ -93,7 +95,7 @@ public message:any;
 
   }
   let user_leaves_json=JSON.stringify(body);
-  this.leavesservice.get_leaves(user_leaves_json).subscribe(
+  this.leavesservice.add_leaves(user_leaves_json).subscribe(
     res=>{
       console.log(res)
       this.message=res;
