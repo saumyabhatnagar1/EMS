@@ -1,14 +1,14 @@
-<link rel="stylesheet" href= 
-"https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> 
-    <script src= 
-"https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"> 
-    </script> 
-    <script src= 
-"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"> 
-    </script> 
-    <script src= 
-"https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"> 
-    </script> 
+<link rel="stylesheet" href=
+"https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js">
+    </script>
+    <script src=
+"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+    </script>
+    <script src=
+"https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+    </script>
 
 
 <div *ngIf="(command == 'STATUS')">
@@ -80,7 +80,7 @@
 
 <div class="container1  jumbotron" *ngIf="(command == 'NEW' )">
   <div class="row">
-    
+
     <div class="col-sm-5">
       <div style="box-shadow: 0 1px 0 #bdbdbd, 0 2px 0 #fff, 0 3px 0 #bdbdbd, 0 4px 0 #fff, 0 5px 0 #bdbdbd, 0 0 0 1px
       #bdbdbd;width:100%;border-radius: 0.6em; position: relative; right: 90%;" class="">
@@ -89,11 +89,11 @@
       border-bottom: 1px dashed #f37302;
       box-shadow: 0 2px 0 #fd9f1b;border-top-left-radius:0.6em;border-top-right-radius:0.6em;" align="center">
           <h2>Remaining Leaves</h2>
-          
+
         </div>
         <div align="center">
           <h2 style="padding-bottom: 30px;padding-top: 20px;">{{remainingLeaves}}</h2>
-          
+
         </div>
       </div>
     </div>
@@ -126,14 +126,14 @@
         <div *ngIf="reason.errors.required">Reason is required</div>
       </div>
       <button class="btn btn-primary mb-3" data-toggle="modal"  data-target="#confirmBox" [disabled]="!f.valid" > Apply</button>
-    
+
     </form>
 
-    
-  
 
 
-    
+
+
+
 
 
   <div class="modal fade" id="confirmBox">
