@@ -11,6 +11,6 @@
   border-radius: 50%;
   width:100px;
   height:100px;
-  background-image: url("C:\Users\dell\Desktop\EMS1\test\EMS\ui\src\app\help\a.png");
+  background-image: url("./a.png");
   background-size: cover;
 }

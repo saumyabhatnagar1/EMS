@@ -16,6 +16,10 @@
         <a class="nav-link" routerLink='/profile'>{{username}}</a>
       </li>
 
+      <li class="nav-item" [hidden]="isLoggedIn">
+        <a class="nav-link" routerLink='/workUpdate'>Work-Update</a>
+      </li>
+
 
       <li class="nav-item dropdown" [hidden]="isLoggedIn">
         <a class="nav-link dropdown-toggle" href=# id="navbarDropdown"

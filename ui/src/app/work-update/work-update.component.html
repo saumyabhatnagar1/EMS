@@ -1,0 +1,58 @@
+<div class="jumbotron">
+<div class="activeProjectsHeading">
+<h1 class="activeProjectsHeadingContent">Active Projects</h1> </div>
+<button class="button addButton">+</button>
+
+<div class="col-sm-6">
+    <table class="table">
+        <tr>
+            <td>{{projects.project1.id}}</td>
+            <td>{{projects.project1.name}}</td>
+            <td><button style="padding: 0;border: none;background: none;" data-toggle="modal"  data-target="#teamModal">Team</button></td>
+            <td><button style="background: none; border-radius: 50%;">i</button></td>
+            
+        </tr>
+        <tr>
+            <td>{{projects.project2.id}}</td>
+            <td>{{projects.project2.name}}</td>
+            <td><button style="padding: 0;border: none;background: none;">Team</button></td>
+            <td><button style="background: none; border-radius: 50%;">i</button></td>
+        </tr>
+        <tr>
+            <td>{{projects.project3.id}}</td>
+            <td>{{projects.project3.name}}</td>
+            <td><button style="padding: 0;border: none;background: none;">Team</button></td>
+            <td><button style="background: none; border-radius: 50%;">i</button></td>
+        </tr>
+
+    </table>
+
+</div>
+
+<div class="modal fade" id="teamModal">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4>Team Info</h4>
+          <button class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+              <tr><th>Name</th><th>Role</th></tr>
+              <tr><td>{{projects.project1.team.member1.name}}</td>
+                  <td>{{projects.project1.team.member1.role}}</td>
+              </tr>
+              <tr><td>{{projects.project1.team.member2.name}}</td>
+                <td>{{projects.project1.team.member2.role}}</td>
+            </tr>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-dismiss="modal" style="background-color:#0362fc;">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

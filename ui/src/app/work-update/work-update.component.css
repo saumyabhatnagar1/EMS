@@ -1,0 +1,25 @@
+.activeProjectsHeading{
+    height: 100px;
+    width: 300px;
+    background-color: #0362fc;
+    font-size: 50px;
+}
+
+.activeProjectsHeadingContent{
+    font-size: 30px;
+    color: white;
+    position: relative;
+    top: 30px;
+    left: 30px;
+
+}
+
+.addButton{
+    border-radius:50%;
+    font-size: 35px;
+    background-color: #fc6203;
+    position: relative;
+    top: -20px;
+    left: 10px;
+    color: white;
+}

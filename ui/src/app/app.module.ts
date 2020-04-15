@@ -17,6 +17,7 @@ import { LeavesComponent } from './leaves/leaves.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { HelpComponent } from './help/help.component';
+import { WorkUpdateComponent } from './work-update/work-update.component';
 
 
 
@@ -31,6 +32,7 @@ import { HelpComponent } from './help/help.component';
     LeavesComponent,
     NotificationsComponent,
     HelpComponent,
+    WorkUpdateComponent,
   ],
   imports: [
     BrowserModule,
