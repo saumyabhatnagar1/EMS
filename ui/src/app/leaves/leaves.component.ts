@@ -41,6 +41,7 @@ export class LeavesComponent implements OnInit {
     
     console.log(this.dateForm.get('dateLeave').value )
     console.log(this.dateForm.get('reason').value)
+    this.notificationService.showSuccess("Leave Application Submitted!!!");
   }
 
   //taking messages from notification component

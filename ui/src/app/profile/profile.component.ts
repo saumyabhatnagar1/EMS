@@ -10,13 +10,17 @@ import { Router} from '@angular/router';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit {
-  public message:any;
-  public designation:string =  "Web Developer"
-  public bankAccountNumber: string = "09720180111";
-  public bankIfscCode: string = "KCCB0NRM097";
-  public bankMicrNumber : string = "380126029";
 
+
+export class ProfileComponent implements OnInit {
+  public message:any
+  
+  public bankDetails = {
+    designation : "Web Developer",  
+    bankAccountNumber : "09720180111",
+    bankIfscCode : "KCCB0NRM097",
+    bankMicrNumber: "380126029"
+  }
 
 
   constructor(private profileService:ProfileService, private principle:PrincipleService,private router:Router) { }
@@ -41,4 +45,6 @@ get_profile(){
   }
   );
 }
+
+
 }

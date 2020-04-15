@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {LoginService} from './login.service';
 import {PrincipleService} from '../util/principle.service';
 import { Router} from '@angular/router';
+import { NotificationService } from '../common/services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
       email : new FormControl('',Validators.email),
       password: new FormControl('',Validators.required)
   });
-  constructor(private _loginService:LoginService, private principle:PrincipleService,private router:Router) { }
+  constructor(private _loginService:LoginService, private principle:PrincipleService,private router:Router,private notificationService:NotificationService) { }
 
   ngOnInit(): void {
     if(this.principle.getUsername() != undefined){
@@ -31,7 +32,9 @@ export class LoginComponent implements OnInit {
             this.principle.setUser(res);
             window.location.href = '/';
          }else{
-           this.message = res["message"];
+           //this.message = res["message"];
+           this.notificationService.showFailed("Invalid Credentials!")
+           
          }
       },
       err =>{

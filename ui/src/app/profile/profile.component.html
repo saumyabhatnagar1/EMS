@@ -6,7 +6,7 @@
 				<div class="profile-usertitle">
 					<div class="profile-usertitle-name">
 						<h1> {{message.name}} </h1>	
-						<h2 style="padding-top: 20px;"> {{designation}}</h2>
+						<h2 style="padding-top: 20px;"> {{bankDetails.designation}}</h2>
 					</div>
 				</div>
 				
@@ -55,14 +55,14 @@
 							<h2 class="bankDetails">Bank Details</h2>
 						
 						<li>
-							Account Number : {{bankAccountNumber}}
+							Account Number : {{bankDetails.bankAccountNumber}}
 						</li>
 
 						<li>
-							IFSC Code : {{bankIfscCode}}
+							IFSC Code : {{bankDetails.bankIfscCode}}
 						</li>
 						<li>
-							MICR Number : {{bankMicrNumber}}
+							MICR Number : {{bankDetails.bankMicrNumber}}
 						</li>
 					</ul>
 				</div>

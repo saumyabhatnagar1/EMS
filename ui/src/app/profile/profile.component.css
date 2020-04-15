@@ -1,6 +1,4 @@
-
-  
-  /* Profile container */
+ /* Profile container */
   .profile {
     margin: 20px 0;
   }
@@ -9,7 +7,7 @@
   .profile-sidebar {
     padding: 20px 10px 100px 10px;
     background: #f0fffc;
-    height: 600px;
+    height: 700px;
   }
   
   .profile-userpic img {
@@ -65,7 +63,7 @@
     padding: 20px;
     background: #f0fffc;
     min-height: 460px;
-    height:  600px;
+    height:  700px;
   }
 
   .bankDetails{
@@ -73,7 +71,3 @@
     padding-bottom: 20px;
     color: #5a7391;
   }
- 
-
-
-  
