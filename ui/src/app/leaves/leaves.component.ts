@@ -1,8 +1,11 @@
+import { LeavesService } from './leaves.service';
+import { PrincipleService } from './../util/principle.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute } from '@angular/router';
 import { NotificationsComponent } from '../notifications/notifications.component';
 import { NotificationService} from '../common/services/notification.service';
+
 
 @Component({
   selector: 'app-leaves',
@@ -17,8 +20,10 @@ export class LeavesComponent implements OnInit {
   public remainingLeaves:number=21;
   leaves = [];
   pageOfItems: Array<any>;
-  constructor(private activeRoute:ActivatedRoute,private notificationService:NotificationService) { }
+  constructor(private activeRoute:ActivatedRoute,private notificationService:NotificationService,private leavesservice:LeavesService,public principle:PrincipleService) { }
 
+
+  
   public dateForm=new FormGroup({
     dateLeave:new FormControl('',Validators.required),
     reason:new FormControl('',Validators.required)
@@ -78,5 +83,26 @@ export class LeavesComponent implements OnInit {
     // update current page of items
     this.pageOfItems = pageOfItems;
 }
+public message:any;
+ get_leaves(){
+  let body={
+    email:this.principle.getUsername(),
+    reason:this.reason,
+    date:this.dateLeave
+
+  }
+  let user_leaves_json=JSON.stringify(body);
+  this.leavesservice.get_leaves(user_leaves_json).subscribe(
+    res=>{
+      console.log(res)
+      this.message=res;
+      
+    },
+    err=>{
+      console.log(err)
+    }
+  )
+}
+ 
 
 }
