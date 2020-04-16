@@ -1,27 +1,29 @@
+
 .activeProjectsHeading{
-    height: 100px;
-    width: 300px;
-    background-color: #0362fc;
+    height: 120px;
+    width: 40%;
+    background-color: #0020f2;
     font-size: 50px;
 }
 
 .activeProjectsHeadingContent{
-    font-size: 30px;
+    font-size: 45px;
     color: white;
     position: relative;
-    top: 30px;
-    left: 30px;
+    top: 35px;
+    left: 80px;
 
 }
 
 .addButton{
-    border-radius:50%;
-    font-size: 35px;
-    background-color: #fc6203;
+    border-radius:100%;
+    font-size: 40px;
+    background-color: #de4d04;
     position: relative;
-    top: -20px;
+    top: -30px;
     left: 10px;
     color: white;
+    
 }
 
 
@@ -50,14 +52,60 @@
   background: #d4d4d4;
 } */
 
-table, td, th {
-  border: 1px solid #ddd;
+.table, td, th {
+  border: 0 solid #ddd;
+  text-align: center;
+  height: 30px;
+  width: 30px;
+}
+
+.table {
+  border-collapse: collapse;
+  height: 200px;
+  width: 60%;
+  text-align: center;
+  background-color: #bec4c1;
+}
+
+.tableTeam{
+  position: relative;
+  left: 20%;
+  border-collapse: collapse;
+  height: 100px;
+  width: 60%;
   text-align: left;
 }
 
-table {
-  border-collapse: collapse;
-  height: 100px;
-  width: 250px;
-  text-align: center;
+.tableTeam, td, th{
+  text-align: left;
+  height: 30px;
+  width: 70px;
+  padding: 10px;
 }
+
+
+.tableTask {
+  border-collapse: collapse;
+  height: 50px;
+  width: 60%;
+  text-align: center;
+  background-color: #bec4c1;
+  color: black;
+}
+
+.vl {
+  border-left: 1px solid black;
+  height: 700px;
+  position: absolute;
+  left: 60%;
+  margin-left: -3px;
+  top: 0;
+}
+
+.my-pagination{
+  position: relative;
+  left: 10%;
+  color: #de4d04;
+
+}
+

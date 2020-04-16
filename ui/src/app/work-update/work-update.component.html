@@ -5,23 +5,25 @@
   </div>
   <button class="button addButton">+</button>
   <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-8">
 
 
 
       <div class="status-content">
-        <table>
+        <table class="table table-hover"> 
 
 
           <tbody>
             <tr *ngFor="let proj of projects |paginate : {id :'listing_pagination',
         itemsPerPage : 3,
         currentPage: page}; index as i">
+              <td><button style="border-radius: 50%; background-color: black;">&iexcl;</button></td>
+
               <td>{{proj.id}}</td>
               <td>{{proj.name}}</td>
-              <td><button style="padding: 0;border: none;background: none;" (click)="count=i" class="btn btn-success"
+              <td><button style="padding: 0;border: none;background: none; color: black;" (click)="count=i" class="btn btn-success"
                   data-toggle="modal" data-target="#teamModal" (click)="count=i;">Team</button></td>
-              <td><button (click)="count2=i;count=i;show=true">&iexcl;</button></td>
+              <td><button (click)="count2=i;count=i;show=true" style="border-radius: 50%;">&iexcl;</button></td>
             </tr>
           </tbody>
         </table>
@@ -33,10 +35,12 @@
       </div>
     </div>
 
-    <div *ngIf="show" class="col-sm-6">
-      
-      <table style="padding: 10px;" class="table-bordered">
-      <tr style="cursor: pointer;"  data-target="#taskModal" data-toggle="modal" >
+    <div *ngIf="show" class="vl"></div>
+
+    <div *ngIf="show" class="col-sm-4">
+        <h3 style="position: relative; left: 20%;">Task ids</h3>
+      <table style="padding: 10px;" class="tableTask table-bordered table-dark">
+      <tr style="cursor: pointer;"  data-target="#taskModal" data-toggle="modal" class="" >
           <td>{{tasks[0].taskid}}</td>
           <td>{{tasks[1].taskid}}</td>
           <td>{{tasks[2].taskid}}</td>
@@ -44,6 +48,7 @@
 
         </tr>
       </table>
+      <h5 style="position: relative; font-size: 14px; left: 22%;">*Click on id for more info </h5>
 
     </div>
   </div>
@@ -57,7 +62,7 @@
         
       </div>
       <div class="modal-body">
-        <table class="table">
+        <table class="tableTeam">
           <tr>
             <th>Name</th>
             <th>Role</th>
