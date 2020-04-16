@@ -36,11 +36,11 @@
     <div *ngIf="show" class="col-sm-6">
       
       <table style="padding: 10px;" class="table-bordered">
-      <tr style="cursor: pointer;"  data-target="#taskModal" data-toggle="modal" *ngFor="let task of projects[count].tasks;index as i" (click)="count3=i">
-          <td>{{task.taskid}}</td>
-          <td>{{task.assignee}}</td>
-          <td>{{task.dueDate}}</td>
-          <td>{{task.status}}</td>
+      <tr style="cursor: pointer;"  data-target="#taskModal" data-toggle="modal" >
+          <td>{{tasks[0].taskid}}</td>
+          <td>{{tasks[1].taskid}}</td>
+          <td>{{tasks[2].taskid}}</td>
+          <td>{{tasks[3].taskid}}</td>
 
         </tr>
       </table>
@@ -88,10 +88,10 @@
         <!-- <button class="close" data-dismiss="modal">&times;</button> -->
       </div>
       <div class="modal-body">
-        <p>TaskId:{{projects[count].tasks[count3].taskid}} </p>
-        <p>Assigned By:{{projects[count].tasks[count3].assignee}}</p>
-        <p>Status:{{projects[count].tasks[count3].status}}</p>
-        <p>Description:{{projects[count].tasks[count3].desc}}</p>
+        <p>TaskId:{{tasks[0].taskid}} </p>
+        <p>Assigned By:{{tasks[0].assignee}}</p>
+        <p>Status:{{tasks[0].status}}</p>
+        <p>Description:{{tasks[0].desc}}</p>
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" data-dismiss="modal" style="background-color:#0362fc;">Ok</button>
