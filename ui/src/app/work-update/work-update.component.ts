@@ -8,29 +8,64 @@ import { Component, OnInit } from '@angular/core';
 export class WorkUpdateComponent implements OnInit {
    page:number =1;
    count:number=0;
-
+   count2:number=0;
+   count3:number=0;
+  show:boolean=false;
 
    constructor() { }
    ngOnInit(): void {
-     console.log(this.projects)
+     
   }
 
 
-  projects  = [
+  projects = [
     {
-    id : 1,
-    name : "EMS",
-    team : {member1 : {name:"Naveen",role:"RMN"},
-            member2 : {name:"Raj",role:"Developer"}
-            },
-    Date : "September 6,2020"
-  },
-  {
+      id: 1,
+      name: "EMS",
+      team: {
+        member1: { name: "Naveen", role: "RMN" },
+        member2: { name: "Raj", role: "Developer" }
+      },
+      tasks:[ {
+        taskid: 100,
+        assignee: 'Admin',
+        dueDate: '20-10-200',
+        status: 'done',
+        desc:'Fill the form'
+
+      }, {
+        taskid:101,
+        assignee:'Admin',
+        dueDate:'25-10-2020',
+        status:'not completed',
+        desc:'COmplete the code'
+
+      }
+      ],
+      Date: "September 6,2020"
+    },
+    {
     id : 2,
     name : "ABC",
     team : {member1 : {name:"Abdul",role:"Developer"},
             member2 : {name:"Sarthak",role:"Developer"}
             },
+            tasks:[ {
+              taskid: 200,
+              assignee: 'Admin',
+              dueDate: '20-10-200',
+              status: 'done',
+              desc:'water the plants'
+      
+            }, {
+              taskid:201,
+              assignee:'Admin',
+              dueDate:'25-10-2020',
+              status:'not completed',
+              desc:'Wash the car'
+      
+            }
+            ],            
     Date : "September 7,2020"
   },
   {

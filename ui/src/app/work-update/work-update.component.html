@@ -1,44 +1,74 @@
-
-
-
-
 <div class="jumbotron">
-<!-- <pagination-template #p="paginationApi"> -->
-<div class="activeProjectsHeading">
-<h1 class="activeProjectsHeadingContent">Active Projects</h1> </div>
-<button class="button addButton">+</button>
-<!-- <div class="row"> -->
-<!-- <div class="col-sm-6"> -->
+  <!-- <pagination-template #p="paginationApi"> -->
+  <div class="activeProjectsHeading">
+    <h1 class="activeProjectsHeadingContent">Active Projects</h1>
+  </div>
+  <button class="button addButton">+</button>
+  <div class="row">
+    <div class="col-sm-6">
 
 
 
       <div class="status-content">
-      <table>
+        <table>
 
 
-      <tbody>
-        <tr *ngFor="let proj of projects |paginate : {id :'listing_pagination',
+          <tbody>
+            <tr *ngFor="let proj of projects |paginate : {id :'listing_pagination',
         itemsPerPage : 3,
         currentPage: page}; index as i">
-          <td>{{proj.id}}</td>
-          <td>{{proj.name}}</td>
-          <td><button  style="padding: 0;border: none;background: none;" class="btn btn-success" data-toggle="modal" data-target="#teamModal" (click)="count=i;">More</button></td>
+              <td>{{proj.id}}</td>
+              <td>{{proj.name}}</td>
+              <td><button style="padding: 0;border: none;background: none;" (click)="count=i" class="btn btn-success"
+                  data-toggle="modal" data-target="#teamModal" (click)="count=i;">Team</button></td>
+              <td><button (click)="count2=i;count=i;show=true">&iexcl;</button></td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <div>
+          <pagination-controls class="my-pagination" id="listing_pagination" maxSize="5" directionLinks="true"
+            (pageChange)="page = $event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="show" class="col-sm-6">
+      
+      <table style="padding: 10px;" class="table-bordered">
+      <tr style="cursor: pointer;"  data-target="#taskModal" data-toggle="modal" *ngFor="let task of projects[count].tasks;index as i" (click)="count3=i">
+          <td>{{task.taskid}}</td>
+          <td>{{task.assignee}}</td>
+          <td>{{task.dueDate}}</td>
+          <td>{{task.status}}</td>
+
+        </tr>
+      </table>
+
+    </div>
+  </div>
+</div>
 
 <div class="modal fade" id="teamModal">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
         <h4>Team Info</h4>
-        <!-- <button class="close" data-dismiss="modal">&times;</button> -->
+        
       </div>
       <div class="modal-body">
-        <table class="table" >
-            <tr><th>Name</th><th>Role</th></tr>
-            <tr><td>{{proj.team.member1.name}}</td>
-                <td>{{proj.team.member1.role}}</td>
-            </tr>
-            <tr><td>{{proj.team.member2.name}}</td>
-              <td>{{proj.team.member2.role}}</td>
+        <table class="table">
+          <tr>
+            <th>Name</th>
+            <th>Role</th>
+          </tr>
+          <tr>
+            <td>{{projects[count].team.member1.name}}</td>
+            <td>{{projects[count].team.member1.role}}</td>
+          </tr>
+          <tr>
+            <td>{{projects[count].team.member2.name}}</td>
+            <td>{{projects[count].team.member2.role}}</td>
           </tr>
         </table>
       </div>
@@ -49,25 +79,23 @@
   </div>
 </div>
 
-        </tr>
-      </tbody>
-    </table>
+
+<div class="modal fade" id="taskModal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Task Info</h4>
+        <!-- <button class="close" data-dismiss="modal">&times;</button> -->
+      </div>
+      <div class="modal-body">
+        <p>TaskId:{{projects[count].tasks[count3].taskid}} </p>
+        <p>Assigned By:{{projects[count].tasks[count3].assignee}}</p>
+        <p>Status:{{projects[count].tasks[count3].status}}</p>
+        <p>Description:{{projects[count].tasks[count3].desc}}</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-dismiss="modal" style="background-color:#0362fc;">Ok</button>
+      </div>
+    </div>
   </div>
-  <br>
-
-  <!-- <div class="pagination-previous" [class.disabled]="p.isFirstPage()">
-    <a *ngIf="!p.isFirstPage()" (click)="p.previous()">  </a>
-  </div> -->
-
-  <div>
-    <pagination-controls class="my-pagination" id="listing_pagination"  maxSize="5" directionLinks = "true" (pageChange)="page = $event"></pagination-controls>
-  </div>
-
-   <!-- </pagination-template> -->
-
-
 </div>
-
-
-
-
