@@ -1,9 +1,10 @@
 from ..mapper import projectMapper
 import datetime
+import time
 
 def saveProject(project_data):
     project_detail = {
-        "project_id": project_data['project_id'],
+        "project_id": int(round(time.time() * 1000)),
         "name": project_data['name'],
         "date": datetime.datetime.now(),
         "team": project_data['team'],
