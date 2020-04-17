@@ -3,7 +3,7 @@ import json
 from django.http import Http404, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
-from api.services import accountService, principleService
+from api.services import accountService, principleService, loggerService
 
 
 @csrf_exempt
@@ -27,6 +27,7 @@ def login(request):
     user_data = json.loads(request.body)
     json_res = accountService.getUser(user_data)
     if json_res is not None:
+        loggerService.saveLog(user_data["email"])
         json_res["status"] = 200
         return JsonResponse(json_res)
     else:
