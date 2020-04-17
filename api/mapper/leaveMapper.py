@@ -1,6 +1,6 @@
-import pymongo
+from . import client
 
-client = pymongo.MongoClient("localhost", 27017)
+client = client.connectToDB()
 Leaves = client.primer.leaves
 
 

@@ -16,10 +16,10 @@ def addProject(request):
     return JsonResponse({"status": 200, "message": "PROJECT SAVED"})
 
 @csrf_exempt
-def getProject(request):
+def getProjects(request):
     if not principleService.isLoggedIn():
         return JsonResponse({"status": 401, "message": "MUST LOG FIRST"})
-    project_data = projectService.getProjectDetail()
+    project_data = projectService.getProjectsDetail()
     if project_data is not None:
         return JsonResponse(project_data, safe=False)
     else:

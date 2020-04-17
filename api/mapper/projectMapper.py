@@ -1,6 +1,6 @@
-import pymongo
+from . import client
 
-client = pymongo.MongoClient("localhost", 27017)
+client = client.connectToDB()
 Projects = client.primer.projects
 
 
@@ -9,11 +9,8 @@ def save(project_detail):
     return id
 
 
-def findActiveProjects():
-    query = {"completed": False}
+def findProjects():
     projects = list(Projects.find())
     if len(projects) > 0:
         return projects
     return None
-
-print(findActiveProjects())
