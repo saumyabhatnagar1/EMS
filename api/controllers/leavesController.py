@@ -12,6 +12,7 @@ def addLeave(request):
     if request.method != 'POST' or len(request.body) <= 2:
         return JsonResponse({'status': 404, 'message': 'INVALID_REQUEST'})
     leave_data = json.loads(request.body)
+    leave_data["email"] = principleService.getUsername()
     leavesService.saveLeave(leave_data)
     return JsonResponse({"status": 200, "message": "LEAVE_REQUEST SUBMITTED"})
 
