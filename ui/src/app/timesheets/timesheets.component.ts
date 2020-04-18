@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TimesheetsService} from './timesheets.service';
 import {PrincipleService} from '../util/principle.service';
+import { NotificationService} from '../common/services/notification.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -28,7 +29,7 @@ export class TimesheetsComponent implements OnInit {
     out_minutes : new FormControl('',Validators.required),
 
   });
-  constructor(private principle:PrincipleService, private timesheetsService:TimesheetsService) { }
+  constructor(private principle:PrincipleService,private notificationService:NotificationService, private timesheetsService:TimesheetsService) { }
 
   ngOnInit(): void {
       this.updateCurrentDate(this.today.getFullYear(),this.today.getMonth(),this.today.getDate(),this.today.getDay())
@@ -57,14 +58,19 @@ export class TimesheetsComponent implements OnInit {
       let data = {"username":username || this.principle.getUsername(), "date": date, "month": month, "year": year}
       this.timesheetsService.findTimeSheet(JSON.stringify(data)).subscribe(
         res =>{
-          console.log(res)
+          console.log("message",res)
           this.message = res["message"];
-          this.id = res["data"]["id"];
-          this.timings.patchValue({"in_hours": res["data"]["timings"]["in_time"]["hours"]});
-          this.timings.patchValue({"in_minutes": res["data"]["timings"]["in_time"]["minutes"]});
-          this.timings.patchValue({"out_hours": res["data"]["timings"]["out_time"]["hours"]});
-          this.timings.patchValue({"out_minutes": res["data"]["timings"]["out_time"]["minutes"]});
-          this.isSubmitted = true;
+          if(res["data"]){
+            this.id = res["data"]["id"];
+            this.timings.patchValue({"in_hours": res["data"]["timings"]["in_time"]["hours"]});
+            this.timings.patchValue({"in_minutes": res["data"]["timings"]["in_time"]["minutes"]});
+            this.timings.patchValue({"out_hours": res["data"]["timings"]["out_time"]["hours"]});
+            this.timings.patchValue({"out_minutes": res["data"]["timings"]["out_time"]["minutes"]});
+            this.isSubmitted = true;
+          }else{
+            this.id = undefined;
+            this.timings.reset();
+          }
         },err =>{
           console.log(err)
         }
@@ -90,15 +96,23 @@ export class TimesheetsComponent implements OnInit {
         this.timesheetsService.addTimeSheet(data).subscribe(
            res=>{
               console.log(res);
+              if(res["status"] == 401){
+                this.notificationService.showFailed("Your account is not authorized!");
+              }
            },err=>{
                console.log(err)
+               this.notificationService.showFailed("Something went wrong!");
         });
     }else{
         this.timesheetsService.adminUpdateTimeSheet(data).subscribe(
             res=>{
                console.log(res);
+               if(res["status"] == 401){
+                this.notificationService.showFailed("Your account is not authorized!");
+              }
             },err=>{
                 console.log(err)
+                 this.notificationService.showFailed("Something went wrong!");
          });
     }
   }

@@ -1,9 +1,11 @@
 from django.urls import path
 
-from api.controllers import accountController, timesheetsController, leavesController, projectController
+from api.controllers import accountController, timesheetsController, leavesController, projectController, \
+    principleController
 
 urlpatterns = [
     path('', accountController.index, name='index'),
+    path('principle/', principleController.index, name='principle'),
     path('login/', accountController.login, name='login'),
     path('createUser/', accountController.createUser, name='create User'),
     path('account/profile', accountController.getUserProfile, name='profile'),

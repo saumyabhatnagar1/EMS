@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { PrincipleService } from './util/principle.service';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'EMS';
+  constructor(private principle:PrincipleService){
+  	
+  }
 }

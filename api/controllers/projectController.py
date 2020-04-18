@@ -1,8 +1,9 @@
 import json
 
-from api.services import principleService, accountService, leavesService, projectService
-from django.http import JsonResponse, Http404
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+
+from api.services import principleService, projectService
 
 
 @csrf_exempt
@@ -14,6 +15,7 @@ def addProject(request):
     project_data = json.loads(request.body)
     projectService.saveProject(project_data)
     return JsonResponse({"status": 200, "message": "PROJECT SAVED"})
+
 
 @csrf_exempt
 def getProjects(request):
