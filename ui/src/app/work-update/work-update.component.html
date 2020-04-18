@@ -14,16 +14,16 @@
 
 
           <tbody>
-            <tr *ngFor="let proj of projects |paginate : {id :'listing_pagination',
+            <tr *ngFor="let proj of projectJson |paginate : {id :'listing_pagination',
         itemsPerPage : 3,
         currentPage: page}; index as i">
               <td><button style="border-radius: 50%; background-color: black;">&iexcl;</button></td>
 
-              <td>{{proj.id}}</td>
+              <td>{{proj.project_id}}</td>
               <td>{{proj.name}}</td>
               <td><button style="padding: 0;border: none;background: none; color: black;" (click)="count=i" class="btn btn-success"
-                  data-toggle="modal" data-target="#teamModal" (click)="count=i;">Team</button></td>
-              <td><button (click)="count2=i;count=i;show=true" style="border-radius: 50%;">&iexcl;</button></td>
+                  data-toggle="modal" data-target="#teamModal" (click)="pid_team=i;">Team</button></td>
+              <td><button (click)="show=true;get_tasks(i)" style="border-radius: 50%;">&iexcl;</button></td>
             </tr>
           </tbody>
         </table>
@@ -41,10 +41,10 @@
         <h3 style="position: relative; left: 20%;">Task ids</h3>
       <table class="tableTask">
       <tr style="cursor: pointer;"  data-target="#taskModal" data-toggle="modal" class="" >
-          <td>{{tasks[0].taskid}}</td>
-          <td>{{tasks[1].taskid}}</td>
-          <td>{{tasks[2].taskid}}</td>
-          <td>{{tasks[3].taskid}}</td>
+          <td>Task Id 1</td>
+          <td>Task id 2</td>
+          <td>Task id 3</td>
+          <td>Task id 4</td>
 
         </tr>
       </table>
@@ -67,14 +67,11 @@
             <th>Name</th>
             <th>Role</th>
           </tr>
-          <tr>
-            <td>{{projects[count].team.member1.name}}</td>
-            <td>{{projects[count].team.member1.role}}</td>
+          <tr *ngFor="let team of projectJson[pid_team].teams">
+            <td>{{team.name}}</td>
+            <td>{{team.role}}</td>
           </tr>
-          <tr>
-            <td>{{projects[count].team.member2.name}}</td>
-            <td>{{projects[count].team.member2.role}}</td>
-          </tr>
+         
         </table>
       </div>
       <div class="modal-footer">
@@ -93,10 +90,10 @@
         <!-- <button class="close" data-dismiss="modal">&times;</button> -->
       </div>
       <div class="modal-body">
-        <p>TaskId:{{tasks[0].taskid}} </p>
-        <p>Assigned By:{{tasks[0].assignee}}</p>
-        <p>Status:{{tasks[0].status}}</p>
-        <p>Description:{{tasks[0].desc}}</p>
+        <p>TaskId: </p>
+        <p>Assigned By:</p>
+        <p>Status:</p>
+        <p>Description</p>
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" data-dismiss="modal" style="background-color:#0362fc;">Ok</button>

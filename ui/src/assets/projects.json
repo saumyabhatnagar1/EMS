@@ -1,0 +1,30 @@
+[
+    {
+        "project_id": 1,
+        "name": "EMS",
+        "teams": [
+            {
+                "name": "Naveen",
+                "role": "RMN"
+            },
+            {
+                "name": "Raj",
+                "role": "Dev"
+            }
+        ]
+    },
+    {
+        "project_id": 2,
+        "name": "CV",
+        "teams": [
+            {
+                "name": "Sarthak",
+                "role": "Dev"
+            },
+            {
+                "name": "Risabh",
+                "role": "Dev"
+            }
+        ]
+    }
+]
