@@ -23,6 +23,7 @@ export class WorkUpdateComponent implements OnInit {
   constructor(private projectservice:ProjectService) { }
   ngOnInit(): void {
     this.get_projects()
+    this.findAllProjects()
     
   }
 public projectJson:any;
@@ -63,20 +64,8 @@ public taskJson:any;
   onConfirm()
   {
     let projectJSON = JSON.stringify(this.projectForm.value)
-    let data = {
-    "name": "project name",
-    "team" : [
-        {
-            "email" : "naveen.gaddi@yahoo.com",
-            "role" : "RMN"
-        },
-        {
-            "email" : "abdul@yahoo.com",
-            "role" : "Dev"
-        },
-    ]
-  }
-    console.log(projectJSON)
+   
+    
     this.projectservice.requestProject(projectJSON).subscribe(
       res=>{
       
@@ -100,6 +89,29 @@ public taskJson:any;
     })
     
   })
+public projectsApi:any;
+  findAllProjects(){
+    this.projectservice.getAllProjects().subscribe(
+      res=>{
+        this.appendProjects(res);
+        console.log(res);
+      },
+      err=>{
+        console.log(err)
+      }
+    )
+  }
+  public projects=[];
+  appendProjects(res){
+    let projectData=Object.entries(res);
+    console.log(projectData)
+    this.projects=[];
+    for(let index=0;index<projectData.length;index++)
+    {
+      this.projects.push(projectData[index][1])
+    }
+    console.log(projects)
+  }
 
  
 

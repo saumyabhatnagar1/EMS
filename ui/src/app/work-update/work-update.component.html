@@ -15,7 +15,7 @@
 
 
           <tbody>
-            <tr *ngFor="let proj of projectJson |paginate : {id :'listing_pagination',
+            <tr *ngFor="let proj of projects |paginate : {id :'listing_pagination',
         itemsPerPage : 3,
         currentPage: page}; index as i">
               <td><button style="border-radius: 50%; background-color: black;">&iexcl;</button></td>
