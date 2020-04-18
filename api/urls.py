@@ -18,5 +18,7 @@ urlpatterns = [
     path('leaves/findAll', leavesController.getLeavesData, name='leave detail'),
 
     path('project/new', projectController.addProject, name='add project'),
-    path('project/findAll', projectController.getProjects, name='get project')
+    path('project/findAll', projectController.getProjects, name='get project'),
+    path('task/new', projectController.addTask, name='add task'),
+    path('task/find', projectController.getTasks, name='get task'),
 ]
