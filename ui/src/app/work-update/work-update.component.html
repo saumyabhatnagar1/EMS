@@ -1,9 +1,10 @@
 <div class="jumbotron">
   <!-- <pagination-template #p="paginationApi"> -->
+    <button class="btn btn-primary" (click)="onConfirm()">Confirm</button>
   <div class="activeProjectsHeading">
     <h1 class="activeProjectsHeadingContent">Active Projects</h1>
   </div>
-  <button class="button addButton">+</button>
+  <button class="button addButton" data-target="#projectModal" data-toggle="modal">+</button>
   <div class="row">
     <div class="col-sm-8">
 
@@ -100,4 +101,43 @@
       </div>
     </div>
   </div>
+
+  
+
+  
+</div>
+
+<div class="modal fade" id="projectModal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Add project</h4>
+        <!-- <button class="close" data-dismiss="modal">&times;</button> -->
+      </div>
+      <div class="modal-body">
+        <form action="" [formGroup]="projectForm" (ngSubmit)="onConfirm()">
+          <label for=""> Name
+            <input type="text" formControlName="name" placeholder="Project Name" class="form-control">
+          </label>
+          
+            <div formGroupName = "team">
+          
+            <input type="text" formControlName="email" placeholder="Member1" class="form-control">
+            <input type="text" formControlName="role" placeholder="Role" class="form-control">
+          
+            </div>
+          
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+       
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-dismiss="modal" style="background-color:#0362fc;">Ok</button>
+      </div>
+    </div>
+  </div>
+
+  
+
+  
 </div>

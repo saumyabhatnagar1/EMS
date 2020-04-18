@@ -1,8 +1,8 @@
+import { FormControl,FormGroup } from '@angular/forms';
 import { ProjectService } from './projects.service';
 import { Component, OnInit } from '@angular/core';
 import projects from '../../assets/projects.json';
 import tasks from '../../assets/tasks.json';
-
 
 @Component({
   selector: 'app-work-update',
@@ -58,6 +58,48 @@ public taskJson:any;
         }
       )
   }
+
+
+  onConfirm()
+  {
+    let projectJSON = JSON.stringify(this.projectForm.value)
+    let data = {
+    "name": "project name",
+    "team" : [
+        {
+            "email" : "naveen.gaddi@yahoo.com",
+            "role" : "RMN"
+        },
+        {
+            "email" : "abdul@yahoo.com",
+            "role" : "Dev"
+        },
+    ]
+  }
+    console.log(projectJSON)
+    this.projectservice.requestProject(projectJSON).subscribe(
+      res=>{
+      
+        console.log(res);
+        //this.notificationService.showSuccess("Leave Application Submitted!!!");
+      },
+      err=>{
+        //this.notificationService.showFailed("Something went wrong!");
+        console.log(err)
+    });
+    
+  }
+
+
+
+  public projectForm = new FormGroup({
+    name:new FormControl(''),
+    team:new FormGroup({
+      email:new FormControl(''),
+      role:new FormControl('')
+    })
+    
+  })
 
  
 
