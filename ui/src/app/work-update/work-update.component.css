@@ -53,10 +53,9 @@
 } */
 
 .table, td, th {
-  border: 0 solid #ddd;
+  
   text-align: center;
-  height: 30px;
-  width: 30px;
+  
 }
 
 .table {
@@ -64,7 +63,7 @@
   height: 200px;
   width: 60%;
   text-align: center;
-  background-color: #bec4c1;
+  
 }
 
 .tableTeam{
@@ -89,18 +88,10 @@
   height: 50px;
   width: 60%;
   text-align: center;
-  background-color: #bec4c1;
+  background-color: #e3e2e1;
   color: black;
 }
 
-.vl {
-  border-left: 1px solid black;
-  height: 700px;
-  position: absolute;
-  left: 60%;
-  margin-left: -3px;
-  top: 0;
-}
 
 .my-pagination{
   position: relative;

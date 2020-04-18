@@ -10,7 +10,7 @@
 
 
       <div class="status-content">
-        <table class="table table-hover"> 
+        <table class="table table-hover table-striped"> 
 
 
           <tbody>
@@ -35,11 +35,11 @@
       </div>
     </div>
 
-    <div *ngIf="show" class="vl"></div>
+    
 
     <div *ngIf="show" class="col-sm-4">
         <h3 style="position: relative; left: 20%;">Task ids</h3>
-      <table style="padding: 10px;" class="tableTask table-bordered table-dark">
+      <table class="tableTask">
       <tr style="cursor: pointer;"  data-target="#taskModal" data-toggle="modal" class="" >
           <td>{{tasks[0].taskid}}</td>
           <td>{{tasks[1].taskid}}</td>
