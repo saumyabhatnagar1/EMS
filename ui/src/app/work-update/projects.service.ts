@@ -28,7 +28,7 @@ export class ProjectService{
     	return this.http.post(this.globalService.baseApiUrl+'task/new',body);
     }
 
-    getAllTasks(){
-    	return this.http.post(this.globalService.baseApiUrl+'task/find',{});
+    getAllTask(project_id){
+    	return this.http.post(this.globalService.baseApiUrl+'task/find',{project_id});
     }
 }

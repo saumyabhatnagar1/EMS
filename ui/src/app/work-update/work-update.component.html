@@ -25,7 +25,7 @@
               <td><button style="padding: 0;border: none;background: none; color: black;" (click)="count=i"
                   class="btn btn-success" data-toggle="modal" data-target="#teamModal"
                   (click)="pid_team=i;">Team</button></td>
-              <td><button (click)="show=true; getProjectId(i)" style="border-radius: 50%;" >&iexcl;</button></td>
+              <td><button style="border-radius: 50%;" (click)="getTask(i);" >&iexcl;</button></td>
             </tr>
           </tbody>
         </table>
@@ -43,11 +43,11 @@
       <h3 style="position: relative; left: 20%;">Task ids</h3>
       <button data-target="#addTaskModal" data-toggle="modal" class="btn btn-primary">Add Task</button>
       <table class="tableTask">
-        <tr style="cursor: pointer;" data-target="#taskModal" data-toggle="modal" class="">
-          <td>Task Id 1</td>
-          <td>Task id 2</td>
-          <td>Task id 3</td>
-          <td>Task id 4</td>
+        <tr *ngFor="let t of tasks" style="cursor: pointer;" class="">
+          <td>{{t.project_id}}mm</td>
+          <td>{{t.assignee}}</td>
+          <td>{{t.description}}</td>
+          <td>{{t.completed}}</td>
 
         </tr>
       </table>
@@ -70,9 +70,9 @@
             <th>Name</th>
             <th>Role</th>
           </tr>
-          <tr *ngFor="let team of projectJson[pid_team].teams">
-            <td>{{team.name}}</td>
-            <td>{{team.role}}</td>
+          <tr>
+            <td>Name</td>
+            <td>Role</td>
           </tr>
 
         </table>
@@ -91,7 +91,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4>Add project</h4>
-        <!-- <button class="close" data-dismiss="modal">&times;</button> -->
+        
       </div>
       <div class="modal-body">
         <form action="" [formGroup]="projectForm">

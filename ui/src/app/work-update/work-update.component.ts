@@ -1,8 +1,7 @@
-import { FormControl,FormGroup, FormArray } from '@angular/forms';
+import { FormControl, FormGroup, FormArray } from '@angular/forms';
 import { ProjectService } from './projects.service';
 import { Component, OnInit } from '@angular/core';
-import projects from '../../assets/projects.json';
-import tasks from '../../assets/tasks.json';
+
 
 @Component({
   selector: 'app-work-update',
@@ -14,170 +13,164 @@ export class WorkUpdateComponent implements OnInit {
   count: number = 0;
   count2: number = 0;
   count3: number = 0;
-  show: boolean = false;
-  pid:number=0;
-  pid_team:number=0;
+  show: boolean = true;
+  pid: number = 0;
+  pid_team: number = 0;
+
+
+
+  constructor(private projectservice: ProjectService) { }
+  ngOnInit(): void {
+    
+    this.findAllProjects()
+    
+
+  }
+  
+
+  public taskJson: any;
+ 
   
 
 
-  constructor(private projectservice:ProjectService) { }
-  ngOnInit(): void {
-    this.get_projects()
-    this.findAllProjects()
-    
-  }
-public projectJson:any;
-  get_projects(){
-    this.projectservice.get_projects().subscribe(
-      res=>{
-        this.projectJson=res;
-        console.log(res)
-      },
-      err=>{
-        console.log(err)
-      }
-    )
-  }
-
-public taskJson:any;
-  get_tasks(pid){
-
-    let project_id=this.projectJson[pid].project_id
-    let resultarray:Array<string|string>=[];
-      this.projectservice.get_tasks(pid).subscribe(
-        res=>{
-          this.taskJson=res;
-          Object.keys(res).map(function(key){
-            let task=res[key];
-            if(task.project_id==project_id)
-            resultarray.push(task);
-          });
-          console.log(resultarray)
-        },
-        err=>{
-          console.log(err)
-        }
-      )
-  }
-
-
   public projectForm = new FormGroup({
-    name:new FormControl(''),
-    team:new FormArray([
+    name: new FormControl(''),
+    team: new FormArray([
       new FormGroup({
-        email:new FormControl(''),
-        role:new FormControl('')
-     })
+        email: new FormControl(''),
+        role: new FormControl('')
+      })
     ])
-    })
+  })
 
-    
-    team = this.projectForm.get('team') as FormArray
 
-    addTeam(t2){
-      
-      (this.projectForm.get('team') as FormArray).push(new FormControl(t2.value))
-      //console.log(this.projectForm.get('team'))
-      console.log(this.team)
-    }
+  team = this.projectForm.get('team') as FormArray
 
-  onConfirm()
-  {
+  addTeam(t2) {
+
+    (this.projectForm.get('team') as FormArray).push(new FormControl(t2.value))
+    //console.log(this.projectForm.get('team'))
+    console.log(this.team)
+  }
+
+  onConfirm() {
     let projectJSON = JSON.stringify(this.projectForm.value)
-   // console.log(this.projectForm.get('team')[0].value)
+    // console.log(this.projectForm.get('team')[0].value)
     console.log(projectJSON)
 
-    
+
     this.projectservice.requestProject(projectJSON).subscribe(
-      res=>{
-      
+      res => {
+
         console.log(res);
         //this.notificationService.showSuccess("Leave Application Submitted!!!");
       },
-      err=>{
+      err => {
         //this.notificationService.showFailed("Something went wrong!");
         console.log(err)
-    });
-    
-    
+      });
+
+
   }
 
 
 
- 
 
 
 
 
-public projectsApi:any;
-  findAllProjects(){
+
+  public projectsApi: any;
+  findAllProjects() {
     this.projectservice.getAllProjects().subscribe(
-      res=>{
+      res => {
         this.appendProjects(res);
         console.log(res);
       },
-      err=>{
+      err => {
         console.log(err)
       }
     )
   }
-  public projects=[];
-  appendProjects(res){
-    let projectData=Object.entries(res);
-    console.log(projectData)
-    this.projects=[];
-    for(let index=0;index<projectData.length;index++)
-    {
+  public projects = [];
+  appendProjects(res) {
+    let projectData = Object.entries(res);
+    
+    this.projects = [];
+    for (let index = 0; index < projectData.length; index++) {
       this.projects.push(projectData[index][1])
     }
-    console.log(projects)
+    
   }
 
 
   public taskForm = new FormGroup({
-    project_id : new FormControl(''),
-    description : new FormControl(''),
-    assignee : new FormControl('')
-   })
- 
-  onTaskSubmit()
-  {
-    let taskJSON = JSON.stringify(this.taskForm.value)
-   // console.log(this.projectForm.get('team')[0].value)
-    console.log(taskJSON)
+    project_id: new FormControl(''),
+    description: new FormControl(''),
+    assignee: new FormControl('')
+  })
 
+  onTaskSubmit() {
+    let taskJSON = JSON.stringify(this.taskForm.value)
+    // console.log(this.projectForm.get('team')[0].value)
+    console.log(taskJSON)
+    
     
     this.projectservice.createTask(taskJSON).subscribe(
-      res=>{
-      
+      res => {
+        
         console.log(res);
+        this.appendTasks(res)
         //this.notificationService.showSuccess("Leave Application Submitted!!!");
       },
-      err=>{
+      err => {
         //this.notificationService.showFailed("Something went wrong!");
         console.log(err)
-    });
+      });
+
+
+      
+
+      
     
+
+  }
+
+  public tasks=[]
+  appendTasks(res){
+    let taskData = Object.entries(res);
+    
+    this.tasks=[]
+    for (let index = 0; index < taskData.length; index++) {
+      this.tasks.push(taskData[index][1])
+      
+    }
+    console.log(this.tasks)
+  }
+  
+  public project_id2
+  getProjectId(i) {
+    this.project_id2= (this.projects[i].project_id)
     
   }
 
-  getProjectId(i){
-    console.log(projects[i].teams)
-  }
-
-  getTask(){
-    this.projectservice.getAllTasks().subscribe(
-      res=>{
+  getTask(i) {
+    
+    let project_id:string=(this.projects[i].project_id).toString()
+    console.log(project_id)
+    
+    this.projectservice.getAllTask(project_id).subscribe(
+      res => {
         console.log(res);
       },
-      err=>{
+      err => {
         console.log(err)
       }
     )
   }
 
 
- 
+
 
 
 }
