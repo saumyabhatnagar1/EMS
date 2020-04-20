@@ -4,6 +4,7 @@ from django.http import Http404, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from api.services import accountService, principleService, loggerService
+from api.security.decorators import login_required
 
 
 @csrf_exempt
@@ -35,9 +36,9 @@ def login(request):
 
 
 @csrf_exempt
+@login_required
 def logout(request):
-    if principleService.isLoggedIn():
-        principleService.removeCurrentUser()
+    principleService.removeCurrentUser()
     return JsonResponse({"status": 205, "message": "logout success"})
 
 
@@ -46,9 +47,8 @@ def index(request):
 
 
 @csrf_exempt
+@login_required
 def getUserProfile(request):
-    if not principleService.isLoggedIn():
-        return JsonResponse({"status": 401, "message": "MUST LOG FIRST"})
     if request.method != 'POST':
         return JsonResponse({'status': 404, 'message': 'INVALID_REQUEST'})
     user_data = json.loads(request.body)

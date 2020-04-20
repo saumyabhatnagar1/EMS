@@ -4,12 +4,12 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from api.services import principleService, projectService
+from api.security.decorators import login_required
 
 
 @csrf_exempt
+@login_required
 def addProject(request):
-    if not principleService.isLoggedIn():
-        return JsonResponse({"status": 401, "message": "MUST LOG FIRST"})
     if request.method != 'POST' or len(request.body) <= 2:
         return JsonResponse({"status": 404, "message": "INVALID_REQUEST"})
     project_data = json.loads(request.body)
@@ -18,9 +18,8 @@ def addProject(request):
 
 
 @csrf_exempt
+@login_required
 def getProjects(request):
-    if not principleService.isLoggedIn():
-        return JsonResponse({"status": 401, "message": "MUST LOG FIRST"})
     project_data = projectService.getProjectsDetail()
     if project_data is not None:
         return JsonResponse(project_data, safe=False)
@@ -29,9 +28,8 @@ def getProjects(request):
 
 
 @csrf_exempt
+@login_required
 def addTask(request):
-    if not principleService.isLoggedIn():
-        return JsonResponse({"status": 401, "message": "MUST LOG FIRST"})
     if request.method != 'POST' or len(request.body) <= 2:
         return JsonResponse({"status": 404, "message": "INVALID_REQUEST"})
     task_data = json.loads(request.body)
@@ -40,9 +38,8 @@ def addTask(request):
 
 
 @csrf_exempt
+@login_required
 def getTasks(request):
-    if not principleService.isLoggedIn():
-        return JsonResponse({"status": 401, "message": "MUST LOG FIRST"})
     if request.method != 'POST' or len(request.body) < 1:
         return JsonResponse({"status": 404, "message": "INVALID_REQUEST"})
     project_id = json.loads(request.body)['project_id']
