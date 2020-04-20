@@ -115,19 +115,28 @@
         <!-- <button class="close" data-dismiss="modal">&times;</button> -->
       </div>
       <div class="modal-body">
-        <form action="" [formGroup]="projectForm" (ngSubmit)="onConfirm()">
+        <form action="" [formGroup]="projectForm">
           <label for=""> Name
             <input type="text" formControlName="name" placeholder="Project Name" class="form-control">
           </label>
           
-            <div formGroupName = "team">
           
-            <input type="text" formControlName="email" placeholder="Member1" class="form-control">
-            <input type="text" formControlName="role" placeholder="Role" class="form-control">
-          
+            <div formArrayName = "team"  #t2>
+              <div *ngFor='let t of team.controls;index as i'>
+                <div [formGroupName]="i">
+                  <input type="text" formControlName="email" placeholder="Member" class="form-control">
+                  <input type="text" formControlName="role" placeholder="Role" class="form-control">
+                  <button (click)="addTeam(t2)">Add</button>
+                </div>
             </div>
+            </div>
+                
+                  
           
-          <button type="submit" class="btn btn-primary">Submit</button>
+              
+ 
+          
+          <button type="submit" class="btn btn-primary" (click)="onConfirm()">Submit</button>
         </form>
        
       </div>

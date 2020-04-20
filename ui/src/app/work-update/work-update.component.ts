@@ -1,4 +1,4 @@
-import { FormControl,FormGroup } from '@angular/forms';
+import { FormControl,FormGroup, FormArray } from '@angular/forms';
 import { ProjectService } from './projects.service';
 import { Component, OnInit } from '@angular/core';
 import projects from '../../assets/projects.json';
@@ -61,10 +61,32 @@ public taskJson:any;
   }
 
 
+  public projectForm = new FormGroup({
+    name:new FormControl(''),
+    team:new FormArray([
+      new FormGroup({
+        email:new FormControl(''),
+        role:new FormControl('')
+     })
+    ])
+    })
+
+    
+    team = this.projectForm.get('team') as FormArray
+
+    addTeam(t2){
+      
+      (this.projectForm.get('team') as FormArray).push(new FormControl(t2.value))
+      //console.log(this.projectForm.get('team'))
+      console.log(this.team)
+    }
+
   onConfirm()
   {
     let projectJSON = JSON.stringify(this.projectForm.value)
-   
+   // console.log(this.projectForm.get('team')[0].value)
+    console.log(projectJSON)
+
     
     this.projectservice.requestProject(projectJSON).subscribe(
       res=>{
@@ -77,18 +99,16 @@ public taskJson:any;
         console.log(err)
     });
     
+    
   }
 
 
 
-  public projectForm = new FormGroup({
-    name:new FormControl(''),
-    team:new FormGroup({
-      email:new FormControl(''),
-      role:new FormControl('')
-    })
-    
-  })
+ 
+
+
+
+
 public projectsApi:any;
   findAllProjects(){
     this.projectservice.getAllProjects().subscribe(
