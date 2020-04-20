@@ -1,6 +1,6 @@
 <div class="jumbotron">
   <!-- <pagination-template #p="paginationApi"> -->
-    <button class="btn btn-primary" (click)="onConfirm()">Confirm</button>
+  <button class="btn btn-primary">Confirm</button>
   <div class="activeProjectsHeading">
     <h1 class="activeProjectsHeadingContent">Active Projects</h1>
   </div>
@@ -11,7 +11,7 @@
 
 
       <div class="status-content">
-        <table class="table table-hover table-striped"> 
+        <table class="table table-hover table-striped">
 
 
           <tbody>
@@ -22,9 +22,10 @@
 
               <td>{{proj.project_id}}</td>
               <td>{{proj.name}}</td>
-              <td><button style="padding: 0;border: none;background: none; color: black;" (click)="count=i" class="btn btn-success"
-                  data-toggle="modal" data-target="#teamModal" (click)="pid_team=i;">Team</button></td>
-              <td><button (click)="show=true;get_tasks(i)" style="border-radius: 50%;">&iexcl;</button></td>
+              <td><button style="padding: 0;border: none;background: none; color: black;" (click)="count=i"
+                  class="btn btn-success" data-toggle="modal" data-target="#teamModal"
+                  (click)="pid_team=i;">Team</button></td>
+              <td><button (click)="show=true; getProjectId(i)" style="border-radius: 50%;" >&iexcl;</button></td>
             </tr>
           </tbody>
         </table>
@@ -36,12 +37,13 @@
       </div>
     </div>
 
-    
+
 
     <div *ngIf="show" class="col-sm-4">
-        <h3 style="position: relative; left: 20%;">Task ids</h3>
+      <h3 style="position: relative; left: 20%;">Task ids</h3>
+      <button data-target="#addTaskModal" data-toggle="modal" class="btn btn-primary">Add Task</button>
       <table class="tableTask">
-      <tr style="cursor: pointer;"  data-target="#taskModal" data-toggle="modal" class="" >
+        <tr style="cursor: pointer;" data-target="#taskModal" data-toggle="modal" class="">
           <td>Task Id 1</td>
           <td>Task id 2</td>
           <td>Task id 3</td>
@@ -60,7 +62,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4>Team Info</h4>
-        
+
       </div>
       <div class="modal-body">
         <table class="tableTeam">
@@ -72,7 +74,7 @@
             <td>{{team.name}}</td>
             <td>{{team.role}}</td>
           </tr>
-         
+
         </table>
       </div>
       <div class="modal-footer">
@@ -83,29 +85,6 @@
 </div>
 
 
-<div class="modal fade" id="taskModal">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4>Task Info</h4>
-        <!-- <button class="close" data-dismiss="modal">&times;</button> -->
-      </div>
-      <div class="modal-body">
-        <p>TaskId: </p>
-        <p>Assigned By:</p>
-        <p>Status:</p>
-        <p>Description</p>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" data-dismiss="modal" style="background-color:#0362fc;">Ok</button>
-      </div>
-    </div>
-  </div>
-
-  
-
-  
-</div>
 
 <div class="modal fade" id="projectModal">
   <div class="modal-dialog modal-sm">
@@ -119,34 +98,66 @@
           <label for=""> Name
             <input type="text" formControlName="name" placeholder="Project Name" class="form-control">
           </label>
-          
-          
-            <div formArrayName = "team"  #t2>
-              <div *ngFor='let t of team.controls;index as i'>
-                <div [formGroupName]="i">
-                  <input type="text" formControlName="email" placeholder="Member" class="form-control">
-                  <input type="text" formControlName="role" placeholder="Role" class="form-control">
-                  <button (click)="addTeam(t2)">Add</button>
-                </div>
+
+
+          <div formArrayName="team" #t2>
+            <div *ngFor='let t of team.controls;index as i'>
+              <div [formGroupName]="i">
+                <input type="text" formControlName="email" placeholder="Member" class="form-control">
+                <input type="text" formControlName="role" placeholder="Role" class="form-control">
+                <button (click)="addTeam(t2)">Add</button>
+              </div>
             </div>
-            </div>
-                
-                  
-          
-              
- 
-          
-          <button type="submit" class="btn btn-primary" (click)="onConfirm()">Submit</button>
+          </div>
+
+
+
+
+
+
+          <button type="submit" class="btn btn-primary" (click)="onConfirm()"> Submit</button>
         </form>
-       
+
       </div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" data-dismiss="modal" style="background-color:#0362fc;">Ok</button>
-      </div>
+
     </div>
   </div>
 
-  
 
-  
+
+
+</div>
+
+
+<div class="modal fade" id="addTaskModal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Add Task</h4>
+        <!-- <button class="close" data-dismiss="modal">&times;</button> -->
+      </div>
+      <div class="modal-body">
+        <form action="" [formGroup]="taskForm">
+          <label for=""> Project Id
+            <input type="text" formControlName="project_id" placeholder="project id" class="form-control">
+          </label>
+          <label for=""> Task Description
+            <input type="text" formControlName="description" placeholder="description" class="form-control">
+          </label>
+          <label for=""> Assignee
+            <input type="text" formControlName="assignee" placeholder="assignee" class="form-control">
+          </label>
+
+
+          <button type="submit" class="btn btn-primary" (click)="onTaskSubmit()" data-dismiss="modal">Submit</button>
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+
+
+
+
 </div>

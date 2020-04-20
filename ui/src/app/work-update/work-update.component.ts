@@ -133,7 +133,48 @@ public projectsApi:any;
     console.log(projects)
   }
 
+
+  public taskForm = new FormGroup({
+    project_id : new FormControl(''),
+    description : new FormControl(''),
+    assignee : new FormControl('')
+   })
  
+  onTaskSubmit()
+  {
+    let taskJSON = JSON.stringify(this.taskForm.value)
+   // console.log(this.projectForm.get('team')[0].value)
+    console.log(taskJSON)
+
+    
+    this.projectservice.createTask(taskJSON).subscribe(
+      res=>{
+      
+        console.log(res);
+        //this.notificationService.showSuccess("Leave Application Submitted!!!");
+      },
+      err=>{
+        //this.notificationService.showFailed("Something went wrong!");
+        console.log(err)
+    });
+    
+    
+  }
+
+  getProjectId(i){
+    console.log(projects[i].teams)
+  }
+
+  getTask(){
+    this.projectservice.getAllTasks().subscribe(
+      res=>{
+        console.log(res);
+      },
+      err=>{
+        console.log(err)
+      }
+    )
+  }
 
 
  

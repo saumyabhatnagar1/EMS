@@ -23,4 +23,12 @@ export class ProjectService{
     getAllProjects(){
     	return this.http.post(this.globalService.baseApiUrl+'project/findAll',{});
     }
+
+    createTask(body){
+    	return this.http.post(this.globalService.baseApiUrl+'task/new',body);
+    }
+
+    getAllTasks(){
+    	return this.http.post(this.globalService.baseApiUrl+'task/find',{});
+    }
 }
