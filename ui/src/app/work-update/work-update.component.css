@@ -1,31 +1,28 @@
 
-.activeProjectsHeading{
-    height: 120px;
-    width: 40%;
-    background-color: #0020f2;
-    font-size: 50px;
-}
 
-.activeProjectsHeadingContent{
-    font-size: 45px;
-    color: white;
-    position: relative;
-    top: 35px;
-    left: 80px;
-
-}
 
 .addButton{
-    border-radius:100%;
+    border-radius:48%;
     font-size: 40px;
     background-color: #de4d04;
     position: relative;
     top: -30px;
-    left: 10px;
+    left: 2%;
     color: white;
     
 }
 
+.table1, .table2{
+  height: 100vh;
+  width: 100%;
+}
+
+
+@media screen and (min-width:800px){
+  .table1, .table2 {
+    height: 50vh;
+  }
+}
 
 /* .paginator{
   font-family: 'Lato', sans-serif;
@@ -52,51 +49,10 @@
   background: #d4d4d4;
 } */
 
-.table, td, th {
-  
-  text-align: center;
-  
-}
-
-.table {
-  border-collapse: collapse;
-  height: 200px;
-  width: 60%;
-  text-align: center;
-  
-}
-
-.tableTeam{
-  position: relative;
-  left: 20%;
-  border-collapse: collapse;
-  height: 100px;
-  width: 60%;
-  text-align: left;
-}
-
-.tableTeam, td, th{
-  text-align: left;
-  height: 30px;
-  width: 70px;
-  padding: 10px;
-}
 
 
-.tableTask {
-  border-collapse: collapse;
-  height: 50px;
-  width: 60%;
-  text-align: center;
-  background-color: #e3e2e1;
-  color: black;
-}
 
 
-.my-pagination{
-  position: relative;
-  left: 10%;
-  color: #de4d04;
 
-}
+
 

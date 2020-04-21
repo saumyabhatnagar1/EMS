@@ -13,7 +13,7 @@ export class WorkUpdateComponent implements OnInit {
   count: number = 0;
   count2: number = 0;
   count3: number = 0;
-  show: boolean = true;
+  show: boolean = false;
   pid: number = 0;
   pid_team: number = 0;
 
@@ -23,8 +23,7 @@ export class WorkUpdateComponent implements OnInit {
   ngOnInit(): void {
     
     this.findAllProjects()
-    
-
+  
   }
   
 
@@ -92,6 +91,7 @@ export class WorkUpdateComponent implements OnInit {
       }
     )
   }
+
   public projects = [];
   appendProjects(res) {
     let projectData = Object.entries(res);
@@ -102,6 +102,7 @@ export class WorkUpdateComponent implements OnInit {
     }
     
   }
+
 
 
   public taskForm = new FormGroup({
@@ -120,19 +121,13 @@ export class WorkUpdateComponent implements OnInit {
       res => {
         
         console.log(res);
-        this.appendTasks(res)
+        
         //this.notificationService.showSuccess("Leave Application Submitted!!!");
       },
       err => {
         //this.notificationService.showFailed("Something went wrong!");
         console.log(err)
-      });
-
-
-      
-
-      
-    
+      });   
 
   }
 
@@ -161,6 +156,7 @@ export class WorkUpdateComponent implements OnInit {
     
     this.projectservice.getAllTask(project_id).subscribe(
       res => {
+        this.appendTasks(res)
         console.log(res);
       },
       err => {
