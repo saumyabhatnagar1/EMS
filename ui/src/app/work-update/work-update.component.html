@@ -28,7 +28,7 @@
               <td><button style="padding: 0;border: none;background: none; color: black;" (click)="count=i"
                   class="btn btn-success" data-toggle="modal" data-target="#teamModal"
                   (click)="pid_team=i;">Team</button></td>
-              <td><button style="border-radius: 50%;" (click)="getTask(i); show=true" >&iexcl;</button></td>
+              <td><button style="border-radius: 50%;" (click)="getTask(proj.project_id); show=true" >&iexcl;</button></td>
             </tr>
           </tbody>
         </table>
@@ -49,7 +49,7 @@
       </h3>
       <table class="table table-hover table-striped">
         <tr><th>Id</th><th>Assignee</th><th>Description</th><th>Completed</th></tr>
-        <tr *ngFor="let t of tasks" style="cursor: pointer;" class="">
+        <tr *ngFor="let t of tasks;index as i"  (click)="task_id=i;" data-toggle="modal" data-target="#taskModal" style="cursor: pointer;" class="">
           
           <td>{{t.project_id}}</td>
           <td>{{t.assignee}}</td>
@@ -63,6 +63,7 @@
   </div>
 </div>
 
+<div *ngIf="projects.length>0">
 <div class="modal fade" id="teamModal">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
@@ -73,12 +74,8 @@
       <div class="modal-body">
         <table class="tableTeam">
           <tr>
-            <th>Name</th>
-            <th>Role</th>
-          </tr>
-          <tr>
-            <td>Name</td>
-            <td>Role</td>
+            <th>{{projects[0].team.email}}</th>
+            <th>{{projects[0].team.role}}</th>
           </tr>
 
         </table>
@@ -88,6 +85,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 
 
@@ -121,7 +119,7 @@
 
 
 
-          <button type="submit" class="btn btn-primary" (click)="onConfirm()"> Submit</button>
+          <button type="submit" class="btn btn-primary" (click)="addProject()"> Submit</button>
         </form>
 
       </div>
@@ -136,7 +134,7 @@
 
 
 <div class="modal fade" id="addTaskModal">
-  <div class="modal-dialog modal-sm">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h4>Add Task</h4>
@@ -162,8 +160,39 @@
 
     </div>
   </div>
+</div>
 
+<div *ngIf="tasks.length>0">
+<div class="modal fade" id="taskModal">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Task Info</h4>
 
+      </div>
+      <div class="modal-body">
+        <table class="table table-hover table-bordered">
+          <tr>
+            <th>Project Id</th>
+            <th>Assignee</th>
+            <th>Completed</th>
+            <th>Description</th>
+          </tr>
+          <tr>
 
+            <td>{{tasks[task_id].project_id}}</td>
+            <td>{{tasks[task_id].assignee}}</td>
+      
+            <td>{{tasks[task_id].completed}}</td>
+            <td>{{tasks[task_id].description}}</td>
+          </tr>
 
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-dismiss="modal" style="background-color:#0362fc;">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
