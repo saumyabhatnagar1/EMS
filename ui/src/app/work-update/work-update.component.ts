@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WorkUpdateComponent implements OnInit {
   page: number = 1;
+  page1: number =1;
   count: number = 0;
   count2: number = 0;
   count3: number = 0;
@@ -21,15 +22,15 @@ export class WorkUpdateComponent implements OnInit {
 
   constructor(private projectservice: ProjectService) { }
   ngOnInit(): void {
-    
+
     this.findAllProjects()
 
   }
-  
+
 
   public taskJson: any;
- 
-  
+
+
 
 
   public projectForm = new FormGroup({
@@ -95,12 +96,12 @@ this.findAllProjects()
   public projects = [];
   appendProjects(res) {
     let projectData = Object.entries(res);
-    
+
     this.projects = [];
     for (let index = 0; index < projectData.length; index++) {
       this.projects.push(projectData[index][1])
     }
-    
+
   }
 
 
@@ -115,11 +116,11 @@ this.findAllProjects()
     let taskJSON = JSON.stringify(this.taskForm.value)
     // console.log(this.projectForm.get('team')[0].value)
     console.log(taskJSON)
-    
-    
+
+
     this.projectservice.createTask(taskJSON).subscribe(
       res => {
-        
+
         console.log(res);
 
         //this.notificationService.showSuccess("Leave Application Submitted!!!");
@@ -128,25 +129,25 @@ this.findAllProjects()
         //this.notificationService.showFailed("Something went wrong!");
         console.log(err)
       });
-    
+
   }
 
   public tasks=[]
   appendTasks(res){
     let taskData = Object.entries(res);
-    
+
     this.tasks=[]
     for (let index = 0; index < taskData.length; index++) {
       this.tasks.push(taskData[index][1])
-      
+
     }
     console.log(this.tasks)
   }
-  
-  public project_id2
-  
 
-  getTask(project_id) {    
+  public project_id2
+
+
+  getTask(project_id) {
     this.projectservice.getAllTask(project_id.toString()).subscribe(
       res => {
         this.appendTasks(res)
