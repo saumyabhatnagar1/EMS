@@ -41,9 +41,9 @@
       <div class="modal-header">
         <h4>Leave Status</h4>
       </div>
-      <div  class="modal-body">
+      <div  class="modal-body" *ngIf="leaves.length>0">
 
-        <p><b>Email</b>:{{leaves[count].email}}</p>
+        <!-- <p><b>Email</b>:{{leaves[count].email}}</p> -->
         <p><b>Leave on</b>:{{leaves[count].date}}</p>
         <p><b>Status</b>:{{leaves[count].status}}</p>
         <p><b>Reason</b>:{{leaves[count].reason}}</p>

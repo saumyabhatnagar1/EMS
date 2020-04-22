@@ -4,11 +4,11 @@
     <h1 class="card-body" style="font-size: 50px;">Active Projects</h1>
   </div>
   <button class="button addButton btn btn-primary" data-target="#projectModal" data-toggle="modal">+</button>
-  
+
 
   <div class="row">
     <div class="col-lg-6">
-  
+
 
       <div class="table1">
         <table class="table table-hover table-striped table-responsive-" style="width: 80%;">
@@ -19,7 +19,7 @@
             <tr *ngFor="let proj of projects |paginate : {id :'listing_pagination',
         itemsPerPage : 3,
         currentPage: page}; index as i">
-              
+
               <td>{{i+1}}</td>
               <td>{{proj.project_id}}</td>
               <td>{{proj.name}}</td>
@@ -47,8 +47,11 @@
       </h3>
       <table class="table table-hover table-striped">
         <tr><th>Id</th><th>Assignee</th><th>Description</th><th>Completed</th></tr>
-        <tr *ngFor="let t of tasks;index as i"  (click)="task_id=i;" data-toggle="modal" data-target="#taskModal" style="cursor: pointer;" class="">
-          
+        <tr *ngFor="let t of tasks | paginate : {id :'pagination',
+        itemsPerPage : 3,
+        currentPage: page1};index as i"  (click)="task_id=i;" data-toggle="modal" data-target="#taskModal" style="cursor: pointer;" class=""
+           >
+
           <td>{{t.project_id}}</td>
           <td>{{t.assignee}}</td>
           <td>{{t.description}}</td>
@@ -56,6 +59,10 @@
 
         </tr>
       </table>
+      <div>
+        <pagination-controls class="my-pagination" id="pagination" maxSize="5" directionLinks="true"
+          (pageChange)="page1 = $event"></pagination-controls>
+      </div>
     </div>
   </div>
   </div>
@@ -108,7 +115,7 @@
                 <div class="row">
                   <div class="col">
                 <label>Email
-                  
+
                   <input type="text" formControlName="email" placeholder="Member" class="form-control" style="width: 230px;">
                 </label>
                     </div>
@@ -158,11 +165,11 @@
             <div class="row">
               <div class="col">
           <label for=""> Project Id
-            
+
             <input type="text" formControlName="project_id" value="{{project_id2}}" class="form-control">
           </label>
         </div>
-          
+
           <div class="col">
           <label style="margin-right: 21px;" for=""> Assignee
             <input type="text" formControlName="assignee" placeholder="Assignee" class="form-control">
@@ -206,7 +213,7 @@
 
             <td>{{tasks[task_id].project_id}}</td>
             <td>{{tasks[task_id].assignee}}</td>
-      
+
             <td>{{tasks[task_id].completed}}</td>
             <td>{{tasks[task_id].description}}</td>
           </tr>
