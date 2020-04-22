@@ -18,6 +18,7 @@ urlpatterns = [
 
     path('leaves/new', leavesController.addLeave, name='leave request'),
     path('leaves/findAll', leavesController.getLeavesData, name='leave detail'),
+    path('leaves/updateStatus', leavesController.updateLeaveStatus, name='leave status update'),
 
     path('project/new', projectController.addProject, name='add project'),
     path('project/findAll', projectController.getProjects, name='get project'),

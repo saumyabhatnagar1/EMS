@@ -22,3 +22,10 @@ def getLeaveDetail(email):
             cnt += 1
         return leaves_dict
     return None
+
+
+def update(leave_data):
+    response = leaveMapper.update(leave_data)
+    if response is not None:
+        return response
+    return None

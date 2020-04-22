@@ -15,3 +15,11 @@ def findLeaveDetail(email):
     if len(leaves) > 0:
         return leaves
     return None
+
+
+def update(leaveDetail):
+    query = {"email": leaveDetail['email'], "date": leaveDetail['date']}
+    update_to = {"$set": {"approved": True}}
+    response = Leaves.update(query, update_to)
+    return response
+

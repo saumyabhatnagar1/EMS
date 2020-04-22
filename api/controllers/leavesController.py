@@ -28,3 +28,19 @@ def getLeavesData(request):
         return JsonResponse(leave_data, safe=False)
     else:
         return JsonResponse({"status": 400, "message": "NO LEAVE_DETAIL FOUND"})
+
+
+@csrf_exempt
+@login_required
+@is_post
+def updateLeaveStatus(request):
+    if len(request.body) <= 1:
+        return JsonResponse({'status': 404, 'message': 'INVALID_REQUEST'})
+    if principleService.getRole() != "HR":
+        return JsonResponse({"status": 401, "message": "UNAUTHORIZED REQUEST"})
+    leave_data = json.loads(request.body)
+    response = leavesService.update(leave_data)
+    if response is not None:
+        return JsonResponse({"status":200, "message": "LEAVE REQUEST ACCEPTED"})
+    return JsonResponse({"status": 400, "message": "SOMETHING WENT WRONG"})
+
