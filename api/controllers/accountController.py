@@ -4,12 +4,13 @@ from django.http import Http404, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from api.services import accountService, principleService, loggerService
-from api.security.decorators import login_required
+from api.security.decorators import login_required, is_post
 
 
 @csrf_exempt
+@is_post
 def createUser(request):
-    if request.method != 'POST' or len(request.body) <= 2:
+    if len(request.body) <= 2:
         return Http404
     user_data = json.loads(request.body)
     id = accountService.createUser(user_data)
@@ -20,10 +21,11 @@ def createUser(request):
 
 
 @csrf_exempt
+@is_post
 def login(request):
     if principleService.isLoggedIn():
         return JsonResponse(principleService.getUser())
-    if request.method != 'POST' or len(request.body) <= 2:
+    if len(request.body) <= 2:
         return JsonResponse({'status': 404, 'message': 'INVALID_REQUEST'})
     user_data = json.loads(request.body)
     json_res = accountService.getUser(user_data)
@@ -48,9 +50,8 @@ def index(request):
 
 @csrf_exempt
 @login_required
+@is_post
 def getUserProfile(request):
-    if request.method != 'POST':
-        return JsonResponse({'status': 404, 'message': 'INVALID_REQUEST'})
     user_data = json.loads(request.body)
     account = accountService.getUserProfile(user_data["email"])
     if account is not None:

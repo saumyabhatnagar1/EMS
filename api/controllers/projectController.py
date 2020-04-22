@@ -4,13 +4,14 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from api.services import principleService, projectService
-from api.security.decorators import login_required
+from api.security.decorators import login_required, is_post
 
 
 @csrf_exempt
 @login_required
+@is_post
 def addProject(request):
-    if request.method != 'POST' or len(request.body) <= 2:
+    if len(request.body) <= 2:
         return JsonResponse({"status": 404, "message": "INVALID_REQUEST"})
     project_data = json.loads(request.body)
     projectService.saveProject(project_data)
@@ -29,8 +30,9 @@ def getProjects(request):
 
 @csrf_exempt
 @login_required
+@is_post
 def addTask(request):
-    if request.method != 'POST' or len(request.body) <= 2:
+    if len(request.body) <= 2:
         return JsonResponse({"status": 404, "message": "INVALID_REQUEST"})
     task_data = json.loads(request.body)
     projectService.saveTask(task_data)
@@ -39,8 +41,9 @@ def addTask(request):
 
 @csrf_exempt
 @login_required
+@is_post
 def getTasks(request):
-    if request.method != 'POST' or len(request.body) < 1:
+    if len(request.body) < 1:
         return JsonResponse({"status": 404, "message": "INVALID_REQUEST"})
     project_id = json.loads(request.body)['project_id']
     task_data = projectService.getTasksDetail(project_id)

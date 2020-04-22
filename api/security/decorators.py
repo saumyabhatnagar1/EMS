@@ -23,3 +23,13 @@ def is_admin(function):
         return function(request, *args, **kwargs)
 
     return wrap
+
+
+def is_post(function):
+    @wraps(function)
+    def wrap(request, *args, **kwargs):
+        if request.method != 'POST':
+            return JsonResponse({"status": 404, "message": "INVALID REQUEST"})
+        return function(request, *args, **kwargs)
+
+    return wrap

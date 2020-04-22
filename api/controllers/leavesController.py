@@ -4,13 +4,14 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from api.services import principleService, leavesService
-from api.security.decorators import login_required
+from api.security.decorators import login_required, is_post
 
 
 @csrf_exempt
 @login_required
+@is_post
 def addLeave(request):
-    if request.method != 'POST' or len(request.body) <= 2:
+    if len(request.body) <= 2:
         return JsonResponse({'status': 404, 'message': 'INVALID_REQUEST'})
     leave_data = json.loads(request.body)
     leave_data["email"] = principleService.getUsername()
