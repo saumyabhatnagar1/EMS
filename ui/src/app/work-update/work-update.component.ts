@@ -144,16 +144,9 @@ this.findAllProjects()
   }
   
   public project_id2
-  getProjectId(i) {
-    this.project_id2= (this.projects[i].project_id)
-    
-  }
+  
 
-  getTask(project_id) {
-    
-    //let project_id:string=(this.projects[i].project_id).toString()
-    console.log(project_id)
-    
+  getTask(project_id) {    
     this.projectservice.getAllTask(project_id.toString()).subscribe(
       res => {
         this.appendTasks(res)
@@ -163,6 +156,7 @@ this.findAllProjects()
         console.log(err)
       }
     )
+    this.project_id2=project_id
   }
 
 public task_id:number=0;
