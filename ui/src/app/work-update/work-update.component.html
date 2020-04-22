@@ -1,7 +1,7 @@
 <div class="jumbotron">
 
   <div class="card" style="width: 32rem; height: 8rem; background-color: #1576d1;">
-    <h1 class="card-body">Active Projects</h1>
+    <h1 class="card-body" style="font-size: 50px;">Active Projects</h1>
   </div>
   <button class="button addButton btn btn-primary" data-target="#projectModal" data-toggle="modal">+</button>
   
@@ -103,11 +103,16 @@
           </label>
           <div formArrayName="team" #t2>
             <div *ngFor='let t of team.controls;index as i'>
+
               <div class="form-group" style="padding: auto;" [formGroupName]="i">
+                <div class="row">
+                  <div class="col">
                 <label>Email
                   
-                  <input type="text" formControlName="email" placeholder="Member" class="form-control">
+                  <input type="text" formControlName="email" placeholder="Member" class="form-control" style="width: 230px;">
                 </label>
+                    </div>
+                    <div class="col">
                 <label>Role
 
                   <select formControlName="role" class="form-control">
@@ -117,12 +122,14 @@
                     <option>Junior Developer</option>
                   </select>
                 </label>
+              </div>
+              </div>
                 <br>
-                <button class="button btn-secondary" (click)="addTeam(t2)">Add</button>
+                <button class="button btn-primary" (click)="addTeam(t2)" >Add Member</button>
               </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary" (click)="addProject()"> Submit</button>
+          <button type="submit" class="btn btn-primary" (click)="addProject()">Submit</button>
         </div>
         </form>
 
@@ -148,19 +155,23 @@
       <div class="modal-body form-group">
         <form action="" [formGroup]="taskForm" class="form-horizontal">
           <div class="form-group">
+            <div class="row">
+              <div class="col">
           <label for=""> Project Id
             
             <input type="text" formControlName="project_id" value="{{project_id2}}" class="form-control">
           </label>
+        </div>
           
-          
-          
+          <div class="col">
           <label style="margin-right: 21px;" for=""> Assignee
             <input type="text" formControlName="assignee" placeholder="Assignee" class="form-control">
           </label>
+        </div>
+        </div>
           <br>
           <label for=""> Task Description
-            <textarea cols="30" required rows="4" maxlength="50" formControlName="description" placeholder="Description" class="form-control"></textarea>
+            <textarea cols="45" required rows="3" maxlength="50"  formControlName="description" placeholder="Description" class="form-control"></textarea>
           </label>
           <br>
 
