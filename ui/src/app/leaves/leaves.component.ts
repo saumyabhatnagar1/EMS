@@ -85,6 +85,28 @@ export class LeavesComponent implements OnInit {
             this.leaves[index].status = "Approved";
           }
       }
+      console.log(this.leaves)
+  }
+  public leave_id;
+  public mssg;
+  updateStatus(email,date){
+    let data=[
+      {
+        email,
+        date
+      }
+
+    ]
+    this.leavesService.updateLeaves(data).subscribe(
+      res=>{
+        this.mssg=res;
+        console.log(res)
+      },
+      err=>{
+        console.log(err)
+      }
+    )
+
   }
 
 }
