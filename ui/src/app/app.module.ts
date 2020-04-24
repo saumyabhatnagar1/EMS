@@ -1,3 +1,4 @@
+import { ProfileComponent } from './profile/profile.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +19,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { HelpComponent } from './help/help.component';
 import { WorkUpdateComponent } from './work-update/work-update.component';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -33,12 +35,14 @@ import { WorkUpdateComponent } from './work-update/work-update.component';
     NotificationsComponent,
     HelpComponent,
     WorkUpdateComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    CommonModule,
     NgxPaginationModule,
     ReactiveFormsModule,
     CalendarModule.forRoot({

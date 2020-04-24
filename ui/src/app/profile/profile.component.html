@@ -1,59 +1,138 @@
 <div class="jumbotron">
-    <div class="row profile">
+	<div class="row profile">
 		<div class="col-md-4">
 			<div class="profile-sidebar">
 
 				<div class="profile-usertitle">
 					<div class="profile-usertitle-name">
-						<h1> {{message.name}} </h1>	
+						<h1> {{message.name}} </h1>
 						<h2 style="padding-top: 20px;"> {{bankDetails.designation}}</h2>
 					</div>
 				</div>
-				
+
 				<div class="profile-userpic">
-					<img src="https://static.change.org/profile-img/default-user-profile.svg" class="img-responsive" alt="">
+					<img src="https://static.change.org/profile-img/default-user-profile.svg" class="img-responsive"
+						alt="">
 				</div>
-				
+
 				<div class="profile-usertitle">
 					<div class="profile-usertitle-name">
-						<h2>  </h2>	
+						<h2> </h2>
 					</div>
 				</div>
-				
+
 			</div>
-        </div>
-        
+		</div>
+
 
 
 
 		<div class="col-md-8">
-            <div class="profile-content">
+			<div class="profile-content" *ngIf="edit">
+				<div class="row">
+					<div class="col-md-10">
+						<h2 class="about">Personal Details</h2>
+					</div>
+					<div class="col-md-2">
+						<button type="submit" (click)="editDetails()" class="btn btn-primary">Edit Details</button>
+					</div>
+				</div>
+				<ul class="list">
+					<li>
+						Email : {{message.email}}
+					</li>
+					<li>
+						DOB : {{message.date}}
+					</li>
+					<li>
+						Gender : {{message.gender}}
+					</li>
+					<li>
+						Address : H No. {{message.houseNumber}}, Street : {{message.street}}, City :
+						{{message.addressLine}}
+					</li>
+					<li>
+						Contact : {{message.mobileNumber}}
+					</li>
+					<li>
+						Country : {{message.country}}
+					</li>
 
-                    <h2 class="about">Personal Details</h2>
 
-					<ul>
-                        <li>
-                            Email : {{message.email}} 
-						</li>
-						<li>
-							DOB : {{message.date}} 
-						</li>
-						<li>
-							Gender : {{message.gender}} 
-						</li>
-						<li>
-							Address : H No. {{message.houseNumber}}, Street : {{message.street}}, City : {{message.addressLine}} 
-						</li>
-						<li>
-							Contact : {{message.mobileNumber}} 
-						</li>
-						<li>
-							Country : {{message.country}}
+					<h2 class="bankDetails">Bank Details</h2>
+
+					<li>
+						Account Number : {{bankDetails.bankAccountNumber}}
+					</li>
+
+					<li>
+						IFSC Code : {{bankDetails.bankIfscCode}}
+					</li>
+					<li>
+						MICR Number : {{bankDetails.bankMicrNumber}}
+					</li>
+				</ul>
+
+			</div>
+
+
+
+			<div class="profile-content" *ngIf="!edit">
+
+				<h2 class="about">Personal Details</h2>
+				<form class="main-form" [formGroup]="updateForm" (ngSubmit)="getUpdate()">
+
+
+					<ul class="editForm">
+						<li class="form-group">
+						<div class="row">
+
+						<div class="col-md-2">	Email :  </div> <div class="col-md-9"><input type="text" formControlName="email" value="{{message.email}}"></div>
+						</div>
 						</li>
 
+
+						<li class="form-group">
+						<div class="row">
+						<div class="col-md-2">	DOB : </div> <div class="col-md-9"><input type="date" formControlName="date" value="{{message.date}}"> </div>
+						</div>
+						</li>
+						<li class="form-group">
+							<div class="row">
+							<div class="col-md-2">Gender :  </div> <div class="col-md-9"> <select  formControlName="gender" placeholder="Gender" class="form-control" >
+								<option selected >Male</option>
+								<option>Female</option>
+								<option>Others</option>
+							   </select> </div>
+						</div>
+						</li>
+						<li class="form-group">
+							<div class="row">
+						<div class="col-md-2">	House No. </div>  <div class="col-md-9"><input type="text" formControlName="houseNumber" value="{{message.houseNumber}}"> <br> </div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-2">	Street : </div> <div class="col-md-9"><input type="text" formControlName="street" value="{{message.street}}"> <br> <br> </div>
+							</div>
+							<div class="row">
+						<div class="col-md-2">	City : </div> <div class="col-md-9"> <input type="text" formControlName="addressLine" value="{{message.addressLine}}"> </div>
+							</div>
+						</li>
 						
-							<h2 class="bankDetails">Bank Details</h2>
-						
+						<li class="form-group">
+							<div class="row">
+						<div class="col-md-2">	Contact : </div>  <div class="col-md-9"><input type="text" formControlName="mobileNumber" value="{{message.mobileNumber}}"> </div>
+							</div>
+						</li>
+						<li class="form-group">
+							<div class="row">
+							<div class="col-md-2">Country : </div> <div class="col-md-9"> <input type="text" formControlName="country" value="{{message.country}}"> </div>
+						</div>
+						</li>
+
+
+						<h2 class="bankDetails">Bank Details</h2>
+
 						<li>
 							Account Number : {{bankDetails.bankAccountNumber}}
 						</li>
@@ -65,7 +144,11 @@
 							MICR Number : {{bankDetails.bankMicrNumber}}
 						</li>
 					</ul>
-				</div>
+					<button (click)="onSubmit()" class="btn btn-primary" [disabled]="updateForm.invalid"
+						type="submit" style="float: right; position: relative; top: -100px; right: 20px;">Save</button>
+
+				</form>
+			</div>
 		</div>
 	</div>
 </div>

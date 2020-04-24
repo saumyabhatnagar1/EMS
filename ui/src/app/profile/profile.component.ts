@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {ProfileService} from './profile.service';
 import {PrincipleService} from '../util/principle.service';
 import { Router} from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 @Component({
@@ -14,6 +14,21 @@ import { Router} from '@angular/router';
 
 export class ProfileComponent implements OnInit {
   public message:any
+  public updateInfo:any
+  public edit: boolean = true
+
+
+  public updateForm = new FormGroup({
+    email: new FormControl('',[Validators.required,Validators.email]),
+    date:new FormControl('',Validators.required),
+    gender:new FormControl('',Validators.required),
+    houseNumber:new FormControl('',Validators.required),
+    street:new FormControl('',Validators.required),
+    addressLine:new FormControl('',Validators.required),
+    mobileNumber:new FormControl('',[Validators.required,Validators.pattern('^((\\??-?)|0)?[0-9]{10}$')]),
+    country:new FormControl('',Validators.required)
+  });
+
   
   public bankDetails = {
     designation : "Web Developer",  
@@ -45,6 +60,40 @@ get_profile(){
   }
   );
 }
+
+getUpdate(){
+  const updateJson = JSON.stringify(this.updateForm.value);
+  
+
+//   let updateData = [{
+//     "email" : this.principle.getUsername()
+//   },
+//   {
+
+//   }
+// ]
+  
+  this.profileService.getUpdate(updateJson).subscribe(
+  res=>{
+        console.log(res)
+        this.updateInfo =res;
+  },
+  err =>{
+     console.log(err);
+  }
+  );
+}
+
+onSubmit(){
+  console.log(this.updateForm.value)
+  
+}
+
+editDetails(){
+  this.edit = !this.edit
+}
+
+
 
 
 }
