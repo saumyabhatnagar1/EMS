@@ -148,13 +148,14 @@
 </div>
 
 
-<div *ngIf="(command == 'updateStatus')">
+<div style="overflow: hidden;" *ngIf="(command == 'updateStatus')">
   <pagination-template #p="paginationApi">
 <div class="jumbotron">
   <div class="status-content">
-  <h1>Manage Request Status</h1>
+  <h1>Manage Leave Status</h1>
   <table align="center" class="table table-hover">
     <thead class="thead-dark">
+      <th>Email</th>
       <th>Date</th>
       <th>Status</th>
       <th style="text-align: center;">Action</th>
@@ -166,10 +167,13 @@
       <tr *ngFor="let leave of leaves|paginate : {id :'listing_pagination',
        itemsPerPage : 5,
        currentPage: page};index as i">
+       <td>{{leave.email}}</td>
         <td class="leaveTableData">{{leave.date}}</td>
         <td class="leaveTableData">{{leave.status}}</td>
-        <td style="text-align: center;"><div class="btn-group"><button class="btn btn-dark mr-2" data-toggle="modal" data-target="#ManageLeave" (click)="count=i;">More</button>
-        <button class="btn btn-dark mr-2" (click)="updateStatus(leaves[i].email,leaves[i].date)">Accept</button><button class="btn btn-dark mr-2">Reject</button></div></td>
+        <td style="text-align: center;"><div class="btn-group">
+        <button class="btn btn-dark mr-2" data-toggle="modal" data-target="#ManageLeave" (click)="count=i;">More</button>
+        <button class="btn btn-success mr-2" (click)="updateStatus(leaves[i].email,leaves[i].date)">Accept</button>
+        <button class="btn btn-danger mr-2">Reject</button></div></td>
 
       </tr>
 
