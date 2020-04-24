@@ -61,3 +61,15 @@ def getUserProfile(request):
         return JsonResponse(account, safe=False)
     else:
         return JsonResponse({"status": 400, "message": "SOMETHING WENT WRONG"})
+
+
+@csrf_exempt
+@login_required
+@is_post
+def updateUserProfile(request):
+    user_data = json.loads(request.body)
+    email = principleService.getUsername()
+    response = accountService.updateUserProfile(user_data, email)
+    if response is not None:
+        return JsonResponse({"status": 200, "message": "PROFILE UPDATED"})
+    return JsonResponse({"status": 400, "message": "SOMETHING WENT WRONG"})

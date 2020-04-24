@@ -15,3 +15,10 @@ def findByEmail(email):
     if len(result) > 0:
         return result[0]
     return None
+
+
+def update(user_data, email):
+    query = {"email": email}
+    update_to = {"$set": user_data}
+    response = Users.update(query, update_to)
+    return response
