@@ -26,12 +26,14 @@ export class ProfileComponent implements OnInit {
     street:new FormControl('',Validators.required),
     addressLine:new FormControl('',Validators.required),
     mobileNumber:new FormControl('',[Validators.required,Validators.pattern('^((\\??-?)|0)?[0-9]{10}$')]),
-    country:new FormControl('',Validators.required)
+    country:new FormControl('',Validators.required),
+    City:new FormControl('',Validators.required),
+
   });
 
-  
+
   public bankDetails = {
-    designation : "Web Developer",  
+    designation : "Web Developer",
     bankAccountNumber : "09720180111",
     bankIfscCode : "KCCB0NRM097",
     bankMicrNumber: "380126029"
@@ -63,7 +65,7 @@ get_profile(){
 
 getUpdate(){
   const updateJson = JSON.stringify(this.updateForm.value);
-  
+
 
 //   let updateData = [{
 //     "email" : this.principle.getUsername()
@@ -72,7 +74,7 @@ getUpdate(){
 
 //   }
 // ]
-  
+
   this.profileService.getUpdate(updateJson).subscribe(
   res=>{
         console.log(res)
@@ -86,14 +88,41 @@ getUpdate(){
 
 onSubmit(){
   console.log(this.updateForm.value)
-  
+
 }
 
 editDetails(){
   this.edit = !this.edit
 }
 
+get email(){
+  return this.updateForm.get('email')
+}
+get date(){
+  return this.updateForm.get('date')
+}
 
+get gender(){
+  return this.updateForm.get('gender')
+}
 
+get houseNumber(){
+  return this.updateForm.get('houseNumber')
+}
 
+get street(){
+  return this.updateForm.get('street')
+}
+
+get country(){
+  return this.updateForm.get('country')
+}
+
+get mobileNumber(){
+  return this.updateForm.get('mobileNumber')
+}
+
+get City(){
+  return this.updateForm.get('City')
+}
 }
