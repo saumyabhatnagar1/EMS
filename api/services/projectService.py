@@ -48,3 +48,20 @@ def getTasksDetail(project_id):
             cnt += 1
         return task_dict
     return None
+
+
+def addTeamMember(project_id, team_detail):
+    team = projectMapper.getTeam(project_id)
+    cnt = len(team)
+    for member in team_detail:
+        team[str(cnt)] = team_detail[member]
+        cnt += 1
+    response = projectMapper.saveTeam(project_id, team)
+    return response
+
+
+def getTeamDetail(project_id):
+    team = projectMapper.getTeam(project_id)
+    if team is not None:
+        return team
+    return None

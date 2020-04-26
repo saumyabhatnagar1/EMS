@@ -25,4 +25,6 @@ urlpatterns = [
     path('project/findAll', projectController.getProjects, name='get project'),
     path('task/new', projectController.addTask, name='add task'),
     path('task/find', projectController.getTasks, name='get task'),
+    path('project/addTeam',projectController.addTeamMember, name='add team member'),
+    path('project/team', projectController.getTeamDetail, name='get team detail'),
 ]

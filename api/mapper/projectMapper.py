@@ -29,3 +29,22 @@ def findTasks(project_id):
         return tasks
     return None
 
+
+def saveTeam(project_id, team):
+    query = {"project_id": project_id}
+    update_to = {"$set": {"team": team}}
+    response = Projects.update(query, update_to)
+    return response
+
+
+def getTeam(project_id):
+    query = {"project_id": project_id}
+    project = list(Projects.find(query))
+    if len(project) == 0:
+        return None
+    if project[0].__contains__("team"):
+        team = project[0]["team"]
+        return team
+    return None
+
+
