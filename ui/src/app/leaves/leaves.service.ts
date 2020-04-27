@@ -19,5 +19,17 @@ export class LeavesService{
     updateLeaves(data){
         return this.http.post(this.globalService.baseApiUrl+'leaves/updateStatus',data);
     }
+    addLeaveType(data){
+        return this.http.post(this.globalService.baseApiUrl+'leavetype/add',data)
+    }
+    findLeaveType(){
+        return this.http.post(this.globalService.baseApiUrl+'leavetype/find',{})
+    }
+    updateLeaveType(data){
+        return this.http.post(this.globalService.baseApiUrl+'leavetype/update',data);
+    }
+    deleteLeaveType(data){
+        return this.http.post(this.globalService.baseApiUrl+'leavetype/delete',data)
+    }
 }
 

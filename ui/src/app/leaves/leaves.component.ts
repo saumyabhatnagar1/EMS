@@ -30,6 +30,7 @@ export class LeavesComponent implements OnInit {
       this.activeRoute.paramMap.subscribe(params=>{
           this.command = params.get('command');
           this.getAllLeaves();
+          this.findLeaveType();
       });    
   }  
   get reason(){
@@ -108,6 +109,85 @@ export class LeavesComponent implements OnInit {
       }
     )
 
+  }
+
+  public LeaveTypeForm=new FormGroup({
+    leave_type:new FormControl('')
+  })
+
+  public leaveType;
+  addLeaveType(){
+    
+    let data=
+    {
+      'value':this.LeaveTypeForm.get('leave_type').value
+    }
+    
+    let leaveTypeJSON=JSON.stringify(data);
+    console.log(leaveTypeJSON)
+
+    this.leavesService.addLeaveType(data).subscribe(
+      res=>{
+        this.leaveType=res;
+        console.log(res)
+      },
+      err=>{
+        console.log(err);
+      }
+    )
+    this.findLeaveType()
+  }
+
+  public leave_types=[];
+  findLeaveType(){
+    this.leavesService.findLeaveType().subscribe(
+      res=>{
+           this.appendLeaveType(res)
+      },err=>{
+           console.log(err);
+    });;
+    
+  }
+  appendLeaveType(res){
+    let leavesTypeData = Object.entries(res); 
+    this.leave_types = [];     
+    for(let index = 0; index<leavesTypeData.length;index++){
+        this.leave_types.push(leavesTypeData[index][1]);
+    }
+    console.log(this.leave_types)
+}
+  updateLeaveType(leavetype){
+    console.log(leavetype.id)
+    let data={
+      'id':leavetype.id,
+      'value':leavetype.value
+    }
+
+    this.leavesService.updateLeaveType(JSON.stringify(data)).subscribe(
+      res=>{
+        console.log(res)
+      },
+      err=>{
+        console.log(err)
+      }
+    
+    )
+    this.findLeaveType()
+
+  }
+  deleteLeaveType(id){
+    let data={
+      'id':id
+    }
+    this.leavesService.deleteLeaveType(JSON.stringify(data)).subscribe(
+      res=>{
+        console.log(res)
+      },
+      err=>{
+        console.log(err)
+      }
+    )
+    this.findLeaveType()
   }
 
 }

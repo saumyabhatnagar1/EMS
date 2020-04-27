@@ -201,13 +201,13 @@
     
     <div>
       
-        <form>
+        <form [formGroup]="LeaveTypeForm">
         <div class="row">
         <div class="col" style="left: 30%;">
-          <input placeholder="Add leave Type" type="text" style="border-radius: 10px; width: 50%;"> 
+          <input formControlName="leave_type" placeholder="Add leave Type" type="text" style="border-radius: 10px; width: 50%;"> 
         </div>
         <div class="col" style="left: 5%;"> 
-          <button class="button btn-secondary">Add Leave type</button>
+          <button class="button btn-secondary" (click)="addLeaveType()">Add Leave type</button>
         </div>
         </div>
       </form>
@@ -224,8 +224,15 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="">
-              <td></td>
+            <tr *ngFor="let leavetype of leave_types;index as i">
+              <td>{{i+1}}</td>
+              <td>{{leavetype.value}}</td>
+              <td>
+                <div class="button-group">
+                <button class="button btn-success"(click)="updateLeaveType(leavetype)">Save</button>
+                <button class="button btn-danger" (click)="deleteLeaveType(leavetype.id)">Delete</button>
+                </div>
+              </td>
             </tr>
           </tbody>
           </table>
