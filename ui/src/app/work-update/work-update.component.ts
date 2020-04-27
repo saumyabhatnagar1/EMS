@@ -45,12 +45,12 @@ export class WorkUpdateComponent implements OnInit {
 
 
   team = this.projectForm.get('team') as FormArray
-
-  addTeam(t2) {
-
-    (this.projectForm.get('team') as FormArray).push(new FormControl(t2.value))
+  
+  addTeam(t2,i) {
+    
+    (this.team.push(new FormControl(t2.value)))
     //console.log(this.projectForm.get('team'))
-    console.log(this.team)
+    console.log(this.team.controls[i].value)
   }
 
   addProject() {
@@ -72,14 +72,6 @@ export class WorkUpdateComponent implements OnInit {
 this.findAllProjects()
 
   }
-
-
-
-
-
-
-
-
   public projectsApi: any;
   findAllProjects() {
     this.projectservice.getAllProjects().subscribe(
@@ -92,7 +84,6 @@ this.findAllProjects()
       }
     )
   }
-
   public projects = [];
   appendProjects(res) {
     let projectData = Object.entries(res);
@@ -103,16 +94,13 @@ this.findAllProjects()
     }
 
   }
-
-
-
   public taskForm = new FormGroup({
     project_id: new FormControl(''),
     description: new FormControl(''),
     assignee: new FormControl('')
   })
 
-  onTaskSubmit() {
+  addTask() {
     let taskJSON = JSON.stringify(this.taskForm.value)
     // console.log(this.projectForm.get('team')[0].value)
     console.log(taskJSON)

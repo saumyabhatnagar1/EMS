@@ -15,6 +15,7 @@ export class LeavesComponent implements OnInit {
   public command:string;
   public count:number=0;
   public page:number =1;
+  public showLeaveType:boolean=false;
   public remainingLeaves:number=21;
   leaves = [];
   pageOfItems: Array<any>;
@@ -90,14 +91,14 @@ export class LeavesComponent implements OnInit {
   public leave_id;
   public mssg;
   updateStatus(email,date){
-    let data=[
+    
+    let data=
       {
-        email,
-        date
+        'email':email,
+        'date':date
       }
-
-    ]
-    this.leavesService.updateLeaves(data).subscribe(
+    let dataJSON=JSON.stringify(data)
+    this.leavesService.updateLeaves(dataJSON).subscribe(
       res=>{
         this.mssg=res;
         console.log(res)

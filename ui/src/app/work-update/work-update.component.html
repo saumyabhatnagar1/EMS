@@ -108,10 +108,10 @@
           <label for=""> Name
             <input type="text" formControlName="name" placeholder="Project Name" class="form-control">
           </label>
-          <div formArrayName="team" #t2>
+          <div formArrayName="team" >
             <div *ngFor='let t of team.controls;index as i'>
 
-              <div class="form-group" style="padding: auto;" [formGroupName]="i">
+              <div class="form-group" style="padding: auto;" [formGroupName]="i" #t2>
                 <div class="row">
                   <div class="col">
                 <label>Email
@@ -132,7 +132,7 @@
               </div>
               </div>
                 <br>
-                <button class="button btn-primary" (click)="addTeam(t2)" >Add Member</button>
+                <button class="button btn-primary" (click)="addTeam(t2,i)" >Add Member</button>
               </div>
             </div>
           </div>
@@ -183,7 +183,7 @@
           <br>
 
 
-          <button type="submit" class="btn btn-primary" (click)="onTaskSubmit()" data-dismiss="modal">Submit</button>
+          <button type="submit" class="btn btn-primary" (click)="addTask()" data-dismiss="modal">Submit</button>
         </div>
         </form>
 
