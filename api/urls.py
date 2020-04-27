@@ -20,6 +20,10 @@ urlpatterns = [
     path('leaves/new', leavesController.addLeave, name='leave request'),
     path('leaves/findAll', leavesController.getLeavesData, name='leave detail'),
     path('leaves/updateStatus', leavesController.updateLeaveStatus, name='leave status update'),
+    path('leavetype/add', leavesController.addLeaveType, name='add leave type'),
+    path('leavetype/find', leavesController.getLeaveType, name='get leave types'),
+    path('leavetype/update', leavesController.updateLeaveType, name='get leave type'),
+    path('leavetype/delete', leavesController.deleteLeaveType, name='delete leave type'),
 
     path('project/new', projectController.addProject, name='add project'),
     path('project/findAll', projectController.getProjects, name='get project'),

@@ -33,3 +33,13 @@ def is_post(function):
         return function(request, *args, **kwargs)
 
     return wrap
+
+
+def is_HR(function):
+    @wraps(function)
+    def wrap(request, *args, **kwargs):
+        if principleService.getRole() != "HR":
+            return JsonResponse({"status": 401, "message": "UNAUTHORIZED REQUEST"})
+        return function(request, *args, **kwargs)
+
+    return wrap

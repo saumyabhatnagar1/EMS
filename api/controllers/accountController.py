@@ -68,7 +68,8 @@ def getUserProfile(request):
 @is_post
 def updateUserProfile(request):
     user_data = json.loads(request.body)
-    del user_data["email"]
+    if user_data.__contains__("email"):
+        del user_data["email"]
     email = principleService.getUsername()
     response = accountService.updateUserProfile(user_data, email)
     if response is not None:

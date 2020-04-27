@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from api.services import principleService, leavesService
-from api.security.decorators import login_required, is_post
+from api.security.decorators import login_required, is_post, is_HR
 
 
 @csrf_exempt
@@ -33,14 +33,57 @@ def getLeavesData(request):
 @csrf_exempt
 @login_required
 @is_post
+@is_HR
 def updateLeaveStatus(request):
     if len(request.body) <= 1:
         return JsonResponse({'status': 404, 'message': 'INVALID_REQUEST'})
-    if principleService.getRole() != "HR":
-        return JsonResponse({"status": 401, "message": "UNAUTHORIZED REQUEST"})
     leave_data = json.loads(request.body)
     response = leavesService.update(leave_data)
     if response is not None:
         return JsonResponse({"status":200, "message": "LEAVE REQUEST ACCEPTED"})
     return JsonResponse({"status": 400, "message": "SOMETHING WENT WRONG"})
 
+
+@csrf_exempt
+@login_required
+@is_post
+@is_HR
+def addLeaveType(request):
+    leave_type = json.loads(request.body)
+    response = leavesService.addLeaveType(leave_type)
+    if response is not None:
+        return JsonResponse({"status": 200, "message": "LEAVE TYPE ADDED"})
+    return JsonResponse({"status": 400, "message": "SOMETHING WENT WRONG"})
+
+
+@csrf_exempt
+@login_required
+def getLeaveType(request):
+    leave_types = leavesService.getLeaveType()
+    if leave_types is not None:
+        return JsonResponse(leave_types, safe=False)
+    return JsonResponse({"status":400, "message":"NO LEAVE TYPE FOUND"})
+
+
+@csrf_exempt
+@login_required
+@is_post
+@is_HR
+def updateLeaveType(request):
+    leave_type = json.loads(request.body)
+    response = leavesService.updateLeaveType(leave_type)
+    if response is not None:
+        return JsonResponse({"status": 200, "message": "LEAVE TYPE UPDATED"})
+    return JsonResponse({"status": 400, "message": "SOMETHING WENT WRONG"})
+
+
+@csrf_exempt
+@login_required
+@is_post
+@is_HR
+def deleteLeaveType(request):
+    leave_type = json.loads(request.body)
+    response = leavesService.deleteLeaveType(leave_type)
+    if response is not None:
+        return JsonResponse({"status": 200, "message": "LEAVE TYPE DELETED"})
+    return JsonResponse({"status": 400, "message": "SOMETHING WENT WRONG"})

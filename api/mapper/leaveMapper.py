@@ -1,7 +1,9 @@
 from . import client
+from bson.objectid import ObjectId
 
 client = client.connectToDB()
 Leaves = client.primer.leaves
+LeaveTypes = client.primer.leavetypes
 
 
 def save(leaveDetail):
@@ -23,3 +25,27 @@ def update(leaveDetail):
     response = Leaves.update(query, update_to)
     return response
 
+
+def saveLeaveType(leave_type):
+    id = LeaveTypes.insert_one(leave_type).inserted_id
+    return id
+
+
+def getLeaveType():
+    leave_types = list(LeaveTypes.find())
+    if len(leave_types) > 0:
+        return leave_types
+    return None
+
+
+def updateLeaveType(leave_type):
+    query = {"_id": ObjectId(leave_type["id"])}
+    update_to = {"$set": {"value": leave_type["value"]}}
+    response = LeaveTypes.update(query, update_to)
+    return response
+
+
+def deleteLeaveType(leave_type):
+    query = {"_id": ObjectId(leave_type["id"])}
+    response = LeaveTypes.remove(query)
+    return response
