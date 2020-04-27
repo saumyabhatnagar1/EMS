@@ -194,30 +194,40 @@
     </div>
   </pagination-template>
 
-<div *ngIf=showLeaveType>
+<div *ngIf=showLeaveType class="jumbotron">
   <div>
     <h1>Manage Leave Type</h1>
   </div>
     
-    <div >
+    <div>
       
         <form>
-        <input placeholder="Add leave Type" type="text">
-        <button class="button btn-secondary">Add Leave type</button>
-        </form>
+        <div class="row">
+        <div class="col" style="left: 30%;">
+          <input placeholder="Add leave Type" type="text" style="border-radius: 10px; width: 50%;"> 
+        </div>
+        <div class="col" style="left: 5%;"> 
+          <button class="button btn-secondary">Add Leave type</button>
+        </div>
+        </div>
+      </form>
         <br>
         <br>
 
         <div>
-          <table>
+          <table align="center" class="table"> 
+            <thead class="thead-dark">
             <tr>
               <th>S No.</th>
               <th>Leave Type</th>
               <th>Action</th>
             </tr>
+          </thead>
+          <tbody>
             <tr *ngFor="">
               <td></td>
             </tr>
+          </tbody>
           </table>
         </div>
       
