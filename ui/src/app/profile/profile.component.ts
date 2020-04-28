@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ProfileService} from './profile.service';
 import {PrincipleService} from '../util/principle.service';
 import { Router} from '@angular/router';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormsModule , ReactiveFormsModule } from '@angular/forms';
+
 
 
 @Component({
@@ -20,14 +21,14 @@ export class ProfileComponent implements OnInit {
 
   public updateForm = new FormGroup({
     email: new FormControl('',[Validators.required,Validators.email]),
-    date:new FormControl('',Validators.required),
+    date:new FormControl('message.date',Validators.required),
     gender:new FormControl('',Validators.required),
     houseNumber:new FormControl('',Validators.required),
     street:new FormControl('',Validators.required),
     addressLine:new FormControl('',Validators.required),
     mobileNumber:new FormControl('',[Validators.required,Validators.pattern('^((\\??-?)|0)?[0-9]{10}$')]),
     country:new FormControl('',Validators.required),
-    City:new FormControl('',Validators.required),
+    
 
   });
 
@@ -93,6 +94,14 @@ onSubmit(){
 
 editDetails(){
   this.edit = !this.edit
+  this.updateForm.get('email').setValue(this.message.email)
+  this.updateForm.get('date').setValue(this.message.date)
+  this.updateForm.get('mobileNumber').setValue(this.message.mobileNumber)
+  this.updateForm.get('houseNumber').setValue(this.message.houseNumber)
+  this.updateForm.get('country').setValue(this.message.country)
+  this.updateForm.get('gender').setValue(this.message.gender)
+  this.updateForm.get('street').setValue(this.message.street)
+  this.updateForm.get('addressLine').setValue(this.message.addressLine)
 }
 
 get email(){
@@ -125,4 +134,10 @@ get mobileNumber(){
 get City(){
   return this.updateForm.get('City')
 }
+
+get addressLine(){
+  return this.updateForm.get('addressLine')
+}
+
+
 }

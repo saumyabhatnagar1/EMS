@@ -80,124 +80,147 @@
 			<div class="profile-content" *ngIf="!edit">
 
 				<h2 class="about">Personal Details</h2>
+
 				<form class="main-form" [formGroup]="updateForm" (ngSubmit)="getUpdate()">
 
 
-					<ul class="editForm">
-						<li class="form-group">
+
+					<div class="form-group">
 						<div class="row">
 
-						<div class="col-md-2">	Email :  </div> <div class="col-md-9"><input type="text" formControlName="email" value="{{message.email}}"></div>
+							<div class="col-md-2"> Email : </div>
+							<div class="col-md-9"><input type="text" formControlName="email" class="form-control"></div>
 						</div>
-            </li>
+					</div>
 
 
-            <div  class="alert alert-danger" style="width:40%" *ngIf="email.touched&&email.invalid">
-              <div *ngIf="email.errors.email">Email is not valid.</div>
-              <div *ngIf="email.errors.required">Email is required</div>
+					<!-- <div class="form-group">
+						<label>
+						  Email
+						  <input type="name"   value={{message.email}} placeholder = "Full Name" class="form-control">
+						</label>
+					   </div> -->
 
-            </div>
+
+					<div class="alert alert-danger" style="width:40%" *ngIf="email.touched&&email.invalid">
+						<div *ngIf="email.errors.email">Email is not valid.</div>
+						<div *ngIf="email.errors.required">Email is required</div>
+
+					</div>
 
 
-						<li class="form-group">
+					<div class="form-group">
 						<div class="row">
-						<div class="col-md-2">	DOB : </div> <div class="col-md-9"><input type="date" formControlName="date" value="{{message.date}}"> </div>
+							<div class="col-md-2"> DOB : </div>
+							<div class="col-md-9"><input type="date" formControlName="date"> </div>
 						</div>
-            </li>
+					</div>
 
-            <div class="alert alert-danger"  style="width:40%" *ngIf="date.touched&&date.invalid">
-              <div *ngIf="date.errors.required">Date Of Birth is required</div>
-            </div>
+					<div class="alert alert-danger" style="width:40%" *ngIf="date.touched&&date.invalid">
+						<div *ngIf="date.errors.required">Date Of Birth is required</div>
+					</div>
 
 
-						<li class="form-group">
-							<div class="row">
-							<div class="col-md-2">Gender :  </div> <div class="col-md-9"> <select  formControlName="gender" placeholder="Gender" class="form-control" >
-								<option selected >Male</option>
-								<option>Female</option>
-								<option>Others</option>
-							   </select> </div>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-2">Gender : </div>
+							<div class="col-md-9"> <select formControlName="gender" 
+									class="form-control">
+									<option selected>Male</option>
+									<option>Female</option>
+									<option>Others</option>
+								</select> </div>
 						</div>
-            </li>
+					</div>
 
-            <div class="alert alert-danger"  style="width:40%" *ngIf="gender.touched&&gender.invalid">
-              <div *ngIf="gender.errors.required">Gender is required</div>
-            </div>
+					<div class="alert alert-danger" style="width:40%" *ngIf="gender.touched&&gender.invalid">
+						<div *ngIf="gender.errors.required">Gender is required</div>
+					</div>
 
 
 
-						<li class="form-group">
-							<div class="row">
-						<div class="col-md-2">	House No. </div>  <div class="col-md-9"><input type="text" formControlName="houseNumber" value="{{message.houseNumber}}"> <br> </div>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-2"> House No. </div>
+							<div class="col-md-9"><input type="text" formControlName="houseNumber"
+									> <br> </div>
 						</div>
-            <br>
+						<br>
 
-            <div   style="width:40%" *ngIf="houseNumber.touched&&houseNumber.invalid" class="alert alert-danger">
-              <div *ngIf="houseNumber.errors.required">House number is required</div>
-            </div>
+						<div style="width:40%" *ngIf="houseNumber.touched&&houseNumber.invalid"
+							class="alert alert-danger">
+							<div *ngIf="houseNumber.errors.required">House number is required</div>
+						</div>
 
 
 						<div class="row">
-							<div class="col-md-2">	Street : </div> <div class="col-md-9"><input type="text" formControlName="street" value="{{message.street}}"> <br> <br> </div>
-              </div>
-
-              <div class="alert alert-danger"  style="width:40%" *ngIf="street.touched&&street.invalid">
-                <div *ngIf="street.errors.required">Street Name field is required</div>
-              </div>
-
-
-							<div class="row">
-						<div class="col-md-2">	City : </div> <div class="col-md-9"> <input type="text" formControlName="addressLine" value="{{message.addressLine}}"> </div>
-              </div>
-
-              <div class="alert alert-danger"  style="width:40%" *ngIf="City.touched&&City.invalid">
-                <div *ngIf="City.errors.required">Country Field is required</div>
-              </div>
-
-
-
-						</li>
-
-						<li class="form-group">
-							<div class="row">
-						<div class="col-md-2">	Contact : </div>  <div class="col-md-9"><input type="text" formControlName="mobileNumber" value="{{message.mobileNumber}}"> </div>
-							</div>
-            </li>
-
-            <div class="alert alert-danger"  style="width:40%" *ngIf="mobileNumber.touched&&mobileNumber.invalid">
-              <div *ngIf="mobileNumber.errors.pattern">Contact is invalid</div>
-              <div *ngIf="mobileNumber.errors.required">Contact is required</div>
-            </div>
-
-
-
-						<li class="form-group">
-							<div class="row">
-							<div class="col-md-2">Country : </div> <div class="col-md-9"> <input type="text" formControlName="country" value="{{message.country}} "> </div>
+							<div class="col-md-2"> Street : </div>
+							<div class="col-md-9"><input type="text" formControlName="street"
+									> <br> <br> </div>
 						</div>
-            </li>
+
+						<div class="alert alert-danger" style="width:40%" *ngIf="street.touched&&street.invalid">
+							<div *ngIf="street.errors.required">Street Name field is required</div>
+						</div>
 
 
-            <div class="alert alert-danger"  style="width:40%" *ngIf="country.touched&&country.invalid">
-              <div *ngIf="country.errors.required">Country Field is required</div>
-            </div>
+						<div class="row">
+							<div class="col-md-2"> City : </div>
+							<div class="col-md-9"> <input type="text" formControlName="addressLine"
+									> </div>
+						</div>
+
+						<div class="alert alert-danger" style="width:40%" *ngIf="addressLine.touched&&addressLine.invalid">
+							<div *ngIf="addressLine.errors.required">Address Field is required</div>
+						</div>
 
 
-						<h2 class="bankDetails">Bank Details</h2>
 
-						<li>
-							Account Number : {{bankDetails.bankAccountNumber}}
-						</li>
+					</div>
 
-						<li>
-							IFSC Code : {{bankDetails.bankIfscCode}}
-						</li>
-						<li>
-							MICR Number : {{bankDetails.bankMicrNumber}}
-						</li>
-					</ul>
-					<button (click)="onSubmit()" class="btn btn-primary" [disabled]="updateForm.invalid"
-						type="submit" style="float: right; position: relative; top: -100px; right: 20px;">Save</button>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-2"> Contact : </div>
+							<div class="col-md-9"><input type="text" formControlName="mobileNumber"> </div>
+						</div>
+					</div>
+
+					<div class="alert alert-danger" style="width:40%"
+						*ngIf="mobileNumber.touched&&mobileNumber.invalid">
+						<div *ngIf="mobileNumber.errors.pattern">Contact is invalid</div>
+						<div *ngIf="mobileNumber.errors.required">Contact is required</div>
+					</div>
+
+
+
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-2">Country : </div>
+							<div class="col-md-9"> <input type="text" formControlName="country"> </div>
+						</div>
+					</div>
+
+
+					<div class="alert alert-danger" style="width:40%" *ngIf="country.touched&&country.invalid">
+						<div *ngIf="country.errors.required">Country Field is required</div>
+					</div>
+
+
+					<h2 class="bankDetails">Click Here For Bank Details</h2>
+
+					<div>
+						Account Number : {{bankDetails.bankAccountNumber}}
+					</div>
+
+					<div>
+						IFSC Code : {{bankDetails.bankIfscCode}}
+					</div>
+					<div>
+						MICR Number : {{bankDetails.bankMicrNumber}}
+					</div>
+
+					<button (click)="onSubmit()" class="btn btn-primary" type="submit"
+						style="float: right; position: relative; top: -100px; right: 20px;">Save</button>
 
 				</form>
 			</div>
