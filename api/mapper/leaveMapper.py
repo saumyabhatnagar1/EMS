@@ -49,3 +49,10 @@ def deleteLeaveType(leave_type):
     query = {"_id": ObjectId(leave_type["id"])}
     response = LeaveTypes.remove(query)
     return response
+
+
+def findAll():
+    leaves = list(Leaves.find())
+    if len(leaves) > 0:
+        return leaves
+    return None

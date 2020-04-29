@@ -27,7 +27,7 @@ def getLeavesData(request):
     if leave_data is not None:
         return JsonResponse(leave_data, safe=False)
     else:
-        return JsonResponse({"status": 400, "message": "NO LEAVE_DETAIL FOUND"})
+        return JsonResponse({"status": 200, "message": "NO LEAVE_DETAIL FOUND"})
 
 
 @csrf_exempt
@@ -62,7 +62,7 @@ def getLeaveType(request):
     leave_types = leavesService.getLeaveType()
     if leave_types is not None:
         return JsonResponse(leave_types, safe=False)
-    return JsonResponse({"status":400, "message":"NO LEAVE TYPE FOUND"})
+    return JsonResponse({"status": 200, "message":"NO LEAVE TYPE FOUND"})
 
 
 @csrf_exempt
@@ -87,3 +87,13 @@ def deleteLeaveType(request):
     if response is not None:
         return JsonResponse({"status": 200, "message": "LEAVE TYPE DELETED"})
     return JsonResponse({"status": 400, "message": "SOMETHING WENT WRONG"})
+
+
+@csrf_exempt
+@login_required
+@is_HR
+def findAllLeaves(request):
+    leaves = leavesService.findAllLeaveDetail()
+    if leaves is not None:
+        return JsonResponse(leaves, safe=False)
+    return JsonResponse({"status": 200, "message": "NO LEAVE TYPE FOUND"})

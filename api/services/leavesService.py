@@ -67,3 +67,16 @@ def deleteLeaveType(leave_type):
     if response is not None:
         return response
     return None
+
+
+def findAllLeaveDetail():
+    leaves = leaveMapper.findAll()
+    if leaves is not None:
+        leaves_dict = {}
+        cnt = 0
+        for leave in leaves:
+            del leave["_id"]
+            leaves_dict[cnt] = leave
+            cnt += 1
+        return leaves_dict
+    return None
