@@ -82,33 +82,16 @@ export class ManageLeavesComponent implements OnInit {
       this.getAllLeaves()
   }
 
+
+
+
+
   public LeaveTypeForm=new FormGroup({
     leave_type:new FormControl('')
   })
 
   public leaveType;
-  addLeaveType(){
-    
-    let data=
-    {
-      'value':this.LeaveTypeForm.get('leave_type').value
-    }
-    
-    let leaveTypeJSON=JSON.stringify(data);
-    console.log(leaveTypeJSON)
-
-    this.leavesService.addLeaveType(data).subscribe(
-      res=>{
-        this.leaveType=res;
-        console.log(res)
-      },
-      err=>{
-        console.log(err);
-      }
-    )
-    this.findLeaveType()
-  }
-
+ 
   public leave_types=[];
   findLeaveType(){
     this.leavesService.findLeaveType().subscribe(
@@ -127,6 +110,30 @@ export class ManageLeavesComponent implements OnInit {
     }
     console.log(this.leave_types)
 }
+
+addLeaveType(){
+    
+  let data=
+  {
+    'value':this.LeaveTypeForm.get('leave_type').value
+  }
+  
+  let leaveTypeJSON=JSON.stringify(data);
+  console.log(leaveTypeJSON)
+
+  this.leavesService.addLeaveType(data).subscribe(
+    res=>{
+      this.leaveType=res;
+      console.log(res)
+    },
+    err=>{
+      console.log(err);
+    }
+  )
+  this.findLeaveType()
+}
+
+
   updateLeaveType(leavetype){
     console.log(leavetype.id)
     let data={
