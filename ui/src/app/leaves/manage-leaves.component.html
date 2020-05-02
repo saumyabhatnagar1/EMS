@@ -1,0 +1,124 @@
+
+    <pagination-template #p="paginationApi">
+      <div class="jumbotron">
+        <button class="button btn-secondary" (click)="showLeaveType=true">Manage leave types</button>
+        <div class="status-content">
+          <h1>Manage Leave Status</h1>
+          <table align="center" class="table table-hover">
+            <thead class="thead-dark">
+              <th>Email</th>
+              <th>Date</th>
+              <th>Status</th>
+              <th style="text-align: center;">Action</th>
+            </thead>
+            <div class="pagination-previous" [class.disabled]="p.isFirstPage()">
+              <a *ngIf="!p.isFirstPage()" (click)="p.previous()"> </a>
+            </div>
+            <tbody>
+              <tr *ngFor="let leave of leaves|paginate : {id :'listing_pagination',
+         itemsPerPage : 5,
+         currentPage: page};index as i">
+                <td>{{leave.email}}</td>
+                <td class="leaveTableData">{{leave.date}}</td>
+                <td class="leaveTableData">{{leave.status}}</td>
+                <td style="text-align: center;">
+                  <div class="btn-group">
+                    <button class="btn btn-dark mr-2" data-toggle="modal" data-target="#ManageLeave"
+                      (click)="count=i;">More</button>
+                    <button class="btn btn-success mr-2"
+                      (click)="updateStatus(leaves[i].email,leaves[i].date)">Accept</button>
+                    <button class="btn btn-danger mr-2">Reject</button></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div>
+            <pagination-controls class="my-pagination" id="listing_pagination" maxSize="5" directionLinks="true"
+              (pageChange)="page = $event"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </pagination-template>
+  
+  <div *ngIf=showLeaveType class="jumbotron">
+    <div>
+      <h1>Manage Leave Type</h1>
+    </div>
+      
+      <div>
+        
+          <form [formGroup]="LeaveTypeForm">
+          <div class="row">
+          <div class="col" style="left: 30%;">
+            <input formControlName="leave_type" placeholder="Add leave Type" type="text" style="border-radius: 10px; width: 50%;"> 
+          </div>
+          <div class="col" style="left: 5%;"> 
+            <button class="button btn-secondary" (click)="addLeaveType()">Add Leave type</button>
+          </div>
+          </div>
+        </form>
+          <br>
+          <br>
+  
+          <div>
+            <table align="center" class="table"> 
+              <thead class="thead-dark">
+              <tr>
+                <th>S No.</th>
+                <th>Leave Type</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let leavetype of leave_types;index as i">
+                <td>{{i+1}}</td>
+                <td>{{leavetype.value}}</td>
+                <td>
+                  <div class="button-group">
+                  <button class="button btn-success"(click)="updateLeaveType(leavetype)">Save</button>
+                  <button class="button btn-danger" (click)="deleteLeaveType(leavetype.id)">Delete</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+            </table>
+          </div>
+        
+      </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+      
+
+      <div class="modal fade" id="ManageLeave">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4>Leave Status</h4>
+            </div>
+            <div class="modal-body" *ngIf="leaves.length>0">
+      
+              <!-- <p><b>Email</b>:{{leaves[count].email}}</p> -->
+              <p><b>Leave on</b>:{{leaves[count].date}}</p>
+              <p><b>Status</b>:{{leaves[count].status}}</p>
+              <p><b>Reason</b>:{{leaves[count].reason}}</p>
+      
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" data-dismiss="modal">OK</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+  
+  

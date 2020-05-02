@@ -1,3 +1,5 @@
+import { StatusLeavesComponent } from './leaves/status-leaves.component';
+import { NewLeavesComponent } from './leaves/new-leaves.component';
 import { ProfileComponent } from './profile/profile.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -20,6 +22,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { HelpComponent } from './help/help.component';
 import { WorkUpdateComponent } from './work-update/work-update.component';
 import { CommonModule } from '@angular/common';
+import { ManageLeavesComponent } from './leaves/manage-leaves.component';
 
 
 
@@ -35,7 +38,10 @@ import { CommonModule } from '@angular/common';
     NotificationsComponent,
     HelpComponent,
     WorkUpdateComponent,
-    ProfileComponent
+    ProfileComponent,
+    NewLeavesComponent,
+    StatusLeavesComponent,
+    ManageLeavesComponent 
   ],
   imports: [
     BrowserModule,
