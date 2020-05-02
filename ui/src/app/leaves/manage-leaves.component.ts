@@ -13,10 +13,11 @@ import { NotificationService} from '../common/services/notification.service';
 })
 export class ManageLeavesComponent implements OnInit {
 
+  public ifHR:boolean=false;
   public count:number=0;
   public page:number =1;
-  public showLeaveType:boolean=false;
-  
+  public showLeaveType:boolean=false
+
   leaves = [];
   pageOfItems: Array<any>;
 
@@ -24,10 +25,21 @@ export class ManageLeavesComponent implements OnInit {
   constructor(private activeRoute:ActivatedRoute,private notificationService:NotificationService,private leavesService:LeavesService,public principle:PrincipleService) { }
   ngOnInit(): void {
     this.getAllLeaves();
-    this.findLeaveType();  
+    this.findLeaveType(); 
+    this.ifHRrole() 
+    
   }  
+
   
+ ifHRrole(){
+  if(this.principle.getRole()==="HR")
+  this.ifHR=true;
+ }
+
  
+ public leaveTypeFormChange=new FormGroup({
+ leave:new FormControl('')
+});
 
   onChangePage(pageOfItems: Array<any>) {
     // update current page of items
@@ -136,10 +148,13 @@ addLeaveType(){
 
   updateLeaveType(leavetype){
     console.log(leavetype.id)
+    console.log(this.leaveTypeFormChange.get('leave').value+'Value is here')
     let data={
       'id':leavetype.id,
       'value':leavetype.value
+
     }
+
 
     this.leavesService.updateLeaveType(JSON.stringify(data)).subscribe(
       res=>{
@@ -168,4 +183,8 @@ addLeaveType(){
     this.findLeaveType()
   }
 
+
+
+  
+  
 }

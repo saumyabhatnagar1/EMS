@@ -1,4 +1,6 @@
+<div class="alert alert-danger" *ngIf="!ifHR">Invalid Request</div>
 
+<div *ngIf="ifHR">
     <pagination-template #p="paginationApi">
       <div class="jumbotron">
         <button class="button btn-secondary" (click)="showLeaveType=true">Manage leave types</button>
@@ -72,7 +74,11 @@
             <tbody>
               <tr *ngFor="let leavetype of leave_types;index as i">
                 <td>{{i+1}}</td>
-                <td>{{leavetype.value}}</td>
+                <td>
+                  <form [formGroup]="leaveTypeFormChange">
+                    <input formControlName="leave" type="text" value="{{leavetype.value}}">
+                  </form>
+                </td>
                 <td>
                   <div class="button-group">
                   <button class="button btn-success"(click)="updateLeaveType(leavetype)">Save</button>
@@ -119,6 +125,8 @@
           </div>
         </div>
       </div>
+      </div>
+    
   
   
   

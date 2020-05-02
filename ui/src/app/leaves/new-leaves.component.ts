@@ -24,35 +24,10 @@ export class NewLeavesComponent implements OnInit {
     constructor(private activeRoute:ActivatedRoute,private notificationService:NotificationService,private leavesService:LeavesService,public principle:PrincipleService) { }
     
     ngOnInit(): void {
-      this.getAllLeaves();
+      this.findLeaveType()
     }
 
-    getAllLeaves(){
-      this.leavesService.getAllLeaves().subscribe(
-        res=>{
-              if(res["status"] == 400){
-                //no leaves found////
-              }else{
-                this.appendLeaves(res);
-              }
-        },err=>{
-             console.log(err);
-      });;
-  }
-
-  appendLeaves(res){
-    let leavesData = Object.entries(res); 
-    this.leaves = [];     
-    for(let index = 0; index<leavesData.length;index++){
-        this.leaves.push(leavesData[index][1]);
-        if(!this.leaves[index].approved){
-          this.leaves[index].status = "Pending";
-        }else{
-          this.leaves[index].status = "Approved";
-        }
-    }
-    console.log(this.leaves)
-}
+    
 
     get reason(){
         return this.dateForm.get('reason');
@@ -78,5 +53,24 @@ export class NewLeavesComponent implements OnInit {
     });
     
   }
+  public leave_types=[];
+  findLeaveType(){
+    this.leavesService.findLeaveType().subscribe(
+      res=>{
+           this.appendLeaveType(res)
+      },err=>{
+           console.log(err);
+    });;
+    
+  }
+  appendLeaveType(res){
+    let leavesTypeData = Object.entries(res); 
+    this.leave_types = [];     
+    for(let index = 0; index<leavesTypeData.length;index++){
+        this.leave_types.push(leavesTypeData[index][1]);
+    }
+    console.log(this.leave_types)
+}
+
 
 }

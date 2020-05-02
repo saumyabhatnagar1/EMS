@@ -30,10 +30,8 @@
           </label>
           <br>
           <label>Reason
-            <select formControlName="reason" class="form-control" style="width: 180px;">
-              <option selected>Casual Leave</option>
-              <option>Emergency Leave</option>
-              <option>Other Reason</option>
+            <select  formControlName="reason" class="form-control" style="width: 180px;">
+              <option *ngFor="let leave_type of leave_types">{{leave_type.value}}</option>
             </select>
           </label>
           <br>
