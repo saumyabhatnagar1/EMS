@@ -7,7 +7,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./help.component.css']
 })
 export class HelpComponent implements OnInit {
-
+  public contacts:Array<any>=[];
   public queryForm =  new FormGroup({
     email: new FormControl('',[Validators.required,Validators.email]),
     name: new FormControl('',Validators.required),
@@ -19,6 +19,13 @@ export class HelpComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.contacts.push(
+        {name:"Naveen Gaddi","email":"naveen.gaddi@yahoo.com","designation":"Network Manager"},
+        {name:"Raj","email":"naveen.gaddi@yahoo.com","designation":"Network Manager"},
+        {name:"Raj","email":"naveen.gaddi@yahoo.com","designation":"Network Manager"},
+        {name:"Raj","email":"naveen.gaddi@yahoo.com","designation":"Network Manager"},
+        {name:"Raj","email":"naveen.gaddi@yahoo.com","designation":"Network Manager"}
+      );
   }
 
 

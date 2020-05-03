@@ -1,4 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4" *ngFor="let person of contacts;index as i;">
+      <div class="card">
+        <div class="card-header" id="avatar"></div>
+          <ul class = 'card-text'>
+            <li>{{person.name}}</li>
+            <li>{{person.designation}}</li>
+            <li>{{person.email}}</li>
+          </ul>
+          <!-- <a href="#" class="card-link" style="text-align: center">Visit Profile</a> -->
+      </div>
+      <br/>
+    </div>
+  </div>
+</div>
 
+
+<div style="display: none;">
+  
 
 <div class="jumbotron">
   <form class="main-form" [formGroup]="queryForm" >
@@ -196,3 +215,5 @@
 
 
 
+
+</div>
