@@ -33,7 +33,9 @@
 
 
 
-
+      <li class="nav-item" [hidden]="isLoggedIn">
+        <a class="nav-link" routerLink="/manage-employee">Manage Employees</a>
+      </li>
       <li class="nav-item" [hidden]="isLoggedIn">
         <a class="nav-link" routerLink="/timesheets">Timesheets</a>
       </li>

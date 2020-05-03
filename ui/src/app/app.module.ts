@@ -23,7 +23,7 @@ import { HelpComponent } from './help/help.component';
 import { WorkUpdateComponent } from './work-update/work-update.component';
 import { CommonModule } from '@angular/common';
 import { ManageLeavesComponent } from './leaves/manage-leaves.component';
-
+import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
 
 
 @NgModule({
@@ -41,7 +41,8 @@ import { ManageLeavesComponent } from './leaves/manage-leaves.component';
     ProfileComponent,
     NewLeavesComponent,
     StatusLeavesComponent,
-    ManageLeavesComponent 
+    ManageLeavesComponent,
+    ManageEmployeeComponent 
   ],
   imports: [
     BrowserModule,

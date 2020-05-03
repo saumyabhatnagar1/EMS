@@ -22,3 +22,7 @@ def update(user_data, email):
     update_to = {"$set": user_data}
     response = Users.update(query, update_to)
     return response
+
+def getAll():
+    accounts = list(Users.find())
+    return accounts

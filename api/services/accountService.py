@@ -8,6 +8,7 @@ def authenticate(account, password):
 
 def createUser(account):
     account["role"] = "USER"
+    account["isActive"]=True
     if accountMapper.findByEmail(account["email"]) is None:
         id = accountMapper.save(account)
         return id
@@ -36,3 +37,10 @@ def updateUserProfile(user_data, email):
     if response is not None:
         return response
     return None
+
+def getAllAccounts():
+    accounts = accountMapper.getAll()
+    for account in accounts:
+        account["id"] = str(account["_id"])
+        del account["_id"]
+    return accounts

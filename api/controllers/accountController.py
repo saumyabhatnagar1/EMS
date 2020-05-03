@@ -4,7 +4,7 @@ from django.http import Http404, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from api.services import accountService, principleService, loggerService
-from api.security.decorators import login_required, is_post
+from api.security.decorators import login_required, is_post,is_HR
 
 
 @csrf_exempt
@@ -75,3 +75,11 @@ def updateUserProfile(request):
     if response is not None:
         return JsonResponse({"status": 200, "message": "PROFILE UPDATED"})
     return JsonResponse({"status": 400, "message": "SOMETHING WENT WRONG"})
+
+@is_HR
+def getAllAccounts(request):
+    accounts = accountService.getAllAccounts()
+    if accounts is not None:
+        return JsonResponse(accounts,safe=False)
+    return JsonResponse({"status": 400, "message": "SOMETHING WENT WRONG"})
+

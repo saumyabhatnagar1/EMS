@@ -8,6 +8,7 @@ import {ProfileComponent} from './profile/profile.component';
 import { LeavesComponent } from './leaves/leaves.component';
 import { HelpComponent } from './help/help.component';
 import { WorkUpdateComponent } from './work-update/work-update.component';
+import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
 
 
 const routes: Routes =
@@ -19,7 +20,8 @@ const routes: Routes =
   {path : 'profile',component : ProfileComponent},
   {path : 'leaves/:command' , component : LeavesComponent},
   {path : 'help', component : HelpComponent},
-  {path: 'workUpdate', component : WorkUpdateComponent}
+  {path: 'workUpdate', component : WorkUpdateComponent},
+  {path: 'manage-employee', component : ManageEmployeeComponent}
 
 ];
 

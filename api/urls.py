@@ -10,6 +10,7 @@ urlpatterns = [
     path('createUser/', accountController.createUser, name='create User'),
     path('account/profile', accountController.getUserProfile, name='profile'),
     path('logout/', accountController.logout, name='Logout'),
+    path('accounts/', accountController.getAllAccounts, name='get all accounts'),
     path('account/updateProfile', accountController.updateUserProfile, name='update Profile'),
 
     path('timesheets/', timesheetsController.index, name='time sheets'),
