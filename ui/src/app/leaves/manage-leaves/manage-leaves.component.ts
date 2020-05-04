@@ -1,15 +1,15 @@
-import { LeavesService } from './leaves.service';
-import { PrincipleService } from './../util/principle.service';
+import { LeavesService } from '../leaves.service';
+import { PrincipleService } from '../../util/principle.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute } from '@angular/router';
-import { NotificationService} from '../common/services/notification.service';
+import { NotificationService} from '../../common/services/notification.service';
 
 
 @Component({
   selector: 'manage-leaves',
   templateUrl: './manage-leaves.component.html',
-  styleUrls: ['./leaves.component.css']
+  styleUrls: ['../leaves.component.css']
 })
 export class ManageLeavesComponent implements OnInit {
 
