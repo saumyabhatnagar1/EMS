@@ -26,6 +26,22 @@ export class StatusLeavesComponent implements OnInit {
   }  
   
 
+  initDataTable(){
+  	$('#example').DataTable( {
+        data: this.tableData,
+        columns: [
+            { title: "#S.No"},
+            { title: "From" },
+            { title: "To" },
+            { title: "Description" },
+            { title: "Posting Date" },
+            { title: "Admin Remak" },
+            { title: "Status" },
+            { title: "Action" },
+        ]
+    } );
+  }
+
   
 
   onChangePage(pageOfItems: Array<any>) {
@@ -36,6 +52,8 @@ export class StatusLeavesComponent implements OnInit {
   getAllLeaves(){
       this.leavesService.getAllLeaves().subscribe(
         res=>{
+             this.formatEmpData(res);
+              this.initDataTable();
               if(res["status"] == 400){
                 //no leaves found//// 
               }else{
@@ -45,6 +63,27 @@ export class StatusLeavesComponent implements OnInit {
              console.log(err);
       });;
   }
+
+  formatEmpData(res){
+    for(var i = 0 ; i < res.length;i++){
+      var tmp = [];
+      var mail = res[i].name|| "NA"; 
+      var name = res[i].name || "NA";
+      var desg = res[i].designation || "NA"; 
+      var role = res[i].role || "NA";
+      var regDate = res[i].registeredOn || "NA";
+      var status = res[i].isActive ? "Active":"Inactive";
+      var action = `<a href=`+res[i].id+`>
+                        <i class="material-icons" title="Edit">mode_edit</i>
+                    </a>
+                    <a href="#">
+                        <i class="material-icons" title="Delete">clear</i>
+                    </a>`;
+      this.tableData.push([i+1,mail,name,desg,role,regDate,status,action]);
+    }
+  }
+
+
 
   appendLeaves(res){
       let leavesData = Object.entries(res); 
