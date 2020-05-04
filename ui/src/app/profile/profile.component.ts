@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ProfileService} from './profile.service';
 import {PrincipleService} from '../util/principle.service';
+import { NotificationService} from '../common/services/notification.service';
 import { Router} from '@angular/router';
 import { FormGroup, FormControl, Validators, FormsModule , ReactiveFormsModule } from '@angular/forms';
 
@@ -41,7 +42,7 @@ export class ProfileComponent implements OnInit {
   }
 
 
-  constructor(private profileService:ProfileService, private principle:PrincipleService,private router:Router) { }
+  constructor(private profileService:ProfileService,private notificationService:NotificationService, private principle:PrincipleService,private router:Router) { }
   ngOnInit(): void {
        this.get_profile();
   }
@@ -80,6 +81,7 @@ getUpdate(){
   res=>{
         console.log(res)
         this.updateInfo =res;
+        this.notificationService.showSuccess("Profile Updated successfully");
   },
   err =>{
      console.log(err);
