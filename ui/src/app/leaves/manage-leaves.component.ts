@@ -16,7 +16,8 @@ export class ManageLeavesComponent implements OnInit {
   public ifHR:boolean=false;
   public count:number=0;
   public page:number =1;
-  public showLeaveType:boolean=false
+  public showLeaveType:boolean=false;
+  public editDetails:boolean=false;
 
   leaves = [];
   pageOfItems: Array<any>;
@@ -120,6 +121,7 @@ export class ManageLeavesComponent implements OnInit {
     for(let index = 0; index<leavesTypeData.length;index++){
         this.leave_types.push(leavesTypeData[index][1]);
     }
+    // this.leaveTypeFormChange.get('leave').setValue(this.leave_types[0].value)
     console.log(this.leave_types)
 }
 
@@ -144,16 +146,19 @@ addLeaveType(){
   )
   this.findLeaveType()
 }
-
+run(value){
+  this.leaveTypeFormChange.get('leave').setValue(value)
+}
 
   updateLeaveType(leavetype){
     console.log(leavetype.id)
-    console.log(this.leaveTypeFormChange.get('leave').value+'Value is here')
+    let value=this.leaveTypeFormChange.get('leave').value;
     let data={
       'id':leavetype.id,
-      'value':leavetype.value
+      'value':value
 
     }
+    
 
 
     this.leavesService.updateLeaveType(JSON.stringify(data)).subscribe(
@@ -166,6 +171,7 @@ addLeaveType(){
     
     )
     this.findLeaveType()
+    this.editDetails=false;
 
   }
   deleteLeaveType(id){
