@@ -1,5 +1,6 @@
 from . import client
 from bson.objectid import ObjectId
+import datetime
 
 client = client.connectToDB()
 Leaves = client.primer.leaves
@@ -12,7 +13,7 @@ def save(leaveDetail):
 
 
 def findLeaveDetail(email):
-    query = {"email": email}
+    query = {"emp_id": email}
     leaves = list(Leaves.find(query))
     if len(leaves) > 0:
         return leaves
@@ -20,8 +21,13 @@ def findLeaveDetail(email):
 
 
 def update(leaveDetail):
-    query = {"email": leaveDetail['email'], "date": leaveDetail['date']}
-    update_to = {"$set": {"approved": True}}
+    query = {"emp_id": leaveDetail['emp_id'], "date": leaveDetail['date']}
+    update_to = {"$set": {
+        "admin_remark": leaveDetail['admin_remark'],
+        "admin_remark_date": datetime.datetime.now(),
+        "status": leaveDetail['status'],
+        "is_read": True
+    }}
     response = Leaves.update(query, update_to)
     return response
 

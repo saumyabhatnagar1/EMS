@@ -1,12 +1,18 @@
 from ..mapper import leaveMapper
+import datetime
 
 
 def saveLeave(leave_data):
     leaveDetail = {
-        'email': leave_data['email'],
+        'emp_id': leave_data['emp_id'],
+        'leave_type': leave_data['leave_type'],
         'date': leave_data['date'],
-        'reason': leave_data['reason'],
-        'approved': False
+        'description': leave_data['description'],
+        'posting_date': datetime.datetime.now(),
+        'admin_remark': "",
+        'admin_remark_date': "",
+        'status': 0,
+        'is_read': False
     }
     leaveMapper.save(leaveDetail)
 
@@ -24,7 +30,7 @@ def getLeaveDetail(email):
     return None
 
 
-def update(leave_data):
+def updateLeaveStatus(leave_data):
     response = leaveMapper.update(leave_data)
     if response is not None:
         return response
@@ -33,7 +39,9 @@ def update(leave_data):
 
 def addLeaveType(leave_type):
     leave_type_data = {
-        'value': leave_type['value']
+        'value': leave_type['value'],
+        'description': leave_type['description'],
+        'createdOn': datetime.datetime.now()
     }
     response = leaveMapper.saveLeaveType(leave_type_data)
     if response is not None:

@@ -43,3 +43,17 @@ def is_HR(function):
         return function(request, *args, **kwargs)
 
     return wrap
+
+
+def has_permission(permission):
+    def wrap(function):
+        def wrapper(*args):
+            # code for checking permission
+            # if permission is true:
+            # return function(*args)
+            # else
+            # return unauthorized request
+            print(permission)
+            return function(*args)
+        return wrapper
+    return wrap
