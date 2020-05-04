@@ -40,9 +40,9 @@
         <div class="alert alert-danger" *ngIf="dateLeave.touched&&dateLeave.invalid">
           <div *ngIf="dateLeave.errors.required">Date is required</div>
         </div>
-        <div class="alert alert-danger" *ngIf="reason.touched&&reason.invalid">
+        <!-- <div class="alert alert-danger" *ngIf="reason.touched&&reason.invalid">
           <div *ngIf="reason.errors.required">Reason is required</div>
-        </div>
+        </div> -->
         <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#confirmBox" [disabled]="!f.valid">
           Apply</button>
 

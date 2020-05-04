@@ -65,7 +65,7 @@ export class NewLeavesComponent implements OnInit {
   }
   appendLeaveType(res){
     let leavesTypeData = Object.entries(res); 
-    this.leave_types = [];     
+    // this.leave_types = [];     
     for(let index = 0; index<leavesTypeData.length;index++){
         this.leave_types.push(leavesTypeData[index][1]);
     }

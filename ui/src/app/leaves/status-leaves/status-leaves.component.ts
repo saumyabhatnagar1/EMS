@@ -1,11 +1,13 @@
 import { LeavesService } from '../leaves.service';
 import { PrincipleService } from '../../util/principle.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import {ActivatedRoute } from '@angular/router';
 import { NotificationService} from '../../common/services/notification.service';
+//import $ from "jquery";
+import { Router } from '@angular/router';
 
-
+declare var $: any;
 @Component({
   selector: 'status-leaves',
   templateUrl: './status-leaves.component.html',
@@ -19,8 +21,13 @@ export class StatusLeavesComponent implements OnInit {
   leaves = [];
   pageOfItems: Array<any>;
 
+  @ViewChild('dataTable') table;
+  dataTable: any;
+  dtOptions: any;
+
  
-  constructor(private activeRoute:ActivatedRoute,private notificationService:NotificationService,private leavesService:LeavesService,public principle:PrincipleService) { }
+  constructor(private activeRoute:ActivatedRoute,private notificationService:NotificationService,private leavesService:LeavesService,public principle:PrincipleService,private router:Router) { }
+  public tableData:any=[];
   ngOnInit(): void {
     this.getAllLeaves();
   }  
@@ -31,11 +38,11 @@ export class StatusLeavesComponent implements OnInit {
         data: this.tableData,
         columns: [
             { title: "#S.No"},
-            { title: "From" },
-            { title: "To" },
+            { title: "Leave Type" },
+            { title: "Date" },
             { title: "Description" },
             { title: "Posting Date" },
-            { title: "Admin Remak" },
+            { title: "Admin Remark" },
             { title: "Status" },
             { title: "Action" },
         ]
@@ -53,7 +60,7 @@ export class StatusLeavesComponent implements OnInit {
       this.leavesService.getAllLeaves().subscribe(
         res=>{
              this.formatEmpData(res);
-              this.initDataTable();
+               this.initDataTable();
               if(res["status"] == 400){
                 //no leaves found//// 
               }else{
@@ -67,12 +74,13 @@ export class StatusLeavesComponent implements OnInit {
   formatEmpData(res){
     for(var i = 0 ; i < res.length;i++){
       var tmp = [];
-      var mail = res[i].name|| "NA"; 
-      var name = res[i].name || "NA";
-      var desg = res[i].designation || "NA"; 
-      var role = res[i].role || "NA";
-      var regDate = res[i].registeredOn || "NA";
-      var status = res[i].isActive ? "Active":"Inactive";
+      var mail = res[i].leave_type|| "NA"; 
+      var name = res[i].date || "NA";
+      var desg = res[i].description || "NA"; 
+      var role = res[i].posting_date || "NA";
+      var regDate = res[i].admin_remark|| "NA";
+      var status =res[i].status || "NA";
+      //var status = res[i].isActive ? "Active":"Inactive";
       var action = `<a href=`+res[i].id+`>
                         <i class="material-icons" title="Edit">mode_edit</i>
                     </a>
