@@ -1,8 +1,8 @@
-
 import { Component, OnInit } from '@angular/core';
 import { PrincipleService } from '../util/principle.service';
 import { AuthService } from '../util/auth.service';
 import { Router } from '@angular/router';
+declare var $: any
 
 @Component({
   selector: 'app-navbar',
@@ -19,6 +19,14 @@ export class NavbarComponent implements OnInit {
         this.username = this.principle.getUsername();
       }
       this.getRole()
+
+      $(function() {
+        // Sidebar toggle behavior
+        $('#sidebarCollapse').on('click', function() {
+          $('#sidebar, #content').toggleClass('active');
+        });
+      });
+      
    }
    public ifHR:boolean=false;
   public message;
@@ -36,6 +44,12 @@ export class NavbarComponent implements OnInit {
         },err=>{
              console.log(err);
         });
+    }
+
+    public _opened: boolean = false;
+ 
+    public _toggleSidebar() {
+      this._opened = !this._opened;
     }
 
     

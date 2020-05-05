@@ -9,6 +9,7 @@ import { CalendarCommonModule, CalendarMonthModule } from 'angular-calendar';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { SidebarModule } from 'ng-sidebar';
 
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
@@ -62,7 +63,8 @@ import { ProfileComponent } from './profile/profile.component';
       useFactory: adapterFactory
     }),
     CalendarMonthModule,
-    NgbModule
+    NgbModule,
+    SidebarModule.forRoot() 
   ],
   providers: [],
   bootstrap: [AppComponent]

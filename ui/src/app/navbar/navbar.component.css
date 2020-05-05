@@ -1,0 +1,41 @@
+ng-sidebar-container{
+  
+  position: absolute;
+  width: 225px;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  background-color: teal;
+  height: 100%
+  
+}
+
+ng-sidebar{
+  height: 100%;
+  width: 225px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar{
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+:host >>> .ng-sidebar {  
+   width: 300px;
+  }
+
+  ::selection {
+    background-color: #0273d4;
+    color: #fff;
+  }
+
+  ::ng-deep aside {
+    height: 100vh;
+  }
+
+
+
+

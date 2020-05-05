@@ -1,60 +1,64 @@
-<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
-  <a class="navbar-brand" href="#">EMS</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-          aria-controls="navbarCollapse"
-          aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse">
-    <ul class="navbar-nav mr-auto">
+<ng-sidebar-container>
+ 
+  <!-- A sidebar -->
+  <ng-sidebar mode="over" class="ng-sidebar" closeOnClickOutside="true"  sidebarClass="sidebarClass" animate="true" [(opened)]="_opened">
+    
+    <button (click)="_toggleSidebar()">Toggle sidebar</button>
 
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/">Home</a>
-      </li>
+    <div class="navbar navbar-dark bg-dark sidebar">
+      <a href="#" class="navbar-brand">EMS</a>
+      <div >
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a href="/" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item" [hidden]="isLoggedIn">
+            <a routerLink="/profile" class="nav-link">{{username}}</a>
+          </li>
+          <li class="nav-item" [hidden]="isLoggedIn">
+            <a routerLink="/workUpdate" class="nav-link">Work-Update</a>
+          </li>
+          <li class="nav-item dropdown" [hidden]="isLoggedIn">
+            <a href="" class="nav-link dropdown-toggle" id="navbar-dropdown" role="button" data-toggle="dropdown"> Leave Request</a>
+            <div class="dropdown-menu" aria-labelledby="navbar-dropdown" >
+              <a class="dropdown-item" [routerLink]="['/leaves','NEW']" > New Request </a>
+              <a class="dropdown-item" [routerLink]="['/leaves','STATUS']" >Status</a>
+              <a *ngIf = "ifHR" class="dropdown-item" [routerLink]="['/leaves','updateStatus']" >Manage Request</a>
 
-      <li class="nav-item" [hidden]="isLoggedIn">
-        <a class="nav-link" routerLink='/profile'>{{username}}</a>
-      </li>
+            </div>
+          </li>
 
-      <li class="nav-item" [hidden]="isLoggedIn">
-        <a class="nav-link" routerLink='/workUpdate'>Work-Update</a>
-      </li>
+          <li class="nav-item" [hidden]="isLoggedIn">
+            <a routerLink="/manage-employee" class="nav-link">Manage-Employee</a>
+          </li>
 
+          <li class="nav-item" [hidden]="isLoggedIn">
+            <a routerLink="/timesheets" class="nav-link">TimeSheets</a>
+          </li>
+          <li class="nav-item" [hidden]="isLoggedIn">
+            <a (click)="logout()" class="nav-link">Logout</a>
+          </li>
 
-      <li class="nav-item dropdown" [hidden]="isLoggedIn">
-        <a class="nav-link dropdown-toggle" href=# id="navbarDropdown"
-           role="button" data-toggle="dropdown">Leave Request</a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" [routerLink]="['/leaves','NEW']" >New Request</a>
-          <a class="dropdown-item" [routerLink]="['/leaves','STATUS']">Status</a>
-          <a *ngIf="ifHR" class="dropdown-item" [routerLink]="['/leaves','updateStatus']">Manage Request</a>
-        </div>
-      </li>
+          <li class="nav-item" [hidden]="!isLoggedIn">
+            <a routerLink="/register" class="nav-link">Register</a>
+          </li>
+          <li class="nav-item" [hidden]="!isLoggedIn">
+            <a routerLink="/login" class="nav-link">Login</a>
+          </li>
 
+          <li class="nav-item">
+            <a routerLink="/help" class="nav-link">Help-Desk</a>
+          </li>
 
+        </ul>
+      </div>
+    </div>
 
-      <li class="nav-item" [hidden]="isLoggedIn">
-        <a class="nav-link" routerLink="/manage-employee">Manage Employees</a>
-      </li>
-      <li class="nav-item" [hidden]="isLoggedIn">
-        <a class="nav-link" routerLink="/timesheets">Timesheets</a>
-      </li>
+  </ng-sidebar>
 
-      <li class="nav-item" [hidden]="isLoggedIn">
-        <a class="nav-link" (click)="logout()">Logout</a>
-      </li>
-
-      <li class="nav-item" [hidden]="!isLoggedIn">
-        <a class="nav-link" routerLink="/register">Register</a>
-      </li>
-
-      <li class="nav-item" [hidden]="!isLoggedIn">
-        <a class="nav-link" routerLink="/login">Login</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" routerLink='/help'>Help-Desk</a>
-      </li>
-    </ul>
+  <!-- Page content -->
+  <div ng-sidebar-content>
+    <button (click)="_toggleSidebar()">Toggle sidebar</button>
   </div>
-</nav>
+
+</ng-sidebar-container>

@@ -28,6 +28,7 @@
     "date-fns": "^2.11.1",
     "jquery": "^3.5.0",
     "jw-angular-pagination": "^1.1.0",
+    "ng-sidebar": "^9.2.1",
     "ngx-pagination": "^5.0.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
