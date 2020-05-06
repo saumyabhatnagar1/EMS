@@ -1,12 +1,14 @@
+<div class="container">
+
 <div class="alert alert-danger" *ngIf="!ifHR">Invalid Request</div>
 
 <div *ngIf="ifHR">
     <pagination-template #p="paginationApi">
-      <div class="jumbotron">
+      <div class="">
         <button class="button btn-secondary" (click)="showLeaveType=true">Manage leave types</button>
         <div class="status-content">
           <h1>Manage Leave Status</h1>
-          <table align="center" class="table table-hover">
+          <table style="width: 100%;" class="table table-hover">
             <thead class="thead-dark">
               <th>Email</th>
               <th>Date</th>
@@ -24,12 +26,12 @@
                 <td class="leaveTableData">{{leave.date}}</td>
                 <td class="leaveTableData">{{leave.status}}</td>
                 <td style="text-align: center;">
-                  <div class="btn-group">
-                    <button class="btn btn-dark mr-2" data-toggle="modal" data-target="#ManageLeave"
+                  <div class="btn-group-sm">
+                    <button class="btn btn-dark " data-toggle="modal" data-target="#ManageLeave"
                       (click)="count=i;">More</button>
-                    <button class="btn btn-success mr-2"
+                    <button class="btn btn-success"
                       (click)="updateStatus(leaves[i].email,leaves[i].date)">Accept</button>
-                    <button class="btn btn-danger mr-2">Reject</button></div>
+                    <button class="btn btn-danger">Reject</button></div>
                 </td>
               </tr>
             </tbody>
@@ -132,7 +134,7 @@
         </div>
       </div>
       </div>
-    
+    </div>
   
   
   
