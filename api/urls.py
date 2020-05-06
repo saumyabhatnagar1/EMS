@@ -1,7 +1,7 @@
 from django.urls import path
 
 from api.controllers import accountController, timesheetsController, leavesController, projectController, \
-    principleController
+    principleController, permissionController
 
 urlpatterns = [
     path('', accountController.index, name='index'),
@@ -33,4 +33,7 @@ urlpatterns = [
     path('task/find', projectController.getTasks, name='get task'),
     path('project/addTeam',projectController.addTeamMember, name='add team member'),
     path('project/team', projectController.getTeamDetail, name='get team detail'),
+
+    path('permission/add', permissionController.addPermission, name='add permission'),
+    path('permission/get', permissionController.getPermissionDetail, name='get permission details')
 ]

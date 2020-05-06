@@ -40,7 +40,7 @@ def updateLeaveStatus(request):
     leave_data = json.loads(request.body)
     response = leavesService.updateLeaveStatus(leave_data)
     if response is not None:
-        return JsonResponse({"status":200, "message": "LEAVE REQUEST ACCEPTED"})
+        return JsonResponse({"status":200, "message": "LEAVE REQUEST UPDATED"})
     return JsonResponse({"status": 400, "message": "SOMETHING WENT WRONG"})
 
 
