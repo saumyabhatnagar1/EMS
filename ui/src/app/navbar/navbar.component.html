@@ -1,10 +1,15 @@
 <link href = "http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel = "stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<nav class="navbar navbar-dark bg-dark mb-0" style="border-radius: 0%;">
-  <button (click)="_toggleSidebar()" class="button ml-2" style="position: absolute; left: 0;">
-    <span class="glyphicon glyphicon-align-justify"></span>
-  </button>
+<nav class="navbar mb-0" style="border-radius: 0%;background-color:#22979c;">
+  <ul style="display: inline;" class="navbar-nav mr-auto">
+    <li>
+  
+    <span class="glyphicon glyphicon-align-justify" (click)="_toggleSidebar()" style="position: absolute; font-size: 25px; margin-top: 15px;"></span>
+  
+</li>
+  <li class="navbar-brand text-muted"><a style="text-decoration: none; color: black; font-size: 25px; margin-left: 30px;" routerLink='/'>EMS</a></li>
+          </ul>        
 </nav>
 <ng-sidebar-container class="mt-0">
   <!-- A sidebar -->
@@ -15,23 +20,27 @@
       <div class="py-4 px-3 mb-4">
         <div class="media d-flex align-items-center"><img src="https://res.cloudinary.com/mhmd/image/upload/v1556074849/avatar-1_tcnd60.png" alt="..." width="65" class="mr-3 rounded-circle img-thumbnail shadow-sm">
           <div class="media-body">
-            <h6 class="m-0" style="color:white"> Naveen Gaddi</h6>
-            <p style="color:white" class="text-muted mb-0">Web developer</p>
+            <a routerLink="/profile">
+            <h5 class="text-muted mb-0" style="color:black;"> <strong> Naveen Gaddi </strong></h5></a>
+            <p style="color:black" class="text-muted mb-0">Web developer</p>
           </div>
         </div>
       </div>
       <div>
 
-        <ul class="navbar-nav mr-auto">
-          <li class="navbar-brand text-muted"><a style="text-decoration: none" routerLink='/'>EMS</a></li>
+        <ul class="navbar-nav mr-auto" style="width: 100%;">
+          
           <li class="nav-item">
             <a href="/" class="nav-link"><i class="fa fa-th-large mr-3 text-primary fa-fw"></i>Home</a>
           </li>
           <li class="nav-item" [hidden]="isLoggedIn">
-            <a routerLink="/profile" class="nav-link"><i class="fa fa-address-book text-primary fa-fw mr-3"></i>{{username}}</a>
+            <a routerLink="/profile" class="nav-link"><i class="fa fa-address-book text-primary fa-fw mr-3"></i>Profile</a>
           </li>
           <li class="nav-item" [hidden]="isLoggedIn">
             <a routerLink="/workUpdate" class="nav-link"><i class="fa fa-bar-chart text-primary fa-fw mr-3"></i>  Work-Update</a>
+          </li>
+          <li class="nav-item" [hidden]="isLoggedIn">
+            <a *ngIf = "ifHR" [routerLink]="['/leaves','updateStatus']" class="nav-link"><i class="fa fa-address-book text-primary fa-fw mr-3"></i>Leave Type</a>
           </li>
           <li class="nav-item dropdown" [hidden]="isLoggedIn">
             <a href="" class="nav-link dropdown-toggle" id="navbar-dropdown" role="button" data-toggle="dropdown">
@@ -79,7 +88,7 @@
 
   <!-- Page content -->
   <div ng-sidebar-content>
-    
+    <router-outlet></router-outlet>
   </div>
   
 </ng-sidebar-container>

@@ -2,12 +2,14 @@ ng-sidebar-container{
   height: 100vh;
   overflow-y: auto;
   position: absolute;
-  width: 200px;
+  width: 100%;
   margin: 0;
   padding: 0;
-  
 }
 
+::ng-deep .ng-sidebar{
+  width: 200px;
+}
 
 
 .sidebar{
@@ -20,7 +22,7 @@ ng-sidebar-container{
 
 :host >>> .ng-sidebar {  
    
-   background-color:rgba(10, 10, 10, 0.863);
+   background-color:white;
    padding:0px 0px;
   }
 
@@ -35,3 +37,18 @@ ng-sidebar-container{
   color: #0273d4;
 }
 
+
+.ng-sidebar--push{
+  width: 200px;
+}
+
+a{
+  color: black;
+  text-decoration: none;
+}
+
+
+a:focus {
+  background-color: #22979c;
+  transform: scale(1.2);
+  }
