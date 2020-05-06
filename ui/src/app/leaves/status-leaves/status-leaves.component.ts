@@ -62,9 +62,11 @@ export class StatusLeavesComponent implements OnInit {
              this.formatEmpData(res);
                this.initDataTable();
               if(res["status"] == 400){
+                this.router.navigate(['']);
                 //no leaves found//// 
               }else{
                 this.appendLeaves(res);
+                console.log(res)
               }
         },err=>{
              console.log(err);
@@ -72,13 +74,15 @@ export class StatusLeavesComponent implements OnInit {
   }
 
   formatEmpData(res){
-    for(var i = 0 ; i < res.length;i++){
+    let res1 = Object.entries(res);
+    for(var i = 0 ; i < res1.length;i++){
+      //console.log('check')
       var tmp = [];
-      var mail = res[i].leave_type|| "NA"; 
-      var name = res[i].date || "NA";
-      var desg = res[i].description || "NA"; 
-      var role = res[i].posting_date || "NA";
-      var regDate = res[i].admin_remark|| "NA";
+      var leave_type = res[i].leave_type|| "NA"; 
+      var date = res[i].date || "NA";
+      var description = res[i].reason || "NA"; 
+      var posting_date = res[i].posting_date || "NA";
+      var admin_remark = res[i].admin_remark|| "NA";
       var status =res[i].status || "NA";
       //var status = res[i].isActive ? "Active":"Inactive";
       var action = `<a href=`+res[i].id+`>
@@ -87,9 +91,13 @@ export class StatusLeavesComponent implements OnInit {
                     <a href="#">
                         <i class="material-icons" title="Delete">clear</i>
                     </a>`;
-      this.tableData.push([i+1,mail,name,desg,role,regDate,status,action]);
+      this.tableData.push([i+1,leave_type,date,description,posting_date,admin_remark,status,action]);
+
     }
+
+    console.log(this.tableData)
   }
+
 
 
 
