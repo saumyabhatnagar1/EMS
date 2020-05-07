@@ -34,7 +34,7 @@ export class StatusLeavesComponent implements OnInit {
   
 
   initDataTable(){
-  	$('#example').DataTable( {
+  	var table = $('#example').DataTable( {
         data: this.tableData,
         columns: [
             { title: "#S.No"},
@@ -43,10 +43,19 @@ export class StatusLeavesComponent implements OnInit {
             { title: "Description" },
             { title: "Posting Date" },
             { title: "Admin Remark" },
+            {title : "Admin Remark Date"},
             { title: "Status" },
-            { title: "Action" },
-        ]
+        ],
+
+        "scrollY": "200px",
+        "scrollCollapse": true,
+        "scrollbarV":true,
+        "rowHeight":20
+       
+        
     } );
+    
+    
   }
 
   
@@ -80,18 +89,19 @@ export class StatusLeavesComponent implements OnInit {
       var tmp = [];
       var leave_type = res[i].leave_type|| "NA"; 
       var date = res[i].date || "NA";
-      var description = res[i].reason || "NA"; 
+      var description = res[i].description || "NA"; 
       var posting_date = res[i].posting_date || "NA";
       var admin_remark = res[i].admin_remark|| "NA";
+      var admin_remark_date = res[i].admin_remark_date || "NA"
       var status =res[i].status || "NA";
-      //var status = res[i].isActive ? "Active":"Inactive";
-      var action = `<a href=`+res[i].id+`>
-                        <i class="material-icons" title="Edit">mode_edit</i>
-                    </a>
-                    <a href="#">
-                        <i class="material-icons" title="Delete">clear</i>
-                    </a>`;
-      this.tableData.push([i+1,leave_type,date,description,posting_date,admin_remark,status,action]);
+      // //var status = res[i].isActive ? "Active":"Inactive";
+      // var action = `<a href=`+res[i].id+`>
+      //                   <i class="material-icons" title="Edit">mode_edit</i>
+      //               </a>
+      //               <a href="#">
+      //                   <i class="material-icons" title="Delete">clear</i>
+      //               </a>`;
+      this.tableData.push([i+1,leave_type,date,description,posting_date,admin_remark,admin_remark_date,status]);
 
     }
 

@@ -10,6 +10,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SidebarModule } from 'ng-sidebar';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
@@ -54,6 +55,7 @@ import { ProfileComponent } from './profile/profile.component';
     CommonModule,
     NgxPaginationModule,
     ReactiveFormsModule,
+    NgxDatatableModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
