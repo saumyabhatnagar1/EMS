@@ -1,3 +1,4 @@
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { LeavetypeComponent } from './leavetype/leavetype.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -23,7 +24,9 @@ const routes: Routes =
   {path : 'help', component : HelpComponent},
   {path: 'workUpdate', component : WorkUpdateComponent},
   {path: 'manage-employee', component : ManageEmployeeComponent},
-  {path:'leavetype',component:LeavetypeComponent}
+  {path:'leavetype',component:LeavetypeComponent},
+  {path:'dashboard',component:DashboardComponent}
+
 
 ];
 

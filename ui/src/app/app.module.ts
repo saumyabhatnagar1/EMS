@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SidebarModule } from 'ng-sidebar';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ChartsModule } from 'ng2-charts';
 
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
@@ -28,6 +29,7 @@ import { StatusLeavesComponent } from './leaves/status-leaves/status-leaves.comp
 import { NewLeavesComponent } from './leaves/new-leaves/new-leaves.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LeavetypeComponent } from './leavetype/leavetype.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
@@ -47,7 +49,8 @@ import { LeavetypeComponent } from './leavetype/leavetype.component';
     StatusLeavesComponent,
     ManageLeavesComponent,
     ManageEmployeeComponent,
-    LeavetypeComponent 
+    LeavetypeComponent,
+    DashboardComponent 
   ],
   imports: [
     BrowserModule,
@@ -68,7 +71,8 @@ import { LeavetypeComponent } from './leavetype/leavetype.component';
     }),
     CalendarMonthModule,
     NgbModule,
-    SidebarModule.forRoot() 
+    SidebarModule.forRoot(),
+    ChartsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

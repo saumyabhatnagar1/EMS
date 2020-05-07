@@ -43,9 +43,14 @@
             <a href="/" class="nav-link"><i class="fa fa-th-large mr-3 text-primary fa-fw"></i>Home</a>
           </li>
           <li class="nav-item" [hidden]="isLoggedIn">
+            <a routerLink="/dashboard" class="nav-link"><i
+                class="fa fa-pie-chart text-primary fa-fw mr-3"></i>Dashboard</a>
+          </li>
+          <li class="nav-item" [hidden]="isLoggedIn">
             <a routerLink="/profile" class="nav-link"><i
                 class="fa fa-address-book text-primary fa-fw mr-3"></i>Profile</a>
           </li>
+
           <li class="nav-item" [hidden]="isLoggedIn">
             <a routerLink="/workUpdate" class="nav-link"><i class="fa fa-bar-chart text-primary fa-fw mr-3"></i>
               Work-Update</a>
