@@ -1,3 +1,4 @@
+import { LeavetypeComponent } from './leavetype/leavetype.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {RegisterComponent} from './register/register.component';
@@ -21,7 +22,8 @@ const routes: Routes =
   {path : 'leaves/:command' , component : LeavesComponent},
   {path : 'help', component : HelpComponent},
   {path: 'workUpdate', component : WorkUpdateComponent},
-  {path: 'manage-employee', component : ManageEmployeeComponent}
+  {path: 'manage-employee', component : ManageEmployeeComponent},
+  {path:'leavetype',component:LeavetypeComponent}
 
 ];
 

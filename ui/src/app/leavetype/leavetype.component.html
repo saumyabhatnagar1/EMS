@@ -1,0 +1,58 @@
+<div class="container">
+<div class="jumbotron">
+    <div>
+      <h1>Manage Leave Type</h1>
+    </div>
+      
+      <div>
+        
+          <form [formGroup]="LeaveTypeForm">
+          <div class="row">
+          <div class="col" style="left: 30%;">
+            <input formControlName="leave_type" placeholder="Add leave Type" type="text" style="border-radius: 10px; width: 50%;"> 
+          </div>
+          <div class="col" style="left: 5%;"> 
+            <button class="button btn-secondary" (click)="addLeaveType()">Add Leave type</button>
+          </div>
+          </div>
+        </form>
+          <br>
+          <br>
+  
+          <div>
+            <table align="center" class="table"> 
+              <thead class="thead-dark">
+              <tr>
+                <th>S No.</th>
+                <th>Leave Type</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let leavetype of leave_types;index as i">
+                <td>{{i+1}}</td>
+                <td>
+                    <form [formGroup]="leaveTypeFormChange">
+                      <span>{{leavetype.value}}</span>
+                      <div *ngIf="leavetype">
+                        {{run(leave_types[i].value)}}</div>
+                        <input formControlName="leave" type="text" >
+                      
+                    </form>
+                 
+                </td>
+                <td>
+                  <div class="btn-group">
+                  <button class="button btn-success"(click)="updateLeaveType(leavetype)">Save</button>
+                  <!-- <button class="button btn-secondary" (click)="editDetails=true;">Edit</button> -->
+                  <button class="button btn-danger" (click)="deleteLeaveType(leavetype.id)">Delete</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+            </table>
+          </div>
+        
+      </div>
+      </div>
+   </div>

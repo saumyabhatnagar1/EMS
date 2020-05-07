@@ -27,6 +27,7 @@ import { ManageEmployeeComponent } from './manage-employee/manage-employee.compo
 import { StatusLeavesComponent } from './leaves/status-leaves/status-leaves.component';
 import { NewLeavesComponent } from './leaves/new-leaves/new-leaves.component';
 import { ProfileComponent } from './profile/profile.component';
+import { LeavetypeComponent } from './leavetype/leavetype.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { ProfileComponent } from './profile/profile.component';
     NewLeavesComponent,
     StatusLeavesComponent,
     ManageLeavesComponent,
-    ManageEmployeeComponent 
+    ManageEmployeeComponent,
+    LeavetypeComponent 
   ],
   imports: [
     BrowserModule,
