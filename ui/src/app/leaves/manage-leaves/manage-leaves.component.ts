@@ -5,7 +5,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {ActivatedRoute } from '@angular/router';
 import { NotificationService} from '../../common/services/notification.service';
 
-
+declare var $: any;
 @Component({
   selector: 'manage-leaves',
   templateUrl: './manage-leaves.component.html',
@@ -21,7 +21,7 @@ export class ManageLeavesComponent implements OnInit {
 
   leaves = [];
   pageOfItems: Array<any>;
-
+  
   @ViewChild('datatable') table;
   dataTable: any;
 

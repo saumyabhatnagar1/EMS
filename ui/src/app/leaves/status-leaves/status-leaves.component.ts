@@ -23,18 +23,26 @@ export class StatusLeavesComponent implements OnInit {
 
   @ViewChild('dataTable') table;
   dataTable: any;
-  dtOptions: any;
+  //dtOptions: any;
 
  
   constructor(private activeRoute:ActivatedRoute,private notificationService:NotificationService,private leavesService:LeavesService,public principle:PrincipleService,private router:Router) { }
   public tableData:any=[];
+
+  // dtOptions: DataTables.Settings = {};
+
   ngOnInit(): void {
     this.getAllLeaves();
+    // this.dtOptions = {
+    //   pagingType: 'full_numbers',
+    //   pageLength: 5,
+    //   processing: true
+    // }
   }  
   
 
   initDataTable(){
-  	var table = $('#example').DataTable( {
+  	$("#example").DataTable( {
         data: this.tableData,
         columns: [
             { title: "#S.No"},
