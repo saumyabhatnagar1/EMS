@@ -3,7 +3,14 @@
 <div class="alert alert-danger" *ngIf="!ifHR">Invalid Request</div>
 
 <div *ngIf="ifHR">
-    <pagination-template #p="paginationApi">
+<br>
+<br>
+
+<div class = "container">
+  <table  id="example" class="row-border hover order-column" ></table>
+</div> 
+
+    <!-- <pagination-template #p="paginationApi">
       <div class="">
         <button class="button btn-secondary" (click)="showLeaveType=true">Manage leave types</button>
         <div class="status-content">
@@ -42,7 +49,7 @@
           </div>
         </div>
       </div>
-    </pagination-template>
+    </pagination-template> -->
   
   <div *ngIf=showLeaveType class="jumbotron">
     <div>

@@ -1,7 +1,7 @@
 import { LeavesService } from '../leaves.service';
 import { PrincipleService } from '../../util/principle.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {ActivatedRoute } from '@angular/router';
 import { NotificationService} from '../../common/services/notification.service';
 
@@ -22,14 +22,38 @@ export class ManageLeavesComponent implements OnInit {
   leaves = [];
   pageOfItems: Array<any>;
 
+  @ViewChild('datatable') table;
+  dataTable: any;
+
   
   constructor(private activeRoute:ActivatedRoute,private notificationService:NotificationService,private leavesService:LeavesService,public principle:PrincipleService) { }
+  public tableData:any=[];
   ngOnInit(): void {
     this.getAllLeaves();
     this.findLeaveType(); 
     this.ifHRrole() 
     
   }  
+
+
+
+  initDataTable(){
+  	var table = $('#example').DataTable( {
+        data: this.tableData,
+        columns: [
+            { title: "#S.No"},
+            { title: 'Email' },
+            { title: "Date" },
+            { title: "Status" },
+            { title: "Action"},
+        ],
+
+        "scrollY": "200px",
+        "scrollCollapse": true,
+    } );
+    
+    
+  }
 
   
  ifHRrole(){
@@ -50,15 +74,44 @@ export class ManageLeavesComponent implements OnInit {
   getAllLeaves(){
       this.leavesService.getAllLeaves().subscribe(
         res=>{
+              this.formatEmpData(res);
+              this.initDataTable();
               if(res["status"] == 400){
                 //no leaves found////
               }else{
                 this.appendLeaves(res);
+                console.log(res)
               }
         },err=>{
              console.log(err);
       });;
   }
+
+
+  formatEmpData(res){
+    let res1 = Object.entries(res);
+    for(var i = 0 ; i < res1.length;i++){
+      //console.log('check')
+      var tmp = [];
+      var email= res[i].email|| "NA"; 
+      var date = res[i].date || "NA";
+      var status =res[i].status || "NA";
+      //var status = res[i].isActive ? "Active":"Inactive";
+      var action = `<a href=`+res[i].id+`>
+                        <i class="material-icons" title="Edit">mode_edit</i>
+                    </a>
+                    <a href="#">
+                        <i class="material-icons" title="Delete">clear</i>
+                    </a>`;
+      this.tableData.push([i+1,email,date,status,action,]);
+
+    }
+
+    console.log(this.tableData)
+  }
+
+
+
 
   appendLeaves(res){
       let leavesData = Object.entries(res); 
