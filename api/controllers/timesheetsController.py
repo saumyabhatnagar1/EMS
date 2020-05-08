@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from api.services import principleService, timesheetsService
-from api.security.decorators import login_required, is_admin
+from api.security.decorators import login_required, is_admin, is_post
 
 
 @csrf_exempt
@@ -15,6 +15,7 @@ def index():
 
 @csrf_exempt
 @is_admin
+@is_post
 def add(request):
     timesheet = json.loads(request.body)
     var = timesheetsService.add(timesheet)
@@ -26,6 +27,7 @@ def add(request):
 
 @csrf_exempt
 @is_admin
+@is_post
 def update(request):
     timesheet = json.loads(request.body)
     var = timesheetsService.update(timesheet)
@@ -37,6 +39,7 @@ def update(request):
 
 @csrf_exempt
 @login_required
+@is_post
 def find(request):
     timesheet = json.loads(request.body)
     if principleService.getRole() != "ADMIN":
@@ -47,4 +50,14 @@ def find(request):
         return JsonResponse({"status": 200, "message": "RECORD FOUND",
                              "data": {"id": str(sheet["_id"]), "username": sheet["username"],
                                       "timings": sheet["timings"]}})
+    return JsonResponse({"status": 200, "message": "RECORD NOT FOUND"})
+
+
+@csrf_exempt
+@login_required
+def findAll(request):
+    id = principleService.getUsername()
+    sheet = timesheetsService.findSheetById(id)
+    if sheet is not None:
+        return JsonResponse(sheet, safe=False)
     return JsonResponse({"status": 200, "message": "RECORD NOT FOUND"})

@@ -27,3 +27,11 @@ def update(timesheet):
                                                   "minutes": timesheet["timings"]["out_time"]["minutes"]}}}}
     var = Timesheets.update(query, updateTo)
     return var
+
+
+def findById(id):
+    query = {"username": id}
+    sheet = list(Timesheets.find(query))
+    if len(sheet) > 0:
+        return sheet
+    return None

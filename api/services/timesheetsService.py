@@ -2,15 +2,30 @@ from ..mapper import timesheetsMapper
 
 
 def findSheetById(id):
-    sheet = timesheetsMapper.findById(id)
-    if sheet is not None:
-        return sheet
+    sheets = timesheetsMapper.findById(id)
+    if sheets is not None:
+        sheet_dict = {}
+        cnt = 0
+        for sheet in sheets:
+            del sheet["_id"]
+            sheet_dict[cnt] = sheet
+            cnt += 1
+        return sheet_dict
     return None
 
 
 def add(timesheet):
+    timesheet_data = {
+        "username": timesheet["username"],
+        "day": timesheet["day"],
+        "date": timesheet["date"],
+        "month": timesheet["month"],
+        "year": timesheet["year"],
+        "timings": timesheet["timings"],
+        "createdOn": timesheet["createdOn"]
+    }
     if find(timesheet) is None:
-        return timesheetsMapper.save(timesheet)
+        return timesheetsMapper.save(timesheet_data)
     return None
 
 

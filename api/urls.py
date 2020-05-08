@@ -17,6 +17,7 @@ urlpatterns = [
     path('timesheets/add', timesheetsController.add, name='add time sheet'),
     path('timesheets/find', timesheetsController.find, name='find time sheet'),
     path('timesheets/admin/update', timesheetsController.update, name='admin update time sheet'),
+    path('timesheets/findAll', timesheetsController.findAll, name='find all time sheets'),
 
     path('leaves/new', leavesController.addLeave, name='leave request'),
     path('leaves/findAll', leavesController.getLeavesData, name='leave detail'),
