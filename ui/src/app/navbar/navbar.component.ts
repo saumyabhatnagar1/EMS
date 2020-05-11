@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PrincipleService } from '../util/principle.service';
 import { AuthService } from '../util/auth.service';
 import { Router } from '@angular/router';
+import { NotificationService} from '../common/services/notification.service';
+
 declare var $: any
 
 @Component({
@@ -12,7 +14,7 @@ declare var $: any
 export class NavbarComponent implements OnInit {
   public isLoggedIn:boolean = true;
   public username : string = "";
-  constructor(private principle:PrincipleService ,private authService:AuthService,private router:Router) { }
+  constructor(private principle:PrincipleService,private notificationService:NotificationService,private authService:AuthService,private router:Router) { }
   ngOnInit(): void {
      if( this.principle.getUsername() !=undefined){
         this.isLoggedIn = false;
@@ -40,7 +42,9 @@ export class NavbarComponent implements OnInit {
   logout(){
         this.authService.logout().subscribe(
         res=>{
+              this.notificationService.showSuccess("Successfully Logout!")
               window.location.href='/';
+              
         },err=>{
              console.log(err);
         });

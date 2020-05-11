@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
          if(res["status"] == 200){
             this.principle.setUser(res);
             window.location.href = '/';
+            this.notificationService.showSuccess("Successfully Login!")
          }else{
            //this.message = res["message"];
            this.notificationService.showFailed("Invalid Credentials!")

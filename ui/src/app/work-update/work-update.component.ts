@@ -1,6 +1,8 @@
 import { FormControl, FormGroup, FormArray } from '@angular/forms';
 import { ProjectService } from './projects.service';
 import { Component, OnInit } from '@angular/core';
+import { NotificationService} from '../common/services/notification.service';
+
 
 
 @Component({
@@ -20,7 +22,7 @@ export class WorkUpdateComponent implements OnInit {
 
 
 
-  constructor(private projectservice: ProjectService) { }
+  constructor(private projectservice: ProjectService,private notificationService: NotificationService) { }
   ngOnInit(): void {
 
     this.findAllProjects()
@@ -63,10 +65,10 @@ export class WorkUpdateComponent implements OnInit {
       res => {
 
         console.log(res);
-        //this.notificationService.showSuccess("Leave Application Submitted!!!");
+        this.notificationService.showSuccess("Project Added!!!");
       },
       err => {
-        //this.notificationService.showFailed("Something went wrong!");
+        this.notificationService.showFailed("Something went wrong!");
         console.log(err)
       });
 this.findAllProjects()
@@ -111,10 +113,10 @@ this.findAllProjects()
 
         console.log(res);
 
-        //this.notificationService.showSuccess("Leave Application Submitted!!!");
+        this.notificationService.showSuccess("Task Added!!!");
       },
       err => {
-        //this.notificationService.showFailed("Something went wrong!");
+        this.notificationService.showFailed("Something went wrong!");
         console.log(err)
       });
 

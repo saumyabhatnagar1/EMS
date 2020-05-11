@@ -141,13 +141,19 @@ addLeaveType(){
     res=>{
       this.leaveType=res;
       console.log(res)
+      this.notificationService.showSuccess("Leave type added!!!")
+      
     },
     err=>{
       console.log(err);
+      this.notificationService.showFailed("Something went wrong")
+
     }
   )
   this.findLeaveType()
 }
+
+
 run(value){
   this.leaveTypeFormChange.get('leave').setValue(value)
 }
@@ -166,9 +172,12 @@ run(value){
     this.leavesService.updateLeaveType(JSON.stringify(data)).subscribe(
       res=>{
         console.log(res)
+        this.notificationService.showSuccess("Leave type saved!!!")
+
       },
       err=>{
         console.log(err)
+        this.notificationService.showFailed("Something went wrong")
       }
     
     )
@@ -183,9 +192,13 @@ run(value){
     this.leavesService.deleteLeaveType(JSON.stringify(data)).subscribe(
       res=>{
         console.log(res)
+        this.notificationService.showSuccess("Leave type deleted!!!")
+
       },
       err=>{
         console.log(err)
+        this.notificationService.showFailed("Something went wrong")
+
       }
     )
     this.findLeaveType()
