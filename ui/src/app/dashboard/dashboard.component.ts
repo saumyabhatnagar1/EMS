@@ -2,7 +2,8 @@ import { DashboardService } from './dashboard.service';
 import { Component, OnInit } from '@angular/core';
 import { ChartsModule } from 'ng2-charts';
 import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Color, Label } from 'ng2-charts';
+import { Color, Label,MultiDataSet } from 'ng2-charts';
+import { ChartType } from 'chart.js';
 
 
 @Component({
@@ -83,15 +84,22 @@ export class DashboardComponent implements OnInit {
   lineChartPlugins = [];
   lineChartType = 'line';
 
+
+
+  doughnutChartLabels: Label[] = ['On Time', 'Late', 'Absent'];
+  doughnutChartData: MultiDataSet = [
+    [55, 25, 20]
+  ];
+  doughnutChartType: ChartType = 'doughnut';
+
+
+
+
+
   fetchAllTimesheets(){
     this.dashboardService.fetchAllTimesheet().subscribe(
       res=>{
             this.msg = res
-            //let x = Object.entries(res)
-            
-           // this.addLabel(x)
-           // console.log(x)
-           // console.log(x.length)
            this.appendTimesheets(res)
             
       },

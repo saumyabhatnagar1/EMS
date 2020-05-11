@@ -1,15 +1,38 @@
-<div class="container" style="background-color: white;">
-    <h2 style="align-content: center; margin-left: 40%; color: #7c7f80;">Working Statistics</h2>
-<div class="chart-wrapper" style="width: 70%; margin-left: 20%; margin-top: 5%; margin-bottom: 10%;">
-    <canvas baseChart 
-        [datasets]="lineChartData" 
-        [labels]="lineChartLabels" 
-        [options]="lineChartOptions"
-        [colors]="lineChartColors" 
-        [legend]="lineChartLegend" 
-        [chartType]="lineChartType" 
-        [plugins]="lineChartPlugins">
-    </canvas>
+<div class="container" *ngIf="dataArray.length==0" style="align-items: center;justify-items: center; ">
+    <div class=" alert alert-danger" >No data Found</div>
 </div>
+
+<div class="container" *ngIf="dataArray.length>0">
+
+    <div class="row">
+      
+
+        <div class="col-md-6 linegraph">
+        <h2>Working Statistics</h2>
+        <div class="chart-wrapper">
+            <canvas width="200" height="150" baseChart 
+            [datasets]="lineChartData" 
+            [labels]="lineChartLabels" 
+            [options]="lineChartOptions"
+            [colors]="lineChartColors" 
+            [legend]="lineChartLegend" 
+            [chartType]="lineChartType" 
+            [plugins]="lineChartPlugins">
+        </canvas>
+        </div>
+        </div>
+
+
+        <div class="col-md-6" >
+        
+            <div class="chart-wrapper">
+                <canvas width="200" height="150" baseChart 
+                [data]="doughnutChartData"
+                [labels]="doughnutChartLabels"
+                [chartType]="doughnutChartType">
+              </canvas>
+            </div>
+        </div>
+    </div>
 </div>
 

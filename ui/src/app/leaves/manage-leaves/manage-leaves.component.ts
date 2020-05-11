@@ -73,9 +73,13 @@ export class ManageLeavesComponent implements OnInit {
  }
 
  
- public leaveTypeFormChange=new FormGroup({
- leave:new FormControl('')
+ public leavestatus=new FormGroup({
+ status:new FormControl(''),
+  desc:new FormControl('')
 });
+saveLeaveStatus(){
+  console.log(this.leavestatus.value)
+}
 
   onChangePage(pageOfItems: Array<any>) {
     // update current page of items
@@ -209,48 +213,6 @@ addLeaveType(){
   )
   this.findLeaveType()
 }
-run(value){
-  this.leaveTypeFormChange.get('leave').setValue(value)
-}
-
-  updateLeaveType(leavetype){
-    console.log(leavetype.id)
-    let value=this.leaveTypeFormChange.get('leave').value;
-    let data={
-      'id':leavetype.id,
-      'value':value
-
-    }
-    
-
-
-    this.leavesService.updateLeaveType(JSON.stringify(data)).subscribe(
-      res=>{
-        console.log(res)
-      },
-      err=>{
-        console.log(err)
-      }
-    
-    )
-    this.findLeaveType()
-    this.editDetails=false;
-
-  }
-  deleteLeaveType(id){
-    let data={
-      'id':id
-    }
-    this.leavesService.deleteLeaveType(JSON.stringify(data)).subscribe(
-      res=>{
-        console.log(res)
-      },
-      err=>{
-        console.log(err)
-      }
-    )
-    this.findLeaveType()
-  }
 
 
 
