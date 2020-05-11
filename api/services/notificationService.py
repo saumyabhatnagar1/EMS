@@ -7,7 +7,8 @@ def addNotification(notification_data):
         "description": notification_data['description'],
         "date": notification_data['date'],
         "publisher": notification_data['publisher'],
-        "to": notification_data['to']
+        "to": notification_data['to'],
+        "url": notification_data['url']
     }
     response = notificationMapper.save(notification_detail)
     if response is not None:
@@ -28,8 +29,8 @@ def findAll():
     return None
 
 
-def findByID(email):
-    notification = notificationMapper.findByID(email)
+def findByID(email, role):
+    notification = notificationMapper.findByID(email, role)
     if notification is not None:
         notification_dict = {}
         cnt = 0

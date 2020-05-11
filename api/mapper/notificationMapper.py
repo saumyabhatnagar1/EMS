@@ -1,6 +1,6 @@
 from .client import connectToDB
 
-Notifications = connectToDB().primer.notification
+Notifications = connectToDB().primer.notifications
 
 
 def save(notification_detail):
@@ -15,9 +15,11 @@ def findAll():
     return None
 
 
-def findByID(email):
-    query = {"publisher": email}
-    notifications = list(Notifications.find(query))
+def findByID(email, role):
+    query1 = {"to": email}
+    query2 = {"to": role}
+    query3 = {"to": "ALL"}
+    notifications = list(Notifications.find(query1)) + list(Notifications.find(query2)) + list(Notifications.find(query3))
     if len(notifications) > 0:
         return notifications
     return None

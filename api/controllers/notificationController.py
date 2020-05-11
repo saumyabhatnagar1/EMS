@@ -31,7 +31,8 @@ def findAllNotifications(request):
 @login_required
 def findNotificationsById(request):
     email = principleService.getUsername()
-    notifications = notificationService.findByID(email)
+    role = principleService.getRole()
+    notifications = notificationService.findByID(email, role)
     if notifications is not None:
         return JsonResponse(notifications, safe=False)
     return JsonResponse({"status": 200, "message": "NOTIFICATION NOT FOUND"})
