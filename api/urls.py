@@ -1,7 +1,7 @@
 from django.urls import path
 
 from api.controllers import accountController, timesheetsController, leavesController, projectController, \
-    principleController, permissionController
+    principleController, permissionController, notificationController
 
 urlpatterns = [
     path('', accountController.index, name='index'),
@@ -36,5 +36,9 @@ urlpatterns = [
     path('project/team', projectController.getTeamDetail, name='get team detail'),
 
     path('permission/add', permissionController.addPermission, name='add permission'),
-    path('permission/get', permissionController.getPermissionDetail, name='get permission details')
+    path('permission/get', permissionController.getPermissionDetail, name='get permission details'),
+
+    path('notifications/add', notificationController.addNotification, name='add notification'),
+    path('notifications/findAll', notificationController.findAllNotifications, name='find all notification'),
+    path('notifications/find', notificationController.findNotificationsById, name='find notifications by id'),
 ]
