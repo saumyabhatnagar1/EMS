@@ -10,6 +10,26 @@
   <table  id="example" class="row-border hover order-column" ></table>
 </div> 
 
+<div>
+</div>
+<div class="modal" id="modalForStatusUpdate" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                 <h3 class="modal-title">Title</h3>
+
+            </div>
+            <div class="modal-body">
+                 <h5 class="text-center">msg</h5>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default " (click)="updateLeaveStatus()">Save</button>
+                <button type="button" class="btn btn-primary" (click)="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
     <!-- <pagination-template #p="paginationApi">
       <div class="">
         <button class="button btn-secondary" (click)="showLeaveType=true">Manage leave types</button>

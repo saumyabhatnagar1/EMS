@@ -31,11 +31,22 @@ export class ManageLeavesComponent implements OnInit {
   ngOnInit(): void {
     this.getAllLeaves();
     this.findLeaveType(); 
-    this.ifHRrole() 
-    
+    this.ifHRrole();
+    this.showModalForStatusUpdate();
   }  
 
+  showModalForStatusUpdate(){
+    $(document).on('click','.modalShow',function(e) {
+      document.getElementById('modalForStatusUpdate').style.display = 'block';
+    });
+  }
+  closeModal(){
+    document.getElementById('modalForStatusUpdate').style.display = 'none';
+  }
 
+  updateLeaveStatus(){
+    //todo
+  }
 
   initDataTable(){
   	var table = $('#example').DataTable( {
@@ -97,18 +108,17 @@ export class ManageLeavesComponent implements OnInit {
       var date = res[i].date || "NA";
       var status =res[i].status || "NA";
       //var status = res[i].isActive ? "Active":"Inactive";
-      var action = `<a href=`+res[i].id+`>
-                        <i class="material-icons" title="Edit">mode_edit</i>
-                    </a>
-                    <a href="#">
-                        <i class="material-icons" title="Delete">clear</i>
-                    </a>`;
+      var action = `<button type="button" class="btn btn-primary modalShow">
+  Update
+</button>`;
       this.tableData.push([i+1,email,date,status,action,]);
 
     }
 
     console.log(this.tableData)
   }
+
+
 
 
 
