@@ -1,26 +1,25 @@
 <!--Navbar-->
 
 <nav class="navbar mb-0" style="border-radius: 0%;background-color:#22979c;">
-  <ul  class="navbar-nav mr-auto">
+  <ul class="navbar-nav mr-auto">
     <li class="navbar-brand" style="display: flex; flex-direction: row;">
 
-      <span  (click)="_toggleSidebar()"
-        style="position: relative; cursor: pointer;" ><i class="material-icons" id="toggleBtn">menu</i></span>
+      <span (click)="_toggleSidebar()" style="position: relative; cursor: pointer;"><i id="toggleBtn">menu</i></span>
 
-    <a
-        style="text-decoration: none; color: black; font-size: 25px; margin-left: 10px" routerLink='/'>EMS</a></li>
+      <a style="text-decoration: none; color: black; font-size: 25px; margin-left: 10px" routerLink='/'>EMS</a></li>
 
 
-        <li class="nav-item mr-3" style="position: absolute; right: 0;" [hidden]="isLoggedIn">
-          <a (click)="logout()" routerLink="/" class="nav-link">Logout</a>
-        </li>
+    <li class="nav-item mr-3" style="position: absolute; right: 0;" [hidden]="isLoggedIn">
+
+      <a (click)="logout()" routerLink="/" class="nav-link">Logout</a>
+    </li>
   </ul>
 </nav>
 <ng-sidebar-container class="mt-0">
   <!-- Sidebar -->
-  <ng-sidebar mode="push" class="ng-sidebar" closeOnClickOutside="true" animate="true" [(opened)]="_opened">
+  <ng-sidebar mode="push" class="ng-sidebar" animate="true" [(opened)]="_opened">
 
-    <div class="navbar" >
+    <div class="navbar">
 
       <div class="py-4 mb-4" style="display: flex;flex-direction:column;">
         <div class=" align-items-center"><img
@@ -39,11 +38,10 @@
         <ul class="navbar-nav" style="width: 100%;">
 
           <li class="nav-item">
-            
-            <a href="/" class="nav-link"><i class="material-icons">home</i>Home</a>
+           <a style="display: flex; flex-direction: row;" href="/" class="nav-link"><i class="material-icons">home</i>Home</a>
           </li>
           <li class="nav-item" [hidden]="isLoggedIn">
-            <a routerLink="/dashboard" class="nav-link"><i class="material-icons">pie_chart</i>Dashboard</a>
+          <a routerLink="/dashboard" class="nav-link">  <i class="material-icons">pie_chart</i>Dashboard</a>
           </li>
           <li class="nav-item" [hidden]="isLoggedIn">
             <a routerLink="/profile" class="nav-link"><i class="material-icons">person</i>Profile</a>
@@ -54,7 +52,8 @@
               Work-Update</a>
           </li>
           <li class="nav-item" [hidden]="isLoggedIn">
-            <a *ngIf="ifHR" routerLink="/leavetype" class="nav-link"><i class="material-icons">date_range</i>Leave Type</a>
+            <a *ngIf="ifHR" routerLink="/leavetype" class="nav-link"><i class="material-icons">date_range</i>Leave
+              Type</a>
           </li>
           <li class="nav-item dropdown" [hidden]="isLoggedIn">
             <a href="" class="nav-link dropdown-toggle" id="navbar-dropdown" role="button" data-toggle="dropdown">
@@ -73,10 +72,9 @@
           </li>
 
           <li class="nav-item" [hidden]="isLoggedIn">
-
             <a routerLink="/timesheets" class="nav-link"> <i class="material-icons">schedule</i>TimeSheets</a>
           </li>
-          
+
 
           <li class="nav-item" [hidden]="!isLoggedIn">
 
