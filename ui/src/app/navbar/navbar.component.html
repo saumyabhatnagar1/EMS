@@ -1,16 +1,17 @@
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!--Navbar-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <nav class="navbar mb-0" style="border-radius: 0%;background-color:#22979c;">
-  <ul style="display: inline;" class="navbar-nav mr-auto">
-    <li>
+  <ul  class="navbar-nav mr-auto">
+    <li class="navbar-brand" style="display: flex; flex-direction: row;">
 
-      <span class="glyphicon glyphicon-align-justify" (click)="_toggleSidebar()"
-        style="position: absolute; font-size: 25px; margin-top: 15px;cursor: pointer;"></span>
+      <span  (click)="_toggleSidebar()"
+        style="position: relative; cursor: pointer;" ><i class="material-icons" id="toggleBtn">menu</i></span>
 
-    </li>
-    <li class="navbar-brand text-muted"><a
-        style="text-decoration: none; color: black; font-size: 25px; margin-left: 30px;" routerLink='/'>EMS</a></li>
+    <a
+        style="text-decoration: none; color: black; font-size: 25px; margin-left: 10px" routerLink='/'>EMS</a></li>
+
+
         <li class="nav-item mr-3" style="position: absolute; right: 0;" [hidden]="isLoggedIn">
 
           <a (click)="logout()" routerLink="/" class="nav-link">Logout</a>
@@ -40,28 +41,26 @@
         <ul class="navbar-nav" style="width: 100%;">
 
           <li class="nav-item">
-            <a href="/" class="nav-link"><i class="fa fa-th-large mr-3 text-primary fa-fw"></i>Home</a>
+            
+            <a href="/" class="nav-link"><i class="material-icons">home</i>Home</a>
           </li>
           <li class="nav-item" [hidden]="isLoggedIn">
-            <a routerLink="/dashboard" class="nav-link"><i
-                class="fa fa-pie-chart text-primary fa-fw mr-3"></i>Dashboard</a>
+            <a routerLink="/dashboard" class="nav-link"><i class="material-icons">pie_chart</i>Dashboard</a>
           </li>
           <li class="nav-item" [hidden]="isLoggedIn">
-            <a routerLink="/profile" class="nav-link"><i
-                class="fa fa-address-book text-primary fa-fw mr-3"></i>Profile</a>
+            <a routerLink="/profile" class="nav-link"><i class="material-icons">person</i>Profile</a>
           </li>
 
           <li class="nav-item" [hidden]="isLoggedIn">
-            <a routerLink="/workUpdate" class="nav-link"><i class="fa fa-bar-chart text-primary fa-fw mr-3"></i>
+            <a routerLink="/workUpdate" class="nav-link"><i class="material-icons">laptop</i>
               Work-Update</a>
           </li>
           <li class="nav-item" [hidden]="isLoggedIn">
-            <a *ngIf="ifHR" routerLink="/leavetype" class="nav-link"><i
-                class="fa fa-address-book text-primary fa-fw mr-3"></i>Leave Type</a>
+            <a *ngIf="ifHR" routerLink="/leavetype" class="nav-link"><i class="material-icons">date_range</i>Leave Type</a>
           </li>
           <li class="nav-item dropdown" [hidden]="isLoggedIn">
             <a href="" class="nav-link dropdown-toggle" id="navbar-dropdown" role="button" data-toggle="dropdown">
-              <i class="fa fa-calendar text-primary fa-fw mr-3"></i> Leave Request</a>
+              <i class="material-icons">today</i> Leave Request</a>
             <div class="dropdown-menu" style="background-color:rgba(0,0,0,0.05);" aria-labelledby="navbar-dropdown">
               <a class="dropdown-item" [routerLink]="['/leaves','NEW']"> New Request </a>
               <a class="dropdown-item" [routerLink]="['/leaves','STATUS']">Status</a>
@@ -72,29 +71,26 @@
 
           <li class="nav-item" [hidden]="isLoggedIn">
 
-            <a routerLink="/manage-employee" class="nav-link"> <i
-                class="fa fa-users text-primary fa-fw mr-3"></i>Manage-Employee</a>
+            <a routerLink="/manage-employee" class="nav-link"> <i class="material-icons">people</i>Manage-Employee</a>
           </li>
 
           <li class="nav-item" [hidden]="isLoggedIn">
 
-            <a routerLink="/timesheets" class="nav-link"> <i
-                class="fa fa-clock-o text-primary fa-fw mr-3"></i>TimeSheets</a>
+            <a routerLink="/timesheets" class="nav-link"> <i class="material-icons">schedule</i>TimeSheets</a>
           </li>
           
 
           <li class="nav-item" [hidden]="!isLoggedIn">
 
-            <a routerLink="/register" class="nav-link"><i
-                class="fa fa-user-plus text-primary mr-3 fa-fw"></i>Register</a>
+            <a routerLink="/register" class="nav-link"><i class="material-icons">person_add</i>Register</a>
           </li>
           <li class="nav-item" [hidden]="!isLoggedIn">
 
-            <a routerLink="/login" class="nav-link"><i class="fa fa-sign-in text-primary fa-fw mr-3"></i>Login</a>
+            <a routerLink="/login" class="nav-link"><i class="material-icons">meeting_room</i>Login</a>
           </li>
 
           <li class="nav-item">
-            <a routerLink="/help" class="nav-link"><i class="fa fa-phone text-primary fa-fw mr-3"></i> Help-Desk</a>
+            <a routerLink="/help" class="nav-link"><i class="material-icons">settings_phone</i> Help-Desk</a>
           </li>
 
         </ul>
