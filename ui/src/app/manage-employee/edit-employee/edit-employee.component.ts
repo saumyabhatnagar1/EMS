@@ -57,7 +57,7 @@ export class EditEmployeeComponent implements OnInit {
    	this.profileForm.get('isActive').setValue(res.isActive)
    }
    saveEmployeeData(){
-   	if(this.profileForm.get('isActive').value == "true"){
+   	if(this.profileForm.get('isActive').value == true || this.profileForm.get('isActive').value == "true"){
    		this.profileForm.get('isActive').setValue(true);
    	}else{
    		this.profileForm.get('isActive').setValue(false);

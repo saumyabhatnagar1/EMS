@@ -1,6 +1,7 @@
 import { Component,ViewChild, OnInit, AfterViewInit,Renderer2 } from '@angular/core';
 import { AccountServiceService} from '../common/services/account-service.service';
 import { NotificationService} from '../common/services/notification.service';
+import { RegisterService } from '../register/register.service';
 import { Router } from '@angular/router';
 
 declare var $: any;
@@ -14,7 +15,7 @@ export class ManageEmployeeComponent implements AfterViewInit,OnInit {
   @ViewChild('dataTable') table;
   dataTable: any;
   dtOptions: any;
-  constructor(private renderer: Renderer2,private accountService:AccountServiceService,private notificationService:NotificationService,private router:Router) { }
+  constructor(private registerService:RegisterService,private renderer: Renderer2,private accountService:AccountServiceService,private notificationService:NotificationService,private router:Router) { }
   public tableData:any=[];
   ngOnInit(): void {
   	
@@ -23,7 +24,7 @@ export class ManageEmployeeComponent implements AfterViewInit,OnInit {
   
   initDataTable(){
   	$('#example').DataTable( {
-        
+        "bDestroy":true,
         data: this.tableData,
         columns: [
             { title: "#S.No"},
@@ -65,6 +66,7 @@ export class ManageEmployeeComponent implements AfterViewInit,OnInit {
   	});
   }
   formatEmpData(res){
+    this.tableData = [];
     for(var i = 0 ; i < res.length;i++){
       var tmp = [];
       var mail = res[i].email || "NA"; 
@@ -77,5 +79,25 @@ export class ManageEmployeeComponent implements AfterViewInit,OnInit {
 
       this.tableData.push([i+1,mail,name,desg,role,regDate,status,action]);
     }
+  }
+
+  createAccount(){
+    let data = JSON.stringify({
+      "email":$('#email').val(),
+      "password":$('#password').val()
+    });
+    this.registerService.createAccount(data).subscribe(res=>{
+      if(res["status"] == 201){
+        this.notificationService.showSuccess("Account created!");
+        this.getEmployeeData();
+      }else{
+        this.notificationService.showFailed("Error in account creation");
+      }
+      console.log(res);
+
+    },err=>{
+      this.notificationService.showFailed("something went wrong");
+      console.log(err);
+    })
   }
 }
