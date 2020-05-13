@@ -11,7 +11,7 @@ import { LeavesComponent } from './leaves/leaves.component';
 import { HelpComponent } from './help/help.component';
 import { WorkUpdateComponent } from './work-update/work-update.component';
 import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
-
+import { EditEmployeeComponent } from './manage-employee/edit-employee/edit-employee.component';
 
 const routes: Routes =
 [
@@ -25,7 +25,8 @@ const routes: Routes =
   {path: 'workUpdate', component : WorkUpdateComponent},
   {path: 'manage-employee', component : ManageEmployeeComponent},
   {path:'leavetype',component:LeavetypeComponent},
-  {path:'dashboard',component:DashboardComponent}
+  {path:'dashboard',component:DashboardComponent},
+  {path:'manage-employee/edit/:id',component:EditEmployeeComponent}
 
 
 ];

@@ -95,6 +95,7 @@ onSubmit(){
 }
 
 editDetails(){
+  this.router.navigate(['manage-employee/edit',this.message.email]);
   this.edit = !this.edit
   this.updateForm.get('email').setValue(this.message.email)
   this.updateForm.get('date').setValue(this.message.date)

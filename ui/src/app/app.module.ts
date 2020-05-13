@@ -30,6 +30,7 @@ import { NewLeavesComponent } from './leaves/new-leaves/new-leaves.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LeavetypeComponent } from './leavetype/leavetype.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { EditEmployeeComponent } from './manage-employee/edit-employee/edit-employee.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ManageLeavesComponent,
     ManageEmployeeComponent,
     LeavetypeComponent,
-    DashboardComponent 
+    DashboardComponent,
+    EditEmployeeComponent 
   ],
   imports: [
     BrowserModule,

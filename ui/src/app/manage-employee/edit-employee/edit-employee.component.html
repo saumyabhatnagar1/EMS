@@ -1,0 +1,53 @@
+<div class="card container">
+<h3>Profile</h3>
+	<div class="card-body">
+		<form [formGroup]="profileForm" (ngSubmit)="saveEmployeeData()">
+  
+		  <div class="form-group row">
+		    <label for="email" class="col-sm-2 col-form-label">Email</label>
+		    <div class="col-sm-10">
+		      <input type="text" readonly class="form-control-plaintext" formControlName="email">
+		    </div>
+		  </div>
+		  <div class="form-group row">
+		    <label for="name" class="col-sm-2 col-form-label">Name</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" placeholder="Full Name" formControlName="name" >
+		    </div>
+		  </div>
+
+		  <div class="form-group row">
+		    <label for="gender" class="col-sm-2 col-form-label">Gender</label>
+		    <div class="col-sm-4">
+		    	<select class="form-control" formControlName="gender">
+			      <option>Male</option>
+			      <option>Female</option>
+			      <option>Other</option>
+			    </select>
+		    </div>
+		  </div>
+		  <div class="form-group row" *ngIf="(isHR)">
+		    <label for="role" class="col-sm-2 col-form-label">Role</label>
+		    <div class="col-sm-4">
+		    	<select class="form-control" formControlName="role">
+			      <option>USER</option>
+			      <option>ADMIN</option>
+			      <option>HR</option>
+			      <option>PM</option>
+			      <option>INTERN</option>
+			    </select>
+		    </div>
+		  </div>
+		  <div class="form-group row" *ngIf="(isHR)">
+		    <label for="isActive" class="col-sm-2 col-form-label">Status</label>
+		    <div class="col-sm-4">
+		    	<select class="form-control" formControlName="isActive">
+			      <option [value]="true">ACTIVE</option>
+			      <option [value]="false">INACTIVE</option>
+			    </select>
+		    </div>
+		  </div>
+		  <button type="submit" class="btn btn-primary" style="background-color: teal">Save</button>
+		</form>
+	</div>
+</div>

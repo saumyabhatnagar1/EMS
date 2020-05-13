@@ -32,7 +32,6 @@ def getUserProfile(email):
 
 
 def updateUserProfile(user_data, email):
-    user_data["role"] = principleService.getRole()
     response = accountMapper.update(user_data, email)
     if response is not None:
         return response
