@@ -1,3 +1,4 @@
+import { EditLeavetypeComponent } from './leavetype/edit-leavetype/edit-leavetype.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LeavetypeComponent } from './leavetype/leavetype.component';
 import { NgModule } from '@angular/core';
@@ -13,6 +14,7 @@ import { WorkUpdateComponent } from './work-update/work-update.component';
 import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
 import { EditEmployeeComponent } from './manage-employee/edit-employee/edit-employee.component';
 
+
 const routes: Routes =
 [
   { path :'register', component:RegisterComponent},
@@ -26,7 +28,8 @@ const routes: Routes =
   {path: 'manage-employee', component : ManageEmployeeComponent},
   {path:'leavetype',component:LeavetypeComponent},
   {path:'dashboard',component:DashboardComponent},
-  {path:'manage-employee/edit/:id',component:EditEmployeeComponent}
+  {path:'manage-employee/edit/:id',component:EditEmployeeComponent},
+  {path:'leavetype/edit/:type',component:EditLeavetypeComponent}
 
 
 ];

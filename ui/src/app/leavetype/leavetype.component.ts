@@ -1,9 +1,11 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { AccountServiceService } from './../common/services/account-service.service';
+import { Component, OnInit,ViewChild,AfterViewInit,Renderer2 } from '@angular/core';
 import { LeavesService } from './service.leavetype';
 import { PrincipleService } from './../util/principle.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import {ActivatedRoute } from '@angular/router';
+import {ActivatedRoute,Router } from '@angular/router';
 import { NotificationService} from '../common/services/notification.service';
+
 
 declare var $:any;
 @Component({
@@ -11,7 +13,7 @@ declare var $:any;
   templateUrl: './leavetype.component.html',
   styleUrls: ['./leavetype.component.css']
 })
-export class LeavetypeComponent implements OnInit {
+export class LeavetypeComponent implements AfterViewInit, OnInit {
 
 
 
@@ -23,58 +25,75 @@ export class LeavetypeComponent implements OnInit {
   public editDetails:boolean=false;
   @ViewChild('datatable') table;
   dataTable: any;
+
+  dtOptions: any;
     
 
   leaves = [];
   pageOfItems: Array<any>;
 
   
-  constructor(private activeRoute:ActivatedRoute,private notificationService:NotificationService,private leavesService:LeavesService,public principle:PrincipleService) { }
+  constructor(private activeRoute:ActivatedRoute,private accountService:AccountServiceService,private router:Router ,private notificationService:NotificationService,private leavesService:LeavesService,public principle:PrincipleService,private renderer:Renderer2) { }
   ngOnInit(): void {
 
+  
     this.findLeaveType(); 
     this.ifHRrole() 
-
+    
    
   }  
   public tableData:any=[];
   initDataTable(){
-    var table = $('#example').DataTable( {
+    var table = $('#example2').DataTable( {
         data: this.tableData,
+        "bDestroy":true,
         columns: [
-            { title: "#S.No"},
-            { title: 'Leave Type' },
-            { title: "Action"},
-        ],
 
-        "scrollY": "200px",
-        "scrollCollapse": true,
+            { title: "sno"},
+            { title: 'Leave Type' },
+            { title: "Action",
+              render:function(data:any,type:any,full:any){
+                
+                //console.log(full[1].toString())
+                let value=full[1].toString()
+                let leavevalue=(value.substring(value.indexOf('"')+1,value.lastIndexOf('"')))
+                return `<a style="cursor:pointer" class="" type=`+leavevalue+` ><i type=`+leavevalue+` class="material-icons" title="Edit">mode_edit</i></a>
+                <a style="cursor:pointer"  type=`+leavevalue+` ><i  type=`+leavevalue+` class="material-icons" title="Edit">delete</i></a>`;
+                //return  `<a style="cursor:pointer" leavetyp='2'><i class="material-icons">mode_edit</i><a><a leavetyp='${leavevalue}'><i class="material-icons">delete</i></a>`;
+              }
+          }
+        ],
     } ); 
   }
+
+  ngAfterViewInit(): void {
+    //console.log(this.table.cell(0,3).nodes().to$().find('input').val())
+    this.renderer.listen('document', 'click', (event) => {
+      console.log(event.target.getAttribute("type"));
+      if (event.target.hasAttribute("type")) {
+        this.router.navigate(["leavetype/edit/" + event.target.getAttribute("type")]);
+      }
+    });
+  }
+
   formatLeaveData(res){
     let res1 = Object.entries(res);
+    console.log(res)
     for(var i = 0 ; i < res1.length;i++){
       //console.log('check')
       var tmp = [];
-      var leavetype=`<input`
-      var email= res[i].email|| "NA"; 
-      var date = res[i].date || "NA";
-      var status =res[i].status || "NA";
-      //var status = res[i].isActive ? "Active":"Inactive";
-      var action = `<button type="button" class="btn btn-primary modalShow">
-  Update
-</button>`;
-      this.tableData.push([i+1,email,date,status,action,]);
+      var value=res[i].value;
+      var leavetype=`<input value="${value}" >`
+      var action = '';
+      this.tableData.push([i+1,leavetype,action]);
 
     }
 
     console.log(this.tableData)
   }
 
+ 
 
-
-  
-  
  ifHRrole(){
   if(this.principle.getRole()==="HR")
   this.ifHR=true;
@@ -100,6 +119,7 @@ export class LeavetypeComponent implements OnInit {
     this.leavesService.findLeaveType().subscribe(
       res=>{
           this.formatLeaveData(res)
+          this.initDataTable()
            this.appendLeaveType(res)
       },err=>{
            console.log(err);
@@ -153,11 +173,7 @@ run(value){
     let data={
       'id':leavetype.id,
       'value':value
-
-    }
-    
-
-
+      }
     this.leavesService.updateLeaveType(JSON.stringify(data)).subscribe(
       res=>{
         console.log(res)
@@ -168,7 +184,6 @@ run(value){
         console.log(err)
         this.notificationService.showFailed("Something went wrong")
       }
-    
     )
     this.findLeaveType()
     this.editDetails=false;

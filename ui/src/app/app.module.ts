@@ -31,6 +31,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { LeavetypeComponent } from './leavetype/leavetype.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditEmployeeComponent } from './manage-employee/edit-employee/edit-employee.component';
+import { EditLeavetypeComponent } from './leavetype/edit-leavetype/edit-leavetype.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { EditEmployeeComponent } from './manage-employee/edit-employee/edit-empl
     ManageEmployeeComponent,
     LeavetypeComponent,
     DashboardComponent,
-    EditEmployeeComponent 
+    EditEmployeeComponent,
+    EditLeavetypeComponent 
   ],
   imports: [
     BrowserModule,
@@ -60,6 +62,7 @@ import { EditEmployeeComponent } from './manage-employee/edit-employee/edit-empl
     HttpClientModule,
     FormsModule,
     CommonModule,
+    NgxDatatableModule,
     NgxPaginationModule,
     ReactiveFormsModule,
     NgxDatatableModule,

@@ -36,6 +36,7 @@ export class ManageEmployeeComponent implements AfterViewInit,OnInit {
             { title: "Status" },
             { title: "Action",
               render:function(data:any,type:any,full:any){
+              
                 return `<a style="cursor:pointer" class="" emp-id=`+full[1]+` ><i emp-id=`+full[1]+` class="material-icons" title="Edit">mode_edit</i></a>
                 <a style="cursor:pointer"  emp-id=`+full[1]+` ><i  emp-id=`+full[1]+` class="material-icons" title="Edit">delete</i></a>`;
               }
