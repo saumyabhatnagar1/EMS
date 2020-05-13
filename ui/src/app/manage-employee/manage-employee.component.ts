@@ -18,7 +18,7 @@ export class ManageEmployeeComponent implements AfterViewInit,OnInit {
   public tableData:any=[];
   ngOnInit(): void {
   	
-    this.getEmployeeData();1
+    this.getEmployeeData();
   }
   
   initDataTable(){
@@ -72,7 +72,7 @@ export class ManageEmployeeComponent implements AfterViewInit,OnInit {
       var desg = res[i].designation || "NA"; 
       var role = res[i].role || "NA";
       var regDate = res[i].registeredOn || "NA";
-      var status = res[i].isActive ? "Active":"Inactive";
+      var status = res[i].isActive ? "<p style='color:green'>Active</p>":"<p style='color:red;'>Inactive</p>";
       var action = '';
 
       this.tableData.push([i+1,mail,name,desg,role,regDate,status,action]);
