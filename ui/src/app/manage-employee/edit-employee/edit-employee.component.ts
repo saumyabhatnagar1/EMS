@@ -18,7 +18,13 @@ export class EditEmployeeComponent implements OnInit {
     email: new FormControl(''),
     gender: new FormControl(''),
     role:new FormControl(''),
+    date :new FormControl(''),
     isActive:new FormControl(''),
+    houseNumber:new FormControl(''),
+    street:new FormControl(''),
+    addressLine:new FormControl(''),
+    mobileNumber:new FormControl(''),
+    country:new FormControl(''),
   });
   constructor(private notificationService:NotificationService,private principle:PrincipleService,private activeRoute:ActivatedRoute,private profileService:ProfileService) { }
 
@@ -54,7 +60,13 @@ export class EditEmployeeComponent implements OnInit {
    	this.profileForm.get('email').setValue(res.email);
    	this.profileForm.get('gender').setValue(res.gender)
    	this.profileForm.get('role').setValue(res.role);
-   	this.profileForm.get('isActive').setValue(res.isActive)
+   	this.profileForm.get('isActive').setValue(res.isActive);
+    this.profileForm.get('date').setValue(res.date);
+    this.profileForm.get('houseNumber').setValue(res.houseNumber);
+    this.profileForm.get('street').setValue(res.street);
+    this.profileForm.get('addressLine').setValue(res.addressLine);
+    this.profileForm.get('mobileNumber').setValue(res.mobileNumber);
+    this.profileForm.get('country').setValue(res.country);
    }
    saveEmployeeData(){
    	if(this.profileForm.get('isActive').value == true || this.profileForm.get('isActive').value == "true"){
