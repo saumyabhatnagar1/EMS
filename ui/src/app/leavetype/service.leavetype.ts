@@ -31,5 +31,9 @@ export class LeavesService{
     deleteLeaveType(data){
         return this.http.post(this.globalService.baseApiUrl+'leavetype/delete',data)
     }
+    findLeavetypeById(data)
+    {
+        return this.http.post(this.globalService.baseApiUrl+'leavetype/findById',data)
+    }
 }
 

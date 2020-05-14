@@ -31,7 +31,6 @@ import { ProfileComponent } from './profile/profile.component';
 import { LeavetypeComponent } from './leavetype/leavetype.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditEmployeeComponent } from './manage-employee/edit-employee/edit-employee.component';
-import { EditLeavetypeComponent } from './leavetype/edit-leavetype/edit-leavetype.component';
 
 
 @NgModule({
@@ -54,7 +53,6 @@ import { EditLeavetypeComponent } from './leavetype/edit-leavetype/edit-leavetyp
     LeavetypeComponent,
     DashboardComponent,
     EditEmployeeComponent,
-    EditLeavetypeComponent 
   ],
   imports: [
     BrowserModule,

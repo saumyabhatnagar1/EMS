@@ -1,4 +1,3 @@
-import { EditLeavetypeComponent } from './leavetype/edit-leavetype/edit-leavetype.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LeavetypeComponent } from './leavetype/leavetype.component';
 import { NgModule } from '@angular/core';
@@ -29,7 +28,6 @@ const routes: Routes =
   {path:'leavetype',component:LeavetypeComponent},
   {path:'dashboard',component:DashboardComponent},
   {path:'manage-employee/edit/:id',component:EditEmployeeComponent},
-  {path:'leavetype/edit/:type',component:EditLeavetypeComponent}
 
 
 ];
