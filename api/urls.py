@@ -27,6 +27,8 @@ urlpatterns = [
     path('leavetype/update', leavesController.updateLeaveType, name='get leave type'),
     path('leavetype/delete', leavesController.deleteLeaveType, name='delete leave type'),
     path('leaves/fetchAll', leavesController.findAllLeaves, name='all leaves detail'),
+    path('leavetype/findById', leavesController.getLeaveTypeById, name='leave type by id'),
+
 
     path('project/new', projectController.addProject, name='add project'),
     path('project/findAll', projectController.getProjects, name='get project'),

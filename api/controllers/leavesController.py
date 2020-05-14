@@ -97,3 +97,15 @@ def findAllLeaves(request):
     if leaves is not None:
         return JsonResponse(leaves, safe=False)
     return JsonResponse({"status": 200, "message": "NO LEAVE TYPE FOUND"})
+
+
+@csrf_exempt
+@login_required
+@is_post
+@is_HR
+def getLeaveTypeById(request):
+    leave_type = json.loads(request.body)
+    response = leavesService.getLeaveTypeById(leave_type)
+    if response is not None:
+        return JsonResponse(leave_type, safe=False)
+    return JsonResponse({"status": 200, "message":"NO LEAVE TYPE FOUND"})

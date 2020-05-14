@@ -62,3 +62,10 @@ def findAll():
     if len(leaves) > 0:
         return leaves
     return None
+
+def getLeaveTypeById(leave_type):
+    query = {"_id": ObjectId(leave_type["id"])}
+    result = list(LeaveTypes.find(query))
+    if len(result)>0:
+        return result[0]
+    return None
