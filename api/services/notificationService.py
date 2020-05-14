@@ -8,7 +8,8 @@ def addNotification(notification_data):
         "date": notification_data['date'],
         "publisher": notification_data['publisher'],
         "to": notification_data['to'],
-        "url": notification_data['url']
+        "url": notification_data['url'],
+        "isRead": False
     }
     response = notificationMapper.save(notification_detail)
     if response is not None:
