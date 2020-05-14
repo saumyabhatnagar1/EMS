@@ -64,8 +64,8 @@ def findAll():
     return None
 
 def getLeaveTypeById(leave_type):
-    query = {"_id": ObjectId(leave_type["id"])}
+    query = {"_id": ObjectId(leave_type["id"])  }
     result = list(LeaveTypes.find(query))
-    if len(result)>0:
+    if result is  not None:
         return result[0]
     return None

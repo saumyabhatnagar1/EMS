@@ -106,6 +106,10 @@ def findAllLeaves(request):
 def getLeaveTypeById(request):
     leave_type = json.loads(request.body)
     response = leavesService.getLeaveTypeById(leave_type)
+
     if response is not None:
-        return JsonResponse(leave_type, safe=False)
+        print(response)
+        response["id"]=str(response["_id"])
+        del(response["_id"])
+        return JsonResponse(response, safe=False)
     return JsonResponse({"status": 200, "message":"NO LEAVE TYPE FOUND"})

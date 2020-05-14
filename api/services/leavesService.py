@@ -89,6 +89,7 @@ def findAllLeaveDetail():
         return leaves_dict
     return None
 
+
 def getLeaveTypeById(leave_type):
     leave_type = leaveMapper.getLeaveTypeById(leave_type)
     if leave_type is not None:
