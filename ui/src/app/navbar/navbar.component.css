@@ -51,6 +51,9 @@ a{
 .nav-item:active{
   background-color: #22979c;
 }
+.nav-item:active:nth-child(6){
+  background-color:#fff;
+}
 
 
 
