@@ -36,6 +36,7 @@
                 <td>{{employee.isActive ? "Active" : "Inactive"}}</td>
                 <td>
                     <div class="ui-toolbar-group-center">
+                        <button pButton type="button" icon="pi pi-search" class="ui-button-success"></button>
                         <button (click)="editEmployee(employee.email)" pButton type="button" icon="pi pi-user-edit" class="ui-button-primary"></button>
                         <button pButton type="button" icon="pi pi-times" class="ui-button-danger"></button>
                     </div>
