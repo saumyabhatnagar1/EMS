@@ -55,10 +55,7 @@ export class StatusLeavesComponent implements OnInit {
             { title: "Status" },
         ],
 
-        "scrollY": "200px",
-        "scrollCollapse": true,
-        "scrollbarV":true,
-        "rowHeight":20
+        
        
         
     } );

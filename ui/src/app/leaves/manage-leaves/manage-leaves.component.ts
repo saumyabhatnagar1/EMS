@@ -70,8 +70,7 @@ export class ManageLeavesComponent implements OnInit , AfterViewInit {
             }},
         ],
 
-        "scrollY": "200px",
-        "scrollCollapse": true,
+       
     } );
     
     
