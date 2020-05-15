@@ -179,7 +179,7 @@ saveLeaveStatus(){
     }
     let data=
       {
-        'emp_id':this.leaves[this.leaveid].email,
+        'emp_id':this.leaves[this.leaveid].emp_id,
         'date':this.leaves[this.leaveid].date,
         'admin_remark': $('#leavesDesc').val(),
         'status': status,
