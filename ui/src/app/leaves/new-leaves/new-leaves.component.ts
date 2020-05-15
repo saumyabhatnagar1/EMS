@@ -40,9 +40,10 @@ export class NewLeavesComponent implements OnInit {
   onConfirm()
   {
     let data = {
-      "email" : this.principle.getUsername(),
+      "emp_id" : this.principle.getUsername(),
       "date" : this.dateForm.get('dateLeave').value,
-      "reason" : this.dateForm.get('reason').value
+      "leave_type" : this.dateForm.get('reason').value,
+      "description":""
     }
     this.leavesService.requestLeave(data).subscribe(
       res=>{

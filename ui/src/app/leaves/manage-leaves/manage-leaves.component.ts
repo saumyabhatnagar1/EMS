@@ -146,10 +146,11 @@ saveLeaveStatus(){
     
     let data=
       {
-        'email':email,
+        'emp_id':email,
         'date':date
       }
     let dataJSON=JSON.stringify(data)
+    console.log(dataJSON)
     this.leavesService.updateLeaves(dataJSON).subscribe(
       res=>{
         this.mssg=res;
