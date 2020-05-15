@@ -57,7 +57,9 @@ export class ManageLeavesComponent implements OnInit , AfterViewInit {
         columns: [
             { title: "#S.No"},
             { title: 'Email' },
+            { title: 'Leave Type' },
             { title: "Date" },
+            { title: "Description" },
             { title: "Status" },
             { title: "Action",
             render:function(data:any,type:any,full:any){
@@ -131,13 +133,17 @@ saveLeaveStatus(){
     for(var i = 0 ; i < res1.length;i++){
       //console.log('check')
       var tmp = [];
-      var email= res[i].email|| "NA"; 
+      var email= res[i].emp_id || "NA"; 
+      var leave_type= res[i].leave_type || "NA"; 
       var date = res[i].date || "NA";
       var status =res[i].status || "NA";
+      var description =res[i].description || "NA";
       //var status = res[i].isActive ? "Active":"Inactive";
-      var action = ""
-      this.tableData.push([i+1,email,date,status,action,]);
-      //console.log(res[i].reason)
+      var action = `<button type="button" class="btn btn-primary modalShow">
+  Update
+</button>`;
+      this.tableData.push([i+1,email,leave_type,date,description,status,action,]);
+
     }
 
    // console.log(this.tableData)

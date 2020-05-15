@@ -35,6 +35,7 @@ import {ToastModule} from 'primeng/toast';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {TableModule} from 'primeng/table';
 import {DialogModule} from 'primeng/dialog';
+import {InputSwitchModule} from 'primeng/inputswitch';
 
 
 @NgModule({
@@ -85,6 +86,7 @@ import {DialogModule} from 'primeng/dialog';
     ConfirmDialogModule,
     TableModule,
     DialogModule,
+    InputSwitchModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,5 @@
 <div class="container">
+
     <p-toast></p-toast>
     <p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle">
         <p-footer>
@@ -14,7 +15,7 @@
                     <h3>List of Employees</h3>
                 </div>
                 <div class="col-sm">
-                    <button pButton type="button" icon="pi pi-plus-circle" label="Add employee" (click)="showDialog()">
+                    <button pButton type="button" icon="pi pi-fw pi-user-plus" label="Add employee" (click)="showDialog()">
                     </button>
                 </div>
             </div>
@@ -39,7 +40,11 @@
                 <td>{{employee.designation}}</td>
                 <td>{{employee.role}}</td>
                 <td>{{employee.createdOn}}</td>
-                <td>{{employee.isActive ? "Active" : "Inactive"}}</td>
+                <td>
+                    <p-inputSwitch [(ngModel)]="employee.isActive" (onChange)="deactivateEmployee(employee.email)">
+                        
+                    </p-inputSwitch>
+                </td>
                 <td>
                     <div class="ui-toolbar-group-center">
                         <button pButton type="button" icon="pi pi-search" class="ui-button-success"></button>

@@ -68,6 +68,7 @@ export class ManageEmployeeComponent implements OnInit {
             message: 'Are you sure that you want to deactivate account?',
             accept: () => {
                 //Actual logic to perform a confirmation
+                
                 this.messageService.add({severity:'success',summary:'Account Deactivated'})
             }
         });
