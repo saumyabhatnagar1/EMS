@@ -1,8 +1,6 @@
 import { Component,ViewChild, OnInit, AfterViewInit,Renderer2 } from '@angular/core';
 import { AccountServiceService} from '../common/services/account-service.service';
-import { NotificationService} from '../common/services/notification.service';
 import { RegisterService } from '../register/register.service';
-
 import {MessageService} from 'primeng/api';
 
 import { Router } from '@angular/router';
@@ -14,56 +12,61 @@ declare var $: any;
   styleUrls: ['./manage-employee.component.css'],
   providers:[MessageService]
 })
-export class ManageEmployeeComponent implements AfterViewInit,OnInit {
+export class ManageEmployeeComponent implements OnInit {
 
-  @ViewChild('dataTable') table;
-  dataTable: any;
-  dtOptions: any;
-  constructor(private messageService: MessageService,private registerService:RegisterService,private renderer: Renderer2,private accountService:AccountServiceService,private notificationService:NotificationService,private router:Router) { }
-  public tableData:any=[];
+  public employees:any;
+  public cols :any;
+  public showCreateAccount:boolean=false;
+  first = 0;
+  rows = 10;
+  constructor(private messageService: MessageService,private registerService:RegisterService,private accountService:AccountServiceService,private router:Router) { }
   ngOnInit(): void {
-  	
+    this.cols = [
+            
+            { field: "email", header:"Email"},
+            { field: "name" ,header:"Full Name"},
+            { field: "designation",header:"Designation"},
+            { field: "role" ,header:"Role"},
+            { field: "createdOn",header:"Reg. Date"},
+            { field: "isActive",header:"Status"},
+            { field: "action",header:"Action"}
+    ];
     this.getEmployeeData();
-  }
-  
-  initDataTable(){
-  	$('#example').DataTable( {
-        "bDestroy":true,
-        data: this.tableData,
-        columns: [
-            { title: "#S.No"},
-            { title: "Email" },
-            { title: "Name" },
-            { title: "Designation" },
-            { title: "Role" },
-            { title: "Reg. Date" },
-            { title: "Status" },
-            { title: "Action",
-              render:function(data:any,type:any,full:any){
-              
-                return `<a style="cursor:pointer" class="" emp-id=`+full[1]+` ><i emp-id=`+full[1]+` class="material-icons" title="Edit">mode_edit</i></a>
-                <a style="cursor:pointer"  emp-id=`+full[1]+` ><i  emp-id=`+full[1]+` class="material-icons" title="Edit">delete</i></a>`;
-              }
-          },
-        ]
-    } );
+
   }
 
-  ngAfterViewInit(): void {
-    this.renderer.listen('document', 'click', (event) => {
-      if (event.target.hasAttribute("emp-id")) {
-        console.log(event.target.getAttribute("emp-id"));
-        this.router.navigate(["/manage-employee/edit/" + event.target.getAttribute("emp-id")]);
-      }
-    });
+    next() {
+        this.first = this.first + this.rows;
+    }
+
+    prev() {
+        this.first = this.first - this.rows;
+    }
+
+    reset() {
+        this.first = 0;
+    }
+
+    isLastPage(): boolean {
+        return this.first === (this.employees.length - this.rows);
+    }
+
+    isFirstPage(): boolean {
+        return this.first === 0;
+    }
+  
+  showDialog(){
+    this.showCreateAccount = true;
+  }
+
+  editEmployee(id){
+    this.router.navigate(["/manage-employee/edit/"+id]);
   }
 
   getEmployeeData(){
   	this.accountService.getUsers().subscribe(res=>{
-  		this.formatEmpData(res);
-      this.initDataTable();
+      this.employees = res;
       if(res["status"] == 401){
-        //this.notificationService.showFailed("Your account is not authorized!");
         this.messageService.add({severity:'warning', summary:'Unauthorized Access!', detail:'Your account not authorized contact admin...'});
         this.router.navigate(['']);
       }else if(res["status"] == 410){
@@ -73,22 +76,7 @@ export class ManageEmployeeComponent implements AfterViewInit,OnInit {
   		console.log(err);
   	});
   }
-  formatEmpData(res){
-    this.tableData = [];
-    for(var i = 0 ; i < res.length;i++){
-      var tmp = [];
-      var mail = res[i].email || "NA"; 
-      var name = res[i].name || "NA";
-      var desg = res[i].designation || "NA"; 
-      var role = res[i].role || "NA";
-      var regDate = res[i].registeredOn || "NA";
-      var status = res[i].isActive ? "<p style='color:green'>Active</p>":"<p style='color:red;'>Inactive</p>";
-      var action = '';
-
-      this.tableData.push([i+1,mail,name,desg,role,regDate,status,action]);
-    }
-  }
-
+  
   createAccount(){
     let data = JSON.stringify({
       "email":$('#email').val(),

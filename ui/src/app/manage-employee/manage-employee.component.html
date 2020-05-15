@@ -1,37 +1,52 @@
-<p-toast></p-toast>
 <div class="container">
-    <div class="card">
-        <div class="card-body">
+    <p-toast></p-toast>
+    <p-table #dt [columns]="cols" [value]="employees"  [paginator]="true" [rows]="7" [responsive]="true" [showCurrentPageReport]="true" [(first)]="first"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+        <ng-template pTemplate="caption">
             <div class="row">
-                <div class="col">
+                <div class="col-sm">
                     <h3>List of Employees</h3>
                 </div>
-                <div class="col">
-                    <!-- Button trigger modal -->
-                    <button type="button" class="float-right btn btn-primary" data-toggle="modal" data-target="#createEmployee">
-                    <i class="material-icons">add_circle</i>Add Employee
+                <div class="col-sm">
+                    <button pButton type="button" icon="pi pi-plus-circle" label="Add employee" (click)="showDialog()">
                     </button>
                 </div>
             </div>
-            <hr/>
-            <div class="table table-responsive">
-                <table id="example" class="display" width="100%"></table>
+            <div style="text-align: right">        
+                <i class="pi pi-search" style="margin:5px 5px 0 0"></i>
+                <input type="text" pInputText size="50" placeholder="Search" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
             </div>
-        </div>
-    </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-employee>
+            <tr>
+                <!-- <td>{{employee.sno}}</td> -->
+                <td>{{employee.email}}</td>
+                <td>{{employee.name}}</td>
+                <td>{{employee.designation}}</td>
+                <td>{{employee.role}}</td>
+                <td>{{employee.createdOn}}</td>
+                <td>{{employee.isActive ? "Active" : "Inactive"}}</td>
+                <td>
+                    <div class="ui-toolbar-group-center">
+                        <button (click)="editEmployee(employee.email)" pButton type="button" icon="pi pi-user-edit" class="ui-button-primary"></button>
+                        <button pButton type="button" icon="pi pi-times" class="ui-button-danger"></button>
+                    </div>
+                </td>
 
-
-    <!-- Modal -->
-    <div class="modal fade" id="createEmployee" tabindex="-1" role="dialog" aria-labelledby="createEmployee" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalCenterTitle">Create Employee Account</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<p-dialog header="Create Account" [style]="{'width':'50vh'}"  [(visible)]="showCreateAccount">
+        <div class="">
             <form>
               <div class="form-group">
                 <label for="email">Email address</label>
@@ -42,45 +57,11 @@
                 <input type="password" class="form-control" required id="password" placeholder="Password">
               </div>
             </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-success" data-dismiss="modal" (click)='createAccount()'>Create Account</button>
-          </div>
         </div>
-      </div>
-    </div>
-<!-- <table id="employeeData" class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>#S.No</th>
-                <th width="120">Email</th>
-                <th width="200">Full Name</th>
-                <th>Designation</th>
-                <th width="120">Role</th>
-                <th width="200">Reg Date</th>
-                <th width="200">Status</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let emp of empData;index as i">
-                <td>{{i+1}}</td>
-                <td>{{emp.email || "NA"}}</td>
-                <td>{{emp.name || "NA"}}</td>
-                <td>{{emp.designation || "NA"}}</td>
-                <td>{{emp.role || "NA"}}</td>
-                <td>{{emp.registeredOn || "NA"}}</td>
-                <td>{{emp.status || "NA"}}</td>
-                <td>
-                    <a href="#">
-                        <i class="material-icons">mode_edit</i>
-                    </a>
-                    <a href="#">
-                        <i class="material-icons" title="Inactive">clear</i>
-                    </a>
-                </td>
-            </tr>
-       </tbody>
-    </table> -->
-</div>
+        <p-footer>
+            <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+              <button type="button" pButton icon="pi pi-times" (click)="showCreateAccount=false" label="Cancel"></button>
+              <button type="button" pButton icon="pi pi-check" (click)="showCreateAccount=false;createAccount()" label="Create"></button>  
+            </div>
+        </p-footer>
+</p-dialog>

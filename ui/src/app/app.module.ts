@@ -12,7 +12,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { SidebarModule } from 'ng-sidebar';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ChartsModule } from 'ng2-charts';
-
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -33,6 +32,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditEmployeeComponent } from './manage-employee/edit-employee/edit-employee.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastModule} from 'primeng/toast';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {TableModule} from 'primeng/table';
+import {DialogModule} from 'primeng/dialog';
 
 
 @NgModule({
@@ -79,7 +81,10 @@ import {ToastModule} from 'primeng/toast';
     NgbModule,
     SidebarModule.forRoot(),
     ChartsModule,
-    ToastModule
+    ToastModule,
+    ConfirmDialogModule,
+    TableModule,
+    DialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
