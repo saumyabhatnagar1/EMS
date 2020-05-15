@@ -80,6 +80,7 @@ def updateUserProfile(request):
         return JsonResponse({"status": 200, "message": "PROFILE UPDATED"})
     return JsonResponse({"status": 400, "message": "SOMETHING WENT WRONG"})
 
+@login_required
 @is_HR
 def getAllAccounts(request):
     accounts = accountService.getAllAccounts()

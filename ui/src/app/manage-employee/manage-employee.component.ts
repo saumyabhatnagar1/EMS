@@ -2,20 +2,24 @@ import { Component,ViewChild, OnInit, AfterViewInit,Renderer2 } from '@angular/c
 import { AccountServiceService} from '../common/services/account-service.service';
 import { NotificationService} from '../common/services/notification.service';
 import { RegisterService } from '../register/register.service';
+
+import {MessageService} from 'primeng/api';
+
 import { Router } from '@angular/router';
 
 declare var $: any;
 @Component({
   selector: 'app-manage-employee',
   templateUrl: './manage-employee.component.html',
-  styleUrls: ['./manage-employee.component.css']
+  styleUrls: ['./manage-employee.component.css'],
+  providers:[MessageService]
 })
 export class ManageEmployeeComponent implements AfterViewInit,OnInit {
 
   @ViewChild('dataTable') table;
   dataTable: any;
   dtOptions: any;
-  constructor(private registerService:RegisterService,private renderer: Renderer2,private accountService:AccountServiceService,private notificationService:NotificationService,private router:Router) { }
+  constructor(private messageService: MessageService,private registerService:RegisterService,private renderer: Renderer2,private accountService:AccountServiceService,private notificationService:NotificationService,private router:Router) { }
   public tableData:any=[];
   ngOnInit(): void {
   	
@@ -59,8 +63,11 @@ export class ManageEmployeeComponent implements AfterViewInit,OnInit {
   		this.formatEmpData(res);
       this.initDataTable();
       if(res["status"] == 401){
-        this.notificationService.showFailed("Your account is not authorized!");
+        //this.notificationService.showFailed("Your account is not authorized!");
+        this.messageService.add({severity:'warning', summary:'Unauthorized Access!', detail:'Your account not authorized contact admin...'});
         this.router.navigate(['']);
+      }else if(res["status"] == 410){
+        this.messageService.add({severity:'info', summary:'Login required', detail:'You must login into app before continue...'});
       }
   	},err=>{
   		console.log(err);
@@ -89,15 +96,14 @@ export class ManageEmployeeComponent implements AfterViewInit,OnInit {
     });
     this.registerService.createAccount(data).subscribe(res=>{
       if(res["status"] == 201){
-        this.notificationService.showSuccess("Account created!");
+        this.messageService.add({severity:'success', summary:'Account created!', detail:'One employee record added into database...',life:5000});
         this.getEmployeeData();
       }else{
-        this.notificationService.showFailed("Error in account creation");
+        this.messageService.add({severity:'warn', summary:'Account already exist', detail:'if problem persist contact admin...',life:5000});
       }
-      console.log(res);
 
     },err=>{
-      this.notificationService.showFailed("something went wrong");
+        this.messageService.add({severity:'error', summary:'Error occured!', detail:'something went wrong contact admin now...',life:5000});
       console.log(err);
     })
   }

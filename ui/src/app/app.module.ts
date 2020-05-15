@@ -31,6 +31,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { LeavetypeComponent } from './leavetype/leavetype.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditEmployeeComponent } from './manage-employee/edit-employee/edit-employee.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ToastModule} from 'primeng/toast';
 
 
 @NgModule({
@@ -56,6 +58,7 @@ import { EditEmployeeComponent } from './manage-employee/edit-employee/edit-empl
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
@@ -75,7 +78,8 @@ import { EditEmployeeComponent } from './manage-employee/edit-employee/edit-empl
     CalendarMonthModule,
     NgbModule,
     SidebarModule.forRoot(),
-    ChartsModule 
+    ChartsModule,
+    ToastModule
   ],
   providers: [],
   bootstrap: [AppComponent]
