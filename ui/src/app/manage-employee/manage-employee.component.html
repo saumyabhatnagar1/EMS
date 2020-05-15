@@ -1,5 +1,11 @@
 <div class="container">
     <p-toast></p-toast>
+    <p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle">
+        <p-footer>
+            <button type="button" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
+            <button type="button" pButton icon="pi pi-check" label="Yes" (click)="cd.accept()"></button>
+        </p-footer>
+    </p-confirmDialog>
     <p-table #dt [columns]="cols" [value]="employees"  [paginator]="true" [rows]="7" [responsive]="true" [showCurrentPageReport]="true" [(first)]="first"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
         <ng-template pTemplate="caption">
@@ -38,7 +44,7 @@
                     <div class="ui-toolbar-group-center">
                         <button pButton type="button" icon="pi pi-search" class="ui-button-success"></button>
                         <button (click)="editEmployee(employee.email)" pButton type="button" icon="pi pi-user-edit" class="ui-button-primary"></button>
-                        <button pButton type="button" icon="pi pi-times" class="ui-button-danger"></button>
+                        <button (click)="deactivateEmployee(employee.email)" pButton type="button" icon="pi pi-times" class="ui-button-danger"></button>
                     </div>
                 </td>
 

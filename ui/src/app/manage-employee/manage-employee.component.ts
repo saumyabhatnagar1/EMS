@@ -2,7 +2,7 @@ import { Component,ViewChild, OnInit, AfterViewInit,Renderer2 } from '@angular/c
 import { AccountServiceService} from '../common/services/account-service.service';
 import { RegisterService } from '../register/register.service';
 import {MessageService} from 'primeng/api';
-
+import {ConfirmationService} from 'primeng/api';
 import { Router } from '@angular/router';
 
 declare var $: any;
@@ -10,7 +10,7 @@ declare var $: any;
   selector: 'app-manage-employee',
   templateUrl: './manage-employee.component.html',
   styleUrls: ['./manage-employee.component.css'],
-  providers:[MessageService]
+  providers:[MessageService,ConfirmationService]
 })
 export class ManageEmployeeComponent implements OnInit {
 
@@ -19,7 +19,7 @@ export class ManageEmployeeComponent implements OnInit {
   public showCreateAccount:boolean=false;
   first = 0;
   rows = 10;
-  constructor(private messageService: MessageService,private registerService:RegisterService,private accountService:AccountServiceService,private router:Router) { }
+  constructor(private confirmationService: ConfirmationService,private messageService: MessageService,private registerService:RegisterService,private accountService:AccountServiceService,private router:Router) { }
   ngOnInit(): void {
     this.cols = [
             
@@ -61,6 +61,16 @@ export class ManageEmployeeComponent implements OnInit {
 
   editEmployee(id){
     this.router.navigate(["/manage-employee/edit/"+id]);
+  }
+
+  deactivateEmployee(id){
+      this.confirmationService.confirm({
+            message: 'Are you sure that you want to deactivate account?',
+            accept: () => {
+                //Actual logic to perform a confirmation
+                this.messageService.add({severity:'success',summary:'Account Deactivated'})
+            }
+        });
   }
 
   getEmployeeData(){
