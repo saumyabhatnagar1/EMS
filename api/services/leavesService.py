@@ -83,6 +83,7 @@ def findAllLeaveDetail():
         leaves_dict = {}
         cnt = 0
         for leave in leaves:
+            leave["id"] = str(leave["_id"])
             del leave["_id"]
             leaves_dict[cnt] = leave
             cnt += 1
