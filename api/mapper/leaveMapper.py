@@ -46,7 +46,7 @@ def getLeaveType():
 
 def updateLeaveType(leave_type):
     query = {"_id": ObjectId(leave_type["id"])}
-    update_to = {"$set": {"value": leave_type["value"]}}
+    update_to = {"$set": {"value": leave_type["value"],"description":leave_type["description"]}}
     response = LeaveTypes.update(query, update_to)
     return response
 

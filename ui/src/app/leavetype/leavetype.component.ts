@@ -53,7 +53,6 @@ export class LeavetypeComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit(): void {
     this.renderer.listen('document', 'click', (event) => {
-      console.log(event.target.getAttribute("ltype"));
       if (event.target.hasAttribute("ltype")) {
         let sno=event.target.getAttribute("ltype");
         let leaveid=this.leave_types[sno].id;
@@ -72,7 +71,6 @@ export class LeavetypeComponent implements AfterViewInit, OnInit {
       var action = '';
       this.tableData.push([i+1,leavetype,action]);
     }
-    console.log(this.tableData)
   }
 
   showModalLeavetypeEdit(){
@@ -167,6 +165,7 @@ addLeaveType(){
     let data={
       'id':this.leaveId,
       'value':$('#editleavename').val(),
+      'description':$('#editleavedesc').val()
       
       }
       console.log(data)
