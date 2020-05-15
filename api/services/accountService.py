@@ -1,4 +1,4 @@
-from . import principleService
+from . import principleService, permissionService
 from ..mapper import accountMapper
 import datetime
 
@@ -22,6 +22,8 @@ def getUser(user_data):
     if account and authenticate(account, user_data["password"]):
         principleService.setUsername(account["email"])
         principleService.setRole(account["role"])
+        permissions = permissionService.getPermissionDetail(account["role"])
+        principleService.setAuthorizations(permissions)
         return principleService.getUser()
     return None
 

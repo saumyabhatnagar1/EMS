@@ -7,6 +7,7 @@ from django.contrib.sessions.backends.db import SessionStore
 principle = SessionStore()
 principle['username'] = None  # None means no user logged in
 principle['role'] = None  # None means no user logged in
+principle['permissions'] = None
 
 
 def setUsername(email):
@@ -36,3 +37,7 @@ def removeCurrentUser():
 
 def getUser():
     return {'username': principle['username'], 'role': principle['role']}
+
+
+def setAuthorizations(permissions):
+    principle['permissions'] = permissions
