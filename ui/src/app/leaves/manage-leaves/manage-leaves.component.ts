@@ -1,9 +1,10 @@
 import { LeavesService } from '../leaves.service';
 import { PrincipleService } from '../../util/principle.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit ,Renderer2} from '@angular/core';
 import {ActivatedRoute } from '@angular/router';
 import { NotificationService} from '../../common/services/notification.service';
+
 
 declare var $: any;
 @Component({
@@ -11,22 +12,23 @@ declare var $: any;
   templateUrl: './manage-leaves.component.html',
   styleUrls: ['../leaves.component.css']
 })
-export class ManageLeavesComponent implements OnInit {
+export class ManageLeavesComponent implements OnInit , AfterViewInit {
 
   public ifHR:boolean=false;
   public count:number=0;
   public page:number =1;
   public showLeaveType:boolean=false;
   public editDetails:boolean=false;
-
+  public leaveid:any
   leaves = [];
   pageOfItems: Array<any>;
+  dtOptions: any;
   
   @ViewChild('datatable') table;
   dataTable: any;
 
   
-  constructor(private activeRoute:ActivatedRoute,private notificationService:NotificationService,private leavesService:LeavesService,public principle:PrincipleService) { }
+  constructor(private renderer : Renderer2,private activeRoute:ActivatedRoute,private notificationService:NotificationService,private leavesService:LeavesService,public principle:PrincipleService) { }
   public tableData:any=[];
   ngOnInit(): void {
     this.getAllLeaves();
@@ -51,12 +53,19 @@ export class ManageLeavesComponent implements OnInit {
   initDataTable(){
   	var table = $('#example').DataTable( {
         data: this.tableData,
+        "bDestroy":true,
         columns: [
             { title: "#S.No"},
             { title: 'Email' },
             { title: "Date" },
             { title: "Status" },
-            { title: "Action"},
+            { title: "Action",
+            render:function(data:any,type:any,full:any){
+                
+              var leaveid=full[0]-1;
+              //console.log(full)
+              return `<a style="cursor:pointer" class="modalShow" ltype=`+leaveid+` >UPDATE</a>`;
+            }},
         ],
 
         "scrollY": "200px",
@@ -64,6 +73,19 @@ export class ManageLeavesComponent implements OnInit {
     } );
     
     
+  }
+
+  ngAfterViewInit(): void {
+    this.renderer.listen('document', 'click', (event) => {
+      
+      if (event.target.hasAttribute("ltype")) {
+        let sno=event.target.getAttribute("ltype");
+        console.log(sno)
+        this.leaveid = sno
+        //let leaveid=this.leave_types[sno].id;
+        
+      }
+    });
   }
 
   
@@ -105,6 +127,7 @@ saveLeaveStatus(){
 
   formatEmpData(res){
     let res1 = Object.entries(res);
+  
     for(var i = 0 ; i < res1.length;i++){
       //console.log('check')
       var tmp = [];
@@ -112,14 +135,12 @@ saveLeaveStatus(){
       var date = res[i].date || "NA";
       var status =res[i].status || "NA";
       //var status = res[i].isActive ? "Active":"Inactive";
-      var action = `<button type="button" class="btn btn-primary modalShow">
-  Update
-</button>`;
+      var action = ""
       this.tableData.push([i+1,email,date,status,action,]);
-
+      //console.log(res[i].reason)
     }
 
-    console.log(this.tableData)
+   // console.log(this.tableData)
   }
 
 
@@ -142,15 +163,26 @@ saveLeaveStatus(){
   }
   public leave_id;
   public mssg;
-  updateStatus(email,date){
-    
+  updateStatus(){
+    var status : any
+    if ($("#leavesStatus").val() === 'Approved'){
+      status = 1
+    }
+    else{
+      status = 2
+    }
     let data=
       {
-        'emp_id':email,
-        'date':date
+        'emp_id':this.leaves[this.leaveid].email,
+        'date':this.leaves[this.leaveid].date,
+        'admin_remark': $('#leavesDesc').val(),
+        'status': status,
+
       }
+      
+      console.log(data)
     let dataJSON=JSON.stringify(data)
-    console.log(dataJSON)
+  
     this.leavesService.updateLeaves(dataJSON).subscribe(
       res=>{
         this.mssg=res;

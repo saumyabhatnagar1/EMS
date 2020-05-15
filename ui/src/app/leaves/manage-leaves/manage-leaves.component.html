@@ -21,18 +21,18 @@
             </div>
             <div class="modal-body">
               <form [formGroup]="leavestatus" action="">
-                 <select  formControlName="status" id="" class="form-control">
+                 <select  formControlName="status" id="leavesStatus" class="form-control">
                    <option value="Approved" selected>Approved</option>
                    <option value="Rejected">Rejected</option>
                  </select>
                  <br>
-                <textarea formControlName="desc" class="form-control" name="desc" id="" cols="20" rows="10" placeholder="Description"></textarea>
+                <textarea formControlName="desc" class="form-control" name="desc" id="leavesDesc" cols="20" rows="10" placeholder="Description"></textarea>
                 </form>
 
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary " (click)="saveLeaveStatus()">Save</button>
+                <button type="button" class="btn btn-primary " (click)="updateStatus()">Save</button>
                 <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
             </div>
         </div>
