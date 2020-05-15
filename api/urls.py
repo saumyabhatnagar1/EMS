@@ -20,7 +20,7 @@ urlpatterns = [
     path('timesheets/findAll', timesheetsController.findAll, name='find all time sheets'),
 
     path('leaves/new', leavesController.addLeave, name='leave request'),
-    path('leaves/findAll', leavesController.getLeavesData, name='leave detail'),
+    path('leaves/findByUsername', leavesController.getLeavesData, name='leave detail'),
     path('leaves/updateStatus', leavesController.updateLeaveStatus, name='leave status update'),
     path('leavetype/add', leavesController.addLeaveType, name='add leave type'),
     path('leavetype/find', leavesController.getLeaveType, name='get leave types'),

@@ -123,7 +123,7 @@ findLeaveTypebyId(id){
     let data={
       'id':id
     }
-
+    console.log("sdd");
     this.leavesService.findLeavetypeById(JSON.stringify(data)).subscribe(
       res=>{
         this.leaveData=res;

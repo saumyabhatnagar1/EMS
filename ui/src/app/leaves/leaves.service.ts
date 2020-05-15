@@ -16,6 +16,9 @@ export class LeavesService{
     getAllLeaves(){
     	return this.http.post(this.globalService.baseApiUrl+'leaves/fetchAll',{});
     }
+    getLeavesByUsername(data){
+        return this.http.post(this.globalService.baseApiUrl+'leaves/findByUsername',data);
+    }
     updateLeaves(data){
         return this.http.post(this.globalService.baseApiUrl+'leaves/updateStatus',data);
     }

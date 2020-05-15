@@ -74,7 +74,7 @@ export class StatusLeavesComponent implements OnInit {
   }
 
   getAllLeaves(){
-      this.leavesService.getAllLeaves().subscribe(
+      this.leavesService.getLeavesByUsername(JSON.stringify({"emp_id":this.principle.getUsername() })).subscribe(
         res=>{
              this.formatEmpData(res);
                this.initDataTable();
