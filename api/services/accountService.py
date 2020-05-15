@@ -1,5 +1,6 @@
 from . import principleService
 from ..mapper import accountMapper
+import datetime
 
 
 def authenticate(account, password):
@@ -8,7 +9,8 @@ def authenticate(account, password):
 
 def createUser(account):
     account["role"] = "USER"
-    account["isActive"]=True
+    account["isActive"] = True
+    account["createdOn"] = datetime.datetime.now()
     if accountMapper.findByEmail(account["email"]) is None:
         id = accountMapper.save(account)
         return id
