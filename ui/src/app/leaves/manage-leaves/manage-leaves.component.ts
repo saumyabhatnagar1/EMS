@@ -55,7 +55,7 @@ export class ManageLeavesComponent implements OnInit , AfterViewInit {
         data: this.tableData,
         "bDestroy":true,
         columns: [
-            { title: "#S.No"},
+            { title: "S.No"},
             { title: 'Email' },
             { title: 'Leave Type' },
             { title: "Date" },
@@ -66,7 +66,7 @@ export class ManageLeavesComponent implements OnInit , AfterViewInit {
                 
               var leaveid=full[0]-1;
               //console.log(full)
-              return `<a style="cursor:pointer" class="modalShow" ltype=`+leaveid+` >UPDATE</a>`;
+              return `<button style="cursor:pointer" class="button btn-primary modalShow" ltype=`+leaveid+` >Update</button>`;
             }},
         ],
 
@@ -118,7 +118,7 @@ saveLeaveStatus(){
                 //no leaves found////
               }else{
                 this.appendLeaves(res);
-                console.log(res)
+                
               }
         },err=>{
              console.log(err);
@@ -128,19 +128,26 @@ saveLeaveStatus(){
 
   formatEmpData(res){
     let res1 = Object.entries(res);
-  
+    this.tableData=[]
     for(var i = 0 ; i < res1.length;i++){
       //console.log('check')
       var tmp = [];
       var email= res[i].emp_id || "NA"; 
       var leave_type= res[i].leave_type || "NA"; 
       var date = res[i].date || "NA";
-      var status =res[i].status || "NA";
+      var status;
+      if(res[i].status==0){
+        status='Pending'
+      }
+      else if(res[i].status==1){
+        status='Approved'
+      }
+      else {
+        status='Rejected'
+      }
       var description =res[i].description || "NA";
       //var status = res[i].isActive ? "Active":"Inactive";
-      var action = `<button type="button" class="btn btn-primary modalShow">
-  Update
-</button>`;
+      var action = '';
       this.tableData.push([i+1,email,leave_type,date,description,status,action,]);
 
     }
@@ -173,7 +180,7 @@ saveLeaveStatus(){
     if ($("#leavesStatus").val() === 'Approved'){
       status = 1
     }
-    else{
+    else if($("#leavesStatus").val() === 'Rejected'){
       status = 2
     }
     let data=
@@ -227,7 +234,7 @@ saveLeaveStatus(){
         this.leave_types.push(leavesTypeData[index][1]);
     }
     // this.leaveTypeFormChange.get('leave').setValue(this.leave_types[0].value)
-    console.log(this.leave_types)
+    
 }
 
 addLeaveType(){

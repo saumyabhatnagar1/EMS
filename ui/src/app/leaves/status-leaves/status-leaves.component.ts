@@ -98,7 +98,17 @@ export class StatusLeavesComponent implements OnInit {
       var posting_date = res[i].posting_date || "NA";
       var admin_remark = res[i].admin_remark|| "NA";
       var admin_remark_date = res[i].admin_remark_date || "NA"
-      var status =res[i].status || "NA";
+      var status
+      var status;
+      if(res[i].status==0){
+        status='Pending'
+      }
+      else if(res[i].status==1){
+        status='Approved'
+      }
+      else {
+        status='Rejected'
+      }
       // //var status = res[i].isActive ? "Active":"Inactive";
       // var action = `<a href=`+res[i].id+`>
       //                   <i class="material-icons" title="Edit">mode_edit</i>

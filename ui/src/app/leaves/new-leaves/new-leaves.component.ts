@@ -1,7 +1,7 @@
 import { LeavesService } from '../leaves.service';
 import { PrincipleService } from '../../util/principle.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import {ActivatedRoute } from '@angular/router';
 import { NotificationService} from '../../common/services/notification.service';
 
@@ -11,22 +11,24 @@ import { NotificationService} from '../../common/services/notification.service';
   templateUrl: './new-leaves.component.html',
   styleUrls: ['../leaves.component.css']
 })
-export class NewLeavesComponent implements OnInit {
+export class NewLeavesComponent implements OnInit{
     public remainingLeaves:number=21;
     leaves = [];
 
 
     public dateForm=new FormGroup({
         dateLeave:new FormControl('',Validators.required),
-        reason:new FormControl('',Validators.required)
+        reason:new FormControl('',Validators.required),
+        description:new FormControl('',Validators.required)
       })
 
-    constructor(private activeRoute:ActivatedRoute,private notificationService:NotificationService,private leavesService:LeavesService,public principle:PrincipleService) { }
+    constructor(private fb: FormBuilder,private activeRoute:ActivatedRoute,private notificationService:NotificationService,private leavesService:LeavesService,public principle:PrincipleService) { }
     
     ngOnInit(): void {
       this.findLeaveType()
+      
     }
-
+   
     
 
     get reason(){
@@ -36,6 +38,9 @@ export class NewLeavesComponent implements OnInit {
     get dateLeave(){
         return this.dateForm.get('dateLeave');
       }
+      get description(){
+        return this.dateForm.get('description')
+      }
 
   onConfirm()
   {
@@ -43,8 +48,10 @@ export class NewLeavesComponent implements OnInit {
       "emp_id" : this.principle.getUsername(),
       "date" : this.dateForm.get('dateLeave').value,
       "leave_type" : this.dateForm.get('reason').value,
-      "description":""
+      "description":this.dateForm.get('description').value
     }
+  
+
     this.leavesService.requestLeave(data).subscribe(
       res=>{
         this.notificationService.showSuccess("Leave Application Submitted!!!");
