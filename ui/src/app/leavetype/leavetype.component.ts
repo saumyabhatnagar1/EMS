@@ -26,6 +26,7 @@ export class LeavetypeComponent implements AfterViewInit, OnInit {
   constructor(private activeRoute:ActivatedRoute,private accountService:AccountServiceService,private router:Router ,private notificationService:NotificationService,private leavesService:LeavesService,public principle:PrincipleService,private renderer:Renderer2) { }
   ngOnInit(): void {
     this.showModalLeavetypeEdit()
+    this.showModalLeavetypeDelete()
     this.findLeaveType(); 
     this.ifHRrole()
   }  
@@ -38,13 +39,14 @@ export class LeavetypeComponent implements AfterViewInit, OnInit {
         columns: [
 
             { title: "sno"},
-            { title: 'Leave Type' },
+            { title: 'Leave Type'},
+            {title:'Description'},
             { title: "Action",
               render:function(data:any,type:any,full:any){
                 
                 var leaveid=full[0]-1;
                 return `<a style="cursor:pointer" class="modalShow" ltype=`+leaveid+` ><i ltype=`+leaveid+` class="material-icons" title="Edit">mode_edit</i></a>
-                <a style="cursor:pointer"  ltype=`+leaveid+` ><i  ltype=`+leaveid+` class="material-icons" title="Edit">delete</i></a>`;
+                <a style="cursor:pointer" class="modalDelete" ltype=`+leaveid+` ><i  ltype=`+leaveid+` class="material-icons" title="Edit">delete</i></a>`;
               }
           }
         ],
@@ -68,8 +70,10 @@ export class LeavetypeComponent implements AfterViewInit, OnInit {
     for(var i = 0 ; i < res1.length;i++){
       var tmp=[]
       var leavetype=res[i].value;
+      var description=res[i].description;
       var action = '';
-      this.tableData.push([i+1,leavetype,action]);
+      this.tableData.push([i+1,leavetype,description,action]);
+
     }
   }
 
@@ -81,7 +85,19 @@ export class LeavetypeComponent implements AfterViewInit, OnInit {
   }
   closeModal(){
     document.getElementById('modalLeavetypeEdit').style.display = 'none';
+    document.getElementById('confirmBox').style.display = 'none';
+
   }
+
+
+  showModalLeavetypeDelete(){
+    $(document).on('click','.modalDelete',function(e) {
+      //console.log("test")
+      document.getElementById('confirmBox').style.display = 'block';
+    });
+  }
+
+ 
 
  ifHRrole(){
   if(this.principle.getRole()==="HR")
@@ -185,10 +201,11 @@ addLeaveType(){
 
   }
   
-  deleteLeaveType(id){
+  deleteLeaveType(){
     let data={
-      'id':id
+      'id':this.leaveData.id
     }
+    console.log(this.leaveData.id)
     this.leavesService.deleteLeaveType(JSON.stringify(data)).subscribe(
       res=>{
         console.log(res)
