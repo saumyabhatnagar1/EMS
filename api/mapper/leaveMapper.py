@@ -24,7 +24,7 @@ def update(leaveDetail):
     query = {"emp_id": leaveDetail['emp_id'], "date": leaveDetail['date']}
     update_to = {"$set": {
         "admin_remark": leaveDetail['admin_remark'],
-        "admin_remark_date": datetime.datetime.now(),
+        "admin_remark_date": datetime.datetime.now().strftime("%x %X"),
         "status": leaveDetail['status'],
         "is_read": True
     }}

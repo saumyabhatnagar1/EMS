@@ -8,7 +8,7 @@ def saveLeave(leave_data):
         'leave_type': leave_data['leave_type'],
         'date': leave_data['date'],
         'description': leave_data['description'],
-        'posting_date': datetime.datetime.now(),
+        'posting_date': datetime.datetime.now().strftime("%x %X"),
         'admin_remark': "",
         'admin_remark_date': "",
         'status': 0,
@@ -41,7 +41,7 @@ def addLeaveType(leave_type):
     leave_type_data = {
         'value': leave_type['value'],
         'description': leave_type['description'],
-        'createdOn': datetime.datetime.now()
+        'createdOn': datetime.datetime.now().strftime("%x %X")
     }
     response = leaveMapper.saveLeaveType(leave_type_data)
     if response is not None:
