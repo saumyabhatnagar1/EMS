@@ -36,6 +36,9 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {TableModule} from 'primeng/table';
 import {DialogModule} from 'primeng/dialog';
 import {InputSwitchModule} from 'primeng/inputswitch';
+import { ProjectsComponent } from './projects/projects.component';
+import {MultiSelectModule} from 'primeng/multiselect';
+
 
 
 @NgModule({
@@ -58,6 +61,7 @@ import {InputSwitchModule} from 'primeng/inputswitch';
     LeavetypeComponent,
     DashboardComponent,
     EditEmployeeComponent,
+    ProjectsComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,6 +91,8 @@ import {InputSwitchModule} from 'primeng/inputswitch';
     TableModule,
     DialogModule,
     InputSwitchModule,
+    MultiSelectModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

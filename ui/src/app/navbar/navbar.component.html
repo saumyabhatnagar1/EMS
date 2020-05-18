@@ -52,6 +52,11 @@
               Work-Update</a>
           </li>
           <li class="nav-item" [hidden]="isLoggedIn">
+
+            <a routerLink="/projects" class="nav-link"><i class="material-icons">assessment</i>Projects</a>
+          </li>
+
+          <li class="nav-item" [hidden]="isLoggedIn">
             <a *ngIf="ifHR" routerLink="/leavetype" class="nav-link"><i class="material-icons">date_range</i>Leave
               Type</a>
           </li>

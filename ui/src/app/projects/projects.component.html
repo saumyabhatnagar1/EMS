@@ -1,0 +1,88 @@
+<div class="container">
+
+
+
+<p-table #dt [columns]="cols" [value]="projects"  [paginator]="true" [rows]="7" [responsive]="true" [showCurrentPageReport]="true" [(first)]="first"
+currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+<ng-template pTemplate="caption">
+    <div class="row">
+        <div class="col-sm">
+            <h3>List of Projects</h3>
+        </div>
+        <div class="col-sm">
+            <button pButton type="button" icon="pi pi-fw pi-user-plus" label="Add projects" (click)="showDialog()">
+            </button>
+        </div>
+    </div>
+    <div style="text-align: right">        
+        <i class="pi pi-search" style="margin:5px 5px 0 0"></i>
+        <input type="text" pInputText size="50" placeholder="Search" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+    </div>
+</ng-template>
+<ng-template pTemplate="header" let-columns>
+    <tr>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+            {{col.header}}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+    </tr>
+</ng-template>
+<ng-template pTemplate="body" let-project>
+    <tr>
+        <!-- <td>{{employee.sno}}</td> -->
+        <td>{{project.name}}</td>
+        <td>{{project.assignTo}}</td>
+        <td>project.status</td>
+        <td>project.deadline</td>
+        <td>project.customer_id</td>
+        <td>project.complete_percentage</td>
+        <td>project.description</td>
+        <td>{{project.date}}</td>
+
+
+        <td>
+            <p-inputSwitch [(ngModel)]="project.isActive" >
+                
+            </p-inputSwitch>
+        </td>
+        <td>
+            <div class="ui-toolbar-group-center">
+                <button pButton type="button" icon="pi pi-search" class="ui-button-success"></button>
+                <button  pButton type="button" icon="pi pi-user-edit" class="ui-button-primary"></button>
+                <button  pButton type="button" icon="pi pi-times" class="ui-button-danger"></button>
+            </div>
+        </td>
+
+    </tr>
+</ng-template>
+</p-table>
+</div>
+
+<p-dialog header="Create Account" [style]="{'width':'50vh'}"  [(visible)]="showCreateAccount">
+    <div class="">
+        <form>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" required id="name" aria-describedby="nameHelp" placeholder="Enter Name">           
+          </div>
+          
+          <p-multiSelect [options]="employees"></p-multiSelect>
+
+          <div class="form-group">
+            <label for="deadline">Deadline</label>
+            <input type="date" class="form-control" required id="deadline" aria-describedby="nameHelp" placeholder="Enter Name">           
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" required id="description" aria-describedby="nameHelp" placeholder="Description">           
+          </div>
+        </form>
+    </div>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+          <button type="button" pButton icon="pi pi-times"  label="Cancel"></button>
+          <button type="button" pButton icon="pi pi-check" label="Create"></button>  
+        </div>
+    </p-footer>
+</p-dialog>
