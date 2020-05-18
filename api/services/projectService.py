@@ -7,9 +7,14 @@ def saveProject(project_data):
     project_detail = {
         "project_id": int(round(time.time() * 1000)),
         "name": project_data['name'],
-        "date": datetime.datetime.now(),
-        "team": project_data['team'],
-        "completed": False,
+        "description": project_data['description'],
+        "assignTo": project_data['assignTo'],
+        "createdOn": datetime.datetime.now().strftime("%x %X"),
+        "status": 0,
+        "due": 0,
+        "deadline": project_data['deadline'],
+        "customer_id": project_data['customer_id'],
+        "complete_percentage": project_data['complete_percentage'],
     }
     projectMapper.save(project_detail)
 
@@ -30,9 +35,12 @@ def getProjectsDetail():
 def saveTask(task_data):
     task_detail = {
         "project_id": task_data['project_id'],
+        "title": task_data['title'],
         "description": task_data['description'],
-        "assignee": task_data['assignee'],
-        "completed": False,
+        "assignTo": task_data['assignee'],
+        "status": 0,
+        "createdOn": datetime.datetime.now().strftime("%x %X"),
+        "deadline": task_data['deadline'],
     }
     projectMapper.saveTask(task_detail)
 

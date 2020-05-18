@@ -11,8 +11,8 @@ from api.security.decorators import login_required, is_post
 @login_required
 @is_post
 def addProject(request):
-    if len(request.body) <= 2:
-        return JsonResponse({"status": 404, "message": "INVALID_REQUEST"})
+    if len(request.body) <= 5:
+        return JsonResponse({"status": 404, "message": "INCOMPLETE DATA"})
     project_data = json.loads(request.body)
     projectService.saveProject(project_data)
     return JsonResponse({"status": 200, "message": "PROJECT SAVED"})
