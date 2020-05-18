@@ -14,7 +14,7 @@ def saveProject(project_data):
         "due": 0,
         "deadline": project_data['deadline'],
         "customer_id": project_data['customer_id'],
-        "complete_percentage": project_data['complete_percentage'],
+        "complete_percentage": 0,
     }
     projectMapper.save(project_detail)
 
@@ -41,6 +41,7 @@ def saveTask(task_data):
         "status": 0,
         "createdOn": datetime.datetime.now().strftime("%x %X"),
         "deadline": task_data['deadline'],
+        "due" : 0
     }
     projectMapper.saveTask(task_detail)
 
