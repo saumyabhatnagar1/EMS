@@ -7,7 +7,7 @@
             <button type="button" pButton icon="pi pi-check" label="Yes" (click)="cd.accept()"></button>
         </p-footer>
     </p-confirmDialog>
-    <p-table #dt [columns]="cols" [value]="employees" [resizableColumns]="true" [autoLayout]="true" [paginator]="true" [rows]="7" [responsive]="true" [showCurrentPageReport]="true" [(first)]="first"
+    <p-table #dt  [columns]="cols" [value]="employees" [resizableColumns]="true" [autoLayout]="true" [paginator]="true" [rows]="7" [stacked]="true" [showCurrentPageReport]="true" [(first)]="first"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
         <ng-template pTemplate="caption">
             <div class="row">
@@ -35,12 +35,14 @@
         <ng-template pTemplate="body" let-employee>
             <tr>
                 <!-- <td>{{employee.sno}}</td> -->
+                <span class="ui-column-title"></span>
                 <td>{{employee.email}}</td>
-                <td>{{employee.name}}</td>
-                <td>{{employee.designation}}</td>
-                <td>{{employee.role}}</td>
-                <td>{{employee.createdOn}}</td>
+                <td class="ui-p-4">{{employee.name}}</td>
+                <td class="ui-p-5">{{employee.designation}}</td>
+                <td class="ui-p-6">{{employee.role}}</td>
+                <td class="ui-p-7">{{employee.createdOn}}</td>
                 <td>
+                
                     <p-inputSwitch [(ngModel)]="employee.isActive" (onChange)="deactivateEmployee(employee.email)">
                         
                     </p-inputSwitch>

@@ -1,10 +1,10 @@
 import { FormGroup, FormControl } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { ProjectsService } from './projects.service';
 import {SelectItem} from 'primeng/api';
 import { AccountServiceService} from '../common/services/account-service.service';
 import { MultiSelectItem } from 'primeng/multiselect/public_api';
-
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 
 @Component({

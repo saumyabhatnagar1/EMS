@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container" >
 
 
 
-<p-table #dt [responsive]="true" [resizableColumns]="true" [autoLayout]="true"  [columns]="cols" [value]="projects"  [paginator]="true" [rows]="7" [responsive]="true" [showCurrentPageReport]="true" [(first)]="first"
+<p-table #dt  [stacked]="true" scrollHeight="200px" [resizableColumns]="true" [autoLayout]="true"  [columns]="cols" [value]="projects"  [paginator]="true" [rows]="7"  [showCurrentPageReport]="true" [(first)]="first"
 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
 
 
@@ -32,7 +32,7 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
 <ng-template pTemplate="body" let-project>
     <tr>
         <!-- <td>{{employee.sno}}</td> -->
-        <td>{{project.name}}</td>
+        <td >{{project.name}}</td>
         <td>{{project.assignTo}}</td>
         <td>{{project.status}}</td>
         <td>{{project.deadline}}</td>
