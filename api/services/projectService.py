@@ -32,6 +32,32 @@ def getProjectsDetail():
     return None
 
 
+def getProjectsDetailByID(project_id):
+    project_detail = projectMapper.findProjectsByID(project_id)
+    if project_detail is not None:
+        project_dict = {}
+        cnt = 0
+        for item in project_detail:
+            item.pop("_id")
+            project_dict[cnt] = item
+            cnt += 1
+        return project_dict
+    return None
+
+
+def getProjectsDetailByAssignTo(assignTo):
+    project_detail = projectMapper.findProjectsByAssignTo(assignTo)
+    if project_detail is not None:
+        project_dict = {}
+        cnt = 0
+        for item in project_detail:
+            item.pop("_id")
+            project_dict[cnt] = item
+            cnt += 1
+        return project_dict
+    return None
+
+
 def saveTask(task_data):
     task_detail = {
         "project_id": task_data['project_id'],

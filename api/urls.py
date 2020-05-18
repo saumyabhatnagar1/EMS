@@ -33,6 +33,8 @@ urlpatterns = [
 
     path('project/new', projectController.addProject, name='add project'),
     path('project/findAll', projectController.getProjects, name='get project'),
+    path('project/findByID', projectController.getProjectsByID, name='get project by ID'),
+    path('project/findByAssignTo', projectController.getProjectsByAssignTo, name='get project by assignTo'),
     path('task/new', projectController.addTask, name='add task'),
     path('task/find', projectController.getTasks, name='get task'),
     path('project/addTeam',projectController.addTeamMember, name='add team member'),

@@ -48,3 +48,17 @@ def getTeam(project_id):
     return None
 
 
+def findProjectsByID(project_id):
+    query = {'project_id': project_id}
+    project = list(Projects.find(query))
+    if len(project):
+        return project
+    return None
+
+
+def findProjectsByAssignTo(assignTo):
+    query = {'assignTo': assignTo}
+    project = list(Projects.find(query))
+    if len(project):
+        return project
+    return None

@@ -11,7 +11,7 @@ from api.security.decorators import login_required, is_post
 @login_required
 @is_post
 def addProject(request):
-    if len(request.body) <= 5:
+    if len(request.body) <= 4:
         return JsonResponse({"status": 404, "message": "INCOMPLETE DATA"})
     project_data = json.loads(request.body)
     projectService.saveProject(project_data)
@@ -26,6 +26,28 @@ def getProjects(request):
         return JsonResponse(project_data, safe=False)
     else:
         return JsonResponse({"status": 400, "message": "NO PROJECT FOUND"})
+
+
+@csrf_exempt
+@login_required
+@is_post
+def getProjectsByID(request):
+    project_id = json.loads(request.body)["project_id"]
+    response = projectService.getProjectsDetailByID(project_id)
+    if response is not None:
+        return JsonResponse(response, safe=False)
+    return JsonResponse({"status": 200, "message": "PROJECTS NOT FOUND"})
+
+
+@csrf_exempt
+@login_required
+@is_post
+def getProjectsByAssignTo(request):
+    assignTo = json.loads(request.body)['assignTo']
+    response = projectService.getProjectsDetailByAssignTo(assignTo)
+    if response is not None:
+        return JsonResponse(response, safe=False)
+    return JsonResponse({"status": 200, "message": "PROJECTS NOT FOUND"})
 
 
 @csrf_exempt
