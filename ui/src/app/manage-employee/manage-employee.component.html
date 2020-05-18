@@ -7,7 +7,7 @@
             <button type="button" pButton icon="pi pi-check" label="Yes" (click)="cd.accept()"></button>
         </p-footer>
     </p-confirmDialog>
-    <p-table #dt [columns]="cols" [value]="employees"  [paginator]="true" [rows]="7" [responsive]="true" [showCurrentPageReport]="true" [(first)]="first"
+    <p-table #dt [columns]="cols" [value]="employees" [resizableColumns]="true" [autoLayout]="true" [paginator]="true" [rows]="7" [responsive]="true" [showCurrentPageReport]="true" [(first)]="first"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
         <ng-template pTemplate="caption">
             <div class="row">
@@ -15,7 +15,7 @@
                     <h3>List of Employees</h3>
                 </div>
                 <div class="col-sm">
-                    <button pButton type="button" icon="pi pi-fw pi-user-plus" label="Add employee" (click)="showDialog()">
+                    <button pButton type="button" icon="pi pi-fw pi-user-plus" style="position: relative; float:right;" label="Add employee" (click)="showDialog()">
                     </button>
                 </div>
             </div>

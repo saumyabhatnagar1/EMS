@@ -1,7 +1,9 @@
+import { FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ProjectsService } from './projects.service';
 import {SelectItem} from 'primeng/api';
 import { AccountServiceService} from '../common/services/account-service.service';
+import { MultiSelectItem } from 'primeng/multiselect/public_api';
 
 
 
@@ -13,15 +15,21 @@ import { AccountServiceService} from '../common/services/account-service.service
 export class ProjectsComponent implements OnInit {
 
 
-  public users = ['Saumya',"Rishabh",'Sarthak'];
+
   public cols :any;
-  public showCreateAccount:boolean=false;
+  public showCreateProject:boolean=false;
   first = 0;
   rows = 10;
-
   employees:SelectItem[];
+  users:SelectItem[]
   constructor(private projectservice: ProjectsService,private accountService:AccountServiceService) { 
-
+      this.users=[
+        {
+          label:'Tata',value:'Tata'
+        },
+        {label:'JP Morgan',value:'JP Morgan'},
+        {label:'Rajdhani Solutions',value:'Rajdhani Solution'}
+      ]
   }
 
   
@@ -69,28 +77,28 @@ isFirstPage(): boolean {
 }
 
 showDialog(){
-this.showCreateAccount = true;
+this.showCreateProject = true;
+}
+closeDialog(){
+  this.showCreateProject=false
 }
 
-//   addProject() {
-//     let projectJSON = JSON.stringify(this.projectForm.value)
-//     // console.log(this.projectForm.get('team')[0].value)
-//     console.log(projectJSON)
+  addNewProject() {
+    let projectJSON = JSON.stringify(this.newProjectForm.value)
+    console.log(projectJSON)
 
 
-//     this.projectservice.requestProject(projectJSON).subscribe(
-//       res => {
+    this.projectservice.requestProject(projectJSON).subscribe(
+      res => {
+        console.log(res);
+      
+      },
+      err => {
+        console.log(err)
+      });
+this.findAllProjects()
 
-//         console.log(res);
-//         //this.notificationService.showSuccess("Project Added!!!");
-//       },
-//       err => {
-//         //this.notificationService.showFailed("Something went wrong!");
-//         console.log(err)
-//       });
-// this.findAllProjects()
-
-//   }
+  }
 
   findAllProjects() {
     this.projectservice.getAllProjects().subscribe(
@@ -136,4 +144,12 @@ this.showCreateAccount = true;
     console.log(this.employees)
   }
 
+  public newProjectForm=new FormGroup({
+    name:new FormControl(''),
+    assignTo:new FormControl(''),
+    deadline:new FormControl(''),
+    description:new FormControl(''),
+    customer_id:new FormControl('')
+  })
+  
 }
