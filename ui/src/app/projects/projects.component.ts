@@ -1,17 +1,21 @@
 import { FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit, } from '@angular/core';
 import { ProjectsService } from './projects.service';
-import {SelectItem} from 'primeng/api';
+import {SelectItem,MessageService} from 'primeng/api';
 import { AccountServiceService} from '../common/services/account-service.service';
 import { MultiSelectItem } from 'primeng/multiselect/public_api';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Router } from '@angular/router';
+import { NotificationService} from '../common/services/notification.service';
+//import {MessageService} from 'primeng/api';
+
 
 
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
-  styleUrls: ['./projects.component.css']
+  styleUrls: ['./projects.component.css'],
+  providers:[MessageService],
 })
 export class ProjectsComponent implements OnInit {
 
@@ -23,7 +27,7 @@ export class ProjectsComponent implements OnInit {
   rows = 10;
   employees:SelectItem[];
   users:SelectItem[]
-  constructor(private projectservice: ProjectsService,private accountService:AccountServiceService,private router:Router) { 
+  constructor(private notificationService:NotificationService,private messageService: MessageService,private projectservice: ProjectsService,private accountService:AccountServiceService,private router:Router) { 
       this.users=[
         {
           label:'Tata',value:'Tata'
@@ -97,7 +101,8 @@ viewProject(id){
     this.projectservice.requestProject(projectJSON).subscribe(
       res => {
         console.log(res);
-      
+       // this.messageService.add({severity:'success', summary:'Done!', detail:'New Project Added.',life:5000});
+        this.notificationService.showSuccess("New Project Added...")
       },
       err => {
         console.log(err)
