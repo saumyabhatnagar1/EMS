@@ -38,6 +38,7 @@ import {DialogModule} from 'primeng/dialog';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import { ProjectsComponent } from './projects/projects.component';
 import {MultiSelectModule} from 'primeng/multiselect';
+import { ViewProjectComponent } from './projects/view-project/view-project.component';
 
 
 
@@ -62,6 +63,7 @@ import {MultiSelectModule} from 'primeng/multiselect';
     DashboardComponent,
     EditEmployeeComponent,
     ProjectsComponent,
+    ViewProjectComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

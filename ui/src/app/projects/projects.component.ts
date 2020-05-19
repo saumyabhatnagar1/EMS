@@ -5,6 +5,7 @@ import {SelectItem} from 'primeng/api';
 import { AccountServiceService} from '../common/services/account-service.service';
 import { MultiSelectItem } from 'primeng/multiselect/public_api';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class ProjectsComponent implements OnInit {
   rows = 10;
   employees:SelectItem[];
   users:SelectItem[]
-  constructor(private projectservice: ProjectsService,private accountService:AccountServiceService) { 
+  constructor(private projectservice: ProjectsService,private accountService:AccountServiceService,private router:Router) { 
       this.users=[
         {
           label:'Tata',value:'Tata'
@@ -81,6 +82,11 @@ this.showCreateProject = true;
 }
 closeDialog(){
   this.showCreateProject=false
+}
+
+viewProject(id){
+  this.router.navigate(["/projects/view/"+id]);
+
 }
 
   addNewProject() {

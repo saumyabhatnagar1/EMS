@@ -12,7 +12,7 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
             <h2>List of Projects</h2>
         </div>
         <div class="col-sm">
-            <button pButton type="button" icon="pi pi-fw pi-user-plus" style="position: relative;float:right;" label="Add projects" (click)="showDialog()">
+            <button pButton type="button" icon="pi pi-fw pi-user-plus" style="position: relative;float:right;" label="Add Project" (click)="showDialog()">
             </button>
         </div>
     </div>
@@ -39,10 +39,11 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
         <td>{{project.customer_id}}</td>
         <td>{{project.complete_percentage}}</td>
         <td>{{project.description}}</td>
-        <td>{{project.date}}</td>
+        <td>{{project.createdOn}}</td>
         <td>
             <div class="ui-toolbar-group-center">
-                <button  pButton type="button" icon="pi pi-user-edit" class="ui-button-primary"></button>
+                
+                <button  pButton type="button" icon="pi pi-user-edit" class="ui-button-primary" (click)="viewProject(project.project_id)"></button>
                 <button  pButton type="button" icon="pi pi-times" class="ui-button-danger"></button>
             </div>
         </td>
@@ -52,7 +53,7 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
 </p-table>
 </div>
 
-<p-dialog header="Create Account" [style]="{'width':'50vh'}"  [(visible)]="showCreateProject">
+<p-dialog header="Create Project" [style]="{'width':'50vh'}"  [(visible)]="showCreateProject">
     <div class="">
         <form [formGroup]="newProjectForm">
           <div class="form-group">
@@ -61,8 +62,8 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
           </div>
           
           <div class="form-group">
-            <label for="">Employees</label>
-          <p-multiSelect formControlName="assignTo" [options]="employees"></p-multiSelect>
+            <label for="employees">Assign To</label> <br>
+          <p-multiSelect formControlName="assignTo" [options]="employees" id="employees" ></p-multiSelect>
           </div>
           <div class="form-group">
             <label for="deadline">Deadline</label>
@@ -71,10 +72,10 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
 
           <div class="form-group">
             <label for="description">Description</label>
-            <input type="text" formControlName="description" class="form-control" required id="description" aria-describedby="nameHelp" placeholder="Description">           
+            <textarea type="text" formControlName="description" class="form-control" required id="description" aria-describedby="nameHelp" placeholder="Description"></textarea>  
           </div>
           <div class="form-group">
-            <label for="">Customer</label>
+            <label for="">Customer</label> <br>
             <p-multiSelect formControlName="customer_id" [options]="users"></p-multiSelect>
           </div>
         </form>

@@ -50,8 +50,10 @@ def getTeam(project_id):
 def findProjectsByID(project_id):
     query = {'project_id': project_id}
     project = list(Projects.find(query))
+    print(project)
+
     if len(project):
-        return project
+        return project     
     return None
 
 
