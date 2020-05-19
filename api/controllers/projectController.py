@@ -78,12 +78,11 @@ def getTasks(request):
 @login_required
 @is_post
 def addTeamMember(request):
-    project_id = json.loads(request.body)['project_id']
-    team_detail = json.loads(request.body)['team']
-    response = projectService.addTeamMember(project_id, team_detail)
+    team_data = json.loads(request.body)
+    response = projectService.addTeamMember(team_data)
     if response is not None:
-        return JsonResponse({"status":200, "message":"TEAM MEMBER ADDED"})
-    return JsonResponse({"status":400, "message":"SOMETHING WENT WRONG"})
+        return JsonResponse({"status": 200, "message": "TEAM MEMBER ADDED"})
+    return JsonResponse({"status": 400, "message": "SOMETHING WENT WRONG"})
 
 
 @csrf_exempt

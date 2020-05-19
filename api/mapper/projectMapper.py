@@ -3,6 +3,7 @@ from . import client
 client = client.connectToDB()
 Projects = client.primer.projects
 Tasks = client.primer.tasks
+WorksOn = client.primer.worksOn
 
 
 def save(project_detail):
@@ -30,11 +31,9 @@ def findTasks(project_id):
     return None
 
 
-def saveTeam(project_id, team):
-    query = {"project_id": project_id}
-    update_to = {"$set": {"team": team}}
-    response = Projects.update(query, update_to)
-    return response
+def saveTeam(team_detail):
+    id = WorksOn.insert_one(team_detail).inserted_id
+    return id
 
 
 def getTeam(project_id):
