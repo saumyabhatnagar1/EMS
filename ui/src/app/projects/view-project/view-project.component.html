@@ -1,2 +1,19 @@
-<p>view-project works!</p>
-<p>{{id}}</p>
+<div class="container" style="display: flex; flex-direction: column; justify-content: center; align-items: center;" *ngIf = "project.length>0">
+    
+        <div class="card" style="width: 25rem; margin-top: 5%;">
+            <div class="card-body">
+              <h3 class="card-title">Project Info</h3>
+              <h4 class="card-subtitle mb-2">{{project[0].name}}</h4>
+              <p class="card-text">Assign To : {{project[0].assignTo}}</p>
+              <p class="card-text">Created On : {{project[0].createdOn}}</p>
+              <p class="card-text">Customer : {{project[0].customer_id}}</p>
+              <p class="card-text">Deadline : {{project[0].deadline}}</p>
+              <p class="card-text">Description : {{project[0].description}}</p>
+              <p class="card-text">Due : {{project[0].due}}</p>
+              <p class="card-text">Status : {{project[0].status}}</p>
+              <p class="card-text">Complete % : {{project[0].complete_percentage}}</p>
+            
+            </div>
+          </div>
+    
+</div>

@@ -15,6 +15,6 @@ export class ProjectsService {
   }
 
   getAllProjects(){
-    return this.http.post(this.globalService.baseApiUrl+'project/findAll',{});
+    return this.http.post(this.globalService.baseApiUrl+'project/getAll',{});
   }
 }

@@ -11,7 +11,7 @@ export class ViewProjectService {
   constructor(private http:HttpClient,private globalService: GlobalsService) { }
 
   getProjectById(id){
-    return this.http.post(this.globalService.baseApiUrl+'project/findByID',id)
+    return this.http.post(this.globalService.baseApiUrl+'project/getByID',id)
   }
 
 }
