@@ -1,11 +1,9 @@
 from ..mapper import projectMapper
 import datetime
-import time
 
 
 def saveProject(project_data):
     project_detail = {
-        "project_id": int(round(time.time() * 1000)),
         "name": project_data['name'],
         "description": project_data['description'],
         "assignTo": project_data['assignTo'],
@@ -25,6 +23,7 @@ def getProjectsDetail():
         project_dict = {}
         cnt = 0
         for item in project_detail:
+            item["id"] = str(item['_id'])
             item.pop("_id")
             project_dict[cnt] = item
             cnt += 1
@@ -38,6 +37,7 @@ def getProjectsDetailByID(project_id):
         project_dict = {}
         cnt = 0
         for item in project_detail:
+            item["id"] = str(item['_id'])
             item.pop("_id")
             project_dict[cnt] = item
             cnt += 1
@@ -51,6 +51,7 @@ def getProjectsDetailByAssignTo(assignTo):
         project_dict = {}
         cnt = 0
         for item in project_detail:
+            item["id"] = str(item['_id'])
             item.pop("_id")
             project_dict[cnt] = item
             cnt += 1
@@ -97,5 +98,11 @@ def addTeamMember(team_data):
 def getTeamDetail(project_id):
     team = projectMapper.getTeam(project_id)
     if team is not None:
-        return team
+        team_dict = {}
+        cnt = 0
+        for item in team:
+            item.pop("_id")
+            team_dict[cnt] = item
+            cnt += 1
+        return team_dict
     return None

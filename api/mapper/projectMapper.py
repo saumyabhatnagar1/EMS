@@ -1,4 +1,5 @@
 from . import client
+from bson.objectid import ObjectId
 
 client = client.connectToDB()
 Projects = client.primer.projects
@@ -38,17 +39,14 @@ def saveTeam(team_detail):
 
 def getTeam(project_id):
     query = {"project_id": project_id}
-    project = list(Projects.find(query))
-    if len(project) == 0:
-        return None
-    if project[0].__contains__("team"):
-        team = project[0]["team"]
-        return team
+    project = list(WorksOn.find(query))
+    if len(project) > 0:
+        return project
     return None
 
 
 def findProjectsByID(project_id):
-    query = {'project_id': project_id}
+    query = {'_id': ObjectId(project_id)}
     project = list(Projects.find(query))
     print(project)
 
