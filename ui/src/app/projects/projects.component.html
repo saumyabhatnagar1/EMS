@@ -53,7 +53,7 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
 
 <p-dialog header="Create Project" [style]="{'width':'80vh'}"  [(visible)]="showCreateProject">
     <div class="">
-        <form [formGroup]="newProjectForm">
+        <form [formGroup]="projectForm">
           <div class="form-group">
             <label for="name">Project Name</label>
             <input formControlName="name" type="text" class="form-control" required id="name" aria-describedby="nameHelp" placeholder="Enter Name">           
