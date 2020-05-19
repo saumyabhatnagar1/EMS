@@ -7,7 +7,6 @@ import { MultiSelectItem } from 'primeng/multiselect/public_api';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificationService} from '../common/services/notification.service';
-//import {MessageService} from 'primeng/api';
 
 
 
@@ -94,20 +93,21 @@ viewProject(id){
 }
 
   addNewProject() {
-    let projectJSON = JSON.stringify(this.newProjectForm.value)
+    let projectJSON = JSON.stringify(this.projectForm.value)
     console.log(projectJSON)
-
 
     this.projectservice.requestProject(projectJSON).subscribe(
       res => {
-        console.log(res);
-       // this.messageService.add({severity:'success', summary:'Done!', detail:'New Project Added.',life:5000});
-        this.notificationService.showSuccess("New Project Added...")
+        if(res["status"] == 200)
+          this.messageService.add({severity:'success', summary:'Created!', detail:'New Project Added.',life:5000});
+        else
+          this.messageService.add({severity:'warn',summary:'Failed',detail:'something went wrong',life:5000});
+       this.findAllProjects();
       },
       err => {
-        console.log(err)
+        console.log(err);
+        this.messageService.add({severity:'error',summary:'Failed',detail:'something went wrong in api',life:5000});
       });
-this.findAllProjects()
 
   }
 
@@ -155,7 +155,7 @@ this.findAllProjects()
     console.log(this.employees)
   }
 
-  public newProjectForm=new FormGroup({
+  public projectForm=new FormGroup({
     name:new FormControl(''),
     assignTo:new FormControl(''),
     deadline:new FormControl(''),

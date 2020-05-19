@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class ViewProjectComponent implements OnInit {
 
   constructor(private activeRoute:ActivatedRoute,private viewProjectService: ViewProjectService) { }
-  public id
+  public id:any;
   public project = []
   ngOnInit(): void {
     this.activeRoute.paramMap.subscribe(params=>{
@@ -24,7 +24,7 @@ export class ViewProjectComponent implements OnInit {
   getProjectById(){
     
     let data = {
-      "project_id":parseInt(this.id)
+      "project_id":this.id
     }
     this.viewProjectService.getProjectById(JSON.stringify(data)).subscribe(res=>{
       console.log(res)
