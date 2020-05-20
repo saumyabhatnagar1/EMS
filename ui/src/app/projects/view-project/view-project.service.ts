@@ -13,5 +13,10 @@ export class ViewProjectService {
   getProjectById(id){
     return this.http.post(this.globalService.baseApiUrl+'project/getByID',id)
   }
-
+  getTeamById(id){
+    return this.http.post(this.globalService.baseApiUrl+'project/getTeam',id)
+  }
+  addTeamMember(data){
+    return this.http.post(this.globalService.baseApiUrl+'project/addTeamMember',data)
+  }
 }

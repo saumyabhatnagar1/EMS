@@ -1,6 +1,17 @@
 <div class="container" style="display: flex; flex-direction: column; justify-content: center; align-items: center;" *ngIf = "project.length>0">
-    
-        <div class="card" style="width: 25rem; margin-top: 5%;">
+    <div class="row">
+
+
+      <div class="card col-md-5" style="width: 30rem; margin-top: 5%;" *ngIf="teams1.length" >
+        <div class="card-body">
+          <h3 class="card-title">Team Info</h3>
+          <p class="card-text" *ngFor="let team of teams1[1];index as i"><strong>Member {{i+1}}:</strong><br>{{team}}</p>
+          <button style="position: relative; right: 0; bottom: 0;" class="button btn-primary " data-toggle="modal" data-target="#addMemberBox">Add Team Member</button>
+        
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+        <div class="card col-md-5 " style="width: 30rem; margin-top: 5%;">
             <div class="card-body">
               <h3 class="card-title">Project Info</h3>
               <h4 class="card-subtitle mb-2">{{project[0].name}}</h4>
@@ -15,5 +26,31 @@
             
             </div>
           </div>
-    
+       
+
+
+
+          <div class="modal fade  " id="addMemberBox">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4>Add New Member</h4>
+                  <button class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <form [formGroup]="addMemberForm">
+                    <div class="form-group">
+                    <p-multiSelect formControlName="newTeamMember" [options]="employees" id="employees" ></p-multiSelect>
+                  </div>
+                </form>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-secondary" data-dismiss="modal"
+                    style="background-color:green;" data-target="#statusBox" data-toggle="modal" (click)="addTeamMember()">Yes</button>
+                  <button class="btn btn-secondary" data-dismiss="modal" style="background-color: red;">No</button>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
 </div>
