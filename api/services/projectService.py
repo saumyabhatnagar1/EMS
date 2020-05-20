@@ -98,11 +98,8 @@ def addTeamMember(team_data):
 def getTeamDetail(project_id):
     team = projectMapper.getTeam(project_id)
     if team is not None:
-        team_dict = {}
-        cnt = 0
+        team_dict = {"project_id": project_id, "team": []}
         for item in team:
-            item.pop("_id")
-            team_dict[cnt] = item
-            cnt += 1
+            team_dict["team"].append(item["emp_id"])
         return team_dict
     return None

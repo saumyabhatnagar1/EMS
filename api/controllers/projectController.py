@@ -93,4 +93,4 @@ def getTeamDetail(request):
     team = projectService.getTeamDetail(project_id)
     if team is not None:
         return JsonResponse(team, safe=False)
-    return JsonResponse({"status":400, "message":"SOMETHING WENT WRONG"})
+    return JsonResponse({"status": 400, "message": "TEAM NOT FOUND"})
