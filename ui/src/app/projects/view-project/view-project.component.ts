@@ -121,6 +121,8 @@ public teams1=[]
       }
     )
     this.getProjectById()
+    this.getTeamById()
+
   }
   
 
