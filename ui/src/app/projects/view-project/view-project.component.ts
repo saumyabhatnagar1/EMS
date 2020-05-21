@@ -3,18 +3,20 @@ import { AccountServiceService } from './../../common/services/account-service.s
 import { ViewProjectService } from './view-project.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import {SelectItem,MessageService} from 'primeng/api';
+import {MessageService} from 'primeng/api';
+import {ConfirmationService} from 'primeng/api';
 
 
 
 @Component({
   selector: 'app-view-project',
   templateUrl: './view-project.component.html',
-  styleUrls: ['./view-project.component.css']
+  styleUrls: ['./view-project.component.css'],
+  providers: [MessageService,ConfirmationService]
 })
 export class ViewProjectComponent implements OnInit {
 
-  constructor(private accountService:AccountServiceService,private activeRoute:ActivatedRoute,private viewProjectService: ViewProjectService) { }
+  constructor(private confirmationservice : ConfirmationService,private messageservice: MessageService,private accountService:AccountServiceService,private activeRoute:ActivatedRoute,private viewProjectService: ViewProjectService) { }
   public id:any;
   public project = []
   ngOnInit(): void {
@@ -115,14 +117,29 @@ public teams1=[]
     this.viewProjectService.addTeamMember(JSON.stringify(data)).subscribe(
       res=>{
         console.log(res)
+        this.messageservice.add({severity:'success',summary: 'New Team member added...',life:2000})
+        setTimeout(()=>{
+          window.location.reload()
+        },2000) 
+        
+           
       },
       err=>{
         console.log(err)
       }
     )
-    this.getProjectById()
-    this.getTeamById()
 
+    
+   
+    
+   //
+    
+    
+
+  }
+  onclick(){
+    console.log('test')
+    this.messageservice.add({severity:'success',summary: 'test'})
   }
   
 

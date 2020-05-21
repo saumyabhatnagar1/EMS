@@ -1,8 +1,10 @@
-<div class="container" style="display: flex; flex-direction: column; justify-content: center; align-items: center;" *ngIf = "project.length>0">
-    <div class="row">
+<p-toast></p-toast>
+<div class="container" style="display: flex; flex-direction: column; justify-content: center; align-items: center;" >
+  
+  <div class="row">
 
 
-      <div class="card col-md-5" style="width: 30rem; margin-top: 5%;" *ngIf="teams1.length" >
+      <div class="card col-md-5"  style="width: 30rem; margin-top: 5%;" *ngIf="teams1.length" >
         <div class="card-body">
           <h3 class="card-title">Team Info</h3>
          
@@ -14,11 +16,11 @@
        </form>
 
           <button style="position: relative; right: 0; bottom: 0;"   (click)="addTeamMember()" class="button btn-primary ">Add Team Member</button>
-        
+           <button (click) = "onclick()">Test</button>
         </div>
       </div>
       <div class="col-md-2"></div>
-        <div class="card col-md-5 " style="width: 30rem; margin-top: 5%;">
+        <div class="card col-md-5 "  *ngIf = "project.length>0" style="width: 30rem; margin-top: 5%;">
             <div class="card-body">
               <h3 class="card-title">Project Info</h3>
               <h4 class="card-subtitle mb-2">{{project[0].name}}</h4>

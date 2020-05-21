@@ -42,6 +42,7 @@ import { ViewProjectComponent } from './projects/view-project/view-project.compo
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

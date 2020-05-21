@@ -66,7 +66,7 @@ export class ManageLeavesComponent implements OnInit , AfterViewInit {
                 
               var leaveid=full[0]-1;
               //console.log(full)
-              return `<button style="cursor:pointer" class="button btn-primary modalShow" ltype=`+leaveid+` >Update</button>`;
+              return `<button style="cursor:pointer"   id ="enable" class="button btn-primary modalShow" ltype=`+leaveid+` >Update</button>`;
             }},
         ],
 
@@ -78,17 +78,22 @@ export class ManageLeavesComponent implements OnInit , AfterViewInit {
 
   ngAfterViewInit(): void {
     this.renderer.listen('document', 'click', (event) => {
-      
+      console.log(event)
+      $('#enable').prop('disabled',true)
+
       if (event.target.hasAttribute("ltype")) {
         let sno=event.target.getAttribute("ltype");
         console.log(sno)
         this.leaveid = sno
         //let leaveid=this.leave_types[sno].id;
-        
+       
       }
+     
     });
-  }
 
+    
+  }
+ 
   
  ifHRrole(){
   if(this.principle.getRole()==="HR")

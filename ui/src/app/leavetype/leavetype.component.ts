@@ -209,7 +209,7 @@ addLeaveType(){
     this.leavesService.deleteLeaveType(JSON.stringify(data)).subscribe(
       res=>{
         console.log(res)
-        this.notificationService.showSuccess("Leave type deleted!!!")
+        this.notificationService.showFailed("Leave type deleted!!!")
 
       },
       err=>{
