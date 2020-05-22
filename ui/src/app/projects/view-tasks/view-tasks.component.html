@@ -1,0 +1,88 @@
+<p-toast></p-toast>
+<p-table #dt  [stacked]="true" scrollHeight="200px" [resizableColumns]="true" [autoLayout]="true"  [columns]="cols" [value]="tasks"  [paginator]="true" [rows]="7"  [showCurrentPageReport]="true" [(first)]="first"
+currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+
+
+<ng-template pTemplate="caption">
+    <div class="row">
+        <div class="col-sm">
+            <h2>List of Tasks</h2>
+        </div>
+        <div class="col-sm">
+            <button pButton type="button" icon="pi pi-fw pi-user-plus" style="position: relative;float:right;" label="Add Tasks" (click)="showDialog()">
+            </button>
+        </div>
+    </div>
+    <div style="text-align: right">        
+        <i class="pi pi-search" style="margin:5px 5px 0 0"></i>
+        <input type="text" pInputText size="37" placeholder="Search" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+    </div>
+</ng-template>
+<ng-template pTemplate="header" let-columns>
+    <tr>
+        <th *ngFor="let col of columns" [style.width]="col.width" [pSortableColumn]="col.field">
+            {{col.header}}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+    </tr>
+</ng-template>
+<ng-template pTemplate="body" let-task>
+    <tr>
+        <!-- <td>{{employee.sno}}</td> -->
+        
+        <td>{{task.title}}</td>
+        <td>{{task.assignTo}}</td>
+        <td>{{task.project_id}}</td>
+        <td>{{task.status}}</td>
+        <td>{{task.deadline}}</td>
+        <td>{{task.createdOn}}</td>
+        <td>{{task.description}}</td>
+
+
+        <td>
+            <div class="ui-toolbar-group-center">
+                
+                <button  pButton type="button" icon="pi pi-user-edit" class="ui-button-primary"></button>
+                <button  pButton type="button" icon="pi pi-times" class="ui-button-danger"></button>
+            </div>
+        </td>
+
+    </tr>
+</ng-template>
+
+</p-table>
+
+<p-dialog header="Create Task" [style]="{'width':'80vh'}"  [(visible)]="showCreateTask">
+    <div class="">
+        <form [formGroup]="TaskForm">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input formControlName="title" type="text" class="form-control" required id="title" aria-describedby="nameHelp" placeholder="Title of Task">           
+          </div>
+          
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input formControlName="description" type="text" class="form-control" required id="description" aria-describedby="nameHelp" placeholder="Description">           
+          </div>
+         
+          <div class="form-group">
+            <label for="deadline">Deadline</label>
+            <input formControlName="deadline" type="date" class="form-control" required id="deadline" aria-describedby="nameHelp" placeholder="">           
+          </div>    
+
+          <div class="form-group">
+            <label for="employees">Assign To</label> <br>
+          <p-multiSelect formControlName="assignTo" [options]="employees" id="employees" ></p-multiSelect>
+          </div>
+          
+        </form>
+        
+        
+    </div>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+        <button type="button" pButton icon="pi pi-times"  label="Cancel" (click)="closeDialog()"></button>
+        <button type="button" pButton icon="pi pi-check" label="Create" (click)="addTask();closeDialog()"></button>  
+        </div>
+    </p-footer>
+</p-dialog>

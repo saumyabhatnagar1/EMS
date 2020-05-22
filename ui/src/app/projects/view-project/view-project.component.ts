@@ -1,3 +1,4 @@
+import { ViewTasksComponent } from './../view-tasks/view-tasks.component';
 import { FormGroup, FormBuilder, FormControlDirective,FormControl } from '@angular/forms';
 import { AccountServiceService } from './../../common/services/account-service.service';
 import { ViewProjectService } from './view-project.service';

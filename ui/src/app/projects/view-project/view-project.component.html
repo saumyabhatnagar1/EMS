@@ -1,6 +1,6 @@
 <p-toast></p-toast>
 <div class="container" style="display: flex; flex-direction: column; justify-content: center; align-items: center;" >
-  
+  <div class="col">
   <div class="row">
 
 
@@ -16,7 +16,7 @@
        </form>
 
           <button style="position: relative; right: 0; bottom: 0;"   (click)="addTeamMember()" class="button btn-primary ">Add Team Member</button>
-           <button (click) = "onclick()">Test</button>
+           
         </div>
       </div>
       <div class="col-md-2"></div>
@@ -39,27 +39,12 @@
 
 
 
-          <!-- <div class="modal fade  " id="addMemberBox">
-            <div class="modal-dialog modal-lg">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4>Add New Member</h4>
-                  <button class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                  <form [formGroup]="addMemberForm">
-                    <div class="form-group">
-                    <p-multiSelect formControlName="newTeamMember" [options]="employees" id="employees" ></p-multiSelect>
-                  </div>
-                </form>
-                </div>
-                <div class="modal-footer">
-                  <button class="btn btn-secondary" data-dismiss="modal"
-                    style="background-color:green;" data-target="#statusBox" data-toggle="modal" (click)="addTeamMember()">Yes</button>
-                  <button class="btn btn-secondary" data-dismiss="modal" style="background-color: red;">No</button>
-                </div>
-              </div>
-            </div>
-          </div> -->
     </div>
+</div>
+
+<br><br>
+
+<div class="row">
+<app-view-tasks></app-view-tasks>
+</div>
 </div>

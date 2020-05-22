@@ -39,6 +39,7 @@ import {InputSwitchModule} from 'primeng/inputswitch';
 import { ProjectsComponent } from './projects/projects.component';
 import {MultiSelectModule} from 'primeng/multiselect';
 import { ViewProjectComponent } from './projects/view-project/view-project.component';
+import { ViewTasksComponent } from './projects/view-tasks/view-tasks.component';
 
 
 
@@ -65,6 +66,7 @@ import { ViewProjectComponent } from './projects/view-project/view-project.compo
     EditEmployeeComponent,
     ProjectsComponent,
     ViewProjectComponent,
+    ViewTasksComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
