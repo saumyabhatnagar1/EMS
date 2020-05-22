@@ -64,17 +64,30 @@ def saveTask(task_data):
         "project_id": task_data['project_id'],
         "title": task_data['title'],
         "description": task_data['description'],
-        "assignTo": task_data['assignee'],
+        "assignTo": task_data['assignTo'],
         "status": 0,
         "createdOn": datetime.datetime.now().strftime("%x %X"),
         "deadline": task_data['deadline'],
-        "due" : 0
+        "due": 0
     }
     projectMapper.saveTask(task_detail)
 
 
-def getTasksDetail(project_id):
-    task_detail = projectMapper.findTasks(project_id)
+def getTaskByProjectID(project_id):
+    task_detail = projectMapper.findTasksByProjectID(project_id)
+    if task_detail is not None:
+        task_dict = {}
+        cnt = 0
+        for item in task_detail:
+            item.pop("_id")
+            task_dict[cnt] = item
+            cnt += 1
+        return task_dict
+    return None
+
+
+def getTaskByAssignTo(assignTo):
+    task_detail = projectMapper.findTasksByAssignTo(assignTo)
     if task_detail is not None:
         task_dict = {}
         cnt = 0

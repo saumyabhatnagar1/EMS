@@ -54,7 +54,7 @@ def getProjectsByAssignTo(request):
 @login_required
 @is_post
 def addTask(request):
-    if len(request.body) <= 2:
+    if len(request.body) <= 4:
         return JsonResponse({"status": 404, "message": "INVALID_REQUEST"})
     task_data = json.loads(request.body)
     projectService.saveTask(task_data)
@@ -64,14 +64,27 @@ def addTask(request):
 @csrf_exempt
 @login_required
 @is_post
-def getTasks(request):
+def getTaskByProjectID(request):
     if len(request.body) < 1:
         return JsonResponse({"status": 404, "message": "INVALID_REQUEST"})
     project_id = json.loads(request.body)['project_id']
-    task_data = projectService.getTasksDetail(project_id)
+    task_data = projectService.getTaskByProjectID(project_id)
     if task_data is not None:
         return JsonResponse(task_data, safe=False)
-    return JsonResponse({"status":400, "message": "NO TASK FOUND"})
+    return JsonResponse({"status": 200, "message": "NO TASK FOUND"})
+
+
+@csrf_exempt
+@login_required
+@is_post
+def getTaskByAssignTo(request):
+    if len(request.body) < 1:
+        return JsonResponse({"status": 404, "message": "INVALID_REQUEST"})
+    assignTo = json.loads(request.body)['assignTo']
+    task_data = projectService.getTaskByAssignTo(assignTo)
+    if task_data is not None:
+        return JsonResponse(task_data, safe=False)
+    return JsonResponse({"status": 200, "message": "NO TASK FOUND"})
 
 
 @csrf_exempt

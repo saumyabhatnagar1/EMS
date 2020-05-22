@@ -24,8 +24,16 @@ def saveTask(task_detail):
     return id
 
 
-def findTasks(project_id):
+def findTasksByProjectID(project_id):
     query = {"project_id": project_id}
+    tasks = list(Tasks.find(query))
+    if len(tasks) > 0:
+        return tasks
+    return None
+
+
+def findTasksByAssignTo(assignTo):
+    query = {"assignTo": assignTo}
     tasks = list(Tasks.find(query))
     if len(tasks) > 0:
         return tasks

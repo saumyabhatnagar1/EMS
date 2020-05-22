@@ -35,8 +35,9 @@ urlpatterns = [
     path('project/getAll', projectController.getProjects, name='get project'),
     path('project/getByID', projectController.getProjectsByID, name='get project by ID'),
     path('project/getByAssignTo', projectController.getProjectsByAssignTo, name='get project by assignTo'),
-    path('task/new', projectController.addTask, name='add task'),
-    path('task/find', projectController.getTasks, name='get task'),
+    path('tasks/new', projectController.addTask, name='add task'),
+    path('tasks/getByProjectID', projectController.getTaskByProjectID, name='get tasks by project_id'),
+    path('tasks/getByAssignTo', projectController.getTaskByAssignTo, name='get tasks by assignTo'),
     path('project/addTeamMember', projectController.addTeamMember, name='add team member'),
     path('project/getTeam', projectController.getTeamDetail, name='get team detail'),
 
