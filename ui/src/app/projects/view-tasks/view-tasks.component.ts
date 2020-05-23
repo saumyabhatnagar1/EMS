@@ -135,6 +135,7 @@ addTask(){
   },err=>{
     console.log(err)
   })
+  this.getTask()
 }
 
 getTask(){
@@ -146,6 +147,7 @@ getTask(){
     res=>{
       //console.log(res)
       let res1=Object.entries(res)
+      this.tasks=[]
         for(let i=0;i<res1.length;i++)
         { 
           this.tasks.push(res1[i][1])
