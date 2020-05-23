@@ -30,7 +30,7 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
     <tr>
         <!-- <td>{{employee.sno}}</td> -->
         
-        <td>{{task.title}}</td>
+        <td >{{task.title}}</td>
         <td>{{task.assignTo}}</td>
         <td>{{task.project_id}}</td>
         <td>{{task.status}}</td>
@@ -39,9 +39,9 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
         <td>{{task.description}}</td>
 
 
-        <td>
+        <td #id [attr.data-message-id]="task.id" >
             <div class="ui-toolbar-group-center">
-                <button pButton type="button" icon="pi pi-search" class="ui-button-success" (click)="showUpdateDialog();"></button>
+                <button pButton type="button" icon="pi pi-search"  class="ui-button-success"  (click)="showUpdateDialog(id);" ></button>
                 <button  pButton type="button" icon="pi pi-user-edit" class="ui-button-primary"></button>
                 
             </div>
@@ -87,31 +87,17 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
     </p-footer>
 </p-dialog>
 
-<p-dialog header="Update Task" [style]="{'width':'80vh'}"  [(visible)]="showUpdateTask">
-    <div class="">
+<p-dialog header="Update Task" [style]="{'width':'80vh'}"  [(visible)]="showUpdateTask" >
+    <div *ngFor="let taskbyid of tasksbyid"  class="modal-body">
+      <p>Created On:{{taskbyid.createdOn}}</p>
+      <p>Deadline:{{taskbyid.deadline}}</p>
+      <p>Description:{{taskbyid.description}}</p>
+      <p>assigned to:{{taskbyid.assignedTo}}</p>
+      <p>title:{{taskbyid.title}}</p>
+      <p>status:{{taskbyid.status}}</p>
+      <p>due:{{taskbyid.due}}</p>
         
-        <!-- <form [formGroup]="TaskForm">
-          <div class="form-group">
-            <label for="title">Title</label>
-            <input formControlName="title" type="text" class="form-control" required id="title" aria-describedby="nameHelp" placeholder="Title of Task">           
-          </div>
-          
-          <div class="form-group">
-            <label for="description">Description</label>
-            <input formControlName="description" type="text" class="form-control" required id="description" aria-describedby="nameHelp" placeholder="Description">           
-          </div>
-         
-          <div class="form-group">
-            <label for="deadline">Deadline</label>
-            <input formControlName="deadline" type="date" class="form-control" required id="deadline" aria-describedby="nameHelp" placeholder="">           
-          </div>    
-
-          <div class="form-group">
-            <label for="employees">Assign To</label> <br>
-          <p-multiSelect formControlName="assignTo" [options]="employees" id="employees" ></p-multiSelect>
-          </div>
-          
-        </form> -->
+      
         
         
     </div>

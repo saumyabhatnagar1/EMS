@@ -75,9 +75,17 @@ isFirstPage(): boolean {
 showDialog(){
 this.showCreateTask = true;
 }
-showUpdateDialog(){
-  this.showUpdateTask = true;
-}
+public tasksbyid:any
+showUpdateDialog(id){
+  
+  this.showUpdateTask=true
+  var taskid=(id.getAttribute('data-message-id'))
+  this.tasksbyid=this.tasks.filter((task)=>{
+    return task.id==taskid
+  })
+
+  }
+
 closeDialog(){
   this.showCreateTask=false
   this.showUpdateTask=false
