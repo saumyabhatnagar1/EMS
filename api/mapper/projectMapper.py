@@ -32,6 +32,13 @@ def findTasksByProjectID(project_id):
     return None
 
 
+def updateTask(task_detail):
+    query = {"_id": ObjectId(task_detail['id'])}
+    update_to = {"$set": {"status": task_detail['status']}}
+    response = Tasks.update(query, update_to)
+    return response
+
+
 def findTasksByAssignTo(assignTo):
     query = {"assignTo": assignTo}
     tasks = list(Tasks.find(query))

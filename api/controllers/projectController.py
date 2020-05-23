@@ -90,6 +90,17 @@ def getTaskByAssignTo(request):
 @csrf_exempt
 @login_required
 @is_post
+def updateTaskStatus(request):
+    task_detail = json.loads(request.body)
+    response = projectService.updateTaskStatus(task_detail)
+    if response is not None:
+        return JsonResponse({"status": 200, "message": "TASK UPDATED"})
+    return JsonResponse({"status": 200, "message": "NO TASK FOUND"})
+
+
+@csrf_exempt
+@login_required
+@is_post
 def addTeamMember(request):
     team_data = json.loads(request.body)
     response = projectService.addTeamMember(team_data)

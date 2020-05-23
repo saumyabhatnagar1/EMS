@@ -79,6 +79,7 @@ def getTaskByProjectID(project_id):
         task_dict = {}
         cnt = 0
         for item in task_detail:
+            item["id"] = str(item["_id"])
             item.pop("_id")
             task_dict[cnt] = item
             cnt += 1
@@ -92,10 +93,18 @@ def getTaskByAssignTo(assignTo):
         task_dict = {}
         cnt = 0
         for item in task_detail:
+            item["id"] = str(item["_id"])
             item.pop("_id")
             task_dict[cnt] = item
             cnt += 1
         return task_dict
+    return None
+
+
+def updateTaskStatus(task_detail):
+    response = projectMapper.updateTask(task_detail)
+    if response is not None:
+        return response
     return None
 
 
