@@ -23,6 +23,7 @@ export class ViewTasksComponent implements OnInit {
 
   public cols :any;
   public showCreateTask:boolean=false;
+  public showUpdateTask:boolean=false;
   first = 0;
   rows = 10;
   public tasks = []
@@ -74,8 +75,12 @@ isFirstPage(): boolean {
 showDialog(){
 this.showCreateTask = true;
 }
+showUpdateDialog(){
+  this.showUpdateTask = true;
+}
 closeDialog(){
   this.showCreateTask=false
+  this.showUpdateTask=false
 }
 
 test(){

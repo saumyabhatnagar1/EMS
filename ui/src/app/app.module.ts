@@ -40,6 +40,8 @@ import { ProjectsComponent } from './projects/projects.component';
 import {MultiSelectModule} from 'primeng/multiselect';
 import { ViewProjectComponent } from './projects/view-project/view-project.component';
 import { ViewTasksComponent } from './projects/view-tasks/view-tasks.component';
+import {ProgressBarModule} from 'primeng/progressbar';
+
 
 
 
@@ -100,7 +102,7 @@ import { ViewTasksComponent } from './projects/view-tasks/view-tasks.component';
     DialogModule,
     InputSwitchModule,
     MultiSelectModule,
-    
+    ProgressBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -30,8 +30,12 @@
               <p class="card-text">Deadline : {{project[0].deadline}}</p>
               <p class="card-text">Description : {{project[0].description}}</p>
               <p class="card-text">Due : {{project[0].due}}</p>
+              
               <p class="card-text">Status : {{project[0].status}}</p>
-              <p class="card-text">Complete % : {{project[0].complete_percentage}}</p>
+              
+            
+              
+              <div class="card-text ui-progressbar-label">Complete % : <p-progressBar [value]="project[0].complete_percentage"></p-progressBar> </div>
             
             </div>
           </div>

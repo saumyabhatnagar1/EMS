@@ -41,9 +41,9 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
 
         <td>
             <div class="ui-toolbar-group-center">
-                
+                <button pButton type="button" icon="pi pi-search" class="ui-button-success" (click)="showUpdateDialog();"></button>
                 <button  pButton type="button" icon="pi pi-user-edit" class="ui-button-primary"></button>
-                <button  pButton type="button" icon="pi pi-times" class="ui-button-danger"></button>
+                
             </div>
         </td>
 
@@ -83,6 +83,42 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
         <button type="button" pButton icon="pi pi-times"  label="Cancel" (click)="closeDialog()"></button>
         <button type="button" pButton icon="pi pi-check" label="Create" (click)="addTask();closeDialog()"></button>  
+        </div>
+    </p-footer>
+</p-dialog>
+
+<p-dialog header="Update Task" [style]="{'width':'80vh'}"  [(visible)]="showUpdateTask">
+    <div class="">
+        
+        <!-- <form [formGroup]="TaskForm">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input formControlName="title" type="text" class="form-control" required id="title" aria-describedby="nameHelp" placeholder="Title of Task">           
+          </div>
+          
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input formControlName="description" type="text" class="form-control" required id="description" aria-describedby="nameHelp" placeholder="Description">           
+          </div>
+         
+          <div class="form-group">
+            <label for="deadline">Deadline</label>
+            <input formControlName="deadline" type="date" class="form-control" required id="deadline" aria-describedby="nameHelp" placeholder="">           
+          </div>    
+
+          <div class="form-group">
+            <label for="employees">Assign To</label> <br>
+          <p-multiSelect formControlName="assignTo" [options]="employees" id="employees" ></p-multiSelect>
+          </div>
+          
+        </form> -->
+        
+        
+    </div>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+        <button type="button" pButton icon="pi pi-times"  label="Cancel" (click)="closeDialog()"></button>
+        <button type="button" pButton icon="pi pi-check" label="Create" (click)="closeDialog()"></button>  
         </div>
     </p-footer>
 </p-dialog>

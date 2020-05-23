@@ -20,6 +20,7 @@ export class ViewProjectComponent implements OnInit {
   constructor(private confirmationservice : ConfirmationService,private messageservice: MessageService,private accountService:AccountServiceService,private activeRoute:ActivatedRoute,private viewProjectService: ViewProjectService) { }
   public id:any;
   public project = []
+  public value: number = 50;
   ngOnInit(): void {
     this.activeRoute.paramMap.subscribe(params=>{
       this.id = params.get('id')
