@@ -97,7 +97,7 @@ export class ManageEmployeeComponent implements OnInit {
      // }
 
     },err=>{
-        this.messageService.add({severity:'error', summary:'Error occured!', detail:'something went wrong contact admin now...',life:5000});
+        this.messageService.add({severity:'warn', summary:'Unauthorized Access!', detail:'Your account not authorized contact admin...'});
       console.log(err);
     })
   }

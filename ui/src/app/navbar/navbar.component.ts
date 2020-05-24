@@ -51,7 +51,7 @@ export class NavbarComponent implements OnInit {
         });
     }
 
-    public _opened: boolean = false;
+    public _opened: boolean = true;
  
     public _toggleSidebar() {
       this._opened = !this._opened;
