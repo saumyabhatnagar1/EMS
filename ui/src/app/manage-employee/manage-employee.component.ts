@@ -23,7 +23,7 @@ export class ManageEmployeeComponent implements OnInit {
   ngOnInit(): void {
     this.cols = [
             
-            { field: "username", header:"Email"},
+            { field: "username", header:"Username"},
             { field: "name" ,header:"Full Name"},
             { field: "designation",header:"Designation"},
             { field: "role" ,header:"Role"},
@@ -77,14 +77,9 @@ export class ManageEmployeeComponent implements OnInit {
   getEmployeeData(){
   	this.accountService.getUsers().subscribe(res=>{
       this.employees = res;
-      if(res["status"] == 401){
-        this.messageService.add({severity:'warning', summary:'Unauthorized Access!', detail:'Your account not authorized contact admin...'});
-        this.router.navigate(['']);
-      }else if(res["status"] == 410){
-        this.messageService.add({severity:'info', summary:'Login required', detail:'You must login into app before continue...'});
-      }
   	},err=>{
   		console.log(err);
+        this.messageService.add({severity:'warn', summary:'Unauthorized Access!', detail:'Your account not authorized contact admin...'});
   	});
   }
   
