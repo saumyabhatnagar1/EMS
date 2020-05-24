@@ -15,7 +15,8 @@ export class EditEmployeeComponent implements OnInit {
   public isHR:boolean=false;
   profileForm = new FormGroup({
     name: new FormControl(''),
-    email: new FormControl(''),
+    username: new FormControl(''),
+    designation: new FormControl(''),
     gender: new FormControl(''),
     role:new FormControl(''),
     date :new FormControl(''),
@@ -33,7 +34,7 @@ export class EditEmployeeComponent implements OnInit {
         this.id = params.get('id');
         this.get_profile();
     });
-    if (this.principle.getRole() === "HR"){
+    if (this.principle.getRole() === "ADMIN"){
     	this.isHR = true;
     }else{
     	this.isHR = false;
@@ -42,7 +43,7 @@ export class EditEmployeeComponent implements OnInit {
 
     get_profile(){
 	  let data = {
-	    "email" : this.id
+	    "username" : this.id
 	  }
 	  let user_login_json = JSON.stringify(data);
 	  this.profileService.get_profile(user_login_json).subscribe(
@@ -57,9 +58,10 @@ export class EditEmployeeComponent implements OnInit {
    }
    patchValues(res){
    	this.profileForm.get('name').setValue(res.name);
-   	this.profileForm.get('email').setValue(res.email);
+   	this.profileForm.get('username').setValue(res.username);
    	this.profileForm.get('gender').setValue(res.gender)
    	this.profileForm.get('role').setValue(res.role);
+    this.profileForm.get('designation').setValue(res.designation);
    	this.profileForm.get('isActive').setValue(res.isActive);
     this.profileForm.get('date').setValue(res.date);
     this.profileForm.get('houseNumber').setValue(res.houseNumber);
@@ -76,12 +78,13 @@ export class EditEmployeeComponent implements OnInit {
    	}
    	let data = JSON.stringify(this.profileForm.value);
    	console.log(this.profileForm.value);
-   	this.profileService.getUpdate(data).subscribe(res=>{
-   		if(res["status"] == 200){
+   	this.profileService.updateProfile(data).subscribe(res=>{
+      console.log(res);
+   		/*if(res["status"] == 200){
    			this.notificationService.showSuccess("Profile updated!");
    		}else{
    			this.notificationService.showFailed("Profile updation failed!");
-   		}
+   		}*/
    	},err=>{
    		console.log(err);
    		this.notificationService.showFailed("Something went wrong in api");

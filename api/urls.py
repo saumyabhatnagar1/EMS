@@ -2,14 +2,14 @@ from django.urls import path
 
 from api.controllers import accountController, timesheetsController, leavesController, projectController, \
     principleController, permissionController, notificationController
-
+from . import views
 urlpatterns = [
-    path('', accountController.index, name='index'),
+    path('accounts/createAccount/',accountController.createAccount,name='create Account'),
+    path('accounts/getAccount/',views.getAccount,name='getAccount Account'),
+    path('accounts/getAllAccounts/',accountController.getAllAccounts,name='get All accounts'),
+
     path('principle/', principleController.index, name='principle'),
-    path('login/', accountController.login, name='login'),
-    path('createUser/', accountController.createUser, name='create User'),
     path('account/profile', accountController.getUserProfile, name='profile'),
-    path('logout/', accountController.logout, name='Logout'),
     path('accounts/', accountController.getAllAccounts, name='get all accounts'),
     path('account/updateProfile', accountController.updateUserProfile, name='update Profile'),
     

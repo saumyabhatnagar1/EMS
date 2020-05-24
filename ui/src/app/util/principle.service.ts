@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient,HttpHeaders} from '@angular/common/http';
 import {GlobalsService} from '../common/services/globals.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,17 +10,15 @@ export class PrincipleService {
   private key : string = 'ems_';
 
   constructor(private http:HttpClient, private globals:GlobalsService) { 
-   
-    this.http.get(this.globals.baseApiUrl+'principle').subscribe(res=>{
+    this.getPrinciple();
+  }
 
-      if(res["username"]!=null){
-        this.setUser(res);
-      }else{
-        this.delete();
-      }
-    },err=>{
-      console.log(err);
-    })
+  setItem(name,value){
+    localStorage.setItem(this.key+name,value);
+  }
+
+  getItem(name){
+    return localStorage.getItem(this.key+name);
   }
 
   setUser(user_data){
@@ -40,5 +39,21 @@ export class PrincipleService {
 
   delete(){
     localStorage.removeItem(this.key+'principle');
+  }
+
+  getPrinciple(){
+    const headers = new HttpHeaders(
+        {'Content-type':'application/json',
+         'Authorization':'Bearer '+this.getItem('jwt_token')
+        });
+    const url = this.globals.baseApiUrl+'principle/';
+    this.http.get(url,{headers:headers}).subscribe(res=>{
+      if(res["username"]){
+        this.setUser(res);
+      }
+      console.log(res);
+    },err=>{
+        console.log(err);
+    });
   }
 }

@@ -35,8 +35,7 @@
         <ng-template pTemplate="body" let-employee>
             <tr>
                 <!-- <td>{{employee.sno}}</td> -->
-                <span class="ui-column-title"></span>
-                <td>{{employee.email}}</td>
+                <td>{{employee.username}}</td>
                 <td class="ui-p-4">{{employee.name}}</td>
                 <td class="ui-p-5">{{employee.designation}}</td>
                 <td class="ui-p-6">{{employee.role}}</td>
@@ -50,8 +49,8 @@
                 <td>
                     <div class="ui-toolbar-group-center">
                         <button pButton type="button" icon="pi pi-search" class="ui-button-success"></button>
-                        <button (click)="editEmployee(employee.email)" pButton type="button" icon="pi pi-user-edit" class="ui-button-primary"></button>
-                        <button (click)="deactivateEmployee(employee.email)" pButton type="button" icon="pi pi-times" class="ui-button-danger"></button>
+                        <button (click)="editEmployee(employee.username)" pButton type="button" icon="pi pi-user-edit" class="ui-button-primary"></button>
+                        <button (click)="deactivateEmployee(employee.username)" pButton type="button" icon="pi pi-times" class="ui-button-danger"></button>
                     </div>
                 </td>
 

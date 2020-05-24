@@ -25,18 +25,24 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-      let user_login_json = JSON.stringify(this.loginForm.value);
-      this._loginService.login(user_login_json).subscribe(
+      let user_login_json = {
+        "username":this.loginForm.get('email').value,
+        "password":this.loginForm.get('password').value
+      }
+      this._loginService.login(JSON.stringify(user_login_json)).subscribe(
       res=>{
-         if(res["status"] == 200){
-            this.principle.setUser(res);
-            window.location.href = '/';
-            this.notificationService.showSuccess("Successfully Login!")
-         }else{
-           //this.message = res["message"];
-           this.notificationService.showFailed("Invalid Credentials!")
-           
-         }
+          if(res['token']){
+            this.principle.setItem('jwt_token',res['token']);
+            this._loginService.getPrinciple().subscribe(res=>{
+                if(res["username"]){
+                  this.principle.setUser(res);
+                  this.router.navigate(['']);
+                }
+            },err=>{
+                console.log(err);
+            });
+            
+          }
       },
       err =>{
          console.log(err);

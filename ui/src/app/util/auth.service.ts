@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient } from '@angular/common/http';
+import {HttpClient,HttpHeaders } from '@angular/common/http';
 import { PrincipleService } from './principle.service';
 
 @Injectable({
@@ -13,5 +13,14 @@ export class AuthService {
   logout(){
     this.principle.delete();
     return this.http.delete(this.endPoint+'logout/');
+  }
+
+  getPrinciple(){
+  	const headers = new HttpHeaders(
+  			{'Content-type':'application/json',
+  			 'Authorization':'Bearer '+this.principle.getItem('jwt_token')
+  			});
+  	const url = this.endPoint+'principle/';
+  	return this.http.get(url,{headers:headers});
   }
 }

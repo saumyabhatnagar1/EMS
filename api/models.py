@@ -1,3 +1,1 @@
-from django.db import models
-
-# Create your models here.
+from .mapper.models.accountModel import Employee

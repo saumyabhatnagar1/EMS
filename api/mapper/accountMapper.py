@@ -1,28 +1,27 @@
-from . import client
-
-client = client.connectToDB()
-Users = client.primer.users
-
+from .models.accountModel import Employee
 
 def save(account):
-    id = Users.insert_one(account).inserted_id
-    return id
+    employee = Employee.objects.create_user(username=account['username'],password=account['password'])
+    employee.save()
+
+def find(username):
+    return Employee.objects.get(username = username)
 
 
-def findByEmail(email):
-    query = {"email": email}
-    result = list(Users.find(query))
-    if len(result) > 0:
-        return result[0]
-    return None
-
-
-def update(user_data, email):
-    query = {"email": email}
-    update_to = {"$set": user_data}
-    response = Users.update(query, update_to)
-    return response
+def update(user_data, username):
+    employee = Employee.objects.get(username=username)
+    employee.role = user_data['role']
+    employee.name = user_data['name']
+    employee.mobileNumber = user_data['mobileNumber']
+    employee.street = user_data['street']
+    employee.addressLine = user_data['addressLine']
+    employee.gender = user_data['gender']
+    employee.houseNumber = user_data['houseNumber']
+    employee.country = user_data['country']
+    employee.isActive = user_data['isActive']
+    employee.designation = user_data['designation']
+    employee.save()
 
 def getAll():
-    accounts = list(Users.find())
+    accounts = Employee.objects.all()
     return accounts

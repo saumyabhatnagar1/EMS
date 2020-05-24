@@ -23,7 +23,7 @@ export class ManageEmployeeComponent implements OnInit {
   ngOnInit(): void {
     this.cols = [
             
-            { field: "email", header:"Email"},
+            { field: "username", header:"Email"},
             { field: "name" ,header:"Full Name"},
             { field: "designation",header:"Designation"},
             { field: "role" ,header:"Role"},
@@ -90,16 +90,16 @@ export class ManageEmployeeComponent implements OnInit {
   
   createAccount(){
     let data = JSON.stringify({
-      "email":$('#email').val(),
+      "username":$('#email').val(),
       "password":$('#password').val()
     });
-    this.registerService.createAccount(data).subscribe(res=>{
-      if(res["status"] == 201){
+    this.accountService.createAccount(data).subscribe(res=>{
+      //if(res["status"] == 201){
         this.messageService.add({severity:'success', summary:'Account created!', detail:'One employee record added into database...',life:5000});
         this.getEmployeeData();
-      }else{
-        this.messageService.add({severity:'warn', summary:'Account already exist', detail:'if problem persist contact admin...',life:5000});
-      }
+      //}else{
+        //this.messageService.add({severity:'warn', summary:'Account already exist', detail:'if problem persist contact admin...',life:5000});
+     // }
 
     },err=>{
         this.messageService.add({severity:'error', summary:'Error occured!', detail:'something went wrong contact admin now...',life:5000});

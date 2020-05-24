@@ -7,3 +7,22 @@
         width: 75vw;
     }
 }
+.status{
+	color:white;
+	height: 20px;
+	text-align: center;
+	font-weight: bold;
+	border-radius: 1px;
+}
+.status.new{
+	background-color: #007ad9;
+}
+.status.in-progress{
+	background-color: #007ad9;
+}
+.status.completed{
+	background-color:green;
+}
+.status.stuck{
+	background-color:red;
+}

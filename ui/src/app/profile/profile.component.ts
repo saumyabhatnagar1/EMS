@@ -21,7 +21,7 @@ export class ProfileComponent implements OnInit {
 
 
   public updateForm = new FormGroup({
-    email: new FormControl('',[Validators.required,Validators.email]),
+    username: new FormControl('',[Validators.required,Validators.email]),
     date:new FormControl('message.date',Validators.required),
     gender:new FormControl('',Validators.required),
     houseNumber:new FormControl('',Validators.required),
@@ -51,7 +51,7 @@ export class ProfileComponent implements OnInit {
 
 get_profile(){
   let data = {
-    "email" : this.principle.getUsername()
+    "username" : this.principle.getUsername()
   }
   let user_login_json = JSON.stringify(data);
   this.profileService.get_profile(user_login_json).subscribe(

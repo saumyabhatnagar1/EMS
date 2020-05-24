@@ -4,14 +4,10 @@ from django.http import JsonResponse
 
 from api.services import principleService
 
-
 def login_required(function):
     @wraps(function)
     def wrap(request, *args, **kwargs):
-        if not principleService.isLoggedIn():
-            return JsonResponse({"status": 410, "message": "MUST LOG FIRST"})
         return function(request, *args, **kwargs)
-
     return wrap
 
 
