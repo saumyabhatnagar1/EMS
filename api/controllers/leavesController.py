@@ -6,28 +6,27 @@ from django.views.decorators.csrf import csrf_exempt
 from api.services import principleService, leavesService
 from api.security.decorators import login_required, is_post, is_HR
 
+from rest_framework.decorators import api_view,permission_classes
+from rest_framework.permissions import IsAuthenticated, IsAdminUser,BasePermission
+from .dto.leaveResponse import LeaveSerializer
+from rest_framework import status
 
-@csrf_exempt
-@login_required
-@is_post
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def addLeave(request):
-    if len(request.body) <= 2:
-        return JsonResponse({'status': 404, 'message': 'INVALID_REQUEST'})
     leave_data = json.loads(request.body)
-    leave_data["email"] = principleService.getUsername()
+    leave_data['emp_id'] = request.user.username
     leavesService.saveLeave(leave_data)
-    return JsonResponse({"status": 200, "message": "LEAVE_REQUEST SUBMITTED"})
+    return JsonResponse({"detail":"leave request created!"},status=status.HTTP_201_CREATED)
 
 
-@csrf_exempt
-@login_required
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def getLeavesData(request):
-    email = principleService.getUsername()
-    leave_data = leavesService.getLeaveDetail(email)
-    if leave_data is not None:
-        return JsonResponse(leave_data, safe=False)
-    else:
-        return JsonResponse({"status": 200, "message": "NO LEAVE_DETAIL FOUND"})
+    username = request.user.username
+    leave_data = leavesService.getLeaveDetail(username)
+    serializer = LeaveSerializer(leave_data,many=True)
+    return JsonResponse(serializer.data,safe=False,status=status.HTTP_200_OK)
 
 
 @csrf_exempt

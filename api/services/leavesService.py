@@ -3,31 +3,12 @@ import datetime
 
 
 def saveLeave(leave_data):
-    leaveDetail = {
-        'emp_id': leave_data['emp_id'],
-        'leave_type': leave_data['leave_type'],
-        'date': leave_data['date'],
-        'description': leave_data['description'],
-        'posting_date': datetime.datetime.now().strftime("%x %X"),
-        'admin_remark': "",
-        'admin_remark_date': "",
-        'status': 0,
-        'is_read': False
-    }
-    leaveMapper.save(leaveDetail)
+    leaveMapper.save(leave_data)
 
 
-def getLeaveDetail(email):
-    leaves_data = leaveMapper.findLeaveDetail(email=email)
-    if leaves_data is not None:
-        leaves_dict = {}
-        cnt = 0
-        for item in leaves_data:
-            item.pop("_id")
-            leaves_dict[cnt] = item
-            cnt += 1
-        return leaves_dict
-    return None
+def getLeaveDetail(username):
+    leaves_data = leaveMapper.findLeaveDetail(username=username)
+    return leaves_data
 
 
 def updateLeaveStatus(leave_data):

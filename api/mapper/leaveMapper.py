@@ -6,18 +6,19 @@ client = client.connectToDB()
 Leaves = client.primer.leaves
 LeaveTypes = client.primer.leavetypes
 
+from .models.leaveModel import Leave
 
-def save(leaveDetail):
-    id = Leaves.insert_one(leaveDetail).inserted_id
-    return id
+def save(leave_data):
+    leave = Leave.objects.create()
+    leave.emp_id = leave_data["emp_id"]
+    leave.date = leave_data["date"]
+    leave.leave_type = leave_data["leave_type"]
+    leave.description = leave_data["description"]
+    leave.save()
 
-
-def findLeaveDetail(email):
-    query = {"emp_id": email}
-    leaves = list(Leaves.find(query))
-    if len(leaves) > 0:
-        return leaves
-    return None
+def findLeaveDetail(username):
+    leaves = Leave.objects.filter(emp_id=username)
+    return leaves
 
 
 def update(leaveDetail):

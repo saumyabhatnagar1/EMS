@@ -13,8 +13,6 @@ urlpatterns = [
     path('accounts/', accountController.getAllAccounts, name='get all accounts'),
     path('account/updateProfile', accountController.updateUserProfile, name='update Profile'),
     
-
-    path('timesheets/', timesheetsController.index, name='time sheets'),
     path('timesheets/add', timesheetsController.add, name='add time sheet'),
     path('timesheets/find', timesheetsController.find, name='find time sheet'),
     path('timesheets/admin/update', timesheetsController.update, name='admin update time sheet'),

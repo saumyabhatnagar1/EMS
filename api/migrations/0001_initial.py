@@ -4,7 +4,7 @@ import django.contrib.auth.models
 import django.contrib.auth.validators
 from django.db import migrations, models
 import django.utils.timezone
-
+import uuid
 
 class Migration(migrations.Migration):
 
@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
                 ('is_staff', models.BooleanField(default=False, help_text='Designates whether the user can log into this admin site.', verbose_name='staff status')),
                 ('is_active', models.BooleanField(default=True, help_text='Designates whether this user should be treated as active. Unselect this instead of deleting accounts.', verbose_name='active')),
                 ('date_joined', models.DateTimeField(default=django.utils.timezone.now, verbose_name='date joined')),
-                ('user_id', models.CharField(blank=True, default='1317131a9d8b11eab408505bc2d0f560', max_length=250, unique=True)),
+                ('user_id', models.CharField(blank=True, default=uuid.uuid1().hex, max_length=250, unique=True)),
                 ('role', models.CharField(default='USER', max_length=250)),
                 ('name', models.CharField(blank=True, max_length=250)),
                 ('email', models.CharField(blank=True, max_length=250)),

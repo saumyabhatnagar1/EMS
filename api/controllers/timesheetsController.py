@@ -8,12 +8,6 @@ from api.security.decorators import login_required, is_admin, is_post
 
 
 @csrf_exempt
-@login_required
-def index():
-    return JsonResponse({"msg": "hello from timesheets"})
-
-
-@csrf_exempt
 @is_admin
 @is_post
 def add(request):
