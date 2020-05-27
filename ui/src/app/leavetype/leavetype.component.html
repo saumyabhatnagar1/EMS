@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <div class="card">
     <div class="card-body">
       <div class="row">
@@ -11,97 +11,217 @@
           </button>
         </div>
       </div>
-        <hr/>
-            <div class="table table-responsive">
-                <table id="example2" class="display" width="100%"></table>
-            </div>
-      
+      <hr />
+      <div class="table table-responsive">
+        <table id="example2" class="display" width="100%"></table>
+      </div>
+
     </div>
   </div>
 
 
 
 
-    <div class="modal" id="modalLeavetypeEdit" role="dialog">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="modal-title">Leave Status</h3>
-
-          </div>
-          <div class="modal-body">
-            <form action="">
-              <div class="form-group">
-                <label>Leave Type:</label>
-                <input class="form-control" id="editleavename" type="text" name="" value=" {{leaveName}}">
-              </div>
-                <div class="form-group">
-                <label for=""> Description</label>
-                
-                <textarea class="form-control" id="editleavedesc" type="text" value="{{leaveDesc}}" cols="10"
-                  rows="5"></textarea>
-              </div>
-            </form>
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
-            <button type="button" class="btn btn-success" (click)="updateLeaveType();closeModal()">Save</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="modal fade" id="newLeaveType" tabindex="-1" role="dialog" aria-labelledby="createLeavetype"
-      aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalCenterTitle">Create New Leave Type</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="form-group">
-                <label for="">Leave Type</label>
-                <input type="text" class="form-control" required id="leavetype" aria-describedby="emailHelp"
-                  placeholder="Enter Leave Type">
-              </div>
-              <div class="form-group">
-                <label for="">Description</label>
-                <input type="text" class="form-control" required id="desc" placeholder="Description">
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-success" data-dismiss="modal" (click)='addLeaveType()'>Create
-             Leave Type</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="modal" role="dialog" id="confirmBox">
-    <div class="modal-dialog modal-sm">
+  <div class="modal" id="modalLeavetypeEdit" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h4>Confirmation</h4>
-          
+          <h3 class="modal-title">Leave Status</h3>
+
         </div>
         <div class="modal-body">
-          Are you Sure you want to delete ?
+          <form action="">
+            <div class="form-group">
+              <label>Leave Type:</label>
+              <input class="form-control" id="editleavename" type="text" name="" value=" {{leaveName}}">
+            </div>
+            <div class="form-group">
+              <label for=""> Description</label>
+
+              <textarea class="form-control" id="editleavedesc" type="text" value="{{leaveDesc}}" cols="10"
+                rows="5"></textarea>
+            </div>
+          </form>
+
         </div>
         <div class="modal-footer">
-          <button class="btn btn-secondary"  data-dismiss="modal"
-            style="background-color:green;" data-target="#statusBox" data-toggle="modal" (click)="deleteLeaveType();closeModal()">Yes</button>
-          <button class="btn btn-secondary" data-dismiss="modal" style="background-color: red;" (click)="closeModal()">No</button>
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+          <button type="button" class="btn btn-success" (click)="updateLeaveType();closeModal()">Save</button>
         </div>
       </div>
     </div>
   </div>
+
+
+  <div class="modal fade" id="newLeaveType" tabindex="-1" role="dialog" aria-labelledby="createLeavetype"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Create New Leave Type</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="">Leave Type</label>
+              <input type="text" class="form-control" required id="leavetype" aria-describedby="emailHelp"
+                placeholder="Enter Leave Type">
+            </div>
+            <div class="form-group">
+              <label for="">Description</label>
+              <input type="text" class="form-control" required id="desc" placeholder="Description">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal" (click)='addLeaveType()'>Create
+            Leave Type</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<!-- <div class="modal" role="dialog" id="confirmBox">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Confirmation</h4>
+
+      </div>
+      <div class="modal-body">
+        Are you Sure you want to delete ?
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-dismiss="modal" style="background-color:green;" data-target="#statusBox"
+          data-toggle="modal" (click)="deleteLeaveType();closeModal()">Yes</button>
+        <button class="btn btn-secondary" data-dismiss="modal" style="background-color: red;"
+          (click)="closeModal()">No</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="container">
+
+
+  <p-table #dt [stacked]="true" scrollHeight="200px" [resizableColumns]="true" [autoLayout]="true" [columns]="cols"
+    [value]="leave_types" [paginator]="true" [rows]="7" [showCurrentPageReport]="true" [(first)]="first"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+
+
+    <ng-template pTemplate="caption">
+      <div class="row">
+        <div class="col-sm">
+          <h2>List of Leave Types</h2>
+        </div>
+        <div class="col-sm">
+          <button pButton type="button" icon="pi pi-fw pi-user-plus" style="position: relative;float:right;"
+            label="Add Leave Type" (click)="showCreateDialog()">
+          </button>
+        </div>
+      </div>
+      <div style="text-align: right">
+        <i class="pi pi-search" style="margin:5px 5px 0 0"></i>
+        <input type="text" pInputText size="37" placeholder="Search"
+          (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns" [style.width]="col.width" [pSortableColumn]="col.field">
+          {{col.header}}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-leavetype>
+      <tr>
+
+        <td>leavetype.value</td>
+        <td>leavetype.description</td>
+
+        <td>
+          <div class="ui-toolbar-group-center">
+
+            <button pButton type="button" icon="pi pi-user-edit" class="ui-button-primary"
+              (click)="showEditDialog()"></button>
+            <button pButton type="button" icon="pi pi-times" class="ui-button-danger"
+              (click)="showDeleteDialog()"></button>
+
+          </div>
+        </td>
+
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<p-dialog header="Create Leave Type" [style]="{'width':'80vh'}" [(visible)]="showCreateLeaveType">
+  <div class="">
+    <form>
+      <div class="form-group">
+        <label for="">Leave Type</label>
+        <input type="text" class="form-control" required id="leavetype" aria-describedby="emailHelp"
+          placeholder="Enter Leave Type">
+      </div>
+      <div class="form-group">
+        <label for="">Description</label>
+        <input type="text" class="form-control" required id="desc" placeholder="Description">
+      </div>
+    </form>
+
+
+  </div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+      <button type="button" pButton icon="pi pi-times" label="Cancel" (click)="closeDialog()"></button>
+      <button type="button" pButton icon="pi pi-check" label="Create" (click)="addLeaveType();closeDialog()"></button>
+    </div>
+  </p-footer>
+</p-dialog>
+
+<p-dialog header="Edit Leave Type" [style]="{'width':'80vh'}" [(visible)]="showEditLeaveType">
+  <div class="">
+    <form action="">
+      <div class="form-group">
+        <label>Leave Type:</label>
+        <input class="form-control" id="editleavename" type="text" name="" value=" {{leaveName}}">
+      </div>
+      <div class="form-group">
+        <label for=""> Description</label>
+
+        <textarea class="form-control" id="editleavedesc" type="text" value="{{leaveDesc}}" cols="10"
+          rows="5"></textarea>
+      </div>
+    </form>
+
+
+  </div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+      <button type="button" pButton icon="pi pi-times" label="Cancel" (click)="closeDialog()"></button>
+      <button type="button" pButton icon="pi pi-check" label="Update"
+        (click)="updateLeaveType();closeDialog()"></button>
+    </div>
+  </p-footer>
+</p-dialog>
+
+<p-dialog header="Delete Leave Type" [style]="{'width':'80vh'}" [(visible)]="showDeleteLeaveType">
+  <div class="modal-body">
+    Are you Sure you want to delete ?
+  </div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+      <button style="background-color:green;" type="button" pButton icon="pi pi-times" label="No"
+        (click)="closeDialog()"></button>
+      <button style="background-color: red;" type="button" pButton icon="pi pi-check" label="Yes"
+        (click)="deleteLeaveType();closeDialog()"></button>
+    </div>
+  </p-footer>
+</p-dialog>
