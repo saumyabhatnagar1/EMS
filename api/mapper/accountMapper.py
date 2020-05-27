@@ -1,11 +1,13 @@
 from .models.accountModel import Employee
 
+
 def save(account):
-    employee = Employee.objects.create_user(username=account['username'],password=account['password'])
+    employee = Employee.objects.create_user(username=account['username'], password=account['password'])
     employee.save()
 
+
 def find(username):
-    return Employee.objects.get(username = username)
+    return Employee.objects.get(username=username)
 
 
 def update(user_data, username):
@@ -21,6 +23,7 @@ def update(user_data, username):
     employee.isActive = user_data['isActive']
     employee.designation = user_data['designation']
     employee.save()
+
 
 def getAll():
     accounts = Employee.objects.all()

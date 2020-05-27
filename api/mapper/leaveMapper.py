@@ -8,6 +8,7 @@ LeaveTypes = client.primer.leavetypes
 
 from .models.leaveModel import Leave
 
+
 def save(leave_data):
     leave = Leave.objects.create()
     leave.emp_id = leave_data["emp_id"]
@@ -15,6 +16,7 @@ def save(leave_data):
     leave.leave_type = leave_data["leave_type"]
     leave.description = leave_data["description"]
     leave.save()
+
 
 def findLeaveDetail(username):
     leaves = Leave.objects.filter(emp_id=username)
@@ -47,7 +49,7 @@ def getLeaveType():
 
 def updateLeaveType(leave_type):
     query = {"_id": ObjectId(leave_type["id"])}
-    update_to = {"$set": {"value": leave_type["value"],"description":leave_type["description"]}}
+    update_to = {"$set": {"value": leave_type["value"], "description": leave_type["description"]}}
     response = LeaveTypes.update(query, update_to)
     return response
 
@@ -64,9 +66,10 @@ def findAll():
         return leaves
     return None
 
+
 def getLeaveTypeById(leave_type):
-    query = {"_id": ObjectId(leave_type["id"])  }
+    query = {"_id": ObjectId(leave_type["id"])}
     result = list(LeaveTypes.find(query))
-    if result is  not None:
+    if result is not None:
         return result[0]
     return None

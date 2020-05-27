@@ -1,9 +1,10 @@
-
 from ..mapper import accountMapper
 
-#newly added methods...
+
+# newly added methods...
 def createAccount(data):
     accountMapper.save(data)
+
 
 def getUserProfile(username):
     account = accountMapper.find(username)
@@ -14,7 +15,8 @@ def getUserProfile(username):
 
 def updateUserProfile(user_data, username):
     accountMapper.update(user_data, username)
-    
+
+
 def getAllAccounts():
     accounts = accountMapper.getAll()
     return accounts
