@@ -1,3 +1,4 @@
+import { NotificationsComponent } from './notifications/notifications.component';
 import { ViewProjectComponent } from './projects/view-project/view-project.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -32,7 +33,7 @@ const routes: Routes =
     { path: 'manage-employee/edit/:id', component: EditEmployeeComponent },
     { path: 'projects', component: ProjectsComponent },
     { path: 'projects/view/:id', component: ViewProjectComponent },
-
+    { path: 'notifications', component: NotificationsComponent },
 
 
 

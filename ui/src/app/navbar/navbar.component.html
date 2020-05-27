@@ -9,6 +9,10 @@
       <a style="text-decoration: none; color: black; font-size: 25px; margin-left: 10px" routerLink='/'>EMS</a></li>
 
 
+    <li class="nav-item mr-3" style="position: absolute; right: 5%;" [hidden]="isLoggedIn">
+
+      <a routerLink="notifications" class="nav-link"><i class="material-icons">notifications</i>Notifications</a>
+    </li>
     <li class="nav-item mr-3" style="position: absolute; right: 0;" [hidden]="isLoggedIn">
 
       <a (click)="logout()" routerLink="/" class="nav-link">Logout</a>
@@ -38,10 +42,11 @@
         <ul class="navbar-nav" style="width: 100%;">
 
           <li class="nav-item">
-           <a style="display: flex; flex-direction: row;" href="/" class="nav-link"><i class="material-icons">home</i>Home</a>
+            <a style="display: flex; flex-direction: row;" href="/" class="nav-link"><i
+                class="material-icons">home</i>Home</a>
           </li>
           <li class="nav-item" [hidden]="isLoggedIn">
-          <a routerLink="/dashboard" class="nav-link">  <i class="material-icons">pie_chart</i>Dashboard</a>
+            <a routerLink="/dashboard" class="nav-link"> <i class="material-icons">pie_chart</i>Dashboard</a>
           </li>
           <li class="nav-item" [hidden]="isLoggedIn">
             <a routerLink="/profile" class="nav-link"><i class="material-icons">person</i>Profile</a>
