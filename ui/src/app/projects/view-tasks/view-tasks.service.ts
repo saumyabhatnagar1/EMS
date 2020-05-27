@@ -17,4 +17,8 @@ export class ViewTasksService {
   getTask(id){
     return this.http.post(this.globalService.baseApiUrl+'tasks/getByProjectID',id)
   }
+  updateStatus(data){
+    return this.http.post(this.globalService.baseApiUrl+'tasks/update',data)
+  }
+
 }

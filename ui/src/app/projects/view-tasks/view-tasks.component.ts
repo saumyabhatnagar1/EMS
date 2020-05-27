@@ -7,6 +7,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountServiceService} from '../../common/services/account-service.service';
 import { FormGroup, FormControl } from '@angular/forms';
+import {ListboxModule} from 'primeng/listbox';
 
 
 
@@ -28,6 +29,7 @@ export class ViewTasksComponent implements OnInit {
   rows = 10;
   public tasks = []
   employees:SelectItem[];
+  public status:SelectItem[];
 
   public id = this.viewProjectComponent.id
   ngOnInit(): void {
@@ -45,6 +47,7 @@ export class ViewTasksComponent implements OnInit {
 
 
     ];
+   
     
     this.getEmployeeData()
     
@@ -167,4 +170,7 @@ getTask(){
   )
 }
 
+updateTask(){
+  console.log(this.tasksbyid.id)
+}
 }

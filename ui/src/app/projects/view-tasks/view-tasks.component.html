@@ -94,17 +94,16 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
       <p>Description:{{taskbyid.description}}</p>
       <p>assigned to:{{taskbyid.assignedTo}}</p>
       <p>title:{{taskbyid.title}}</p>
-      <p>status:{{taskbyid.status}}</p>
+      <form action="">
+          <input type="number" id="status" value="{{taskbyid.status}}">
+      </form>
       <p>due:{{taskbyid.due}}</p>
-        
-      
-        
-        
     </div>
+
     <p-footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
         <button type="button" pButton icon="pi pi-times"  label="Cancel" (click)="closeDialog()"></button>
-        <button type="button" pButton icon="pi pi-check" label="Create" (click)="closeDialog()"></button>  
+        <button type="button" pButton icon="pi pi-check" label="Create" (click)="updateTask();closeDialog()"></button>  
         </div>
     </p-footer>
 </p-dialog>

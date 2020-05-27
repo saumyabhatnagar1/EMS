@@ -8,64 +8,45 @@
 
 <table  id="example" class="row-border hover order-column" ></table>
 
+<p-table #dt  [stacked]="true" scrollHeight="200px" [resizableColumns]="true" [autoLayout]="true"  [columns]="cols" [value]="leaves"  [paginator]="true" [rows]="7"  [showCurrentPageReport]="true" [(first)]="first"
+currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+
+
+<ng-template pTemplate="caption">
+    <div class="row">
+        <div class="col-sm">
+            <h2>List of Leaves</h2>
+        </div>
+    </div>
+    <div style="text-align: right">        
+        <i class="pi pi-search" style="margin:5px 5px 0 0"></i>
+        <input type="text" pInputText size="37" placeholder="Search" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+    </div>
+</ng-template>
+<ng-template pTemplate="header" let-columns>
+    <tr>
+        <th *ngFor="let col of columns" [style.width]="col.width" [pSortableColumn]="col.field">
+            {{col.header}}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+    </tr>
+</ng-template>
+<ng-template pTemplate="body" let-leave let-i="index"> 
+    <tr>
+        <!-- <td>{{employee.sno}}</td> -->
+        <td>{{i+1}}</td>
+        <td >{{leave.leave_type}}</td>
+        <td>{{leave.date}}</td>
+        <td>{{leave.description}}</td>
+        <td>{{leave.posting_date}}</td>
+        <td>{{leave.admin_remark}}</td>
+        <td>{{leave.admin_remark_date}}</td>
+    </tr>
+</ng-template>
+
+</p-table>
+
+
 </div>
 
 
-
-<!-- <pagination-template #p="paginationApi">
-    <div class="jumbotron">
-      <div class="status-content">
-        <h1>Leave Request Status</h1>
-        <table align="center" class="table table-hover">
-          <thead class="thead-dark">
-            <th>Date</th>
-            <th>Status</th>
-            <th>Action</th>
-          </thead>
-          <div class="pagination-previous" [class.disabled]="p.isFirstPage()">
-            <a *ngIf="!p.isFirstPage()" (click)="p.previous()"> </a>
-          </div>
-          <tbody>
-            <tr *ngFor="let leave of leaves|paginate : {id :'listing_pagination',
-       itemsPerPage : 5,
-       currentPage: page};index as i">
-              <td class="leaveTableData">{{leave.date}}</td>
-              <td class="leaveTableData">{{leave.status}}</td>
-              <td><button class="btn btn-dark" data-toggle="modal" data-target="#LeaveDetails"
-                  (click)="count=i;">More</button></td>
-            </tr>
-
-
-          </tbody>
-        </table>
-
-        <div>
-          <pagination-controls class="my-pagination" id="listing_pagination" maxSize="5" directionLinks="true"
-            (pageChange)="page = $event"></pagination-controls>
-        </div>
-      </div>
-    </div>
-
-  </pagination-template>
-
-
-  <div class="modal fade" id="LeaveDetails">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4>Leave Status</h4>
-        </div>
-        <div class="modal-body" *ngIf="leaves.length>0">
-  
-          <p><b>Email</b>:{{leaves[count].email}}</p>
-          <p><b>Leave on</b>:{{leaves[count].date}}</p>
-          <p><b>Status</b>:{{leaves[count].status}}</p>
-          <p><b>Reason</b>:{{leaves[count].reason}}</p>
-  
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" data-dismiss="modal">OK</button>
-        </div>
-      </div>
-    </div>
-  </div> -->

@@ -24,6 +24,9 @@ export class StatusLeavesComponent implements OnInit {
   @ViewChild('dataTable') table;
   dataTable: any;
   //dtOptions: any;
+  first = 0;
+  rows = 10;
+  public cols:any;
 
  
   constructor(private activeRoute:ActivatedRoute,private notificationService:NotificationService,private leavesService:LeavesService,public principle:PrincipleService,private router:Router) { }
@@ -33,12 +36,43 @@ export class StatusLeavesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllLeaves();
-    // this.dtOptions = {
-    //   pagingType: 'full_numbers',
-    //   pageLength: 5,
-    //   processing: true
-    // }
+    this.cols = [
+
+     
+      { field: "sno.", header:"#S no."},
+      { field: "leavetype" ,header:"Leave Type"},
+      {filed: "date", header:"Date"},
+      { field: "description",header:"Description"},
+      { field: "postingdate" ,header:"Posting Date"},
+      { field: "admin_remark",header:"Admin Remark "},
+      { field: "admin_remark_date",header:"Admin Remark Date"},
+      { field: "status",header:"Status"},
+
+
+    ];
+
+    
   }  
+  next() {
+    this.first = this.first + this.rows;
+}
+
+prev() {
+    this.first = this.first - this.rows;
+}
+
+reset() {
+    this.first = 0;
+}
+
+isLastPage(): boolean {
+    return this.first === (this.leaves.length - this.rows);
+}
+
+isFirstPage(): boolean {
+    return this.first === 0;
+}
+
   
 
   initDataTable(){
