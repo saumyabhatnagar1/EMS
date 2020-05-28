@@ -8,7 +8,7 @@ import uuid
 
 
 class Leave(models.Model):
-    id = models.CharField(max_length=250, default=uuid.uuid1().hex, primary_key=True)
+    id = models.CharField(max_length=250, primary_key=True)
     emp_id = models.CharField(max_length=250)
     leave_type = models.CharField(max_length=250)
     date = models.DateField()
@@ -21,7 +21,7 @@ class Leave(models.Model):
 
 
 class LeaveType(models.Model):
-    id = models.CharField(max_length=250, default=uuid.uuid1().hex, primary_key=True)
+    id = models.CharField(max_length=250, primary_key=True)
     value = models.CharField(max_length=100)
     description = models.CharField(max_length=250)
     createdOn = models.DateTimeField(default=django.utils.timezone.now, verbose_name='created date')

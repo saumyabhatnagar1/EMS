@@ -11,8 +11,7 @@ from .models.leaveModel import Leave, LeaveType
 
 
 def save(leave_data):
-    leave = Leave.objects.create()
-    leave.id = uuid.uuid1().hex
+    leave = Leave.objects.create(id=uuid.uuid1().hex)
     leave.emp_id = leave_data["emp_id"]
     leave.date = leave_data["date"]
     leave.leave_type = leave_data["leave_type"]
@@ -35,8 +34,7 @@ def update(leave_data):
 
 
 def saveLeaveType(leave_type_data):
-    leave_type = LeaveType.objects.create()
-    leave_type.id = uuid.uuid1().hex
+    leave_type = LeaveType.objects.create(id=uuid.uuid1().hex)
     leave_type.value = leave_type_data["value"]
     leave_type.description = leave_type_data["description"]
     leave_type.save()
