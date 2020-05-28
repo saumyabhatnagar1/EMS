@@ -18,3 +18,10 @@ class Leave(models.Model):
     admin_remark_date = models.DateField(blank=True)
     status = models.IntegerField(default=0)
     is_read = models.BooleanField(default=False)
+
+
+class LeaveType(models.Model):
+    id = models.CharField(max_length=250, default=uuid.uuid1().hex, primary_key=True)
+    value = models.CharField(max_length=100)
+    description = models.CharField(max_length=250)
+    createdOn = models.DateTimeField(default=django.utils.timezone.now, verbose_name='created date')
