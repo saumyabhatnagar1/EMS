@@ -6,96 +6,78 @@ from django.views.decorators.csrf import csrf_exempt
 from api.services import principleService, projectService
 from api.security.decorators import login_required, is_post
 
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, BasePermission
+from .dto.projectResponse import ProjectSerializer, TaskSerializer
+from rest_framework import status
 
-@csrf_exempt
-@login_required
-@is_post
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def addProject(request):
-    if len(request.body) <= 4:
-        return JsonResponse({"status": 404, "message": "INCOMPLETE DATA"})
     project_data = json.loads(request.body)
     projectService.saveProject(project_data)
-    return JsonResponse({"status": 200, "message": "PROJECT SAVED"})
+    return JsonResponse({"detail": "PROJECT CREATED!"}, status=status.HTTP_201_CREATED)
 
 
-@csrf_exempt
-@login_required
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def getProjects(request):
-    project_data = projectService.getProjectsDetail()
-    if project_data is not None:
-        return JsonResponse(project_data, safe=False)
-    else:
-        return JsonResponse({"status": 400, "message": "NO PROJECT FOUND"})
+    projects = projectService.getProjectsDetail()
+    serializer = ProjectSerializer(projects, many=True)
+    return JsonResponse(serializer.data, safe=False, status=status.HTTP_200_OK)
 
 
-@csrf_exempt
-@login_required
-@is_post
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def getProjectsByID(request):
     project_id = json.loads(request.body)["project_id"]
-    response = projectService.getProjectsDetailByID(project_id)
-    if response is not None:
-        return JsonResponse(response, safe=False)
-    return JsonResponse({"status": 200, "message": "PROJECTS NOT FOUND"})
+    project = projectService.getProjectsDetailByID(project_id)
+    serializer = ProjectSerializer(project)
+    return JsonResponse(serializer.data, safe=False, status=status.HTTP_200_OK)
 
 
-@csrf_exempt
-@login_required
-@is_post
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def getProjectsByAssignTo(request):
     assignTo = json.loads(request.body)['assignTo']
-    response = projectService.getProjectsDetailByAssignTo(assignTo)
-    if response is not None:
-        return JsonResponse(response, safe=False)
-    return JsonResponse({"status": 200, "message": "PROJECTS NOT FOUND"})
+    projects = projectService.getProjectsDetailByAssignTo(assignTo)
+    serializer = ProjectSerializer(projects, many=True)
+    return JsonResponse(serializer.data, safe=False, status=status.HTTP_200_OK)
 
 
-@csrf_exempt
-@login_required
-@is_post
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def addTask(request):
-    if len(request.body) <= 4:
-        return JsonResponse({"status": 404, "message": "INVALID_REQUEST"})
     task_data = json.loads(request.body)
     projectService.saveTask(task_data)
-    return JsonResponse({"status": 200, "message": "TASK SAVED"})
+    return JsonResponse({"detail": "TASK CREATED!"}, status=status.HTTP_201_CREATED)
 
 
-@csrf_exempt
-@login_required
-@is_post
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def getTaskByProjectID(request):
-    if len(request.body) < 1:
-        return JsonResponse({"status": 404, "message": "INVALID_REQUEST"})
     project_id = json.loads(request.body)['project_id']
-    task_data = projectService.getTaskByProjectID(project_id)
-    if task_data is not None:
-        return JsonResponse(task_data, safe=False)
-    return JsonResponse({"status": 200, "message": "NO TASK FOUND"})
+    tasks = projectService.getTaskByProjectID(project_id)
+    serializer = TaskSerializer(tasks, many=True)
+    return JsonResponse(serializer.data, safe=False, status=status.HTTP_200_OK)
 
 
-@csrf_exempt
-@login_required
-@is_post
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def getTaskByAssignTo(request):
-    if len(request.body) < 1:
-        return JsonResponse({"status": 404, "message": "INVALID_REQUEST"})
     assignTo = json.loads(request.body)['assignTo']
-    task_data = projectService.getTaskByAssignTo(assignTo)
-    if task_data is not None:
-        return JsonResponse(task_data, safe=False)
-    return JsonResponse({"status": 200, "message": "NO TASK FOUND"})
+    tasks = projectService.getTaskByAssignTo(assignTo)
+    serializer = TaskSerializer(tasks, many=True)
+    return JsonResponse(serializer.data, safe=False, status=status.HTTP_200_OK)
 
 
-@csrf_exempt
-@login_required
-@is_post
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def updateTaskStatus(request):
-    task_detail = json.loads(request.body)
-    response = projectService.updateTaskStatus(task_detail)
-    if response is not None:
-        return JsonResponse({"status": 200, "message": "TASK UPDATED"})
-    return JsonResponse({"status": 200, "message": "NO TASK FOUND"})
+    task_data = json.loads(request.body)
+    projectService.updateTaskStatus(task_data)
+    return JsonResponse({"message": "TASK UPDATED"}, safe=False, status=status.HTTP_200_OK)
 
 
 @csrf_exempt

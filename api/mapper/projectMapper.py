@@ -1,50 +1,54 @@
 from . import client
 from bson.objectid import ObjectId
+import uuid
 
 client = client.connectToDB()
 Projects = client.primer.projects
 Tasks = client.primer.tasks
 WorksOn = client.primer.worksOn
 
+from .models.projectModel import Project, Task
 
-def save(project_detail):
-    id = Projects.insert_one(project_detail).inserted_id
-    return id
+
+def save(project_data):
+    project = Project.objects.create(id=uuid.uuid1().hex)
+    project.name = project_data['name']
+    project.description = project_data['description']
+    project.assignTo = project_data['assignTo']
+    project.deadline = project_data['deadline']
+    project.customer_id = project_data['customer_id']
+    project.save()
 
 
 def findProjects():
-    projects = list(Projects.find())
-    if len(projects) > 0:
-        return projects
-    return None
+    projects = Project.objects.all()
+    return projects
 
 
-def saveTask(task_detail):
-    id = Tasks.insert_one(task_detail).inserted_id
-    return id
+def saveTask(task_data):
+    task = Task.objects.create(id=uuid.uuid1().hex)
+    task.title = task_data['title']
+    task.description = task_data['description']
+    task.assignTo = task_data['assignTo']
+    task.project_id = task_data['project_id']
+    task.deadline = task_data['deadline']
+    task.save()
 
 
 def findTasksByProjectID(project_id):
-    query = {"project_id": project_id}
-    tasks = list(Tasks.find(query))
-    if len(tasks) > 0:
-        return tasks
-    return None
+    tasks = Task.objects.filter(project_id=project_id)
+    return tasks
 
 
-def updateTask(task_detail):
-    query = {"_id": ObjectId(task_detail['id'])}
-    update_to = {"$set": {"status": task_detail['status']}}
-    response = Tasks.update(query, update_to)
-    return response
+def updateTask(task_data):
+    task = Task.objects.get(id=task_data['id'])
+    task.status = task_data['status']
+    task.save()
 
 
 def findTasksByAssignTo(assignTo):
-    query = {"assignTo": assignTo}
-    tasks = list(Tasks.find(query))
-    if len(tasks) > 0:
-        return tasks
-    return None
+    tasks = Task.objects.filter(assignTo=assignTo)
+    return tasks
 
 
 def saveTeam(team_detail):
@@ -61,18 +65,10 @@ def getTeam(project_id):
 
 
 def findProjectsByID(project_id):
-    query = {'_id': ObjectId(project_id)}
-    project = list(Projects.find(query))
-    print(project)
-
-    if len(project):
-        return project     
-    return None
+    project = Project.objects.get(id=project_id)
+    return project
 
 
 def findProjectsByAssignTo(assignTo):
-    query = {'assignTo': assignTo}
-    project = list(Projects.find(query))
-    if len(project):
-        return project
-    return None
+    projects = Project.objects.filter(assignTo=assignTo)
+    return projects

@@ -3,60 +3,22 @@ import datetime
 
 
 def saveProject(project_data):
-    project_detail = {
-        "name": project_data['name'],
-        "description": project_data['description'],
-        "assignTo": project_data['assignTo'],
-        "createdOn": datetime.datetime.now().strftime("%x %X"),
-        "status": 0,
-        "due": 0,
-        "deadline": project_data['deadline'],
-        "customer_id": project_data['customer_id'],
-        "complete_percentage": 0,
-    }
-    projectMapper.save(project_detail)
+    projectMapper.save(project_data)
 
 
 def getProjectsDetail():
-    project_detail = projectMapper.findProjects()
-    if project_detail is not None:
-        project_dict = {}
-        cnt = 0
-        for item in project_detail:
-            item["id"] = str(item['_id'])
-            item.pop("_id")
-            project_dict[cnt] = item
-            cnt += 1
-        return project_dict
-    return None
+    projects = projectMapper.findProjects()
+    return projects
 
 
 def getProjectsDetailByID(project_id):
-    project_detail = projectMapper.findProjectsByID(project_id)
-    if project_detail is not None:
-        project_dict = {}
-        cnt = 0
-        for item in project_detail:
-            item["id"] = str(item['_id'])
-            item.pop("_id")
-            project_dict[cnt] = item
-            cnt += 1
-        return project_dict
-    return None
+    project = projectMapper.findProjectsByID(project_id)
+    return project
 
 
 def getProjectsDetailByAssignTo(assignTo):
-    project_detail = projectMapper.findProjectsByAssignTo(assignTo)
-    if project_detail is not None:
-        project_dict = {}
-        cnt = 0
-        for item in project_detail:
-            item["id"] = str(item['_id'])
-            item.pop("_id")
-            project_dict[cnt] = item
-            cnt += 1
-        return project_dict
-    return None
+    projects = projectMapper.findProjectsByAssignTo(assignTo)
+    return projects
 
 
 def saveTask(task_data):
@@ -70,42 +32,21 @@ def saveTask(task_data):
         "deadline": task_data['deadline'],
         "due": 0
     }
-    projectMapper.saveTask(task_detail)
+    projectMapper.saveTask(task_data)
 
 
 def getTaskByProjectID(project_id):
-    task_detail = projectMapper.findTasksByProjectID(project_id)
-    if task_detail is not None:
-        task_dict = {}
-        cnt = 0
-        for item in task_detail:
-            item["id"] = str(item["_id"])
-            item.pop("_id")
-            task_dict[cnt] = item
-            cnt += 1
-        return task_dict
-    return None
+    tasks = projectMapper.findTasksByProjectID(project_id)
+    return tasks
 
 
 def getTaskByAssignTo(assignTo):
-    task_detail = projectMapper.findTasksByAssignTo(assignTo)
-    if task_detail is not None:
-        task_dict = {}
-        cnt = 0
-        for item in task_detail:
-            item["id"] = str(item["_id"])
-            item.pop("_id")
-            task_dict[cnt] = item
-            cnt += 1
-        return task_dict
-    return None
+    tasks = projectMapper.findTasksByAssignTo(assignTo)
+    return tasks
 
 
 def updateTaskStatus(task_detail):
-    response = projectMapper.updateTask(task_detail)
-    if response is not None:
-        return response
-    return None
+    projectMapper.updateTask(task_detail)
 
 
 def addTeamMember(team_data):
