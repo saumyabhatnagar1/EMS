@@ -140,11 +140,11 @@
         </th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-leavetype>
+    <ng-template pTemplate="body" let-leavetype  let-i="index">
       <tr>
-
-        <td>leavetype.value</td>
-        <td>leavetype.description</td>
+        <td>{{i}}</td>
+        <td>{{leavetype.value}}</td>
+        <td>{{leavetype.description}}</td>
 
         <td>
           <div class="ui-toolbar-group-center">

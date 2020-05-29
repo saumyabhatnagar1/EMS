@@ -35,7 +35,7 @@ export class NavbarComponent implements OnInit {
    public role;
   getRole(){
     this.role=this.principle.getRole()
-    if(this.principle.getRole()==="HR")
+    if(this.principle.getRole()==="ADMIN")
     this.ifHR=true
   }
 

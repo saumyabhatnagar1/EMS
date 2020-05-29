@@ -1,5 +1,6 @@
+import { PrincipleService } from './../util/principle.service';
 import { GlobalsService } from './../common/services/globals.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -7,7 +8,7 @@ import { Injectable } from '@angular/core';
 })
 
 export class LeavesService{
-    constructor(private http:HttpClient,private globalService:GlobalsService){}
+    constructor(private http:HttpClient,private globalService:GlobalsService,private principle:PrincipleService){}
     
     requestLeave(body){
     	return this.http.post(this.globalService.baseApiUrl+'leaves/new',body);
@@ -20,10 +21,20 @@ export class LeavesService{
         return this.http.post(this.globalService.baseApiUrl+'leaves/updateStatus',data);
     }
     addLeaveType(data){
-        return this.http.post(this.globalService.baseApiUrl+'leavetype/add',data)
+        const headers=new HttpHeaders({
+            'Content-type':'application/json',
+            'Authorization':'Bearer '+this.principle.getItem('jwt_token')
+        })
+
+        return this.http.post(this.globalService.baseApiUrl+'leavetype/add',data,{headers:headers})
     }
     findLeaveType(){
-        return this.http.post(this.globalService.baseApiUrl+'leavetype/find',{})
+        const headers=new HttpHeaders({
+            'Content-type':'application/json',
+            'Authorization':'Bearer '+this.principle.getItem('jwt_token')
+        })
+
+        return this.http.get(this.globalService.baseApiUrl+'leavetype/find',{headers:headers})
     }
     updateLeaveType(data){
         return this.http.post(this.globalService.baseApiUrl+'leavetype/update',data);
