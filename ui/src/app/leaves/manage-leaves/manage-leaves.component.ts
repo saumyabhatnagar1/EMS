@@ -26,7 +26,9 @@ export class ManageLeavesComponent implements OnInit , AfterViewInit {
   
   @ViewChild('datatable') table;
   dataTable: any;
-
+  first = 0;
+  rows = 10;
+public cols:any;
   
   constructor(private renderer : Renderer2,private activeRoute:ActivatedRoute,private notificationService:NotificationService,private leavesService:LeavesService,public principle:PrincipleService) { }
   public tableData:any=[];
@@ -35,7 +37,45 @@ export class ManageLeavesComponent implements OnInit , AfterViewInit {
     this.findLeaveType(); 
     this.ifHRrole();
     this.showModalForStatusUpdate();
+    this.cols = [
+
+     
+      { field: "sno.", header:"#S no."},
+      { field: "leavetype" ,header:"Leave Type"},
+      {filed: "date", header:"Date"},
+      { field: "description",header:"Description"},
+      { field: "postingdate" ,header:"Posting Date"},
+      { field: "admin_remark",header:"Admin Remark "},
+      { field: "admin_remark_date",header:"Admin Remark Date"},
+      { field: "status",header:"Status"},
+
+
+    ];
+
   }  
+  next() {
+    this.first = this.first + this.rows;
+}
+
+prev() {
+    this.first = this.first - this.rows;
+}
+
+reset() {
+    this.first = 0;
+}
+
+isLastPage(): boolean {
+    return this.first === (this.leaves.length - this.rows);
+}
+
+isFirstPage(): boolean {
+    return this.first === 0;
+}
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
+  }
 
   showModalForStatusUpdate(){
     $(document).on('click','.modalShow',function(e) {
@@ -109,10 +149,7 @@ saveLeaveStatus(){
   console.log(this.leavestatus.value)
 }
 
-  onChangePage(pageOfItems: Array<any>) {
-    // update current page of items
-    this.pageOfItems = pageOfItems;
-  }
+  
 
   getAllLeaves(){
       this.leavesService.getAllLeaves().subscribe(

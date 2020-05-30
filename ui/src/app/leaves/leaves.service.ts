@@ -1,5 +1,6 @@
+import { PrincipleService } from './../util/principle.service';
 import { GlobalsService } from './../common/services/globals.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -7,17 +8,25 @@ import { Injectable } from '@angular/core';
 })
 
 export class LeavesService{
-    constructor(private http:HttpClient,private globalService:GlobalsService){}
+    constructor(private http:HttpClient,private globalService:GlobalsService,private principle:PrincipleService){}
     
-    requestLeave(body){
-    	return this.http.post(this.globalService.baseApiUrl+'leaves/new',body);
+    newLeave(body){
+        const headers=new HttpHeaders({
+            'Content-type':'application/json',
+            'Authorization':'Bearer '+this.principle.getItem('jwt_token')
+        })
+    	return this.http.post(this.globalService.baseApiUrl+'leaves/new',body,{headers:headers});
     }
 
     getAllLeaves(){
     	return this.http.post(this.globalService.baseApiUrl+'leaves/fetchAll',{});
     }
     getLeavesByUsername(data){
-        return this.http.post(this.globalService.baseApiUrl+'leaves/findByUsername',data);
+        const headers=new HttpHeaders({
+            'Content-type':'application/json',
+            'Authorization':'Bearer '+this.principle.getItem('jwt_token')
+        })
+        return this.http.get(this.globalService.baseApiUrl+'leaves/findByUsername',{headers:headers});
     }
     updateLeaves(data){
         return this.http.post(this.globalService.baseApiUrl+'leaves/updateStatus',data);
@@ -26,7 +35,11 @@ export class LeavesService{
         return this.http.post(this.globalService.baseApiUrl+'leavetype/add',data)
     }
     findLeaveType(){
-        return this.http.post(this.globalService.baseApiUrl+'leavetype/find',{})
+        const headers=new HttpHeaders({
+            'Content-type':'application/json',
+            'Authorization':'Bearer '+this.principle.getItem('jwt_token')
+        })
+        return this.http.get(this.globalService.baseApiUrl+'leavetype/find',{headers:headers})
     }
     updateLeaveType(data){
         return this.http.post(this.globalService.baseApiUrl+'leavetype/update',data);

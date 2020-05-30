@@ -6,7 +6,6 @@
   <!-- <table  datatable id="example" class="row-border hover order-column" class="dark"  width="100%"></table>
 </div> -->
 
-<table  id="example" class="row-border hover order-column" ></table>
 
 <p-table #dt  [stacked]="true" scrollHeight="200px" [resizableColumns]="true" [autoLayout]="true"  [columns]="cols" [value]="leaves"  [paginator]="true" [rows]="7"  [showCurrentPageReport]="true" [(first)]="first"
 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
@@ -41,6 +40,7 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
         <td>{{leave.posting_date}}</td>
         <td>{{leave.admin_remark}}</td>
         <td>{{leave.admin_remark_date}}</td>
+        <td>{{leave.status}}</td>
     </tr>
 </ng-template>
 

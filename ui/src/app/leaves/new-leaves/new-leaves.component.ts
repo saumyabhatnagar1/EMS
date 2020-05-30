@@ -52,7 +52,7 @@ export class NewLeavesComponent implements OnInit{
     }
   
 
-    this.leavesService.requestLeave(data).subscribe(
+    this.leavesService.newLeave(data).subscribe(
       res=>{
         this.notificationService.showSuccess("Leave Application Submitted!!!");
       },

@@ -72,43 +72,13 @@ isLastPage(): boolean {
 isFirstPage(): boolean {
     return this.first === 0;
 }
-
-  
-
-  initDataTable(){
-  	$("#example").DataTable( {
-        data: this.tableData,
-        columns: [
-            { title: "#S.No"},
-            { title: "Leave Type" },
-            { title: "Date" },
-            { title: "Description" },
-            { title: "Posting Date" },
-            { title: "Admin Remark" },
-            {title : "Admin Remark Date"},
-            { title: "Status" },
-        ],
-
-        
-       
-        
-    } );
-    
-    
-  }
-
-  
-
   onChangePage(pageOfItems: Array<any>) {
     // update current page of items
     this.pageOfItems = pageOfItems;
   }
-
   getAllLeaves(){
       this.leavesService.getLeavesByUsername(JSON.stringify({"emp_id":this.principle.getUsername() })).subscribe(
-        res=>{
-             this.formatEmpData(res);
-               this.initDataTable();
+        res=>{        
               if(res["status"] == 400){
                 this.router.navigate(['']);
                 //no leaves found//// 
@@ -120,46 +90,6 @@ isFirstPage(): boolean {
              console.log(err);
       });;
   }
-
-  formatEmpData(res){
-    let res1 = Object.entries(res);
-    for(var i = 0 ; i < res1.length;i++){
-      //console.log('check')
-      var tmp = [];
-      var leave_type = res[i].leave_type|| "NA"; 
-      var date = res[i].date || "NA";
-      var description = res[i].description || "NA"; 
-      var posting_date = res[i].posting_date || "NA";
-      var admin_remark = res[i].admin_remark|| "NA";
-      var admin_remark_date = res[i].admin_remark_date || "NA"
-      var status
-      var status;
-      if(res[i].status==0){
-        status='Pending'
-      }
-      else if(res[i].status==1){
-        status='Approved'
-      }
-      else {
-        status='Rejected'
-      }
-      // //var status = res[i].isActive ? "Active":"Inactive";
-      // var action = `<a href=`+res[i].id+`>
-      //                   <i class="material-icons" title="Edit">mode_edit</i>
-      //               </a>
-      //               <a href="#">
-      //                   <i class="material-icons" title="Delete">clear</i>
-      //               </a>`;
-      this.tableData.push([i+1,leave_type,date,description,posting_date,admin_remark,admin_remark_date,status]);
-
-    }
-
-    console.log(this.tableData)
-  }
-
-
-
-
   appendLeaves(res){
       let leavesData = Object.entries(res); 
       this.leaves = [];     

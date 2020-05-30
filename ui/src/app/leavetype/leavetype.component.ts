@@ -14,7 +14,9 @@ declare var $: any;
 @Component({
   selector: 'app-leavetype',
   templateUrl: './leavetype.component.html',
-  styleUrls: ['./leavetype.component.css']
+  styleUrls: ['./leavetype.component.css'],
+  providers:[MessageService]
+
 })
 export class LeavetypeComponent implements AfterViewInit, OnInit {
   public ifHR: boolean = false;
@@ -31,7 +33,8 @@ export class LeavetypeComponent implements AfterViewInit, OnInit {
   public showEditLeaveType: boolean = false;
   first = 0;
   rows = 10;
-  constructor(private activeRoute: ActivatedRoute, private accountService: AccountServiceService, private router: Router, private notificationService: NotificationService, private leavesService: LeavesService, public principle: PrincipleService, private renderer: Renderer2) { }
+  public i
+  constructor(private activeRoute: ActivatedRoute, private accountService: AccountServiceService, private router: Router, private notificationService: NotificationService, private leavesService: LeavesService, public principle: PrincipleService, private renderer: Renderer2,private messageservice:MessageService) { }
   ngOnInit(): void {
 
     this.cols = [
@@ -87,28 +90,7 @@ export class LeavetypeComponent implements AfterViewInit, OnInit {
     this.showDeleteLeaveType = false;
   }
 
-  // public tableData: any = [];
-  // initDataTable() {
-  //   var table = $('#example2').DataTable({
-  //     data: this.tableData,
-  //     "bDestroy": true,
-  //     columns: [
-
-  //       { title: "sno" },
-  //       { title: 'Leave Type' },
-  //       { title: 'Description' },
-  //       {
-  //         title: "Action",
-  //         render: function (data: any, type: any, full: any) {
-
-  //           var leaveid = full[0] - 1;
-  //           return `<a style="cursor:pointer" class="modalShow" ltype=` + leaveid + ` ><i ltype=` + leaveid + ` class="material-icons" title="Edit">mode_edit</i></a>
-  //               <a style="cursor:pointer" class="modalDelete" ltype=`+ leaveid + ` ><i  ltype=` + leaveid + ` class="material-icons" title="Edit">delete</i></a>`;
-  //         }
-  //       }
-  //     ],
-  //   });
-  // }
+ 
 
   ngAfterViewInit(): void {
     this.renderer.listen('document', 'click', (event) => {
@@ -120,19 +102,7 @@ export class LeavetypeComponent implements AfterViewInit, OnInit {
     });
   }
 
-  // formatLeaveData(res) {
-  //   let res1 = Object.entries(res);
-  //   console.log(res)
-  //   this.tableData = []
-  //   for (var i = 0; i < res1.length; i++) {
-  //     var tmp = []
-  //     var leavetype = res[i].value;
-  //     var description = res[i].description;
-  //     var action = '';
-  //     this.tableData.push([i + 1, leavetype, description, action]);
-
-  //   }
-  // }
+  
 
   showModalLeavetypeEdit() {
     $(document).on('click', '.modalShow', function (e) {
@@ -221,13 +191,15 @@ export class LeavetypeComponent implements AfterViewInit, OnInit {
         this.leaveType = res;
         console.log(res)
         this.findLeaveType()
-        this.notificationService.showSuccess("Leave type added!!!")
+        this.messageservice.add({severity:'success',summary:'Leave Type successfully added!!'})
+
 
 
       },
       err => {
         console.log(err);
-        this.notificationService.showFailed("Something went wrong")
+        this.messageservice.add({severity:'error',summary:'Some error occurred!!'})
+
 
       }
     )
