@@ -4,15 +4,19 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit, ViewChild, AfterViewInit ,Renderer2} from '@angular/core';
 import {ActivatedRoute } from '@angular/router';
 import { NotificationService} from '../../common/services/notification.service';
+import { SelectItem, MessageService } from 'primeng/api';
+
 
 
 declare var $: any;
 @Component({
   selector: 'manage-leaves',
   templateUrl: './manage-leaves.component.html',
-  styleUrls: ['../leaves.component.css']
+  styleUrls: ['../leaves.component.css'],
+  providers:[MessageService]
+
 })
-export class ManageLeavesComponent implements OnInit , AfterViewInit {
+export class ManageLeavesComponent implements OnInit  {
 
   public ifHR:boolean=false;
   public count:number=0;
@@ -30,24 +34,23 @@ export class ManageLeavesComponent implements OnInit , AfterViewInit {
   rows = 10;
 public cols:any;
   
-  constructor(private renderer : Renderer2,private activeRoute:ActivatedRoute,private notificationService:NotificationService,private leavesService:LeavesService,public principle:PrincipleService) { }
+  constructor( private messageservice:MessageService,private renderer : Renderer2,private activeRoute:ActivatedRoute,private notificationService:NotificationService,private leavesService:LeavesService,public principle:PrincipleService) { }
   public tableData:any=[];
   ngOnInit(): void {
     this.getAllLeaves();
-    this.findLeaveType(); 
+    
     this.ifHRrole();
-    this.showModalForStatusUpdate();
+    // this.showModalForStatusUpdate();
     this.cols = [
 
      
       { field: "sno.", header:"#S no."},
-      { field: "leavetype" ,header:"Leave Type"},
-      {filed: "date", header:"Date"},
-      { field: "description",header:"Description"},
-      { field: "postingdate" ,header:"Posting Date"},
-      { field: "admin_remark",header:"Admin Remark "},
-      { field: "admin_remark_date",header:"Admin Remark Date"},
+      { field: "email" ,header:"Email"},
+      {filed: "leave_type", header:"Leave Type"},
+      { field: "date",header:"Date"},
+      { field: "description" ,header:"Description"},
       { field: "status",header:"Status"},
+      { field: "action",header:"Action"},
 
 
     ];
@@ -77,62 +80,15 @@ isFirstPage(): boolean {
     this.pageOfItems = pageOfItems;
   }
 
-  showModalForStatusUpdate(){
-    $(document).on('click','.modalShow',function(e) {
-      document.getElementById('modalForStatusUpdate').style.display = 'block';
-    });
-  }
-  closeModal(){
-    document.getElementById('modalForStatusUpdate').style.display = 'none';
-  }
+  // showModalForStatusUpdate(){
+  //   $(document).on('click','.modalShow',function(e) {
+  //     document.getElementById('modalForStatusUpdate').style.display = 'block';
+  //   });
+  // }
+  // closeModal(){
+  //   document.getElementById('modalForStatusUpdate').style.display = 'none';
+  // }
 
-  updateLeaveStatus(){
-    //todo
-  }
-
-  initDataTable(){
-  	var table = $('#example').DataTable( {
-        data: this.tableData,
-        "bDestroy":true,
-        columns: [
-            { title: "S.No"},
-            { title: 'Email' },
-            { title: 'Leave Type' },
-            { title: "Date" },
-            { title: "Description" },
-            { title: "Status" },
-            { title: "Action",
-            render:function(data:any,type:any,full:any){
-                
-              var leaveid=full[0]-1;
-              //console.log(full)
-              return `<button style="cursor:pointer"   id ="enable" class="button btn-primary modalShow" ltype=`+leaveid+` >Update</button>`;
-            }},
-        ],
-
-       
-    } );
-    
-    
-  }
-
-  ngAfterViewInit(): void {
-    this.renderer.listen('document', 'click', (event) => {
-      console.log(event)
-      $('#enable').prop('disabled',true)
-
-      if (event.target.hasAttribute("ltype")) {
-        let sno=event.target.getAttribute("ltype");
-        console.log(sno)
-        this.leaveid = sno
-        //let leaveid=this.leave_types[sno].id;
-       
-      }
-     
-    });
-
-    
-  }
  
   
  ifHRrole(){
@@ -154,8 +110,7 @@ saveLeaveStatus(){
   getAllLeaves(){
       this.leavesService.getAllLeaves().subscribe(
         res=>{
-              this.formatEmpData(res);
-              this.initDataTable();
+              console.log(res)
               if(res["status"] == 400){
                 //no leaves found////
               }else{
@@ -165,58 +120,35 @@ saveLeaveStatus(){
         },err=>{
              console.log(err);
       });;
-  }
-
-
-  formatEmpData(res){
-    let res1 = Object.entries(res);
-    this.tableData=[]
-    for(var i = 0 ; i < res1.length;i++){
-      //console.log('check')
-      var tmp = [];
-      var email= res[i].emp_id || "NA"; 
-      var leave_type= res[i].leave_type || "NA"; 
-      var date = res[i].date || "NA";
-      var status;
-      if(res[i].status==0){
-        status='Pending'
-      }
-      else if(res[i].status==1){
-        status='Approved'
-      }
-      else {
-        status='Rejected'
-      }
-      var description =res[i].description || "NA";
-      //var status = res[i].isActive ? "Active":"Inactive";
-      var action = '';
-      this.tableData.push([i+1,email,leave_type,date,description,status,action,]);
-
     }
-
-   // console.log(this.tableData)
-  }
-
-
-
-
-
-
   appendLeaves(res){
       let leavesData = Object.entries(res); 
       this.leaves = [];     
       for(let index = 0; index<leavesData.length;index++){
           this.leaves.push(leavesData[index][1]);
-          if(!this.leaves[index].approved){
-            this.leaves[index].status = "Pending";
-          }else{
-            this.leaves[index].status = "Approved";
-          }
+          // if(this.leaves[index].status=="1"){
+          //   this.leaves[index].status = "Approved";
+          // }
+          // else if (this.leaves[index].status=="0"){
+          //   this.leaves[index].status=="Pending"
+          // }
+          // else{
+          //   this.leaves[index].status = "Rejected";
+          // }
       }
       console.log(this.leaves)
   }
   public leave_id;
-  public mssg;
+  
+  public emp_id;
+  public date;
+  setEmpId(id){
+    this.emp_id=id.getAttribute('emp-id')
+    this.date=id.getAttribute('date')
+    console.log(this.emp_id,this.date)
+  }
+
+
   updateStatus(){
     var status : any
     if ($("#leavesStatus").val() === 'Approved'){
@@ -227,8 +159,8 @@ saveLeaveStatus(){
     }
     let data=
       {
-        'emp_id':this.leaves[this.leaveid].emp_id,
-        'date':this.leaves[this.leaveid].date,
+        'emp_id':this.emp_id,
+        'date':this.date,
         'admin_remark': $('#leavesDesc').val(),
         'status': status,
 
@@ -239,70 +171,15 @@ saveLeaveStatus(){
   
     this.leavesService.updateLeaves(dataJSON).subscribe(
       res=>{
-        this.mssg=res;
+        this.messageservice.add({severity:'success',summary:'Leave Status Updated'})
         console.log(res)
       },
       err=>{
+        this.messageservice.add({severity:'error',summary:'Some Error Occured'})
         console.log(err)
       }
     )
       this.getAllLeaves()
-  }
-
-
-
-
-
-  public LeaveTypeForm=new FormGroup({
-    leave_type:new FormControl('')
-  })
-
-  public leaveType;
- 
-  public leave_types=[];
-  findLeaveType(){
-    this.leavesService.findLeaveType().subscribe(
-      res=>{
-           this.appendLeaveType(res)
-      },err=>{
-           console.log(err);
-    });;
-    
-  }
-  appendLeaveType(res){
-    let leavesTypeData = Object.entries(res); 
-    this.leave_types = [];     
-    for(let index = 0; index<leavesTypeData.length;index++){
-        this.leave_types.push(leavesTypeData[index][1]);
-    }
-    // this.leaveTypeFormChange.get('leave').setValue(this.leave_types[0].value)
-    
-}
-
-addLeaveType(){
-    
-  let data=
-  {
-    'value':this.LeaveTypeForm.get('leave_type').value
-  }
-  
-  let leaveTypeJSON=JSON.stringify(data);
-  console.log(leaveTypeJSON)
-
-  this.leavesService.addLeaveType(data).subscribe(
-    res=>{
-      this.leaveType=res;
-      console.log(res)
-    },
-    err=>{
-      console.log(err);
-    }
-  )
-  this.findLeaveType()
-}
-
-
-
-  
+  }  
   
 }

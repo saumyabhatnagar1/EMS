@@ -1,14 +1,54 @@
+<p-toast></p-toast>
 <div class="container">
-
-<div class="alert alert-danger" *ngIf="ifHR">Invalid Request</div>
-
-<div *ngIf="!ifHR">
+  
+<div>
 <br>
 <br>
 
 <div class = "container">
   <table  id="example" class="row-border hover order-column" ></table>
 </div> 
+
+<p-table #dt  [stacked]="true" scrollHeight="200px" [resizableColumns]="true" [autoLayout]="true"  [columns]="cols" [value]="leaves"  [paginator]="true" [rows]="7"  [showCurrentPageReport]="true" [(first)]="first"
+currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+
+
+<ng-template pTemplate="caption">
+    <div class="row">
+        <div class="col-sm">
+            <h2>List of Leaves</h2>
+        </div>
+    </div>
+    <div style="text-align: right">        
+        <i class="pi pi-search" style="margin:5px 5px 0 0"></i>
+        <input type="text" pInputText size="37" placeholder="Search" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+    </div>
+</ng-template>
+<ng-template pTemplate="header" let-columns>
+    <tr>
+        <th *ngFor="let col of columns" [style.width]="col.width" [pSortableColumn]="col.field">
+            {{col.header}}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+    </tr>
+</ng-template>
+<ng-template pTemplate="body" let-leave let-i="index"> 
+    <tr>
+        <!-- <td>{{employee.sno}}</td> -->
+        <td>{{i+1}}</td>
+        <td >{{leave.emp_id}}</td>
+        <td>{{leave.leave_type}}</td>
+        <td>{{leave.date}}</td>
+        <td>{{leave.description}}</td>
+        <td>{{leave.status}}</td>
+        <td #id [attr.emp-id]="leave.emp_id" [attr.date]="leave.date"><button class="button btn-primary" id="update" data-toggle="modal" data-target="#modalForStatusUpdate" (click)="setEmpId(id)">Update Status</button></td>
+    </tr>
+</ng-template>
+
+</p-table>
+
+
+
 
 <div>
 </div>
@@ -32,8 +72,8 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary " (click)="updateStatus();closeModal()">Save</button>
-                <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+                <button type="button" class="btn btn-primary " data-dismiss="modal" data-dismiss="modal" data-target="#modalForStatusUpdate"  (click)="updateStatus()">Save</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" data-target="#modalForStatusUpdate">Close</button>
             </div>
         </div>
     </div>

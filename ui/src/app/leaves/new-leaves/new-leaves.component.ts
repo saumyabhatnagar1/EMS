@@ -4,12 +4,16 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import {ActivatedRoute } from '@angular/router';
 import { NotificationService} from '../../common/services/notification.service';
+import { SelectItem, MessageService } from 'primeng/api';
+
 
 
 @Component({
   selector: 'new-leaves',
   templateUrl: './new-leaves.component.html',
-  styleUrls: ['../leaves.component.css']
+  styleUrls: ['../leaves.component.css'],
+  providers:[MessageService]
+
 })
 export class NewLeavesComponent implements OnInit{
     public remainingLeaves:number=21;
@@ -22,7 +26,7 @@ export class NewLeavesComponent implements OnInit{
         description:new FormControl('',Validators.required)
       })
 
-    constructor(private fb: FormBuilder,private activeRoute:ActivatedRoute,private notificationService:NotificationService,private leavesService:LeavesService,public principle:PrincipleService) { }
+    constructor(private messageservice:MessageService,private fb: FormBuilder,private activeRoute:ActivatedRoute,private notificationService:NotificationService,private leavesService:LeavesService,public principle:PrincipleService) { }
     
     ngOnInit(): void {
       this.findLeaveType()
@@ -54,10 +58,10 @@ export class NewLeavesComponent implements OnInit{
 
     this.leavesService.newLeave(data).subscribe(
       res=>{
-        this.notificationService.showSuccess("Leave Application Submitted!!!");
+        this.messageservice.add({severity:'success',summary:'Leave Request Submitted'})
       },
       err=>{
-        this.notificationService.showFailed("Something went wrong!");
+        this.messageservice.add({severity:'error',summary:'Somer Error Occured'})
     });
     
   }

@@ -19,7 +19,11 @@ export class LeavesService{
     }
 
     getAllLeaves(){
-    	return this.http.post(this.globalService.baseApiUrl+'leaves/fetchAll',{});
+        const headers=new HttpHeaders({
+            'Content-type':'application/json',
+            'Authorization':'Bearer '+this.principle.getItem('jwt_token')
+        })
+    	return this.http.get(this.globalService.baseApiUrl+'leaves/fetchAll',{headers:headers});
     }
     getLeavesByUsername(data){
         const headers=new HttpHeaders({
@@ -29,7 +33,11 @@ export class LeavesService{
         return this.http.get(this.globalService.baseApiUrl+'leaves/findByUsername',{headers:headers});
     }
     updateLeaves(data){
-        return this.http.post(this.globalService.baseApiUrl+'leaves/updateStatus',data);
+        const headers=new HttpHeaders({
+            'Content-type':'application/json',
+            'Authorization':'Bearer '+this.principle.getItem('jwt_token')
+        })
+        return this.http.post(this.globalService.baseApiUrl+'leaves/updateStatus',data,{headers:headers});
     }
     addLeaveType(data){
         return this.http.post(this.globalService.baseApiUrl+'leavetype/add',data)
@@ -42,7 +50,11 @@ export class LeavesService{
         return this.http.get(this.globalService.baseApiUrl+'leavetype/find',{headers:headers})
     }
     updateLeaveType(data){
-        return this.http.post(this.globalService.baseApiUrl+'leavetype/update',data);
+        const headers=new HttpHeaders({
+            'Content-type':'application/json',
+            'Authorization':'Bearer '+this.principle.getItem('jwt_token')
+        })
+        return this.http.post(this.globalService.baseApiUrl+'leavetype/update',data,{headers:headers});
     }
     deleteLeaveType(data){
         return this.http.post(this.globalService.baseApiUrl+'leavetype/delete',data)
