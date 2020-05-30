@@ -1,5 +1,6 @@
 from djongo import models
 import django.utils.timezone
+from .accountModel import Employee
 
 
 class Project(models.Model):
@@ -25,3 +26,9 @@ class Task(models.Model):
     due = models.IntegerField(default=0)
     createdOn = models.DateTimeField(default=django.utils.timezone.now)
     deadline = models.DateField()
+
+
+class WorksOn(models.Model):
+    id = models.CharField(max_length=250, primary_key=True)
+    project_id = models.CharField(max_length=250)
+    emp_id = models.CharField(max_length=250)

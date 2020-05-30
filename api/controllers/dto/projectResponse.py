@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from api.models import Project, Task
+from api.models import Project, Task, WorksOn
 
 
 class ProjectSerializer(serializers.ModelSerializer):
@@ -32,4 +32,14 @@ class TaskSerializer(serializers.ModelSerializer):
             'due',
             'createdOn',
             'deadline',
+        )
+
+
+class WorkOnSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WorksOn
+        fields = (
+            'id',
+            'project_id',
+            'emp_id'
         )

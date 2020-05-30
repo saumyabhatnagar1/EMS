@@ -8,7 +8,7 @@ from api.security.decorators import login_required, is_post
 
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, BasePermission
-from .dto.projectResponse import ProjectSerializer, TaskSerializer
+from .dto.projectResponse import ProjectSerializer, TaskSerializer, WorkOnSerializer
 from rest_framework import status
 
 
@@ -80,23 +80,18 @@ def updateTaskStatus(request):
     return JsonResponse({"message": "TASK UPDATED"}, safe=False, status=status.HTTP_200_OK)
 
 
-@csrf_exempt
-@login_required
-@is_post
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def addTeamMember(request):
     team_data = json.loads(request.body)
-    response = projectService.addTeamMember(team_data)
-    if response is not None:
-        return JsonResponse({"status": 200, "message": "TEAM MEMBER ADDED"})
-    return JsonResponse({"status": 400, "message": "SOMETHING WENT WRONG"})
+    projectService.addTeamMember(team_data)
+    return JsonResponse({"message": "TEAM MEMBER ADDED"}, safe=False, status=status.HTTP_200_OK)
 
 
-@csrf_exempt
-@login_required
-@is_post
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def getTeamDetail(request):
     project_id = json.loads(request.body)['project_id']
     team = projectService.getTeamDetail(project_id)
-    if team is not None:
-        return JsonResponse(team, safe=False)
-    return JsonResponse({"status": 400, "message": "TEAM NOT FOUND"})
+    serializer = WorkOnSerializer(team, many=True)
+    return JsonResponse(serializer.data, safe=False, status=status.HTTP_200_OK)

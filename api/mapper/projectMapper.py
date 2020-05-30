@@ -1,3 +1,5 @@
+from .models.projectModel import Project, Task, WorksOn
+from .models.accountModel import Employee
 from . import client
 from bson.objectid import ObjectId
 import uuid
@@ -5,9 +7,7 @@ import uuid
 client = client.connectToDB()
 Projects = client.primer.projects
 Tasks = client.primer.tasks
-WorksOn = client.primer.worksOn
-
-from .models.projectModel import Project, Task
+# WorksOn = client.primer.worksOn
 
 
 def save(project_data):
@@ -52,16 +52,20 @@ def findTasksByAssignTo(assignTo):
 
 
 def saveTeam(team_detail):
-    id = WorksOn.insert_one(team_detail).inserted_id
-    return id
+    # emp = Employee.objects.get(username=team_detail['emp_id'])
+    # proj = Project.objects.get(id=team_detail['project_id'])
+
+    # workson = WorksOn.objects.create(project_id=proj, emp_id=emp)
+    # workson.save()
+    worksOn = WorksOn.objects.create(id=uuid.uuid1().hex)
+    worksOn.project_id = team_detail["project_id"]
+    worksOn.emp_id = team_detail["emp_id"]
+    worksOn.save()
 
 
 def getTeam(project_id):
-    query = {"project_id": project_id}
-    project = list(WorksOn.find(query))
-    if len(project) > 0:
-        return project
-    return None
+    team = WorksOn.objects.filter(project_id=project_id)
+    return team
 
 
 def findProjectsByID(project_id):
