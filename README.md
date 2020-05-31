@@ -1,8 +1,6 @@
 # EMS
-// changes exist in git but not in your local pc that u cloned.
 
-
-# Requirements for API to run
+## Requirements for API to run
 
 1. Install Python 3 and above
 
@@ -19,14 +17,8 @@
 
 
 
-##Load Initial Data
-```
-run mongodb server
 
-python manage.py loaddata db/init_users.json --app api.Employee
-```
-
-# To run the api
+## To run the api
 
 run mongod ( mongodb server )
 
@@ -40,22 +32,30 @@ Navigate to Project
     
     python manage.py runserver
 
+##Load Initial Data
+```
+run mongodb server
+
+python manage.py loaddata db/init_users.json --app api.Employee
+```
+
 Navigate to browser
+
 	hit : http://localhost:8000/api
 then you should be seeing "Hello World"
 
 
 
-# Requirements to run UI
+## Requirements to run UI
 
 1. Install Node version 12 and above
 
-2. Install angular latest ( npm install --save -g @angular/cli )
+2. Install angular latest ( `npm install --save -g @angular/cli `)
 
-3. Install required node_modules ( npm install )
+3. Install required node_modules ( `npm install` )
 
 
-# To run UI
+##To run UI
 
 `ng serve --open`
  
