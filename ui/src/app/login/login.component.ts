@@ -4,11 +4,13 @@ import {LoginService} from './login.service';
 import {PrincipleService} from '../util/principle.service';
 import { Router} from '@angular/router';
 import { NotificationService } from '../common/services/notification.service';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers:[MessageService]
 })
 export class LoginComponent implements OnInit {
   public message:any;
@@ -16,7 +18,7 @@ export class LoginComponent implements OnInit {
       email : new FormControl('',Validators.email),
       password: new FormControl('',Validators.required)
   });
-  constructor(private _loginService:LoginService, private principle:PrincipleService,private router:Router,private notificationService:NotificationService) { }
+  constructor(private messageService:MessageService, private _loginService:LoginService, private principle:PrincipleService,private router:Router,private notificationService:NotificationService) { }
 
   ngOnInit(): void {
     if(this.principle.getUsername() != undefined){
@@ -39,13 +41,15 @@ export class LoginComponent implements OnInit {
                   this.router.navigate(['']);
                 }
             },err=>{
-                console.log(err);
+                console.log("error");
+              this.messageService.add({severity:'warn', summary:'Invalid Credentials', detail:''});
             });
-            
+
           }
       },
       err =>{
-         console.log(err);
+        console.log("error")
+         this.messageService.add({severity:'warn', summary:'Invalid Credentials', detail:''});
       }
       );
   }

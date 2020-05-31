@@ -22,7 +22,7 @@ export class ManageEmployeeComponent implements OnInit {
   constructor(private confirmationService: ConfirmationService,private messageService: MessageService,private registerService:RegisterService,private accountService:AccountServiceService,private router:Router) { }
   ngOnInit(): void {
     this.cols = [
-            
+
             { field: "username", header:"Username"},
             { field: "name" ,header:"Full Name"},
             { field: "designation",header:"Designation"},
@@ -54,7 +54,7 @@ export class ManageEmployeeComponent implements OnInit {
     isFirstPage(): boolean {
         return this.first === 0;
     }
-  
+
   showDialog(){
     this.showCreateAccount = true;
   }
@@ -68,7 +68,7 @@ export class ManageEmployeeComponent implements OnInit {
             message: 'Are you sure that you want to deactivate account?',
             accept: () => {
                 //Actual logic to perform a confirmation
-                
+
                 this.messageService.add({severity:'success',summary:'Account Deactivated'})
             }
         });
@@ -82,7 +82,7 @@ export class ManageEmployeeComponent implements OnInit {
         this.messageService.add({severity:'warn', summary:'Unauthorized Access!', detail:'Your account not authorized contact admin...'});
   	});
   }
-  
+
   createAccount(){
     let data = JSON.stringify({
       "username":$('#email').val(),
@@ -97,8 +97,8 @@ export class ManageEmployeeComponent implements OnInit {
      // }
 
     },err=>{
-        this.messageService.add({severity:'warn', summary:'Unauthorized Access!', detail:'Your account not authorized contact admin...'});
-      console.log(err);
+        this.messageService.add({severity:'error', summary:err.error.detail});
+      console.log(err.error.detail);
     })
   }
 }
