@@ -1,6 +1,5 @@
-from djongo import models
 import django.utils.timezone
-from .accountModel import Employee
+from djongo import models
 
 
 class Project(models.Model):
