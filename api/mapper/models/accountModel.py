@@ -1,16 +1,13 @@
 # from django.db import models
-from djongo import models
-from django.contrib.auth.models import User
-from django.contrib.auth.models import AbstractUser
 import django.utils.timezone
-import uuid
+from django.contrib.auth.models import AbstractUser
+from djongo import models
 
 
 # Create your models here.
 
 
 class Employee(AbstractUser):
-    user_id = models.CharField(default=uuid.uuid1().hex, max_length=250, unique=True, blank=True)
     role = models.CharField(max_length=250, default="USER")
     name = models.CharField(max_length=250, blank=True)
     email = models.CharField(max_length=250, blank=True)
