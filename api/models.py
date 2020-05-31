@@ -4,3 +4,4 @@ from .mapper.models.leaveModel import LeaveType
 from .mapper.models.projectModel import Project
 from .mapper.models.projectModel import Task
 from .mapper.models.projectModel import WorksOn
+from .mapper.models.TimesheetModel import Timesheet

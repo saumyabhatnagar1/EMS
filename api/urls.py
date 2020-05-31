@@ -3,6 +3,7 @@ from django.urls import path
 from api.controllers import accountController, timesheetsController, leavesController, projectController, \
     principleController, permissionController, notificationController
 from . import views
+
 urlpatterns = [
     path('accounts/createAccount/',
          accountController.createAccount, name='create Account'),
@@ -16,11 +17,11 @@ urlpatterns = [
     path('account/updateProfile',
          accountController.updateUserProfile, name='update Profile'),
 
-    path('timesheets/add', timesheetsController.add, name='add time sheet'),
-    path('timesheets/find', timesheetsController.find, name='find time sheet'),
-    path('timesheets/admin/update', timesheetsController.update,
+    path('timesheets/add/', timesheetsController.add, name='add time sheet'),
+    path('timesheets/find/', timesheetsController.find, name='find time sheet'),
+    path('timesheets/update/', timesheetsController.update,
          name='admin update time sheet'),
-    path('timesheets/findAll', timesheetsController.findAll,
+    path('timesheets/getByEmpId', timesheetsController.getByEmpId,
          name='find all time sheets'),
 
     path('leaves/new', leavesController.addLeave, name='leave request'),
@@ -37,7 +38,6 @@ urlpatterns = [
          name='all leaves detail'),
     path('leavetype/findById', leavesController.getLeaveTypeById,
          name='leave type by id'),
-
 
     path('project/new', projectController.addProject, name='add project'),
     path('project/getAll', projectController.getProjects, name='get project'),

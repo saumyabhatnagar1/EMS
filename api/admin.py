@@ -4,6 +4,7 @@ from django.contrib import admin
 from .models import Employee
 from .models import Leave, LeaveType
 from .models import Project, Task, WorksOn
+from .models import Timesheet
 
 
 class AdminUser(admin.ModelAdmin):
@@ -16,3 +17,4 @@ admin.site.register(LeaveType)
 admin.site.register(Project)
 admin.site.register(Task)
 admin.site.register(WorksOn)
+admin.site.register(Timesheet)

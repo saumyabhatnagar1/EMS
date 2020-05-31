@@ -1,37 +1,29 @@
-from . import client
+import uuid
 
-client = client.connectToDB()
-Timesheets = client.primer.timesheets
+from .models.TimesheetModel import Timesheet
 
 
-def save(timesheet):
-    var = Timesheets.insert_one(timesheet).inserted_id
-    return var
+def save(timesheet_data):
+    timesheet = Timesheet.objects.create(id=uuid.uuid1().hex)
+    timesheet.emp_id = timesheet_data['emp_id']
+    timesheet.date = timesheet_data['date']
+    timesheet.in_time = timesheet_data['in_time']
+    timesheet.out_time = timesheet_data['out_time']
+    timesheet.save()
 
 
 def find(timesheet):
-    query = {"username": timesheet["username"], "date": timesheet["date"], "month": timesheet["month"],
-             "year": timesheet["year"]}
-    result = list(Timesheets.find(query))
-    if len(result) > 0:
-        return result[0]
-    return None
+    sheet = Timesheet.objects.get(emp_id=timesheet['emp_id'], date=timesheet['date'])
+    return sheet
 
 
-def update(timesheet):
-    query = {"username": timesheet["username"], "date": timesheet["date"], "month": timesheet["month"],
-             "year": timesheet["year"]}
-    updateTo = {"$set": {"timings": {"in_time": {"hours": timesheet["timings"]["in_time"]["hours"],
-                                                 "minutes": timesheet["timings"]["in_time"]["minutes"]},
-                                     "out_time": {"hours": timesheet["timings"]["out_time"]["hours"],
-                                                  "minutes": timesheet["timings"]["out_time"]["minutes"]}}}}
-    var = Timesheets.update(query, updateTo)
-    return var
+def update(sheet, timesheet):
+    sheet.emp_id = timesheet['emp_id']
+    sheet.date = timesheet['date']
+    sheet.in_time = timesheet['in_time']
+    sheet.out_time = timesheet['out_time']
+    sheet.save()
 
 
-def findById(id):
-    query = {"username": id}
-    sheet = list(Timesheets.find(query))
-    if len(sheet) > 0:
-        return sheet
-    return None
+def findByEmpId(emp_id):
+    return Timesheet.objects.filter(emp_id=emp_id)
