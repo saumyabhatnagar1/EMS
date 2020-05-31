@@ -1,5 +1,4 @@
 from ..mapper import leaveMapper
-import datetime
 
 
 def saveLeave(leave_data):

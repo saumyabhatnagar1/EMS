@@ -1,11 +1,13 @@
 import json
+
 from django.http import JsonResponse
+from rest_framework import status
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.parsers import JSONParser
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
+
 from api.services import accountService
 from .dto.accountResponse import ProfileSerializer
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from rest_framework import status
-from rest_framework.parsers import JSONParser
 
 
 @api_view(['POST'])

@@ -1,15 +1,12 @@
 import json
 
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-
-from api.services import principleService, leavesService
-from api.security.decorators import login_required, is_post, is_HR
-
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated, IsAdminUser, BasePermission
-from .dto.leaveResponse import LeaveSerializer, LeaveTypeSerializer
 from rest_framework import status
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
+
+from api.services import leavesService
+from .dto.leaveResponse import LeaveSerializer, LeaveTypeSerializer
 
 
 @api_view(['POST'])

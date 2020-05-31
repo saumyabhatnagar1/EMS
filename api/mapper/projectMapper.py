@@ -1,12 +1,13 @@
-from .models.projectModel import Project, Task, WorksOn
-from .models.accountModel import Employee
-from . import client
-from bson.objectid import ObjectId
 import uuid
+
+from . import client
+from .models.projectModel import Project, Task, WorksOn
 
 client = client.connectToDB()
 Projects = client.primer.projects
 Tasks = client.primer.tasks
+
+
 # WorksOn = client.primer.worksOn
 
 
