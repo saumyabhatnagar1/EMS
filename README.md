@@ -19,6 +19,13 @@
 
 
 
+##Load Initial Data
+```
+run mongodb server
+
+python manage.py loaddata db/init_users.json --app api.Employee
+```
+
 # To run the api
 
 run mongod ( mongodb server )
@@ -30,8 +37,6 @@ Navigate to Project
     python manage.py makemigrations
     
     python manage.py migrate
-    
-    python manage.py createsuperuser
     
     python manage.py runserver
 
@@ -52,5 +57,7 @@ then you should be seeing "Hello World"
 
 # To run UI
 
-1. ng serve --open ( which will open a angular server in http://localhost:4200 )
+`ng serve --open`
+ 
+ ( which will open a angular server in http://localhost:4200 )
 

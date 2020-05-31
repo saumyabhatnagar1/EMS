@@ -1,0 +1,53 @@
+[
+  {
+    "model": "api.employee",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$100000$paIJLkcjrBT0$FKFVD3LsePSRJEuHBE+/xz4bQ/LOZD2OwnkjbMKAwRI=",
+      "last_login": "2020-05-31T07:51:00.629Z",
+      "is_superuser": true,
+      "username": "admin@ems.com",
+      "first_name": "",
+      "last_name": "",
+      "is_staff": true,
+      "is_active": true,
+      "role": "ADMIN",
+      "name": "Administrator",
+      "isActive": true
+    }
+  },
+  {
+    "model": "api.employee",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$100000$paIJLkcjrBT0$FKFVD3LsePSRJEuHBE+/xz4bQ/LOZD2OwnkjbMKAwRI=",
+      "last_login": "2020-05-31T07:51:00.629Z",
+      "is_superuser": false,
+      "username": "test_user@ems.com",
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "role": "USER",
+      "name": "Test User",
+      "isActive": true
+    }
+  },
+  {
+    "model": "api.employee",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$100000$paIJLkcjrBT0$FKFVD3LsePSRJEuHBE+/xz4bQ/LOZD2OwnkjbMKAwRI=",
+      "last_login": "2020-05-31T07:51:00.629Z",
+      "is_superuser": false,
+      "username": "test_hr@ems.com",
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "role": "HR",
+      "name": "Test HR",
+      "isActive": true
+    }
+  }
+]
