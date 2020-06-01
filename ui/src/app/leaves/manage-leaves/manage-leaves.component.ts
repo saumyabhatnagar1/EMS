@@ -173,13 +173,14 @@ saveLeaveStatus(){
       res=>{
         this.messageservice.add({severity:'success',summary:'Leave Status Updated'})
         console.log(res)
+        this.getAllLeaves()
       },
       err=>{
         this.messageservice.add({severity:'error',summary:'Some Error Occured'})
         console.log(err)
       }
     )
-      this.getAllLeaves()
+      
   }  
   
 }

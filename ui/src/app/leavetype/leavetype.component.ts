@@ -4,7 +4,6 @@ import { LeavesService } from './service.leavetype';
 import { PrincipleService } from './../util/principle.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NotificationService } from '../common/services/notification.service';
 import { SelectItem, MessageService } from 'primeng/api';
 
 
@@ -18,7 +17,7 @@ declare var $: any;
   providers:[MessageService]
 
 })
-export class LeavetypeComponent implements AfterViewInit, OnInit {
+export class LeavetypeComponent implements  OnInit {
   public ifHR: boolean = false;
   public page: number = 1;
   public showLeaveType: boolean = false;
@@ -34,7 +33,7 @@ export class LeavetypeComponent implements AfterViewInit, OnInit {
   first = 0;
   rows = 10;
   public i
-  constructor(private activeRoute: ActivatedRoute, private accountService: AccountServiceService, private router: Router, private notificationService: NotificationService, private leavesService: LeavesService, public principle: PrincipleService, private renderer: Renderer2,private messageservice:MessageService) { }
+  constructor(private activeRoute: ActivatedRoute, private accountService: AccountServiceService, private router: Router, private leavesService: LeavesService, public principle: PrincipleService, private renderer: Renderer2,private messageservice:MessageService) { }
   ngOnInit(): void {
 
     this.cols = [
@@ -43,13 +42,10 @@ export class LeavetypeComponent implements AfterViewInit, OnInit {
       { field: "leavetype", header: "Leave-Type" },
       { field: "description", header: "Description" },
       { field: "action", header: "Action" },
-
-
     ];
 
 
-    // this.showModalLeavetypeEdit()
-    // this.showModalLeavetypeDelete()
+    
     this.findLeaveType();
     this.ifHRrole()
   }
@@ -74,14 +70,16 @@ export class LeavetypeComponent implements AfterViewInit, OnInit {
   isFirstPage(): boolean {
     return this.first === 0;
   }
-
+public id;
   showCreateDialog() {
     this.showCreateLeaveType = true;
   }
-  showEditDialog() {
+  showEditDialog(id) {
+    this.id=(id.getAttribute('data-id'))
     this.showEditLeaveType = true;
   }
-  showDeleteDialog() {
+  showDeleteDialog(id) {
+    this.id=(id.getAttribute('data-id'))
     this.showDeleteLeaveType = true;
   }
   closeDialog() {
@@ -89,45 +87,11 @@ export class LeavetypeComponent implements AfterViewInit, OnInit {
     this.showEditLeaveType = false;
     this.showDeleteLeaveType = false;
   }
-
- 
-
-  ngAfterViewInit(): void {
-    this.renderer.listen('document', 'click', (event) => {
-      if (event.target.hasAttribute("ltype")) {
-        let sno = event.target.getAttribute("ltype");
-        let leaveid = this.leave_types[sno].id;
-        this.findLeaveTypebyId(leaveid)
-      }
-    });
-  }
-
-  
-
-  showModalLeavetypeEdit() {
-    $(document).on('click', '.modalShow', function (e) {
-
-      document.getElementById('modalLeavetypeEdit').style.display = 'block';
-    });
-  }
   closeModal() {
     document.getElementById('modalLeavetypeEdit').style.display = 'none';
     document.getElementById('confirmBox').style.display = 'none';
 
   }
-
-
-  showModalLeavetypeDelete() {
-    $(document).on('click', '.modalDelete', function (e) {
-
-      document.getElementById('confirmBox').style.display = 'block';
-    });
-  }
-
-
-
-
-
   ifHRrole() {
     if (this.principle.getRole() === "HR")
       this.ifHR = true;
@@ -171,6 +135,7 @@ export class LeavetypeComponent implements AfterViewInit, OnInit {
     console.log("sdd");
     this.leavesService.findLeavetypeById(JSON.stringify(data)).subscribe(
       res => {
+        console.log(res)
         this.leaveData = res;
         this.leaveName = this.leaveData.value;
         this.leaveDesc = this.leaveData.description
@@ -192,9 +157,6 @@ export class LeavetypeComponent implements AfterViewInit, OnInit {
         console.log(res)
         this.findLeaveType()
         this.messageservice.add({severity:'success',summary:'Leave Type successfully added!!'})
-
-
-
       },
       err => {
         console.log(err);
@@ -203,14 +165,14 @@ export class LeavetypeComponent implements AfterViewInit, OnInit {
 
       }
     )
-    this.findLeaveType()
+   
   }
 
 
   updateLeaveType() {
 
     let data = {
-      'id': this.leaveId,
+      'id': this.id,
       'value': $('#editleavename').val(),
       'description': $('#editleavedesc').val()
 
@@ -219,37 +181,36 @@ export class LeavetypeComponent implements AfterViewInit, OnInit {
     this.leavesService.updateLeaveType(JSON.stringify(data)).subscribe(
       res => {
         console.log(res)
-        this.notificationService.showSuccess("Leave type saved!!!")
-
+        this.findLeaveType()
+        this.messageservice.add({severity:'success',summary:'Leave Type Updated'})
       },
       err => {
         console.log(err)
-        this.notificationService.showFailed("Something went wrong")
+        this.messageservice.add({severity:'warn',summary:'Some error Occurred'})
       }
     )
-    this.findLeaveType()
+    
     this.editDetails = false;
 
   }
 
   deleteLeaveType() {
     let data = {
-      'id': this.leaveData.id
+      'id': this.id
     }
-    console.log(this.leaveData.id)
+    console.log(this.id)
     this.leavesService.deleteLeaveType(JSON.stringify(data)).subscribe(
       res => {
         console.log(res)
-        this.notificationService.showFailed("Leave type deleted!!!")
-
+        this.findLeaveType()
+        this.messageservice.add({severity:'error',summary:'Leave Type Deleted'})
       },
       err => {
         console.log(err)
-        this.notificationService.showFailed("Something went wrong")
-
+        this.messageservice.add({severity:'warn',summary:'Some Error Occurred'})
       }
     )
-    this.findLeaveType()
+   
   }
 }
 

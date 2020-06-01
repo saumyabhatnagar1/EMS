@@ -37,14 +37,26 @@ export class LeavesService{
         return this.http.get(this.globalService.baseApiUrl+'leavetype/find',{headers:headers})
     }
     updateLeaveType(data){
-        return this.http.post(this.globalService.baseApiUrl+'leavetype/update',data);
+        const headers=new HttpHeaders({
+            'Content-type':'application/json',
+            'Authorization':'Bearer '+this.principle.getItem('jwt_token')
+        })
+        return this.http.post(this.globalService.baseApiUrl+'leavetype/update',data,{headers:headers});
     }
     deleteLeaveType(data){
-        return this.http.post(this.globalService.baseApiUrl+'leavetype/delete',data)
+        const headers=new HttpHeaders({
+            'Content-type':'application/json',
+            'Authorization':'Bearer '+this.principle.getItem('jwt_token')
+        })
+        return this.http.post(this.globalService.baseApiUrl+'leavetype/delete',data,{headers:headers})
     }
     findLeavetypeById(data)
     {
-        return this.http.post(this.globalService.baseApiUrl+'leavetype/findById',data)
+        const headers=new HttpHeaders({
+            'Content-type':'application/json',
+            'Authorization':'Bearer '+this.principle.getItem('jwt_token')
+        })
+        return this.http.post(this.globalService.baseApiUrl+'leavetype/findById',data,{headers:headers})
     }
 }
 
