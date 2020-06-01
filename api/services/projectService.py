@@ -61,3 +61,10 @@ def addTeamMember(team_data):
 def getTeamDetail(project_id):
     team = projectMapper.getTeam(project_id)
     return team
+
+
+def filterEmployee():
+    employees, working_emp = projectMapper.filterEmployee()
+    for employee in working_emp:
+        employees = employees.exclude(username=employee.emp_id)
+    return employees

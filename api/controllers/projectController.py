@@ -7,6 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from api.services import projectService
 from .dto.projectResponse import ProjectSerializer, TaskSerializer, WorkOnSerializer
+from .dto.accountResponse import EmployeeSerializer
 
 
 @api_view(['POST'])
@@ -92,3 +93,11 @@ def getTeamDetail(request):
     team = projectService.getTeamDetail(project_id)
     serializer = WorkOnSerializer(team, many=True)
     return JsonResponse(serializer.data, safe=False, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getFreeEmployee(request):
+    employees = projectService.filterEmployee()
+    employee_serializer = EmployeeSerializer(employees, many=True)
+    return JsonResponse(employee_serializer.data, safe=False, status=status.HTTP_200_OK)

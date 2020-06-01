@@ -2,6 +2,7 @@ import uuid
 
 from . import client
 from .models.projectModel import Project, Task, WorksOn
+from .models.accountModel import Employee
 
 client = client.connectToDB()
 Projects = client.primer.projects
@@ -77,3 +78,10 @@ def findProjectsByID(project_id):
 def findProjectsByAssignTo(assignTo):
     projects = Project.objects.filter(assignTo=assignTo)
     return projects
+
+
+def filterEmployee():
+    employees = Employee.objects.all()
+    working_emp = WorksOn.objects.all()
+    return employees, working_emp
+
