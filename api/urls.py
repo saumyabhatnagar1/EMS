@@ -52,6 +52,8 @@ urlpatterns = [
          name='get tasks by assignTo'),
     path('tasks/update', projectController.updateTaskStatus,
          name='update task status'),
+    path('task/addComment', projectController.addComment, name='add comment'),
+    path('task/getAllComments', projectController.getAllComments, name='get all comments'),
     path('project/addTeamMember',
          projectController.addTeamMember, name='add team member'),
     path('project/getTeam', projectController.getTeamDetail, name='get team detail'),

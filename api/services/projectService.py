@@ -1,5 +1,3 @@
-import datetime
-
 from ..mapper import projectMapper
 
 
@@ -23,16 +21,6 @@ def getProjectsDetailByAssignTo(assignTo):
 
 
 def saveTask(task_data):
-    task_detail = {
-        "project_id": task_data['project_id'],
-        "title": task_data['title'],
-        "description": task_data['description'],
-        "assignTo": task_data['assignTo'],
-        "status": 0,
-        "createdOn": datetime.datetime.now().strftime("%x %X"),
-        "deadline": task_data['deadline'],
-        "due": 0
-    }
     projectMapper.saveTask(task_data)
 
 
@@ -51,11 +39,7 @@ def updateTaskStatus(task_detail):
 
 
 def addTeamMember(team_data):
-    team_detail = {
-        "project_id": team_data['project_id'],
-        "emp_id": team_data['emp_id']
-    }
-    projectMapper.saveTeam(team_detail)
+    projectMapper.saveTeam(team_data)
 
 
 def getTeamDetail(project_id):
@@ -68,3 +52,12 @@ def filterEmployee():
     for employee in working_emp:
         employees = employees.exclude(username=employee.emp_id)
     return employees
+
+
+def saveComment(task_comment):
+    projectMapper.saveComment(task_comment)
+
+
+def getAllComments(task_id):
+    comments = projectMapper.getAllComments(task_id)
+    return comments

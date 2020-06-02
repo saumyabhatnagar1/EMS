@@ -1,7 +1,7 @@
 import uuid
 
 from . import client
-from .models.projectModel import Project, Task, WorksOn
+from .models.projectModel import Project, Task, WorksOn, TaskComment
 from .models.accountModel import Employee
 
 client = client.connectToDB()
@@ -54,11 +54,6 @@ def findTasksByAssignTo(assignTo):
 
 
 def saveTeam(team_detail):
-    # emp = Employee.objects.get(username=team_detail['emp_id'])
-    # proj = Project.objects.get(id=team_detail['project_id'])
-
-    # workson = WorksOn.objects.create(project_id=proj, emp_id=emp)
-    # workson.save()
     worksOn = WorksOn.objects.create(id=uuid.uuid1().hex)
     worksOn.project_id = team_detail["project_id"]
     worksOn.emp_id = team_detail["emp_id"]
@@ -85,3 +80,15 @@ def filterEmployee():
     working_emp = WorksOn.objects.all()
     return employees, working_emp
 
+
+def saveComment(task_comment):
+    comment = TaskComment.objects.create(id=uuid.uuid1().hex)
+    comment.task_id = task_comment['task_id']
+    comment.username = task_comment['username']
+    comment.comment = task_comment['comment']
+    comment.save()
+
+
+def getAllComments(task_id):
+    comments = TaskComment.objects.filter(task_id=task_id)
+    return comments
