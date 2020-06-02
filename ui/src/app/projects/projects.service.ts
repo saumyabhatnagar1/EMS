@@ -1,5 +1,6 @@
+import { PrincipleService } from './../util/principle.service';
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient,HttpHeaders} from '@angular/common/http';
 import { GlobalsService } from './../common/services/globals.service';
 
 @Injectable({
@@ -7,14 +8,22 @@ import { GlobalsService } from './../common/services/globals.service';
 })
 export class ProjectsService {
 
-  constructor(private http:HttpClient,private globalService:GlobalsService) { }
+  constructor(private http:HttpClient,private globalService:GlobalsService,private principle:PrincipleService) { }
 
 
-  requestProject(body){
-    return this.http.post(this.globalService.baseApiUrl+'project/new',body);
+  addProject(body){
+    const headers=new HttpHeaders({
+      'Content-type':'application/json',
+      'Authorization':'Bearer '+this.principle.getItem('jwt_token')
+  })
+    return this.http.post(this.globalService.baseApiUrl+'project/new',body,{headers:headers});
   }
 
   getAllProjects(){
-    return this.http.post(this.globalService.baseApiUrl+'project/getAll',{});
+    const headers=new HttpHeaders({
+      'Content-type':'application/json',
+      'Authorization':'Bearer '+this.principle.getItem('jwt_token')
+  })
+    return this.http.get(this.globalService.baseApiUrl+'project/getAll',{headers:headers});
   }
 }

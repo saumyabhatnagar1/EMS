@@ -96,12 +96,11 @@ viewProject(id){
     let projectJSON = JSON.stringify(this.projectForm.value)
     console.log(projectJSON)
 
-    this.projectservice.requestProject(projectJSON).subscribe(
+    this.projectservice.addProject(projectJSON).subscribe(
       res => {
-        if(res["status"] == 200)
-          this.messageService.add({severity:'success', summary:'Created!', detail:'New Project Added.',life:5000});
-        else
-          this.messageService.add({severity:'warn',summary:'Failed',detail:'something went wrong',life:5000});
+        
+      this.messageService.add({severity:'success', summary:'Created!', detail:'New Project Added.',life:5000});
+        
        this.findAllProjects();
       },
       err => {
@@ -136,6 +135,7 @@ viewProject(id){
   getEmployeeData(){
     this.accountService.getUsers().subscribe(res=>{
       this.formatData(res)
+      console.log(res)
       //this.employees = res;
       
   	},err=>{
@@ -147,9 +147,10 @@ viewProject(id){
   formatData(res){
     //console.log(res)
     this.employees = []
-    for(let i=0;i<res.length;i++){
+    var res1=Object.entries(res)
+    for(let i=0;i<res1.length;i++){
       this.employees.push(
-        {label:res[i].name,value:res[i].email}
+        {label:res[i].name,value:res[i].username}
       )
     }
     console.log(this.employees)

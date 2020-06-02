@@ -143,6 +143,7 @@ saveLeaveStatus(){
   public emp_id;
   public date;
   setEmpId(id){
+    
     this.emp_id=id.getAttribute('emp-id')
     this.date=id.getAttribute('date')
     console.log(this.emp_id,this.date)
