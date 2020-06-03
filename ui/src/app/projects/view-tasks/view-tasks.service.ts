@@ -36,4 +36,24 @@ export class ViewTasksService {
     return this.http.post(this.globalService.baseApiUrl+'tasks/update',data,{headers:headers})
   }
 
+  addComment(data){
+      const headers=new HttpHeaders({
+      'Content-type':'application/json',
+      'Authorization':'Bearer '+this.principle.getItem('jwt_token')
+  })
+  return this.http.post(this.globalService.baseApiUrl+'task/addComment',data,{headers:headers})
+
+  }
+
+  getAllComments(data){
+       const headers=new HttpHeaders({
+      'Content-type':'application/json',
+      'Authorization':'Bearer '+this.principle.getItem('jwt_token')
+  })
+  return this.http.post(this.globalService.baseApiUrl+'task/getAllComments',data,{headers:headers})
+
+  }
+
+  
+
 }

@@ -28,4 +28,15 @@ export class AccountServiceService {
 
     return this.http.post(url,user_data,{headers:headers});
   }
+
+   getUser(){
+  	const headers = new HttpHeaders(
+  			{'Content-type':'application/json',
+  			 'Authorization':'Bearer '+this.principle.getItem('jwt_token')
+  			});
+  	const url = this.globals.baseApiUrl+'accounts/getAccount/';
+
+  	return this.http.get(url,{headers:headers});
+  }
+
 }

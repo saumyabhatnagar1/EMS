@@ -42,6 +42,9 @@ export class ViewTasksComponent implements OnInit {
 
   public id = this.viewProjectComponent.id
   ngOnInit(): void {
+    this.getUser()
+    // this.getAllComments()
+    // this.addComment()
     this.cols = [
 
      
@@ -98,6 +101,7 @@ showUpdateDialog(id){
     return task.id==taskid
   })
   console.log(this.tasksbyid[0].id)
+  this.getAllComments()
 
   }
 
@@ -207,4 +211,58 @@ updateTask(){
   // console.log(this.tasksbyid.id)
 
 }
+
+public currentUser:any
+
+getUser(){
+  this.accountService.getUser().subscribe(
+    res=>{
+      this.currentUser = res
+    },
+    err => {
+      console.log(err)
+    }
+  )}
+
+
+public commentForm=new FormGroup({
+  'comment':new FormControl(''),
+
+})
+
+addComment(){
+  let data ={
+    'task_id':this.tasksbyid[0].id,
+    'username' : this.currentUser.username,
+    'comment' : this.commentForm.get('comment').value
+  }
+    this.viewTaskService.addComment(JSON.stringify(data)).subscribe(
+    res=>{
+      console.log(res)
+    },
+    err => {
+      console.log(err)
+    }
+  )
+
+  // console.log(data)
 }
+public comments : any
+getAllComments(){
+  let data = {
+    'task_id' : this.tasksbyid[0].id
+  }
+    this.viewTaskService.getAllComments(JSON.stringify(data)).subscribe(
+    res=>{
+      console.log(res)
+      this.comments = res
+    },
+    err => {
+      console.log(err)
+    }
+  )
+
+}
+
+}
+
