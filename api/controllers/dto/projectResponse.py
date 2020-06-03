@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from api.models import Project, Task, WorksOn
+from api.models import Project, Task, WorksOn, TaskComment
 
 
 class ProjectSerializer(serializers.ModelSerializer):
@@ -43,4 +43,16 @@ class WorkOnSerializer(serializers.ModelSerializer):
             'id',
             'project_id',
             'emp_id'
+        )
+
+
+class TaskCommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TaskComment
+        fields = (
+            'id',
+            'task_id',
+            'username',
+            'comment',
+            'date'
         )

@@ -31,3 +31,11 @@ class WorksOn(models.Model):
     id = models.CharField(max_length=250, primary_key=True)
     project_id = models.CharField(max_length=250)
     emp_id = models.CharField(max_length=250)
+
+
+class TaskComment(models.Model):
+    id = models.CharField(max_length=250, primary_key=True)
+    task_id = models.CharField(max_length=250)
+    username = models.CharField(max_length=250)
+    comment = models.CharField(max_length=500)
+    date = models.DateTimeField(default=django.utils.timezone.now)

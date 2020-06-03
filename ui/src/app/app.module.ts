@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CalendarCommonModule, CalendarMonthModule } from 'angular-calendar';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SidebarModule } from 'ng-sidebar';
@@ -30,17 +30,18 @@ import { ProfileComponent } from './profile/profile.component';
 import { LeavetypeComponent } from './leavetype/leavetype.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditEmployeeComponent } from './manage-employee/edit-employee/edit-employee.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ToastModule} from 'primeng/toast';
-import {ConfirmDialogModule} from 'primeng/confirmdialog';
-import {TableModule} from 'primeng/table';
-import {DialogModule} from 'primeng/dialog';
-import {InputSwitchModule} from 'primeng/inputswitch';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { TableModule } from 'primeng/table';
+import { DialogModule } from 'primeng/dialog';
+import { InputSwitchModule } from 'primeng/inputswitch';
 import { ProjectsComponent } from './projects/projects.component';
-import {MultiSelectModule} from 'primeng/multiselect';
+import { MultiSelectModule } from 'primeng/multiselect';
 import { ViewProjectComponent } from './projects/view-project/view-project.component';
 import { ViewTasksComponent } from './projects/view-tasks/view-tasks.component';
-import {ProgressBarModule} from 'primeng/progressbar';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 
@@ -103,6 +104,7 @@ import {ProgressBarModule} from 'primeng/progressbar';
     InputSwitchModule,
     MultiSelectModule,
     ProgressBarModule,
+    DropdownModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

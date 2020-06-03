@@ -1,42 +1,73 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm">
-      <div style="box-shadow: 0 1px 0 #bdbdbd, 0 2px 0 #fff, 0 3px 0 #bdbdbd, 0 4px 0 #fff, 0 5px 0 #bdbdbd, 0 0 0 1px
-      #bdbdbd;width:50%;border-radius: 0.6em;" class="">
-        <div style="color: #fff;
+    <div class="col-sm-5" style="margin-top: 50px; margin-left: 50px;">
+      <div class="row">
+        <div style="box-shadow: 0 1px 0 #bdbdbd, 0 2px 0 #fff, 0 3px 0 #bdbdbd, 0 4px 0 #fff, 0 5px 0 #bdbdbd, 0 0 0 1px
+      #bdbdbd;width:50%;border-radius: 0.6em;">
+          <div style="color: #fff;
       background-color: #fd9f1b;
       border-bottom: 1px dashed #f37302;
       box-shadow: 0 2px 0 #fd9f1b;border-top-left-radius:0.6em;border-top-right-radius:0.6em;" align="center">
-          <h6>{{year}}</h6>
-          <h3>{{month}}</h3>
-        </div>
-        <div align="center">
-          <h1>{{date}}</h1>
-          <h4>{{day}}</h4>
+            <h6>{{year}}</h6>
+            <h3>{{month}}</h3>
+          </div>
+          <div align="center">
+            <h1>{{date}}</h1>
+            <h4>{{day}}</h4>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-sm">
-      Status
-      <h4>{{message}}</h4>
-      <form [formGroup] = "timings" (ngSubmit)="saveTimeSheet()">
-        <label>In-Time : HH MM</label>
-        <input type="number" min = "0" max="24" formControlName="in_hours">
-        <input type="number" min="0" max="59" formControlName="in_minutes">
 
-        <label>Out-Time : HH MM</label>
-        <input type="number" min = "0" max="24" formControlName="out_hours">
-        <input type="number" min="0" max="59" formControlName="out_minutes">
-        <button  class="btn btn-primary" type="submit"  [disabled]="timings.invalid">Save</button>
-      </form>
-    </div>
-  </div>
-  <br>
-  <div class ="row" >
-      <div class="col-sm">
-        <ngb-datepicker (dateSelect)="onDateSelect($event)"></ngb-datepicker><br/>
-          <input required [hidden]="!isAdmin" type="text" [(ngModel)]="username" placeholder="Enter Username"/><br/>
+      <div class="row" style="margin-top: 50px;">
+        <div class="col-sm">
+          <ngb-datepicker (dateSelect)="onDateSelect($event)"></ngb-datepicker><br />
+
+          <!-- <input required [hidden]="!isAdmin" type="text" [(ngModel)]="username" placeholder="Enter Username" /><br /> -->
+
+          <p-dropdown required [hidden]="!isAdmin" [options]="employees" [(ngModel)]="username">
+          </p-dropdown> <br>
           <button class="btn btn-primary" (click)="fetchSheet(username,date,month,year)">Fetch</button>
+        </div>
+
       </div>
+    </div>
+    <div class="col-sm-3" style="margin-top: 50px; margin-left: 50px;">
+
+      <div class="card row" style="border-radius: 20px; height: 20%;">
+        <div class="card-body" style="padding-left: 50px;">
+          <h5 class="card-title">Status </h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{message}}</h6>
+        </div>
+      </div>
+
+      <div class="card row" style="justify-content: center; border-radius: 20px; height: 70%;">
+        <div class="card-body" style="padding-left: 50px; padding-top: 20%;">
+          <form [formGroup]="timings" (ngSubmit)="saveTimeSheet()">
+            <div class="row">
+              <label>In-Time</label>
+              <input type="number" min="0" max="24" formControlName="in_hours" placeholder="HH"
+                style="margin-left: 20px;">
+              <input type="number" min="0" max="59" formControlName="in_minutes" placeholder="MM">
+            </div>
+            <div class="row" style="margin-top: 10px;">
+              <label>Out-Time </label>
+              <input type="number" min="0" max="24" formControlName="out_hours" placeholder="HH"
+                style="margin-left: 8px;">
+              <input type="number" min="0" max="59" formControlName="out_minutes" placeholder="MM">
+            </div>
+            <button class="btn btn-primary row" type="submit" [disabled]="timings.invalid"
+              style="margin-top: 20px;">Save</button>
+
+
+          </form>
+        </div>
+      </div>
+    </div>
+
   </div>
+
+
+
+
+
 </div>

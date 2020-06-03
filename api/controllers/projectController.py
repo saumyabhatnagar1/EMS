@@ -6,7 +6,8 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 
 from api.services import projectService
-from .dto.projectResponse import ProjectSerializer, TaskSerializer, WorkOnSerializer
+from .dto.projectResponse import ProjectSerializer, TaskSerializer, WorkOnSerializer, TaskCommentSerializer
+from .dto.accountResponse import EmployeeSerializer
 
 
 @api_view(['POST'])
@@ -91,4 +92,29 @@ def getTeamDetail(request):
     project_id = json.loads(request.body)['project_id']
     team = projectService.getTeamDetail(project_id)
     serializer = WorkOnSerializer(team, many=True)
+    return JsonResponse(serializer.data, safe=False, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getFreeEmployee(request):
+    employees = projectService.filterEmployee()
+    employee_serializer = EmployeeSerializer(employees, many=True)
+    return JsonResponse(employee_serializer.data, safe=False, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def addComment(request):
+    task_comment = json.loads(request.body)
+    projectService.saveComment(task_comment)
+    return JsonResponse({"message": "COMMENT ADDED"}, safe=False, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def getAllComments(request):
+    task_id = json.loads(request.body)['task_id']
+    comments = projectService.getAllComments(task_id)
+    serializer = TaskCommentSerializer(comments, many=True)
     return JsonResponse(serializer.data, safe=False, status=status.HTTP_200_OK)
