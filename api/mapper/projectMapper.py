@@ -57,6 +57,9 @@ def saveTeam(team_detail):
     worksOn = WorksOn.objects.create(id=uuid.uuid1().hex)
     worksOn.project_id = team_detail["project_id"]
     worksOn.emp_id = team_detail["emp_id"]
+    employee = Employee.objects.get(username=team_detail['emp_id'])
+    employee.isWorking = True
+    employee.save()
     worksOn.save()
 
 
@@ -76,9 +79,8 @@ def findProjectsByAssignTo(assignTo):
 
 
 def filterEmployee():
-    employees = Employee.objects.all()
-    working_emp = WorksOn.objects.all()
-    return employees, working_emp
+    employees = Employee.objects.filter(isWorking=False)
+    return employees
 
 
 def saveComment(task_comment):

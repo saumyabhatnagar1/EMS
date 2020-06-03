@@ -20,3 +20,4 @@ class Employee(AbstractUser):
     mobileNumber = models.CharField(max_length=250, blank=True)
     country = models.CharField(max_length=250, default='India')
     designation = models.CharField(max_length=250, blank=True)
+    isWorking = models.BooleanField(default=False)

@@ -48,9 +48,7 @@ def getTeamDetail(project_id):
 
 
 def filterEmployee():
-    employees, working_emp = projectMapper.filterEmployee()
-    for employee in working_emp:
-        employees = employees.exclude(username=employee.emp_id)
+    employees = projectMapper.filterEmployee()
     return employees
 
 
