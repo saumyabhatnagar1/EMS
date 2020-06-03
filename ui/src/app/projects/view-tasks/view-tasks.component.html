@@ -9,7 +9,7 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
             <h2>List of Tasks</h2>
         </div>
         <div class="col-sm">
-            <button pButton type="button" icon="pi pi-fw pi-user-plus" style="position: relative;float:right;" label="Add Tasks" (click)="showDialog()">
+            <button pButton type="button" icon="pi pi-plus-circle" style="position: relative;float:right;" label="Add Tasks" (click)="showDialog()">
             </button>
         </div>
     </div>
@@ -33,7 +33,13 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
         <td >{{task.title}}</td>
         <td>{{task.assignTo}}</td>
         <td>{{task.project_id}}</td>
-        <td>{{task.status}}</td>
+        <td>
+          <p *ngIf ='task.status==0'> In Backlog </p>
+          <p *ngIf ='task.status==1'> In BA </p>
+          <p *ngIf ='task.status==2'> In Dev </p>
+          <p *ngIf ='task.status==3'> In QA </p>
+          <p *ngIf ='task.status==4'> In Staging</p>
+          </td>
         <td>{{task.deadline}}</td>
         <td>{{task.createdOn}}</td>
         <td>{{task.description}}</td>
@@ -42,7 +48,7 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
         <td #id [attr.data-message-id]="task.id" >
             <div class="ui-toolbar-group-center">
                 <button pButton type="button" icon="pi pi-search"  class="ui-button-success"  (click)="showUpdateDialog(id);" ></button>
-                <button  pButton type="button" icon="pi pi-user-edit" class="ui-button-primary"></button>
+               
                 
             </div>
         </td>
@@ -87,23 +93,26 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
     </p-footer>
 </p-dialog>
 
-<p-dialog header="Update Task" [style]="{'width':'80vh'}"  [(visible)]="showUpdateTask" >
-    <div *ngFor="let taskbyid of tasksbyid"  class="modal-body">
-      <p>Created On:{{taskbyid.createdOn}}</p>
-      <p>Deadline:{{taskbyid.deadline}}</p>
-      <p>Description:{{taskbyid.description}}</p>
-      <p>assigned to:{{taskbyid.assignedTo}}</p>
-      <p>title:{{taskbyid.title}}</p>
-      <form action="">
-          <input type="number" id="status" value="{{taskbyid.status}}">
+<p-dialog header="Update Task Status" [style]="{'width':'80vh'}"  [(visible)]="showUpdateTask" >
+    <div *ngFor="let taskbyid of tasksbyid"  class="modal-body" style = "height:500px">
+      <p style="padding:10px"><span style="padding-right:10px"> Created On : </span>{{taskbyid.createdOn}}</p>
+      <p style="padding:10px"><span style="padding-right:10px">Deadline :</span>{{taskbyid.deadline}}</p>
+      <p style="padding:10px"><span style="padding-right:10px">Description :</span>{{taskbyid.description}}</p>
+      <p style="padding:10px"><span style="padding-right:10px">assigned to :</span>{{taskbyid.assignedTo}}</p>
+      <p style="padding:10px"><span style="padding-right:10px">title :</span>{{taskbyid.title}}</p>
+      <p style="padding:10px"><span style="padding-right:10px">due :</span>{{taskbyid.due}}</p>
+      <form class="main-form"  [formGroup]="statusForm" > 
+          <!-- <input type="number"  value="{{taskbyid.status}}"> -->
+          <p-dropdown  style="padding : 10px" formControlName="status" [options]="status"></p-dropdown>
+          
       </form>
-      <p>due:{{taskbyid.due}}</p>
+      
     </div>
 
     <p-footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-        <button type="button" pButton icon="pi pi-times"  label="Cancel" (click)="closeDialog()"></button>
-        <button type="button" pButton icon="pi pi-check" label="Create" (click)="updateTask();closeDialog()"></button>  
+       
+        <button type="button" pButton icon="pi pi-check" label="Update" (click)="updateTask();closeDialog()"></button>  
         </div>
     </p-footer>
 </p-dialog>

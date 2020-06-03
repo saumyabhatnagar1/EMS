@@ -12,6 +12,7 @@ import {ListboxModule} from 'primeng/listbox';
 
 
 
+
 @Component({
   selector: 'app-view-tasks',
   templateUrl: './view-tasks.component.html',
@@ -29,7 +30,15 @@ export class ViewTasksComponent implements OnInit {
   rows = 10;
   public tasks = []
   employees:SelectItem[];
-  public status:SelectItem[];
+  public status:SelectItem[] = [
+    {label:'In Backlog', value:0},
+    {label:'In BA', value:1},
+    {label:'In Dev', value:2},
+    {label:'In QA', value:3},
+    {label:'In Staging', value:4},
+    
+];
+  
 
   public id = this.viewProjectComponent.id
   ngOnInit(): void {
@@ -78,14 +87,17 @@ isFirstPage(): boolean {
 showDialog(){
 this.showCreateTask = true;
 }
+public test_id:any
 public tasksbyid:any
 showUpdateDialog(id){
-  
+  this.test_id=id  
+  // console.log(this.test_id)
   this.showUpdateTask=true
   var taskid=(id.getAttribute('data-message-id'))
   this.tasksbyid=this.tasks.filter((task)=>{
     return task.id==taskid
   })
+  console.log(this.tasksbyid[0].id)
 
   }
 
@@ -137,16 +149,16 @@ addTask(){
     "deadline":this.TaskForm.get('deadline').value,
     "assignTo":this.TaskForm.get('assignTo').value
   }
-
+   console.log(data)
   this.viewTaskService.addTask(JSON.stringify(data)).subscribe(
     res=>{
       console.log(res)
       this.messageService.add({severity:'success',summary: 'New Team member added...',life:2000})
-
+      this.getTask()
   },err=>{
     console.log(err)
   })
-  this.getTask()
+  
 }
 
 getTask(){
@@ -164,13 +176,35 @@ getTask(){
           this.tasks.push(res1[i][1])
         }
         console.log(this.tasks)
+
     },err=>{
       console.log(err)
     }
   )
 }
 
+public statusForm=new FormGroup({
+  'status':new FormControl(''),
+
+})
+
 updateTask(){
-  console.log(this.tasksbyid.id)
+  let data = { 
+    'id' : this.tasksbyid[0].id,
+    'status' : this.statusForm.get('status').value
+  }
+
+  this.viewTaskService.updateStatus(JSON.stringify(data)).subscribe(
+    res=>{
+      console.log(this.tasksbyid.id)
+      console.log(res)
+      this.getTask()
+    },
+    err => {
+      console.log(err)
+    }
+  )
+  // console.log(this.tasksbyid.id)
+
 }
 }
