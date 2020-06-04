@@ -131,7 +131,7 @@ formatData(res){
   this.employees = []
   for(let i=0;i<res.length;i++){
     this.employees.push(
-      {label:res[i].name,value:res[i].email}
+      {label:res[i].name,value:res[i].username}
     )
   }
   console.log(this.employees)
