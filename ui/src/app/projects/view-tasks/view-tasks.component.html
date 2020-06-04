@@ -1,128 +1,139 @@
 <p-toast></p-toast>
-<p-table #dt  [stacked]="true" scrollHeight="200px" [resizableColumns]="true" [autoLayout]="true"  [columns]="cols" [value]="tasks"  [paginator]="true" [rows]="7"  [showCurrentPageReport]="true" [(first)]="first"
-currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+<p-table #dt [stacked]="true" scrollHeight="200px" [resizableColumns]="true" [autoLayout]="true" [columns]="cols"
+    [value]="tasks" [paginator]="true" [rows]="7" [showCurrentPageReport]="true" [(first)]="first"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
 
 
-<ng-template pTemplate="caption">
-    <div class="row">
-        <div class="col-sm">
-            <h2>List of Tasks</h2>
-        </div>
-        <div class="col-sm">
-            <button pButton type="button" icon="pi pi-plus-circle" style="position: relative;float:right;" label="Add Tasks" (click)="showDialog()">
-            </button>
-        </div>
-    </div>
-    <div style="text-align: right">        
-        <i class="pi pi-search" style="margin:5px 5px 0 0"></i>
-        <input type="text" pInputText size="37" placeholder="Search" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
-    </div>
-</ng-template>
-<ng-template pTemplate="header" let-columns>
-    <tr>
-        <th *ngFor="let col of columns" [style.width]="col.width" [pSortableColumn]="col.field">
-            {{col.header}}
-            <p-sortIcon [field]="col.field"></p-sortIcon>
-        </th>
-    </tr>
-</ng-template>
-<ng-template pTemplate="body" let-task>
-    <tr>
-        <!-- <td>{{employee.sno}}</td> -->
-        
-        <td >{{task.title}}</td>
-        <td>{{task.assignTo}}</td>
-        <td>{{task.project_id}}</td>
-        <td>
-          <p *ngIf ='task.status==0'> In Backlog </p>
-          <p *ngIf ='task.status==1'> In BA </p>
-          <p *ngIf ='task.status==2'> In Dev </p>
-          <p *ngIf ='task.status==3'> In QA </p>
-          <p *ngIf ='task.status==4'> In Staging</p>
-          </td>
-        <td>{{task.deadline}}</td>
-        <td>{{task.createdOn}}</td>
-        <td>{{task.description}}</td>
-
-
-        <td #id [attr.data-message-id]="task.id" >
-            <div class="ui-toolbar-group-center">
-                <button pButton type="button" icon="pi pi-search"  class="ui-button-success"  (click)="showUpdateDialog(id);" ></button>
-               
-                
+    <ng-template pTemplate="caption">
+        <div class="row">
+            <div class="col-sm">
+                <h2>List of Tasks</h2>
             </div>
-        </td>
+            <div class="col-sm">
+                <button pButton type="button" icon="pi pi-plus-circle" style="position: relative;float:right;"
+                    label="Add Tasks" (click)="showDialog()">
+                </button>
+            </div>
+        </div>
+        <div style="text-align: right">
+            <i class="pi pi-search" style="margin:5px 5px 0 0"></i>
+            <input type="text" pInputText size="37" placeholder="Search"
+                (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns" [style.width]="col.width" [pSortableColumn]="col.field">
+                {{col.header}}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-task>
+        <tr>
+            <!-- <td>{{employee.sno}}</td> -->
 
-    </tr>
-</ng-template>
+            <td>{{task.title}}</td>
+            <td>{{task.assignTo}}</td>
+            <td>{{task.project_id}}</td>
+            <td>
+                <p *ngIf='task.status==0'> In Backlog </p>
+                <p *ngIf='task.status==1'> In BA </p>
+                <p *ngIf='task.status==2'> In Dev </p>
+                <p *ngIf='task.status==3'> In QA </p>
+                <p *ngIf='task.status==4'> In Staging</p>
+            </td>
+            <td>{{task.deadline}}</td>
+            <td>{{task.createdOn}}</td>
+            <td>{{task.description}}</td>
+
+
+            <td #id [attr.data-message-id]="task.id">
+                <div class="ui-toolbar-group-center">
+                    <button pButton type="button" icon="pi pi-search" class="ui-button-success"
+                        (click)="showUpdateDialog(id);"></button>
+
+
+                </div>
+            </td>
+
+        </tr>
+    </ng-template>
 
 </p-table>
 
-<p-dialog header="Create Task" [style]="{'width':'80vh'}"  [(visible)]="showCreateTask">
+<p-dialog header="Create Task" [style]="{'width':'80vh'}" [(visible)]="showCreateTask">
     <div class="">
         <form [formGroup]="TaskForm">
-          <div class="form-group">
-            <label for="title">Title</label>
-            <input formControlName="title" type="text" class="form-control" required id="title" aria-describedby="nameHelp" placeholder="Title of Task">           
-          </div>
-          
-          <div class="form-group">
-            <label for="description">Description</label>
-            <input formControlName="description" type="text" class="form-control" required id="description" aria-describedby="nameHelp" placeholder="Description">           
-          </div>
-         
-          <div class="form-group">
-            <label for="deadline">Deadline</label>
-            <input formControlName="deadline" type="date" class="form-control" required id="deadline" aria-describedby="nameHelp" placeholder="">           
-          </div>    
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input formControlName="title" type="text" class="form-control" required id="title"
+                    aria-describedby="nameHelp" placeholder="Title of Task">
+            </div>
 
-          <div class="form-group">
-            <label for="employees">Assign To</label> <br>
-          <p-multiSelect formControlName="assignTo" [options]="employees" id="employees" ></p-multiSelect>
-          </div>
-          
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input formControlName="description" type="text" class="form-control" required id="description"
+                    aria-describedby="nameHelp" placeholder="Description">
+            </div>
+
+            <div class="form-group">
+                <label for="deadline">Deadline</label>
+                <input formControlName="deadline" type="date" class="form-control" required id="deadline"
+                    aria-describedby="nameHelp" placeholder="">
+            </div>
+
+            <div class="form-group">
+                <label for="employees">Assign To</label> <br>
+                <p-multiSelect formControlName="assignTo" [options]="employees" id="employees"></p-multiSelect>
+            </div>
+
         </form>
-        
-        
+
+
     </div>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-        <button type="button" pButton icon="pi pi-times"  label="Cancel" (click)="closeDialog()"></button>
-        <button type="button" pButton icon="pi pi-check" label="Create" (click)="addTask();closeDialog()"></button>  
+            <button type="button" pButton icon="pi pi-times" label="Cancel" (click)="closeDialog()"></button>
+            <button type="button" pButton icon="pi pi-check" label="Create" (click)="addTask();closeDialog()"></button>
         </div>
     </p-footer>
 </p-dialog>
 
-<p-dialog header="Update Task Status" [style]="{'width':'80vh'}"  [(visible)]="showUpdateTask" >
-    <div *ngFor="let taskbyid of tasksbyid"  class="modal-body" style = "height:500px">
-      <p style="padding:10px"><span style="padding-right:10px"> Created On : </span>{{taskbyid.createdOn}}</p>
-      <p style="padding:10px"><span style="padding-right:10px">Deadline :</span>{{taskbyid.deadline}}</p>
-      <p style="padding:10px"><span style="padding-right:10px">Description :</span>{{taskbyid.description}}</p>
-      <p style="padding:10px"><span style="padding-right:10px">assigned to :</span>{{taskbyid.assignedTo}}</p>
-      <p style="padding:10px"><span style="padding-right:10px">title :</span>{{taskbyid.title}}</p>
-      <p style="padding:10px"><span style="padding-right:10px">due :</span>{{taskbyid.due}}</p>
-      <form class="main-form"  [formGroup]="statusForm" > 
-          <!-- <input type="number"  value="{{taskbyid.status}}"> -->
-          <p-dropdown  style="padding : 10px" formControlName="status" [options]="status"></p-dropdown>
-          
-      </form>
-      <form class="main-form" [formGroup]="commentForm">
-         <textarea rows="4" cols = "50" style= "margin : 10px"  placeholder="add comment" formControlName="comment"></textarea>
-      </form>
-      <button type="button"  style="margin-left: 10px" pButton icon="pi pi-check" label="comment" (click)="addComment()"></button> 
-      <div *ngFor= 'let comment of comments;'>
+<p-dialog header="Update Task Status" [style]="{'width':'80vh'}" [(visible)]="showUpdateTask">
+    <div *ngFor="let taskbyid of tasksbyid" class="modal-body" style="height:500px">
+        <p style="padding:10px"><span style="padding-right:10px"> Created On : </span>{{taskbyid.createdOn}}</p>
+        <p style="padding:10px"><span style="padding-right:10px">Deadline :</span>{{taskbyid.deadline}}</p>
+        <p style="padding:10px"><span style="padding-right:10px">Description :</span>{{taskbyid.description}}</p>
+        <p style="padding:10px"><span style="padding-right:10px">assigned to :</span>{{taskbyid.assignedTo}}</p>
+        <p style="padding:10px"><span style="padding-right:10px">title :</span>{{taskbyid.title}}</p>
+        <p style="padding:10px"><span style="padding-right:10px">due :</span>{{taskbyid.due}}</p>
+        <form class="main-form" [formGroup]="statusForm">
+            <!-- <input type="number"  value="{{taskbyid.status}}"> -->
+            <p-dropdown style="padding : 10px" formControlName="status" [options]="status"></p-dropdown>
 
-        <!-- <p><b> {{comment.username}} </b>, {{comment.date}} </p> 
-        <p>{{comment.comment}}</p> -->
-        {{comment.username}}
+        </form>
+        <form class="main-form" [formGroup]="commentForm">
+            <textarea rows="4" cols="50" style="margin : 10px" placeholder="add comment"
+                formControlName="comment"></textarea>
+        </form>
+        <button type="button" style="margin-left: 10px" pButton icon="pi pi-check" label="comment"
+            (click)="addComment()"></button>
+        <br><br>
+        <div *ngFor='let comment of comments;'>
 
-      </div>
+            <p><b> {{comment.username}} </b>, <span class="text-muted"> {{comment.date}}</span> </p>
+            <p>{{comment.comment}}</p>
+            <br>
+
+        </div>
     </div>
 
     <p-footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-       
-        <button type="button"  pButton icon="pi pi-check" label="Update" (click)=" updateTask();closeDialog()"></button>  
+
+            <button type="button" pButton icon="pi pi-check" label="Update"
+                (click)=" updateTask();closeDialog()"></button>
         </div>
     </p-footer>
 </p-dialog>
