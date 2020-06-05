@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { AccountServiceService} from '../../common/services/account-service.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import {ListboxModule} from 'primeng/listbox';
+import {VirtualScrollerModule} from 'primeng/virtualscroller';
 
 
 
@@ -29,6 +30,7 @@ export class ViewTasksComponent implements OnInit {
   first = 0;
   rows = 10;
   public tasks = []
+  public comments =[]
   employees:SelectItem[];
   public status:SelectItem[] = [
     {label:'In Backlog', value:0},
@@ -240,6 +242,7 @@ addComment(){
     this.viewTaskService.addComment(JSON.stringify(data)).subscribe(
     res=>{
       console.log(res)
+      this.getAllComments()
       this.messageService.add({severity:'success',summary: 'New Comment added...',life:2000})
     },
     err => {
@@ -249,15 +252,20 @@ addComment(){
 
   // console.log(data)
 }
-public comments : any
+// public comments : any
 getAllComments(){
   let data = {
     'task_id' : this.tasksbyid[0].id
   }
     this.viewTaskService.getAllComments(JSON.stringify(data)).subscribe(
     res=>{
-      console.log(res)
-      this.comments = res
+       let res1=Object.entries(res)
+      this.comments=[]
+        for(let i=0;i<res1.length;i++)
+        { 
+          this.comments.push(res1[i][1])
+        }
+        console.log(this.comments)
     },
     err => {
       console.log(err)
