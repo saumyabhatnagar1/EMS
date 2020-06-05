@@ -59,3 +59,8 @@ def saveComment(task_comment):
 def getAllComments(task_id):
     comments = projectMapper.getAllComments(task_id)
     return comments
+
+
+def updateProjectStatus(project_data):
+    projectMapper.updateProject(project_data)
+    projectMapper.updateEmployeeWorkingStatus(project_data)

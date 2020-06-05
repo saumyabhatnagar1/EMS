@@ -118,3 +118,11 @@ def getAllComments(request):
     comments = projectService.getAllComments(task_id)
     serializer = TaskCommentSerializer(comments, many=True)
     return JsonResponse(serializer.data, safe=False, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def updateProjectStatus(request):
+    project_data = json.loads(request.body)
+    projectService.updateProjectStatus(project_data)
+    return JsonResponse({"message": "PROJECT STATUS UPDATED"}, safe=False, status=status.HTTP_200_OK)

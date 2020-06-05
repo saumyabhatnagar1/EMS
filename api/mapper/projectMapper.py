@@ -94,3 +94,18 @@ def saveComment(task_comment):
 def getAllComments(task_id):
     comments = TaskComment.objects.filter(task_id=task_id)
     return comments
+
+
+def updateProject(project_data):
+    project = Project.objects.get(id=project_data['id'])
+    project.status = project_data['status']
+    project.save()
+
+
+def updateEmployeeWorkingStatus(project_data):
+    worksOn = WorksOn.objects.filter(project_id=project_data['id'])
+    workingStatus = True if project_data['status']!=2 else False
+    for emp in worksOn:
+        employee = Employee.objects.get(username=emp.emp_id)
+        employee.isWorking = workingStatus
+        employee.save()
