@@ -1,5 +1,22 @@
 <!--Navbar-->
-
+<p-overlayPanel #op [dismissable]="true" [showCloseIcon]="true">
+  <ng-template pTemplate>
+      <div class="ui-overlaypanel-content">
+        <i class="material-icons">notifications</i>
+        <br>
+        Name:Naveen Gaddi
+        <br>
+        Created On:10.10.2020
+      </div>
+      <div class="ui-overlaypanel-content">
+        <i class="material-icons">notifications</i>
+        <br>
+        Name:Naveen Gaddi
+        <br>
+        Created On:10.10.2020
+      </div>
+  </ng-template>
+</p-overlayPanel>
 <nav class="navbar mb-0 " style="border-radius: 0%;background-color:#00acc1;">
   <ul class="navbar-nav mr-auto">
     <li class="navbar-brand" style="display: flex; flex-direction: row;">
@@ -11,7 +28,7 @@
 
     <li class="nav-item mr-3" style="position: absolute; right: 5%;" [hidden]="isLoggedIn">
 
-      <a routerLink="notifications" class="nav-link"><i class="material-icons">notifications</i>Notifications</a>
+      <a  class="nav-link" (click)="op.toggle($event)"><i class="material-icons">notifications</i>Notifications</a>
     </li>
     <li class="nav-item mr-3" style="position: absolute; right: 0;" [hidden]="isLoggedIn">
 

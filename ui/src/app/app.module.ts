@@ -43,6 +43,8 @@ import { ViewTasksComponent } from './projects/view-tasks/view-tasks.component';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { DropdownModule } from 'primeng/dropdown';
 import {ChartModule} from 'primeng/chart'
+import {OverlayPanelModule} from 'primeng/overlaypanel';
+
 
 
 
@@ -107,6 +109,7 @@ import {ChartModule} from 'primeng/chart'
     MultiSelectModule,
     ProgressBarModule,
     DropdownModule,
+    OverlayPanelModule
   ],
   providers: [],
   bootstrap: [AppComponent]

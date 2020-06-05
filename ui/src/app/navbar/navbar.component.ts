@@ -3,7 +3,7 @@ import { PrincipleService } from '../util/principle.service';
 import { AuthService } from '../util/auth.service';
 import { Router } from '@angular/router';
 import { NotificationService } from '../common/services/notification.service';
-
+import {OverlayPanelModule} from 'primeng/overlaypanel';
 declare var $: any
 
 @Component({
@@ -57,6 +57,7 @@ export class NavbarComponent implements OnInit {
 
   public _toggleSidebar() {
     this._opened = !this._opened;
+    
   }
 
 
