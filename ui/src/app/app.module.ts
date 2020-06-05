@@ -42,6 +42,7 @@ import { ViewProjectComponent } from './projects/view-project/view-project.compo
 import { ViewTasksComponent } from './projects/view-tasks/view-tasks.component';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { DropdownModule } from 'primeng/dropdown';
+import {ChartModule} from 'primeng/chart'
 
 
 
@@ -82,6 +83,7 @@ import { DropdownModule } from 'primeng/dropdown';
     FormsModule,
     CommonModule,
     NgxDatatableModule,
+    ChartModule,
     NgxPaginationModule,
     ReactiveFormsModule,
     NgxDatatableModule,

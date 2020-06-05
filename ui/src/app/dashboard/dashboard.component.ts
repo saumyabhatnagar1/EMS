@@ -4,6 +4,7 @@ import { ChartsModule } from 'ng2-charts';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label,MultiDataSet } from 'ng2-charts';
 import { ChartType } from 'chart.js';
+import {ChartModule} from 'primeng/chart'
 
 
 @Component({
@@ -12,8 +13,63 @@ import { ChartType } from 'chart.js';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  dataMonthly :any;
+  dataYearly:any;
+  toggleButton:boolean = false
+  constructor(private dashboardService:DashboardService) {
 
-  constructor(private dashboardService:DashboardService) { }
+
+     this.dataMonthly = {
+            datasets: [{
+                data: [
+                    11,
+                    16,
+                    7,
+                    3,
+                ],
+                backgroundColor: [
+                    "#FF6384",
+                    "#a6f2f5",
+                    "#8ca8e6",
+                    "#ffd28f",
+                ],
+                label: 'My dataset'
+            }],
+            labels: [
+                "Leaves Left",
+                "Leaves Applied",
+                "Rejected",
+                "Approved",
+            ]
+        }
+   
+
+
+
+   this.dataYearly = {
+    datasets: [{
+        data: [
+            100,
+            1,
+            70,
+            30,
+        ],
+        backgroundColor: [
+            "#FF6384",
+            "#a6f2f5",
+            "#8ca8e6",
+            "#ffd28f",
+        ],
+        label: 'My dataset'
+    }],
+    labels: [
+        "Leaves Left",
+        "Leaves Applied",
+        "Rejected",
+        "Approved",
+    ]
+}
+}
 
   ngOnInit(): void {
 
@@ -24,6 +80,19 @@ export class DashboardComponent implements OnInit {
   public msg ;
   public labelArray = []
   public dataArray = []
+
+    togglePolar : boolean = false
+
+    togglePolarMonthly(){
+      this.togglePolar = false
+      this.toggleButton=false
+    }
+
+    togglePolarYearly(){
+      this.togglePolar = true
+      this.toggleButton=true
+
+    }
 
   addLabel(msg){
     
@@ -122,5 +191,8 @@ appendTimesheets(res){
   console.log(this.timesheets)
   this.addLabel(this.timesheets)
 }
+
+
+
 
 }
