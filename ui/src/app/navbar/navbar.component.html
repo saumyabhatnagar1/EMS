@@ -1,20 +1,34 @@
 <!--Navbar-->
 <p-overlayPanel #op [dismissable]="true" [showCloseIcon]="true">
   <ng-template pTemplate>
-      <div class="ui-overlaypanel-content">
-        <i class="material-icons">notifications</i>
-        <br>
-        Name:Naveen Gaddi
-        <br>
-        Created On:10.10.2020
+      <div class="ui-overlaypanel-content row align-items-center" style="background-color: #07cfe9; margin: 5px;">
+        <div  class="col-4 col-md-2">
+          <i class="material-icons" style="font-size: 32px;">notifications</i>
+        </div>
+        <div class="col-md-8">
+
+          Employee Name:Naveen Gaddi
+          <br>
+          Created On:10.10.2020
+          <br>
+          Task Assigned: Complete the project
+        </div>
       </div>
-      <div class="ui-overlaypanel-content">
-        <i class="material-icons">notifications</i>
-        <br>
-        Name:Naveen Gaddi
-        <br>
-        Created On:10.10.2020
+      <div class="ui-overlaypanel-content row align-items-center" style="background-color: #07cfe9; margin: 5px;">
+        <div  class="col-4 col-md-2">
+          <i class="material-icons" style="font-size: 32px;">notifications</i>
+        </div>
+        <div class="col-md-8">
+
+          Employee Name:Naveen Gaddi
+          <br>
+          Created On:10.10.2020
+          <br>
+          Task Assigned: Complete the project
+        </div>
       </div>
+      
+      
   </ng-template>
 </p-overlayPanel>
 <nav class="navbar mb-0 " style="border-radius: 0%;background-color:#00acc1;">
@@ -28,7 +42,7 @@
 
     <li class="nav-item mr-3" style="position: absolute; right: 5%;" [hidden]="isLoggedIn">
 
-      <a  class="nav-link" (click)="op.toggle($event)"><i class="material-icons">notifications</i>Notifications</a>
+      <a  class="nav-link" style="cursor: pointer;" (click)="op.toggle($event)"><i class="material-icons">notifications</i> <small class="notification-badge">5</small></a>
     </li>
     <li class="nav-item mr-3" style="position: absolute; right: 0;" [hidden]="isLoggedIn">
 

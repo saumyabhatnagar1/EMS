@@ -86,3 +86,15 @@ a{
   /* Support for IE. */
   font-feature-settings: 'liga';
 }
+
+
+.notification-badge {
+  position: absolute;
+  right: 5px;
+  top: -10px;
+  color: #941e1e;
+  background-color: coral;
+  margin: 2px -0.5em;
+  border-radius: 50%;
+  padding: 0 6px;
+}
