@@ -32,6 +32,7 @@ export class ViewProjectComponent implements OnInit {
     this.getProjectById()
     this.getEmployeeData()
 
+
   }
 
   public newTeamMember
@@ -50,9 +51,7 @@ export class ViewProjectComponent implements OnInit {
   formatData(res) {
     //console.log(res)
     this.employees = []
-    this.employees[0] = {
-      label: "Select member", value: null
-    }
+
     for (let i = 0; i < res.length; i++) {
       this.employees.push(
         { label: res[i].name, value: res[i].username }
@@ -114,13 +113,24 @@ export class ViewProjectComponent implements OnInit {
   public addMemberForm = new FormGroup({
     newTeamMember: new FormControl('')
   })
+
+
+
+
   addTeamMember() {
 
+    let teamMember = this.addMemberForm.get('newTeamMember').value
+    console.log(teamMember)
+    let str = teamMember[0]
 
+    for (let i = 1; i < teamMember.length; i++) {
+      str = str + ',' + teamMember[i]
+    }
+    console.log(str)
 
     let data = {
       'project_id': this.id,
-      'emp_id': this.addMemberForm.get('newTeamMember').value
+      'emp_id': str
     }
     console.log(data)
     this.viewProjectService.addTeamMember(JSON.stringify(data)).subscribe(
