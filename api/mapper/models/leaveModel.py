@@ -24,4 +24,4 @@ class LeaveType(models.Model):
     value = models.CharField(max_length=100)
     description = models.CharField(max_length=250)
     createdOn = models.DateTimeField(default=django.utils.timezone.now, verbose_name='created date')
-    number_of_leaves = models.IntegerField()
+    number_of_leaves = models.IntegerField(null=True, blank=False)
