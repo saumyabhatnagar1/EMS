@@ -120,11 +120,13 @@
         <button type="button" style="margin-left: 10px" pButton icon="pi pi-check" label="comment"
             (click)="addComment()"></button>
         <br><br>
+        <div style="height:100px;overflow:auto">
         <div *ngFor='let comment of comments;'>
 
             <p><b> {{comment.username}} </b>, <span class="text-muted"> {{comment.date}}</span> </p>
             <p>{{comment.comment}}</p>
             <br>
+        </div>    
 
         </div>
 
