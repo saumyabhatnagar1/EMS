@@ -17,5 +17,6 @@ class LeaveTypeSerializer(serializers.ModelSerializer):
             'id',
             'value',
             'description',
-            'createdOn'
+            'createdOn',
+            'number_of_leaves'
         )

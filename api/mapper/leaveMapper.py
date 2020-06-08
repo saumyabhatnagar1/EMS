@@ -37,6 +37,7 @@ def saveLeaveType(leave_type_data):
     leave_type = LeaveType.objects.create(id=uuid.uuid1().hex)
     leave_type.value = leave_type_data["value"]
     leave_type.description = leave_type_data["description"]
+    leave_type.number_of_leaves = leave_type_data["number_of_leaves"]
     leave_type.save()
 
 
@@ -45,11 +46,11 @@ def getLeaveType():
     return leave_types
 
 
-def updateLeaveType(leave_type_date):
-    leave_type = LeaveType.objects.get(id=leave_type_date['id'])
-    leave_type.value = leave_type_date['value']
-    leave_type.description = leave_type_date['description']
-    leave_type.createdOn = datetime.datetime.now()
+def updateLeaveType(leave_type_data):
+    leave_type = LeaveType.objects.get(id=leave_type_data['id'])
+    leave_type.value = leave_type_data['value']
+    leave_type.description = leave_type_data['description']
+    leave_type.number_of_leaves = leave_type_data["number_of_leaves"]
     leave_type.save()
 
 
