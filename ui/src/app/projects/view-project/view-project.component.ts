@@ -1,11 +1,12 @@
 import { ViewTasksComponent } from './../view-tasks/view-tasks.component';
-import { FormGroup, FormBuilder, FormControlDirective,FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControlDirective, FormControl } from '@angular/forms';
 import { AccountServiceService } from './../../common/services/account-service.service';
 import { ViewProjectService } from './view-project.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import {MessageService} from 'primeng/api';
-import {ConfirmationService} from 'primeng/api';
+import { MessageService } from 'primeng/api';
+import { ConfirmationService, SelectItem } from 'primeng/api';
+
 
 
 
@@ -13,137 +14,143 @@ import {ConfirmationService} from 'primeng/api';
   selector: 'app-view-project',
   templateUrl: './view-project.component.html',
   styleUrls: ['./view-project.component.css'],
-  providers: [MessageService,ConfirmationService]
+  providers: [MessageService, ConfirmationService]
 })
 export class ViewProjectComponent implements OnInit {
 
-  constructor(private confirmationservice : ConfirmationService,private messageservice: MessageService,private accountService:AccountServiceService,private activeRoute:ActivatedRoute,private viewProjectService: ViewProjectService) { }
-  public id:any;
+  constructor(private confirmationservice: ConfirmationService, private messageservice: MessageService, private accountService: AccountServiceService, private activeRoute: ActivatedRoute, private viewProjectService: ViewProjectService) { }
+  public id: any;
   public project = []
   public value: number = 50;
+  public project1: any;
   ngOnInit(): void {
-    this.activeRoute.paramMap.subscribe(params=>{
+    this.activeRoute.paramMap.subscribe(params => {
       this.id = params.get('id')
     })
 
     //this.addTeamMember()
     this.getProjectById()
     this.getEmployeeData()
-    
+
   }
 
   public newTeamMember
-  public employees=[]
-  getEmployeeData(){
-    this.accountService.getUsers().subscribe(res=>{
+  public employees: SelectItem[];
+  getEmployeeData() {
+    this.accountService.getUsers().subscribe(res => {
       this.formatData(res)
       //this.employees = res;
-      
-  	},err=>{
-  		console.log(err);
-  	});
-  
+
+    }, err => {
+      console.log(err);
+    });
+
   }
 
-  formatData(res){
+  formatData(res) {
     //console.log(res)
     this.employees = []
-    for(let i=0;i<res.length;i++){
+    this.employees[0] = {
+      label: "Select member", value: null
+    }
+    for (let i = 0; i < res.length; i++) {
       this.employees.push(
-        {label:res[i].name,value:res[i].email}
+        { label: res[i].name, value: res[i].username }
       )
     }
     console.log(this.employees)
   }
 
-  getProjectById(){
-    
+  getProjectById() {
+
     let data = {
-      "project_id":this.id
+      "project_id": this.id
     }
-    this.viewProjectService.getProjectById(JSON.stringify(data)).subscribe(res=>{
-      
+    this.viewProjectService.getProjectById(JSON.stringify(data)).subscribe(res => {
+      console.log(res)
+      this.project1 = res
       this.appendProject(res)
 
     },
-    err=>{
-      console.log(err)
-    })
+      err => {
+        console.log(err)
+      })
   }
 
-  appendProject(res){
+  appendProject(res) {
     let res1 = Object.entries(res)
     //console.log(this.project)
-    for(let i=0;i<res1.length;i++){
+    for (let i = 0; i < res1.length; i++) {
       this.project.push(res1[i][1])
     }
-   this.getTeamById()
-  
+    this.getTeamById()
+
     console.log(this.project)
   }
-public teams:any
-public teams1=[]
-  getTeamById(){
-    let data={
-      'project_id':(this.id)
-    } 
-    
+  public teams: any
+  public teams1 = []
+  getTeamById() {
+    let data = {
+      'project_id': (this.id)
+    }
+
     this.viewProjectService.getTeamById(JSON.stringify(data)).subscribe(
-      res=>{
+      res => {
         console.log(res)
-        this.teams=res;
-        let res1=Object.entries(res)
-        for(let i=0;i<res1.length;i++)
-        { 
+        this.teams = res;
+        console.log(this.teams)
+        let res1 = Object.entries(res)
+        for (let i = 0; i < res1.length; i++) {
           this.teams1.push(res1[i][1])
         }
         console.log(this.teams1)
       },
-      err=>{
+      err => {
         console.log(err)
       }
     )
   }
 
-  public addMemberForm=new FormGroup({
-    newTeamMember:new FormControl('')
+  public addMemberForm = new FormGroup({
+    newTeamMember: new FormControl('')
   })
-  addTeamMember(){
+  addTeamMember() {
 
-    
-  
-    let data={
-      'project_id':this.id,
-      'emp_id':this.addMemberForm.get('newTeamMember').value
+
+
+    let data = {
+      'project_id': this.id,
+      'emp_id': this.addMemberForm.get('newTeamMember').value
     }
+    console.log(data)
     this.viewProjectService.addTeamMember(JSON.stringify(data)).subscribe(
-      res=>{
+      res => {
         console.log(res)
-        this.messageservice.add({severity:'success',summary: 'New Team member added...',life:2000})
-        setTimeout(()=>{
+        this.messageservice.add({ severity: 'success', summary: 'New Team member added...', life: 2000 })
+        setTimeout(() => {
           window.location.reload()
-        },2000) 
-        
-           
+        }, 2000)
+
+
       },
-      err=>{
+      err => {
         console.log(err)
       }
     )
 
-    
-   
-    
-   //
-    
-    
+
+
+
+    //
+
+
 
   }
-  onclick(){
+  onclick() {
     console.log('test')
-    this.messageservice.add({severity:'success',summary: 'test'})
+    this.messageservice.add({ severity: 'success', summary: 'test' })
   }
-  
+
 
 }
 

@@ -1,54 +1,60 @@
 <p-toast></p-toast>
-<div class="container" style="display: flex; flex-direction: column; justify-content: center; align-items: center;" >
+<div class="container" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
   <div class="col">
-  <div class="row">
+    <div class="row">
 
 
-      <div class="card col-md-5"  style="width: 30rem; margin-top: 5%;" *ngIf="teams1.length" >
+      <div class="card col-md-5" style="width: 30rem; margin-top: 5%;">
         <div class="card-body">
           <h3 class="card-title">Team Info</h3>
-         
-          <p class="card-text" *ngFor="let team of teams1[1];index as i"><strong>Member {{i+1}}:</strong><br>{{team}}</p>
+
+          <p class="card-text" *ngFor="let team of teams1;index as i"><strong>Member
+              {{i+1}}:</strong><br>{{team.emp_id}}
+          </p>
           <form [formGroup]="addMemberForm">
             <div class="form-group">
-            <p-multiSelect formControlName="newTeamMember" [options]="employees" id="employees" ></p-multiSelect>
-          </div>
-       </form>
+              <!-- <p-multiSelect formControlName="newTeamMember" [options]="employees" id="employees"></p-multiSelect> -->
+              <p-dropdown formControlName="newTeamMember" [options]="employees" id="employees"></p-dropdown>
+            </div>
+          </form>
 
-          <button style="position: relative; right: 0; bottom: 0;"   (click)="addTeamMember()" class="button btn-primary ">Add Team Member</button>
-           
+          <button style="position: relative; right: 0; bottom: 0;" (click)="addTeamMember()"
+            class="button btn-primary ">Add Team Member</button>
+
         </div>
       </div>
       <div class="col-md-2"></div>
-        <div class="card col-md-5 "  *ngIf = "project.length>0" style="width: 30rem; margin-top: 5%;">
-            <div class="card-body">
-              <h3 class="card-title">Project Info</h3>
-              <h4 class="card-subtitle mb-2">{{project[0].name}}</h4>
-              <p class="card-text">Assign To : {{project[0].assignTo}}</p>
-              <p class="card-text">Created On : {{project[0].createdOn}}</p>
-              <p class="card-text">Customer : {{project[0].customer_id}}</p>
-              <p class="card-text">Deadline : {{project[0].deadline}}</p>
-              <p class="card-text">Description : {{project[0].description}}</p>
-              <p class="card-text">Due : {{project[0].due}}</p>
-              
-              <p class="card-text">Status : {{project[0].status}}</p>
-              
-            
-              
-              <div class="card-text ui-progressbar-label">Complete % : <p-progressBar [value]="project[0].complete_percentage"></p-progressBar> </div>
-            
-            </div>
+      <div class="card col-md-5 " *ngIf="project.length>0" style="width: 30rem; margin-top: 5%;">
+        <div class="card-body">
+          <h3 class="card-title">Project Info</h3>
+          <h4 class="card-subtitle mb-2">{{project1.name}}</h4>
+          <p class="card-text">Assign To : {{project1.assignTo}}</p>
+          <p class="card-text">Created On : {{project1.createdOn}}</p>
+          <p class="card-text">Customer : {{project1.customer_id}}</p>
+          <p class="card-text">Deadline : {{project1.deadline}}</p>
+          <p class="card-text">Description : {{project1.description}}</p>
+          <p class="card-text">Due : {{project1.due}}</p>
+
+          <p class="card-text">Status : {{project1.status}}</p>
+
+
+
+          <div class="card-text ui-progressbar-label">Complete % : <p-progressBar
+              [value]="project[0].complete_percentage"></p-progressBar>
           </div>
-       
+
+        </div>
+      </div>
+
 
 
 
     </div>
-</div>
+  </div>
 
-<br><br>
+  <br><br>
 
-<div class="row">
-<app-view-tasks></app-view-tasks>
-</div>
+  <div class="row">
+    <app-view-tasks></app-view-tasks>
+  </div>
 </div>
