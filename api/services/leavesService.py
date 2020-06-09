@@ -1,4 +1,5 @@
 from ..mapper import leaveMapper
+from django.utils import timezone
 
 
 def saveLeave(leave_data):
@@ -8,6 +9,17 @@ def saveLeave(leave_data):
 def getLeaveDetail(username):
     leaves_data = leaveMapper.findLeaveDetail(username=username)
     return leaves_data
+
+
+def getLeavesLeft(username):
+    leaves = leaveMapper.findLeaveDetail(username)
+    leaveTypes = leaveMapper.getLeaveType()
+    leavesThisYear = leaves.filter(date__year=timezone.now().year)
+    leavesLeft = {}
+    for leaveType in leaveTypes:
+        temp = leavesThisYear.filter(leave_type__contains=leaveType.value).filter(date__year=timezone.now().year)
+        leavesLeft[leaveType.value] = leaveType.number_of_leaves - len(temp)
+    return leavesLeft
 
 
 def updateLeaveStatus(leave_data):
