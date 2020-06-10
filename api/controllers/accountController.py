@@ -48,7 +48,8 @@ def getAllAccounts(request):
     serializer = ProfileSerializer(accounts, many=True)
     return JsonResponse(serializer.data, safe=False, status=status.HTTP_200_OK)
 
-
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def countEmployeeByGender(request):
     gender_count = accountService.countEmployeeByGender()
     return JsonResponse(gender_count, safe=False, status=status.HTTP_200_OK)
