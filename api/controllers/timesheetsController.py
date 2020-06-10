@@ -19,7 +19,7 @@ def add(request):
 
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated, IsAdminUser])
 def find(request):
     timesheet = json.loads(request.body)
     try:
@@ -47,4 +47,31 @@ def getByEmpId(request):
     emp_id = request.user.username
     sheet = timesheetsService.getByEmpId(emp_id)
     serializer = TimesheetSerializer(sheet, many=True)
+    return JsonResponse(serializer.data, safe=False, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def getByDate(request):
+    timesheet_data = json.loads(request.body)
+    timesheet = timesheetsService.getByDate(timesheet_data)
+    serializer = TimesheetSerializer(timesheet, many=False)
+    return JsonResponse(serializer.data, safe=False, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def getByMonth(request):
+    timesheet_data = json.loads(request.body)
+    timesheets = timesheetsService.getByMonth(timesheet_data)
+    serializer = TimesheetSerializer(timesheets, many=True)
+    return JsonResponse(serializer.data, safe=False, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def getByYear(request):
+    timesheet_data = json.loads(request.body)
+    timesheets = timesheetsService.getByYear(timesheet_data)
+    serializer = TimesheetSerializer(timesheets, many=True)
     return JsonResponse(serializer.data, safe=False, status=status.HTTP_200_OK)

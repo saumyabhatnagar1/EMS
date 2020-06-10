@@ -1,5 +1,5 @@
 import uuid
-
+import datetime
 from .models.TimesheetModel import Timesheet
 
 
@@ -27,3 +27,20 @@ def update(sheet, timesheet):
 
 def findByEmpId(emp_id):
     return Timesheet.objects.filter(emp_id=emp_id)
+
+
+def findByDate(timesheet_data):
+    timesheet = Timesheet.objects.get(emp_id=timesheet_data['emp_id'], date=timesheet_data['date'])
+    return timesheet
+
+
+def findByMonth(timesheet_data):
+    date = str(timesheet_data['year']) + "-" + str(timesheet_data['month']) + "-01"
+    date_upperbound = str(timesheet_data['year']) + "-" + str(timesheet_data['month']+1) + "-01"
+    timesheet = Timesheet.objects.filter(emp_id=timesheet_data['emp_id']).filter(date__gte=date, date__lt=date_upperbound)
+    return timesheet
+
+
+def findByYear(timesheet_data):
+    timesheet = Timesheet.objects.filter(emp_id=timesheet_data['emp_id'], date__year=timesheet_data['year'])
+    return timesheet

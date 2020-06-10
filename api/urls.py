@@ -24,6 +24,9 @@ urlpatterns = [
          name='admin update time sheet'),
     path('timesheets/getByEmpId', timesheetsController.getByEmpId,
          name='find all time sheets'),
+    path('timesheets/getByDate', timesheetsController.getByDate, name='get by date'),
+    path('timesheets/getByMonth', timesheetsController.getByMonth, name='get by month'),
+    path('timesheets/getByYear', timesheetsController.getByYear, name='get by year'),
 
     path('leaves/new', leavesController.addLeave, name='leave request'),
     path('leaves/findByUsername',
