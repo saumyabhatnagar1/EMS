@@ -15,7 +15,14 @@ import {ChartModule} from 'primeng/chart'
 export class DashboardComponent implements OnInit {
   dataMonthly :any;
   dataYearly:any;
-  toggleButton:boolean = false
+  toggleButton:boolean = false;
+  genderdata=[];
+  
+
+
+
+
+
   constructor(private dashboardService:DashboardService) {
 
 
@@ -69,11 +76,16 @@ export class DashboardComponent implements OnInit {
         "Approved",
     ]
 }
+
 }
+
 
   ngOnInit(): void {
 
+
+    this.getEmpByGender()
     this.fetchAllTimesheets()
+    
     
   }
 
@@ -81,7 +93,9 @@ export class DashboardComponent implements OnInit {
   public labelArray = []
   public dataArray = []
 
-    togglePolar : boolean = false
+    togglePolar : boolean = false;
+    
+    
 
     togglePolarMonthly(){
       this.togglePolar = false
@@ -190,6 +204,40 @@ appendTimesheets(res){
       }
   console.log(this.timesheets)
   this.addLabel(this.timesheets)
+}
+
+
+getEmpByGender(){
+  this.dashboardService.getEmpcountByGender().subscribe(
+    res=>{
+      let res1=Object.entries(res)
+      for(let i=0;i<res1.length;i++)
+      {
+        this.genderdata.push(res1[i][1])
+      }
+      console.log(this.genderdata)
+    },
+    err=>{
+      console.log(err)
+    }
+  )
+}
+
+EmpByGender={datasets: [{
+  data:this.genderdata,
+  backgroundColor: [
+      "#FF6384",
+      "#a6f2f5",
+      "#8ca8e6",
+  ],
+  label: 'My dataset'
+}],
+labels: [
+  "Male",
+  "Female",
+  "Others",
+]
+  
 }
 
 
