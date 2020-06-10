@@ -16,6 +16,7 @@ urlpatterns = [
     path('accounts/', accountController.getAllAccounts, name='get all accounts'),
     path('account/updateProfile',
          accountController.updateUserProfile, name='update Profile'),
+    path('account/countEmployeeByGender', accountController.countEmployeeByGender, name='count employee by gender'),
 
     path('timesheets/add/', timesheetsController.add, name='add time sheet'),
     path('timesheets/find/', timesheetsController.find, name='find time sheet'),

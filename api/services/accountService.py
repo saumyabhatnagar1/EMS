@@ -20,3 +20,16 @@ def updateUserProfile(user_data, username):
 def getAllAccounts():
     accounts = accountMapper.getAll()
     return accounts
+
+
+def countEmployeeByGender():
+    account = accountMapper.getAll()
+    male = account.filter(gender='Male')
+    female = account.filter(gender='Female')
+    other = account.filter(gender='Other')
+    gender_count = {
+        'Male': len(male),
+        'Female': len(female),
+        'Other': len(other)
+    }
+    return gender_count

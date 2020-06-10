@@ -46,4 +46,9 @@ def updateUserProfile(request):
 def getAllAccounts(request):
     accounts = accountService.getAllAccounts()
     serializer = ProfileSerializer(accounts, many=True)
-    return JsonResponse(serializer.data, safe=False)
+    return JsonResponse(serializer.data, safe=False, status=status.HTTP_200_OK)
+
+
+def countEmployeeByGender(request):
+    gender_count = accountService.countEmployeeByGender()
+    return JsonResponse(gender_count, safe=False, status=status.HTTP_200_OK)
