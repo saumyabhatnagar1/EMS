@@ -11,7 +11,12 @@ export class TimesheetsService {
   constructor(private globals: GlobalsService, private http: HttpClient, private principle: PrincipleService) { }
 
   addTimeSheet(data) {
-    return this.http.post(this.globals.baseApiUrl + 'timesheets/add', data);
+    const headers = new HttpHeaders(
+      {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer ' + this.principle.getItem('jwt_token')
+      });
+    return this.http.post(this.globals.baseApiUrl + 'timesheets/add/', data, { headers: headers });
   }
 
   findTimeSheet(data) {

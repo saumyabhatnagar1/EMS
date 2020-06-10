@@ -141,6 +141,7 @@ export class ViewProjectComponent implements OnInit {
           window.location.reload()
         }, 2000)
 
+        //this.getTeamById()
 
       },
       err => {
@@ -151,15 +152,12 @@ export class ViewProjectComponent implements OnInit {
 
 
 
-    //
+
 
 
 
   }
-  onclick() {
-    console.log('test')
-    this.messageservice.add({ severity: 'success', summary: 'test' })
-  }
+
 
 
 }
