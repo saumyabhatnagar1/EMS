@@ -68,10 +68,11 @@ urlpatterns = [
     path('permission/get', permissionController.getPermissionDetail,
          name='get permission details'),
 
-    path('notifications/add', notificationController.addNotification,
+    path('addNotice/', notificationController.addNotification,
          name='add notification'),
-    path('notifications/findAll', notificationController.findAllNotifications,
+    path('getAllNotices/', notificationController.getAllNotifications,
          name='find all notification'),
+    path('getNoticesByType/', notificationController.getNotificationsByType, name= 'get notifications by type'),
     path('notifications/find', notificationController.findNotificationsById,
          name='find notifications by id'),
 ]

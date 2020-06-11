@@ -2,32 +2,12 @@ from ..mapper import notificationMapper
 
 
 def addNotification(notification_data):
-    notification_detail = {
-        "title": notification_data['title'],
-        "description": notification_data['description'],
-        "date": notification_data['date'],
-        "publisher": notification_data['publisher'],
-        "to": notification_data['to'],
-        "url": notification_data['url'],
-        "isRead": False
-    }
-    response = notificationMapper.save(notification_detail)
-    if response is not None:
-        return response
-    return None
+    notificationMapper.save(notification_data)
 
 
-def findAll():
-    notification = notificationMapper.findAll()
-    if notification is not None:
-        notification_dict = {}
-        cnt = 0
-        for item in notification:
-            del item["_id"]
-            notification_dict[cnt] = item
-            cnt += 1
-        return notification_dict
-    return None
+def getAllNotices():
+    notifications = notificationMapper.findAll()
+    return notifications
 
 
 def findByID(email, role):
@@ -41,3 +21,8 @@ def findByID(email, role):
             cnt += 1
         return notification_dict
     return None
+
+
+def getNoticesByType(type):
+    notifications = notificationMapper.findByType(type)
+    return notifications

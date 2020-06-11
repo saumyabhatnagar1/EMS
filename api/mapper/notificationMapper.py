@@ -1,18 +1,21 @@
+from .models.notificationModel import Notification
+import uuid
 from .client import connectToDB
 
 Notifications = connectToDB().primer.notifications
 
 
-def save(notification_detail):
-    id = Notifications.insert_one(notification_detail).inserted_id
-    return id
+def save(notification_data):
+    notification = Notification.objects.create(id=uuid.uuid1().hex)
+    notification.title = notification_data['title']
+    notification.description = notification_data['description']
+    notification.type = notification_data['type']
+    notification.save()
 
 
 def findAll():
-    notifications = list(Notifications.find())
-    if len(notifications) > 0:
-        return notifications
-    return None
+    notifications = Notification.objects.all()
+    return notifications
 
 
 def findByID(email, role):
@@ -23,3 +26,8 @@ def findByID(email, role):
     if len(notifications) > 0:
         return notifications
     return None
+
+
+def findByType(type):
+    notifications = Notification.objects.filter(type=type)
+    return notifications
