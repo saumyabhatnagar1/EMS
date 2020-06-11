@@ -44,6 +44,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { DropdownModule } from 'primeng/dropdown';
 import {ChartModule} from 'primeng/chart'
 import {OverlayPanelModule} from 'primeng/overlaypanel';
+import { NoticeBoardComponent } from './notice-board/notice-board.component';
 
 
 
@@ -73,6 +74,7 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
     ProjectsComponent,
     ViewProjectComponent,
     ViewTasksComponent,
+    NoticeBoardComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

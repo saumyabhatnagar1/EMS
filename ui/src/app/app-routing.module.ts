@@ -15,6 +15,7 @@ import { HelpComponent } from './help/help.component';
 import { WorkUpdateComponent } from './work-update/work-update.component';
 import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
 import { EditEmployeeComponent } from './manage-employee/edit-employee/edit-employee.component';
+import { NoticeBoardComponent } from './notice-board/notice-board.component';
 
 
 const routes: Routes =
@@ -34,6 +35,7 @@ const routes: Routes =
     { path: 'projects', component: ProjectsComponent },
     { path: 'projects/view/:id', component: ViewProjectComponent },
     { path: 'notifications', component: NotificationsComponent },
+    {path : 'notice-board', component : NoticeBoardComponent},
 
 
 

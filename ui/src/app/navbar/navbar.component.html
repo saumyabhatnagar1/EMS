@@ -88,10 +88,10 @@
             <a routerLink="/workUpdate" class="nav-link"><i class="material-icons">laptop</i>
               Work-Update</a>
           </li>
-          <li class="nav-item" [hidden]="isLoggedIn">
+         <li class="nav-item" [hidden]="isLoggedIn">
 
             <a routerLink="/projects" class="nav-link"><i class="material-icons">assessment</i>Projects</a>
-          </li>
+          </li> 
 
           <li class="nav-item" [hidden]="isLoggedIn">
             <a *ngIf="ifHR" routerLink="/leavetype" class="nav-link"><i class="material-icons">date_range</i>Leave
@@ -116,6 +116,12 @@
           <li class="nav-item" [hidden]="isLoggedIn">
             <a routerLink="/timesheets" class="nav-link"> <i class="material-icons">schedule</i>TimeSheets</a>
           </li>
+
+
+          <li class="nav-item" [hidden]="isLoggedIn">
+
+            <a routerLink="/notice-board" class="nav-link"><i class="material-icons">notifications_paused</i>Notice</a>
+          </li> 
 
 
           <li class="nav-item" [hidden]="!isLoggedIn">
