@@ -35,16 +35,17 @@
 </p-dialog>
 
 
-<div class="col">
+
     <div class="row">
 
      
-      <div class="card col-md-6"  *ngFor="let notice of notices;index as i" style="width: 30rem; margin-top: 5%;">
-        <div class="card-body" >
-          <h3 class="card-title">Notice</h3>
-          <p class="card-text">Title: {{notice.title}}</p>
-          <p class="card-text">description : {{notice.description}}</p>
-          <p class="card-text">Type: {{notice.type}}</p>
+      <div class="card col-md-12"   style="width: 30rem; margin-top: 5%;margin-left:5%">
+        <div class="card-title" style="text-align:center; font-weight:bold;font-size: 30px;">NOTICES</div>
+        <div class="card-body" *ngFor="let notice of notices;index as i" >
+          <div class="card-title"><h3 >{{notice.title}}</h3> [{{notice.type}}]</div>
+          <!-- <p class="card-text">Title: {{notice.title}}</p> -->
+          <p class="card-text"> {{notice.description}}</p>
+          <!-- <p class="card-text">Type: {{notice.type}}</p> -->
 
       </div>
     
@@ -55,4 +56,4 @@
 
     </div>
   </div>  
- </div> 
+ 
