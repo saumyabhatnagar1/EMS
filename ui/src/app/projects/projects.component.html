@@ -9,10 +9,10 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
         <div class="col-sm">
             <h2>List of Projects</h2>
         </div>
-        <div class="col-sm">
+       <div class="col-sm">
             <button pButton type="button" icon="pi pi-fw pi-user-plus" style="position: relative;float:right;" label="Add Project" (click)="showDialog()">
             </button>
-        </div>
+        </div> 
     </div>
     <div style="text-align: right">        
         <i class="pi pi-search" style="margin:5px 5px 0 0"></i>
@@ -33,10 +33,10 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
         <td >{{project.name}}</td>
         <td>{{project.assignTo}}</td>
         <td>
-            <button [hidden]="(!(project.status == 0))" pButton type="button" class="ui-button-primary" label="New"></button>
-            <button [hidden]="(!(project.status == 1))" pButton type="button" class="ui-button-primary" label="In Progress"></button>
-            <button [hidden]="(!(project.status == 2))" pButton type="button" class="ui-button-success" label="Completed"></button>
-            <button [hidden]="(!(project.status == 4))" pButton type="button" class="ui-button-danger" label="On Hold"></button>
+            <p *ngIf="project.status==0">New</p>
+            <p *ngIf="project.status==1">In progress</p>
+            <p *ngIf="project.status==2">Completed</p>
+            <p *ngIf="project.status==3">On Hold</p>
         </td>
         <td>{{project.deadline}}</td>
         <td>{{project.customer_id}}</td>
