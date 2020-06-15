@@ -11,8 +11,12 @@ export class DashboardService {
 
   constructor(private http:HttpClient, private globalservice : GlobalsService,private principle:PrincipleService) { }
 
-  fetchAllTimesheet(){
-    return this.http.post(this.globalservice.baseApiUrl+'timesheets/findAll',{})
+  fetchAllTimesheet(data){
+     const headers=new HttpHeaders({
+      'Content-type':'application/json',
+      'Authorization':'Bearer '+this.principle.getItem('jwt_token')
+  })
+    return this.http.post(this.globalservice.baseApiUrl+'timesheets/find/',data,{headers:headers})
   }
   getEmpcountByGender(){
     const headers=new HttpHeaders({

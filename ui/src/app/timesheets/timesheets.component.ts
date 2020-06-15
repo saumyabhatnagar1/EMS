@@ -53,7 +53,7 @@ export class TimesheetsComponent implements OnInit {
   }
   onDateSelect(selectedDate) {
     //console.log(selectedDate)
-    let date = new Date(selectedDate.year, selectedDate.month - 1, selectedDate.day);
+    let date = new Date(selectedDate.year, selectedDate.month, selectedDate.day);
     this.updateCurrentDate(date.getFullYear(), date.getMonth(), date.getDate(), date.getDay());
   }
   updateCurrentDate(year, month, date, day) {
@@ -65,14 +65,14 @@ export class TimesheetsComponent implements OnInit {
     this.day = this.getDay(day);
   }
   fetchSheet(username, date, month, year) {
-    let data = { "emp_id": username || this.principle.getUsername(), "date": date, "month": month, "year": year }
+    let data = { "emp_id": username || this.principle.getUsername(),"date":`${year}-${month}-${date}` }
     console.log(data)
     this.timesheetsService.findTimeSheet(JSON.stringify(data)).subscribe(
       res => {
         console.log("message", res)
         this.message = res["message"];
         if (res["data"]) {
-          this.id = res["data"]["id"]; 3
+          this.id = res["data"]["id"];
           this.timings.patchValue({ "in_hours": res["data"]["timings"]["in_time"]["hours"] });
           this.timings.patchValue({ "in_minutes": res["data"]["timings"]["in_time"]["minutes"] });
           this.timings.patchValue({ "out_hours": res["data"]["timings"]["out_time"]["hours"] });
