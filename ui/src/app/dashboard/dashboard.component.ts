@@ -7,6 +7,8 @@ import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label, MultiDataSet } from 'ng2-charts';
 import { ChartType } from 'chart.js';
 import { ChartModule } from 'primeng/chart'
+import { NoticeBoardService} from '../notice-board/notice-board.service'
+import { ProfileService } from '../profile/profile.service';
 
 
 
@@ -26,7 +28,7 @@ export class DashboardComponent implements OnInit {
 
 
 
-  constructor(private dashboardService: DashboardService,private principle:PrincipleService,private account:AccountServiceService) {
+  constructor(private profileService : ProfileService,private noticeService : NoticeBoardService,private dashboardService: DashboardService,private principle:PrincipleService,private account:AccountServiceService) {
 
 
    
@@ -40,6 +42,10 @@ export class DashboardComponent implements OnInit {
     
     this.getEmpByGender()
     this.fetchAllTimesheets()
+    this.getNotices()
+    this.getNoticesByType('broadcast')
+    this.getNoticesByType('event')
+    this.get_profile()
 
 
   }
@@ -271,8 +277,61 @@ export class DashboardComponent implements OnInit {
     ]
 
   }
+public noticesByType:any=[];
+broadcastNotices:any[];
+eventNotices:any[];
+public notices:any=[]
+public types:any=[]
+getNoticesByType(type){
+  let data = {
+    type : type
+  }
+ 
+  this.dashboardService.getNoticesByType(data).subscribe( 
+     res => {
+        console.log(res)
+        this.noticesByType=res;
+        type=='broadcast'?this.broadcastNotices=this.noticesByType:this.eventNotices=this.noticesByType;
+     },
+     err => {
+       console.log(err)
+     }
+  )
+  
+}
 
 
+getNotices(){
+  this.noticeService.getAllNotices().subscribe(
+    res => {
+      console.log(res)
+      this.notices=res
+      console.log(this.notices)
+    },
+    err => {
+      console.log(err)
+    }
+  )
+}
+
+
+public profile:any
+get_profile(){
+  let data = {
+    "username" : this.principle.getUsername()
+  }
+  let user_login_json = JSON.stringify(data);
+  this.profileService.get_profile(user_login_json).subscribe(
+  res=>{
+        console.log(res)
+        this.profile=res
+      
+  },
+  err =>{
+     console.log(err);
+  }
+  );
+}
 
 
 }

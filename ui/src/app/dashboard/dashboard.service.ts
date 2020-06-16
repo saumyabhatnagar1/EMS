@@ -26,5 +26,22 @@ export class DashboardService {
     return this.http.get(this.globalservice.baseApiUrl+'account/countEmployeeByGender',{headers:headers})
   }
 
+  getNoticesByType(data){
+    const headers=new HttpHeaders({
+      'Content-type':'application/json',
+      'Authorization':'Bearer '+this.principle.getItem('jwt_token')
+  })
+  return this.http.post(this.globalservice.baseApiUrl+'getNoticesByType/',data,{headers:headers});
+  }
+
+  getAllNotices(){
+    const headers=new HttpHeaders({
+      'Content-type':'application/json',
+      'Authorization':'Bearer '+this.principle.getItem('jwt_token')
+  })
+  return this.http.get(this.globalservice.baseApiUrl+'getAllNotices/',{headers:headers});
+  }
+
+
 
 }
