@@ -9,6 +9,8 @@ import { ChartType } from 'chart.js';
 import { ChartModule } from 'primeng/chart'
 import { NoticeBoardService} from '../notice-board/notice-board.service'
 import { ProfileService } from '../profile/profile.service';
+import { NgCircleProgressModule } from 'ng-circle-progress';
+
 
 
 

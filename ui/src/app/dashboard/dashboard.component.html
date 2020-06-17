@@ -60,12 +60,25 @@
                 <div class="col-md-6">
                     <div class="card shadow p-0 mb-2 bg-white rounded" style="height: 18rem;">
                         <div class="card-body">
-                            <div class="card-title" style="display:inline-flex">
-                                <b>KPI</b>
-                            </div>
-                            <div class="chart-wrapper" >
-                                <p-chart [width]="150" [height]="200"  type="pie" [data]="data"></p-chart>
-                            </div>
+                            KPI
+                            <div style="width: 200px;margin: auto;">
+                            <circle-progress 
+                            [percent]="80"
+                            [radius]="50"
+                            [outerStrokeWidth]="8"
+                            [innerStrokeWidth]="8"
+                            [innerStrokeColor]="'#e7e8ea' "
+                            [outerStrokeColor]="'#034B98'"
+                            [space] = "-8"
+                            [animation]="true"
+                            [titleFontSize]= "16"
+                            [animationDuration]="500"
+                            [subtitleFontSize]="10"
+                            [responsive]="true"
+                            [subtitle]="'Efficiency'"
+                            ></circle-progress>
+                        </div>
+
                         </div>
                     </div>
                 </div>

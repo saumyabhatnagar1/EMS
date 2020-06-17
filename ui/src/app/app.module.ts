@@ -45,6 +45,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import {ChartModule} from 'primeng/chart'
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import { NoticeBoardComponent } from './notice-board/notice-board.component';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 
 
@@ -75,6 +76,7 @@ import { NoticeBoardComponent } from './notice-board/notice-board.component';
     ViewProjectComponent,
     ViewTasksComponent,
     NoticeBoardComponent,
+  
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
@@ -111,7 +113,18 @@ import { NoticeBoardComponent } from './notice-board/notice-board.component';
     MultiSelectModule,
     ProgressBarModule,
     DropdownModule,
-    OverlayPanelModule
+    OverlayPanelModule,
+    NgCircleProgressModule.forRoot({
+      // set defaults here
+      radius: 100,
+      outerStrokeWidth: 16,
+      innerStrokeWidth: 8,
+      outerStrokeColor: "#78C000",
+      innerStrokeColor: "#C7E596",
+      animationDuration: 500,
+      
+    })
+ 
   ],
   providers: [],
   bootstrap: [AppComponent]
