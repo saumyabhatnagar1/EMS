@@ -3,6 +3,7 @@ import uuid
 from . import client
 from .models.projectModel import Project, Task, WorksOn, TaskComment
 from .models.accountModel import Employee
+import datetime
 
 client = client.connectToDB()
 Projects = client.primer.projects
@@ -45,6 +46,7 @@ def findTasksByProjectID(project_id):
 def updateTask(task_data):
     task = Task.objects.get(id=task_data['id'])
     task.status = task_data['status']
+    task.due = 1 if str(datetime.datetime.now()) <= str(task.deadline) else 2
     task.save()
 
 
@@ -99,6 +101,7 @@ def getAllComments(task_id):
 def updateProject(project_data):
     project = Project.objects.get(id=project_data['id'])
     project.status = project_data['status']
+    project.due = 1 if str(datetime.datetime.now()) <= str(project.deadline) else 2
     project.save()
 
 
