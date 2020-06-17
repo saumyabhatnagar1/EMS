@@ -25,10 +25,10 @@
         
             
                 <div class="card shadow p-2 mb-3 bg-white rounded" style="height: 19rem; width: 100%;">
-                    <div class="card-body"><b>Broadcast News</b></div>
                     <div class="card-body">
+                        <b>Broadcast News</b>
                         <div class="card-body" *ngFor="let notice of broadcastNotices;index as i" >
-                            <div style="display: inline-flex;"> <i class="material-icons">event</i><div class="card-title"><b>{{notice.title}}:</b><br>{{notice.description}}
+                            <div style="display: inline-flex;"> <i class="material-icons">play_arrow</i><div class="card-title"><b>{{notice.title}}:</b><br>{{notice.description}}
                                 <br>  {{notice.datetime | date:'short':'+0530'}}</div></div>
                         </div>
                     </div>
@@ -39,8 +39,8 @@
 
            
                 <div class="card shadow p-2 mb-3 bg-white rounded" style="height: 18rem; width: 100%;">
-                    <div class="card-body"><b>Event News</b></div>
                     <div class="card-body">
+                        <b>Event News</b>
                         <div class="card-body" *ngFor="let notice of eventNotices;index as i" >
                           <div style="display: inline-flex;"> <i class="material-icons">event</i><div class="card-title"><b>{{notice.title}}:</b><br>{{notice.description}}
                           <br>  {{notice.datetime | date:'short':'+0530'}}</div></div>
@@ -59,7 +59,12 @@
                 <div class="col-md-6">
                     <div class="card shadow p-0 mb-2 bg-white rounded" style="height: 18rem;">
                         <div class="card-body">
-                            KPI Chart
+                            <div class="card-title" style="display:inline-flex">
+                                <b>KPI</b>
+                            </div>
+                            <div class="chart-wrapper" >
+                                <p-chart [width]="150" [height]="200"  type="pie" [data]="data"></p-chart>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -134,7 +139,7 @@
                                 <h3>No. of times Ontime/Late/Absent</h3>
                             </div>
                             <div class="chart-wrapper">
-                                <canvas width="200" height="150" baseChart [data]="doughnutChartData"
+                                <canvas width="200" height="130" responsive="false"  baseChart [data]="doughnutChartData"
                                     [labels]="doughnutChartLabels" [chartType]="doughnutChartType">
                                 </canvas>
                             </div>
@@ -151,9 +156,9 @@
                                 <h3>Employees</h3>
 
                             </div>
-                            <div class="chart-wrapper">
-
-                                <p-chart type="pie" [data]="EmpByGender"></p-chart>
+                            <div class="chart-wrapper" >
+                                <br>
+                                <p-chart [width]="300" [height]="230" maintainAspectRatio:true  type="pie" [data]="EmpByGender"></p-chart>
                             </div>
                         </div>
                     </div>

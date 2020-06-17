@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit {
  
   toggleButton: boolean = false;
   genderdata = [];
+  data: any;
 
 
 
@@ -30,12 +31,31 @@ export class DashboardComponent implements OnInit {
 
   constructor(private profileService : ProfileService,private noticeService : NoticeBoardService,private dashboardService: DashboardService,private principle:PrincipleService,private account:AccountServiceService) {
 
-
+    this.data = {
+      labels: ['KPI1','KPI2'],
+      datasets: [
+          {
+              data: [300, 50],
+              backgroundColor: [
+                  "#FF6384",
+                  "#36A2EB",
+                  
+              ],
+              hoverBackgroundColor: [
+                  "#FF6384",
+                  "#36A2EB",
+                
+              ]
+          }]    
+      };
    
 
   }
   public empid:any;
-
+  pieOptions = {
+    responsive: true,
+    maintainAspectRatio: true,
+};
 
   ngOnInit(): void {
 
@@ -277,6 +297,7 @@ export class DashboardComponent implements OnInit {
     ]
 
   }
+
 public noticesByType:any=[];
 broadcastNotices:any[];
 eventNotices:any[];
