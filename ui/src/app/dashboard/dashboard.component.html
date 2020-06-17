@@ -26,10 +26,10 @@
             
                 <div class="card shadow p-2 mb-3 bg-white rounded" style="height: 19rem; width: 100%;">
                     <div class="card-body">
-                        <b>Broadcast News</b>
-                        <div class="card-body" *ngFor="let notice of broadcastNotices;index as i" >
-                            <div style="display: inline-flex;"> <i class="material-icons">play_arrow</i><div class="card-title"><b>{{notice.title}}:</b><br>{{notice.description}}
-                                <br>  {{notice.datetime | date:'short':'+0530'}}</div></div>
+                        <div style="background-color:#ffc2b3; max-width: 130px;"><b>Broadcast News</b></div>
+                        <div class="card-body" style="height:80px" *ngFor="let notice of broadcastNotices;index as i" >
+                            <div style="display: inline-flex;"> <i class="material-icons">campaign</i><div class="card-title"><b>{{notice.title}}:</b><br>{{notice.description}}
+                                <br>  {{notice.datetime | date:'short':'+0530'}}<br></div></div>
                         </div>
                     </div>
                 </div>
@@ -39,14 +39,15 @@
 
            
                 <div class="card shadow p-2 mb-3 bg-white rounded" style="height: 18rem; width: 100%;">
-                    <div class="card-body">
-                        <b>Event News</b>
-                        <div class="card-body" *ngFor="let notice of eventNotices;index as i" >
+            
+                    <div class="card-body" >
+                        <div style="background-color:#ffc2b3; max-width: 90px;"><b>Event News</b></div>
+                        <div class="card-body" style="height:80px" *ngFor="let notice of eventNotices;index as i" >
                           <div style="display: inline-flex;"> <i class="material-icons">event</i><div class="card-title"><b>{{notice.title}}:</b><br>{{notice.description}}
                           <br>  {{notice.datetime | date:'short':'+0530'}}</div></div>
-                  
                         </div>
                     </div>
+        
                 </div>
             
         </div>
@@ -75,11 +76,11 @@
                                 <h3> Leaves</h3>
                                 <div class="left" style="display: inline;">
                                     <div style="float: left;margin-left: 80px;">
-                                    <Button style="color: white; padding: 10px 10px; text-align: center; text-decoration: none; border-radius: 4px; display: inline-block; font-size: 100%;" type="button" class="btn btn-primary" [disabled]="!toggleButton"
+                                    <Button style="color: white; padding: 4px 14px; text-align: center; text-decoration: none; border-radius: 4px; display: inline-block; font-size: 90%;" type="button" class="btn btn-primary" [disabled]="!toggleButton"
                                         value="Monthly" (click)="togglePolarMonthly()">Monthly</Button>
                                     </div>   
                                     <div style="float: right;">
-                                    <Button type="button" style="color: white; padding: 10px 10px; text-align: center; text-decoration: none; border-radius: 4px; display: inline-block; font-size: 100%;"  class="btn btn-primary" [disabled]="toggleButton"
+                                    <Button type="button" style="color: white; padding: 4px 14px; text-align: center; text-decoration: none; border-radius: 4px; display: inline-block; font-size: 90%;" type="button" class="btn btn-primary" [disabled]="toggleButton"
                                         value="Yearly" (click)="togglePolarYearly()">Yearly</Button>
                                     </div>
                                 </div>
@@ -158,7 +159,7 @@
                             </div>
                             <div class="chart-wrapper" >
                                 <br>
-                                <p-chart [width]="300" [height]="230" maintainAspectRatio:true  type="pie" [data]="EmpByGender"></p-chart>
+                                <p-chart [width]="300" [height]="230" type="pie" [data]="EmpByGender"></p-chart>
                             </div>
                         </div>
                     </div>
