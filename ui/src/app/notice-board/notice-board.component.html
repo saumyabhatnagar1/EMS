@@ -1,59 +1,89 @@
-
 <p-toast></p-toast>
 
 
 
-    <button pButton type="button" icon="pi pi-search-plus" style="position: relative;float:right;z-index:1;" label="Add Notice" (click)="showDialog()">
-    </button>
 
-<p-dialog header="Create Notice" [style]="{'width':'80vh'}"  [(visible)]="showCreateNotice">
-    <div class="">
-        <form [formGroup]="noticeForm">
-          <div class="form-group">
-            <label for="name">title</label>
-            <input formControlName="title" type="text" class="form-control" required id="name" aria-describedby="nameHelp" placeholder="Enter title">           
-          </div>
-          
-          <div class="form-group">
-            <label for="description">description</label> <br>
-            <input formControlName="description" type="text" class="form-control" required id="name" aria-describedby="nameHelp" placeholder="Enter description">
-          </div>
-          <div class="form-group">
-            <label for="type">type</label>
-            <input formControlName="type" type="text" class="form-control" required id="deadline" aria-describedby="nameHelp" placeholder="Enter Type">           
-          </div>
-        </form>
-        
-        
-    </div>
-    <p-footer>
-        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-        <button type="button" pButton icon="pi pi-times"  label="Cancel" (click)="closeDialog()"></button>
-        <button type="button" pButton icon="pi pi-check" label="Create" (click)="addNewNotice();closeDialog()"></button>  
+
+
+<div class="container">
+  <div class="card col-md-12" style="width: 100%; margin-top: 2%;">
+    <div class=" card-title" style="text-align:center; font-weight:bold;font-size: 50px; margin-top: 20px;">NOTICES
+      <button pButton type="button" icon="pi pi-search-plus" style="position: relative;float:right; margin-top: 10px;"
+        label="Add Notice" (click)="showDialog()">
+      </button></div>
+    <div class="card-body">
+
+      <p-dialog header="Create Notice" [style]="{'width':'80vh'}" [(visible)]="showCreateNotice">
+        <div class="">
+          <form [formGroup]="noticeForm">
+            <div class="form-group">
+              <label for="name">title</label>
+              <input formControlName="title" type="text" class="form-control" required id="name"
+                aria-describedby="nameHelp" placeholder="Enter title">
+            </div>
+
+            <div class="form-group">
+              <label for="description">description</label> <br>
+              <input formControlName="description" type="text" class="form-control" required id="name"
+                aria-describedby="nameHelp" placeholder="Enter description">
+            </div>
+            <div class="form-group">
+              <label for="type">type</label>
+              <!-- <input formControlName="type" type="text" class="form-control" required id="deadline"
+                aria-describedby="nameHelp" placeholder="Enter Type"> -->
+              <p-dropdown [options]="typesArray" formControlName="type"></p-dropdown>
+            </div>
+          </form>
+
+
         </div>
-    </p-footer>
-</p-dialog>
+        <p-footer>
+          <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="button" pButton icon="pi pi-times" label="Cancel" (click)="closeDialog()"></button>
+            <button type="button" pButton icon="pi pi-check" label="Create"
+              (click)="addNewNotice();closeDialog()"></button>
+          </div>
+        </p-footer>
+      </p-dialog>
 
 
 
-    <div class="row">
 
-     
-      <div class="card col-md-12"   style="width: 30rem; margin-top: 5%;margin-left:5%">
-        <div class="card-title" style="text-align:center; font-weight:bold;font-size: 30px;">NOTICES</div>
-        <div class="card-body" *ngFor="let notice of notices;index as i" >
-          <div class="card-title"><h3 >{{notice.title}}</h3> [{{notice.type}}]</div>
-          <!-- <p class="card-text">Title: {{notice.title}}</p> -->
-          <p class="card-text"> {{notice.description}}</p>
-          <!-- <p class="card-text">Type: {{notice.type}}</p> -->
+    </div>
+  </div>
+
+
+
+
+  <div class="row">
+    <div class="col">
+      <div class="card shadow p-2 mb-3 bg-white rounded" style="height: 100vh;">
+        <div class="card-body">
+          <div style="background-color:#ffc2b3; max-width: 130px;"><b>Broadcast News</b></div>
+          <div class="card-body" style="height:80px" *ngFor="let notice of broadcastNotices;index as i">
+            <div style="display: inline-flex;"> <i class="material-icons">campaign</i>
+              <div class="card-title"><b>{{notice.title}}:</b><br>{{notice.description}}
+                <br> {{notice.datetime | date:'short':'+0530'}}<br></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card shadow p-2 mb-3 bg-white rounded" style="height: 100vh;">
+        <div class="card-body">
+          <div style="background-color:#ffc2b3; max-width: 90px;"><b>Event News</b></div>
+          <div class="card-body" style="height:80px" *ngFor="let notice of eventNotices;index as i">
+            <div style="display: inline-flex;"> <i class="material-icons">event</i>
+              <div class="card-title"><b>{{notice.title}}:</b><br>{{notice.description}}
+                <br> {{notice.datetime | date:'short':'+0530'}}</div>
+            </div>
+          </div>
+        </div>
 
       </div>
-    
-   
-
-
-
-
     </div>
-  </div>  
- 
+
+  </div>
+</div>
