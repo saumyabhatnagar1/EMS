@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { NoticeBoardService } from './notice-board.service';
 import { SelectItem, MessageService } from 'primeng/api';
-
+import {PaginatorModule} from 'primeng/paginator';
 @Component({
   selector: 'app-notice-board',
   templateUrl: './notice-board.component.html',
@@ -34,7 +34,7 @@ export class NoticeBoardComponent implements OnInit {
     this.showCreateNotice = false
   }
 
-
+public page=1;
   public noticeForm = new FormGroup({
     title: new FormControl(''),
     description: new FormControl(''),

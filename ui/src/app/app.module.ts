@@ -47,6 +47,7 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
 import { NoticeBoardComponent } from './notice-board/notice-board.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { ProjectDashboardComponent } from './project-dashboard/project-dashboard.component';
+import {PaginatorModule} from 'primeng/paginator';
 
 
 
@@ -78,6 +79,7 @@ import { ProjectDashboardComponent } from './project-dashboard/project-dashboard
     ViewTasksComponent,
     NoticeBoardComponent,
     ProjectDashboardComponent,
+    
   
   ],
   schemas: [
@@ -125,7 +127,8 @@ import { ProjectDashboardComponent } from './project-dashboard/project-dashboard
       innerStrokeColor: "#C7E596",
       animationDuration: 500,
       
-    })
+    }),
+    PaginatorModule
  
   ],
   providers: [],

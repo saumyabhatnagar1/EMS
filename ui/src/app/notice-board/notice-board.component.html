@@ -59,31 +59,46 @@
     <div class="col">
       <div class="card shadow p-2 mb-3 bg-white rounded" style="height: 100vh;">
         <div class="card-body">
-          <div style="background-color:#ffc2b3; max-width: 130px;"><b>Broadcast News</b></div>
-          <div class="card-body" style="height:80px" *ngFor="let notice of broadcastNotices;index as i">
-            <div style="display: inline-flex;"> <i class="material-icons">campaign</i>
-              <div class="card-title"><b>{{notice.title}}:</b><br>{{notice.description}}
-                <br> {{notice.datetime | date:'short':'+0530'}}<br></div>
+          <div style="background-color:#ffc2b3; max-width: 200px;font-size: x-large;"><b>Broadcast News</b></div>
+          <div class="card-body" style="height:80px" *ngFor="let notice of broadcastNotices|paginate : {id :'broadcast_pagination',
+          itemsPerPage : 10,
+          currentPage: page};index as i">
+            <div style="display: inline-flex;"><i style="font-size: 36px;"  class="material-icons">campaign</i>
+              <div style="font-size: large;" class="card-title"><b>{{notice.title}}:</b><br><div style="font-size: medium;" *ngIf="notice.description">{{notice.description}}</div>
+                <div style="font-size: small;"> {{notice.datetime | date:'short':'+0530'}}</div></div>
             </div>
           </div>
         </div>
+        <div style="margin: auto;">
+
+          <pagination-controls class="my-pagination" id="broadcast_pagination" maxSize="5" directionLinks="true"
+          (pageChange)="page = $event"></pagination-controls>
+        </div>
       </div>
     </div>
-
+    
     <div class="col">
       <div class="card shadow p-2 mb-3 bg-white rounded" style="height: 100vh;">
         <div class="card-body">
-          <div style="background-color:#ffc2b3; max-width: 90px;"><b>Event News</b></div>
-          <div class="card-body" style="height:80px" *ngFor="let notice of eventNotices;index as i">
-            <div style="display: inline-flex;"> <i class="material-icons">event</i>
-              <div class="card-title"><b>{{notice.title}}:</b><br>{{notice.description}}
-                <br> {{notice.datetime | date:'short':'+0530'}}</div>
-            </div>
+          <div style="background-color:#ffc2b3; max-width:160px;font-size: x-large;"><b>Event News</b></div>
+          <div class="card-body" style="height:80px" *ngFor="let notice of eventNotices|paginate : {id :'event_pagination',
+          itemsPerPage : 10,
+          currentPage: page};index as i">
+          <div style="display: inline-flex;"><i style="font-size: 36px;"  class="material-icons">event</i>
+            <div style="font-size: large;" class="card-title"><b>{{notice.title}}:</b><br><div style="font-size: medium;" *ngIf="notice.description">{{notice.description}}</div>
+              <div style="font-size: small;"> {{notice.datetime | date:'short':'+0530'}}</div></div>
+          </div>
           </div>
         </div>
+        <div style="margin: auto;">
 
+          <pagination-controls class="my-pagination" id="event_pagination" maxSize="5" directionLinks="true"
+          (pageChange)="page = $event"></pagination-controls>
+        </div>
+        
       </div>
     </div>
-
+    
   </div>
+  
 </div>
