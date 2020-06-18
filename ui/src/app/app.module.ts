@@ -46,6 +46,7 @@ import {ChartModule} from 'primeng/chart'
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import { NoticeBoardComponent } from './notice-board/notice-board.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { ProjectDashboardComponent } from './project-dashboard/project-dashboard.component';
 
 
 
@@ -76,6 +77,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     ViewProjectComponent,
     ViewTasksComponent,
     NoticeBoardComponent,
+    ProjectDashboardComponent,
   
   ],
   schemas: [

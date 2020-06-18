@@ -16,6 +16,7 @@ import { WorkUpdateComponent } from './work-update/work-update.component';
 import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
 import { EditEmployeeComponent } from './manage-employee/edit-employee/edit-employee.component';
 import { NoticeBoardComponent } from './notice-board/notice-board.component';
+import { ProjectDashboardComponent } from './project-dashboard/project-dashboard.component';
 
 
 const routes: Routes =
@@ -36,6 +37,7 @@ const routes: Routes =
     { path: 'projects/view/:id', component: ViewProjectComponent },
     { path: 'notifications', component: NotificationsComponent },
     {path : 'notice-board', component : NoticeBoardComponent},
+    {path : 'project-dashboard',component : ProjectDashboardComponent}
 
 
 
