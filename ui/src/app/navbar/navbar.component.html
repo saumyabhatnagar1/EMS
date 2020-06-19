@@ -97,7 +97,7 @@
             <a href="" class="nav-link dropdown-toggle" id="navbar-dropdown" role="button" data-toggle="dropdown">
               <i class="material-icons">assessment</i>Projects</a>
             <div class="dropdown-menu" style="background-color:rgba(0,0,0,0.05);" aria-labelledby="navbar-dropdown">
-              <a class="dropdown-item" routerLink="/project-dashboard"> Dashboard </a>
+              <a *ngIf="ifHR" class="dropdown-item" routerLink="/project-dashboard"> Dashboard </a>
               <a class="dropdown-item" routerLink="/projects">List-Projects</a>
 
             </div>
