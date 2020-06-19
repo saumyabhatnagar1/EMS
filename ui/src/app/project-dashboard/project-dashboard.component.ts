@@ -1,3 +1,4 @@
+import { ProjectDashboardService } from './project-dashboard.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectDashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private projectdashservice:ProjectDashboardService) { }
 
   ngOnInit(): void {
+this.getProjectByNumber()
+    
+  }
+  projectsNumber:any;
+  getProjectByNumber(){
+    this.projectdashservice.getProjectByNumber().subscribe(
+      res=>{
+        this.projectsNumber=res
+        console.log(res)
+        console.log(res['in progress'])
+      },
+      err=>{
+        console.log(err)
+      }
+    )
   }
 
 }
