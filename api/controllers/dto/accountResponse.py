@@ -13,4 +13,5 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
         fields = ('username', 'role', 'name', 'email', 'gender', 'date', 'isActive',
-                  'houseNumber', 'street', 'addressLine', 'mobileNumber', 'country', 'designation', 'isWorking')
+                  'houseNumber', 'street', 'addressLine', 'mobileNumber', 'country', 'designation', 'isWorking',
+                  'birthDay')

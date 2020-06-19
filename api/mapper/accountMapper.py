@@ -22,6 +22,7 @@ def update(user_data, username):
     employee.country = user_data['country']
     employee.isActive = user_data['isActive']
     employee.designation = user_data['designation']
+    employee.birthDay = user_data['birthDay']
     employee.save()
 
 
