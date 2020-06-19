@@ -86,8 +86,9 @@ export class ViewProjectComponent implements OnInit {
 
     console.log(this.project)
   }
-  public teams: any
+
   public teams1 = []
+  public teams: any = this.teams1;
   getTeamById() {
     let data = {
       'project_id': (this.id)
@@ -137,11 +138,11 @@ export class ViewProjectComponent implements OnInit {
       res => {
         console.log(res)
         this.messageservice.add({ severity: 'success', summary: 'New Team member added...', life: 2000 })
-        setTimeout(() => {
-          window.location.reload()
-        }, 2000)
+        // setTimeout(() => {
+        //   window.location.reload()
+        // }, 2000)
 
-        //this.getTeamById()
+        this.getTeamById()
 
       },
       err => {
