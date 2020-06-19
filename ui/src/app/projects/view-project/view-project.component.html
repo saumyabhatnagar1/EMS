@@ -28,14 +28,14 @@
         <div class="card-body">
           <h3 class="card-title">Project Info</h3>
           <h4 class="card-subtitle mb-2">{{project1.name}}</h4>
-          <p class="card-text">Assign To : {{project1.assignTo}}</p>
-          <p class="card-text">Created On : {{project1.createdOn}}</p>
-          <p class="card-text">Customer : {{project1.customer_id}}</p>
-          <p class="card-text">Deadline : {{project1.deadline}}</p>
-          <p class="card-text">Description : {{project1.description}}</p>
-          <p class="card-text">Due : {{project1.due}}</p>
+          <div style="display:inline-flex"><p>Assign To:</p><p style="margin-left: 113px;"> {{project1.assignTo}}</p></div>
+          <div style="display:inline-flex"> <p>Created On:</p><p style="margin-left: 102px;"> {{project1.createdOn | date:'short':'+0530'}}</p></div>
+          <div style="display: inline-flex;"><p>Customer:</p><p style="margin-left: 116px;"> {{project1.customer_id}}</p></div>
+          <div style="display:inline-flex"><p>Deadline:</p><p style="margin-left: 124px;"> {{project1.deadline}}</p></div>
+          <div style="display: inline-flex;"><p>Description:</p><p style="margin-left:108px">{{project1.description}}</p></div>
+          <div style="display: inline-flex;"><p>Due:</p><p style="margin-left: 160px;"> {{project1.due}}</p></div>
 
-          <p class="card-text">Status : {{project1.status}}</p>
+          <div style="display:inline-flex;"><p>Status:</p><p style="margin-left: 146px;"> {{project1.status}}</p></div>
 
 
 

@@ -159,7 +159,7 @@ addTask(){
   this.viewTaskService.addTask(JSON.stringify(data)).subscribe(
     res=>{
       console.log(res)
-      this.messageService.add({severity:'success',summary: 'New Team member added...',life:2000})
+      this.messageService.add({severity:'success',summary: 'New Task added...',life:2000})
       this.getTask()
   },err=>{
     console.log(err)
