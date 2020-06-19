@@ -33,11 +33,12 @@
         </th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-leavetype  let-i="index">
+    <ng-template pTemplate="body" let-leavetype let-i="index">
       <tr>
-        <td>{{i}}</td>
         <td>{{leavetype.value}}</td>
         <td>{{leavetype.description}}</td>
+        <td>{{leavetype.number_of_leaves}}</td>
+
 
         <td #id [attr.data-id]="leavetype.id">
           <div class="ui-toolbar-group-center">
@@ -64,6 +65,10 @@
           placeholder="Enter Leave Type">
       </div>
       <div class="form-group">
+        <label for=""> Number of leaves</label>
+        <input class="form-control" id="numberOfLeaves" type="text" name="" value=" {{leaveName}}">
+      </div>
+      <div class="form-group">
         <label for="">Description</label>
         <input type="text" class="form-control" required id="desc" placeholder="Description">
       </div>
@@ -86,6 +91,11 @@
         <label>Leave Type:</label>
         <input class="form-control" id="editleavename" type="text" name="" value=" {{leaveName}}">
       </div>
+      <div class="form-group">
+        <label for=""> Number of leaves</label>
+        <input class="form-control" id="numberOfLeaves" type="text" name="" value=" {{leaveName}}">
+      </div>
+
       <div class="form-group">
         <label for=""> Description</label>
 

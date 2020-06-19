@@ -14,10 +14,10 @@ declare var $: any;
   selector: 'app-leavetype',
   templateUrl: './leavetype.component.html',
   styleUrls: ['./leavetype.component.css'],
-  providers:[MessageService]
+  providers: [MessageService]
 
 })
-export class LeavetypeComponent implements  OnInit {
+export class LeavetypeComponent implements OnInit {
   public ifHR: boolean = false;
   public page: number = 1;
   public showLeaveType: boolean = false;
@@ -33,19 +33,19 @@ export class LeavetypeComponent implements  OnInit {
   first = 0;
   rows = 10;
   public i
-  constructor(private activeRoute: ActivatedRoute, private accountService: AccountServiceService, private router: Router, private leavesService: LeavesService, public principle: PrincipleService, private renderer: Renderer2,private messageservice:MessageService) { }
+  constructor(private activeRoute: ActivatedRoute, private accountService: AccountServiceService, private router: Router, private leavesService: LeavesService, public principle: PrincipleService, private renderer: Renderer2, private messageservice: MessageService) { }
   ngOnInit(): void {
 
     this.cols = [
 
-      { field: "sno", header: "S.No" },
       { field: "leavetype", header: "Leave-Type" },
       { field: "description", header: "Description" },
+      { field: "numberOfLeaves", header: "Number" },
       { field: "action", header: "Action" },
     ];
 
 
-    
+
     this.findLeaveType();
     this.ifHRrole()
   }
@@ -70,16 +70,16 @@ export class LeavetypeComponent implements  OnInit {
   isFirstPage(): boolean {
     return this.first === 0;
   }
-public id;
+  public id;
   showCreateDialog() {
     this.showCreateLeaveType = true;
   }
   showEditDialog(id) {
-    this.id=(id.getAttribute('data-id'))
+    this.id = (id.getAttribute('data-id'))
     this.showEditLeaveType = true;
   }
   showDeleteDialog(id) {
-    this.id=(id.getAttribute('data-id'))
+    this.id = (id.getAttribute('data-id'))
     this.showDeleteLeaveType = true;
   }
   closeDialog() {
@@ -149,6 +149,7 @@ public id;
   addLeaveType() {
     let data = JSON.stringify({
       "value": $('#leavetype').val(),
+      "number_of_leaves": $('#numberOfLeaves').val(),
       "description": $('#desc').val()
     });
     this.leavesService.addLeaveType(data).subscribe(
@@ -156,16 +157,16 @@ public id;
         this.leaveType = res;
         console.log(res)
         this.findLeaveType()
-        this.messageservice.add({severity:'success',summary:'Leave Type successfully added!!'})
+        this.messageservice.add({ severity: 'success', summary: 'Leave Type successfully added!!' })
       },
       err => {
         console.log(err);
-        this.messageservice.add({severity:'error',summary:'Some error occurred!!'})
+        this.messageservice.add({ severity: 'error', summary: 'Some error occurred!!' })
 
 
       }
     )
-   
+
   }
 
 
@@ -174,6 +175,7 @@ public id;
     let data = {
       'id': this.id,
       'value': $('#editleavename').val(),
+      "number_of_leaves": $('#numberOfLeaves').val(),
       'description': $('#editleavedesc').val()
 
     }
@@ -182,14 +184,14 @@ public id;
       res => {
         console.log(res)
         this.findLeaveType()
-        this.messageservice.add({severity:'success',summary:'Leave Type Updated'})
+        this.messageservice.add({ severity: 'success', summary: 'Leave Type Updated' })
       },
       err => {
         console.log(err)
-        this.messageservice.add({severity:'warn',summary:'Some error Occurred'})
+        this.messageservice.add({ severity: 'warn', summary: 'Some error Occurred' })
       }
     )
-    
+
     this.editDetails = false;
 
   }
@@ -203,14 +205,14 @@ public id;
       res => {
         console.log(res)
         this.findLeaveType()
-        this.messageservice.add({severity:'error',summary:'Leave Type Deleted'})
+        this.messageservice.add({ severity: 'error', summary: 'Leave Type Deleted' })
       },
       err => {
         console.log(err)
-        this.messageservice.add({severity:'warn',summary:'Some Error Occurred'})
+        this.messageservice.add({ severity: 'warn', summary: 'Some Error Occurred' })
       }
     )
-   
+
   }
 }
 
