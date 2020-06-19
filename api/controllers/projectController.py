@@ -126,3 +126,10 @@ def updateProjectStatus(request):
     project_data = json.loads(request.body)
     projectService.updateProjectStatus(project_data)
     return JsonResponse({"message": "PROJECT STATUS UPDATED"}, safe=False, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getNumbersOfProjects(request):
+    projects_detail = projectService.getNumberOfProject()
+    return JsonResponse(projects_detail, safe=False, status=status.HTTP_200_OK)

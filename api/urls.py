@@ -63,6 +63,7 @@ urlpatterns = [
     path('project/getTeam', projectController.getTeamDetail, name='get team detail'),
     path('project/getFreeEmployee', projectController.getFreeEmployee, name='get free employees'),
     path('project/updateProjectStatus', projectController.updateProjectStatus, name='update working status'),
+    path('project/getNumberOfProjects', projectController.getNumbersOfProjects, name='get numbers of projects'),
 
     path('permission/add', permissionController.addPermission, name='add permission'),
     path('permission/get', permissionController.getPermissionDetail,

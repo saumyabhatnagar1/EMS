@@ -64,3 +64,15 @@ def getAllComments(task_id):
 def updateProjectStatus(project_data):
     projectMapper.updateProject(project_data)
     projectMapper.updateEmployeeWorkingStatus(project_data)
+
+
+def getNumberOfProject():
+    projects = projectMapper.findProjects()
+    projects_detail = {
+        "total": len(projects),
+        "not started": len(projects.filter(status=0)),
+        "in progress": len(projects.filter(status=1)),
+        "completed": len(projects.filter(status=2)),
+        "stuck": len(projects.filter(status=3))
+    }
+    return projects_detail
