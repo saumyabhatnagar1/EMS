@@ -33,8 +33,9 @@
         </th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-leavetype let-i="index">
+    <ng-template pTemplate="body" let-leavetype let-i="rowIndex">
       <tr>
+        <td>{{i+1}}</td>
         <td>{{leavetype.value}}</td>
         <td>{{leavetype.description}}</td>
         <td>{{leavetype.number_of_leaves}}</td>
@@ -60,17 +61,17 @@
   <div class="">
     <form>
       <div class="form-group">
-        <label for="">Leave Type</label>
-        <input type="text" class="form-control" required id="leavetype" aria-describedby="emailHelp"
+        <label for="">Leave Type</label>r
+        <input type="text" class="form-control"  required id="leavetype" aria-describedby="emailHelp"
           placeholder="Enter Leave Type">
       </div>
       <div class="form-group">
         <label for=""> Number of leaves</label>
-        <input class="form-control" id="numberOfLeaves" type="text" name="" value=" {{leaveName}}">
+        <input class="form-control" id="numberOfLeaves"  placeholder="Maximum_No_Of_Leaves" type="text" name="">
       </div>
       <div class="form-group">
         <label for="">Description</label>
-        <input type="text" class="form-control" required id="desc" placeholder="Description">
+        <input type="text" class="form-control" required id="desc"  placeholder="Description">
       </div>
     </form>
 
@@ -86,20 +87,20 @@
 
 <p-dialog header="Edit Leave Type" [style]="{'width':'80vh'}" [(visible)]="showEditLeaveType">
   <div class="">
-    <form action="">
+    <form action="" [formGroup]="editForm">
       <div class="form-group">
         <label>Leave Type:</label>
-        <input class="form-control" id="editleavename" type="text" name="" value=" {{leaveName}}">
+        <input class="form-control" id="editleavename"  formContolName="type" type="text" name="" value=" {{leaveName}}">
       </div>
       <div class="form-group">
         <label for=""> Number of leaves</label>
-        <input class="form-control" id="numberOfLeaves" type="text" name="" value=" {{leaveName}}">
+        <input class="form-control" id="numberOfLeaves"  formControlName="max_leaves" type="text" name="" value=" {{leaveName}}">
       </div>
 
       <div class="form-group">
         <label for=""> Description</label>
 
-        <textarea class="form-control" id="editleavedesc" type="text" value="{{leaveDesc}}" cols="10"
+        <textarea class="form-control" id="editleavedesc"  formControlName="description" type="text" value="{{leaveDesc}}" cols="10"
           rows="5"></textarea>
       </div>
     </form>

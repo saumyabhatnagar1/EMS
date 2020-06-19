@@ -32,7 +32,7 @@
                 </th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-leave let-i="index">
+        <ng-template pTemplate="body" let-leave let-i="rowIndex">
             <tr>
                 <!-- <td>{{employee.sno}}</td> -->
                 <td>{{i+1}}</td>
@@ -40,8 +40,14 @@
                 <td>{{leave.date}}</td>
                 <td>{{leave.description}}</td>
                 <td>{{leave.posting_date}}</td>
-                <td>{{leave.admin_remark}}</td>
-                <td>{{leave.admin_remark_date}}</td>
+                <td>
+                    <p *ngIf="leave.admin_remark==''">NA</p>
+                    <p *ngIf="leave.admin_remark!=''">{{leave.admin_remark}}</p>
+                </td>
+                <td>
+                    <p *ngIf="leave.admin_remark_date==null">NA</p>
+                    <p *ngIf="leave.admin_remark_date!=null">{{leave.admin_remark_date}}</p>
+                </td>
                 <td>{{leave.status}}</td>
             </tr>
         </ng-template>

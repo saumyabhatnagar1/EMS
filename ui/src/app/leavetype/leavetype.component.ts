@@ -33,11 +33,16 @@ export class LeavetypeComponent implements OnInit {
   first = 0;
   rows = 10;
   public i
+  editForm = new FormGroup({
+    type: new FormControl(''),
+    max_leaves: new FormControl(''),
+    description: new FormControl(''),
+  })
   constructor(private activeRoute: ActivatedRoute, private accountService: AccountServiceService, private router: Router, private leavesService: LeavesService, public principle: PrincipleService, private renderer: Renderer2, private messageservice: MessageService) { }
   ngOnInit(): void {
 
     this.cols = [
-
+      {field : "S.No.", header : 'S.No'},
       { field: "leavetype", header: "Leave-Type" },
       { field: "description", header: "Description" },
       { field: "numberOfLeaves", header: "Number" },
@@ -122,6 +127,8 @@ export class LeavetypeComponent implements OnInit {
       this.leave_types.push(leavesTypeData[index][1]);
     }
     console.log(this.leave_types)
+
+
   }
 
   public leaveData: any;
@@ -158,6 +165,7 @@ export class LeavetypeComponent implements OnInit {
         console.log(res)
         this.findLeaveType()
         this.messageservice.add({ severity: 'success', summary: 'Leave Type successfully added!!' })
+        
       },
       err => {
         console.log(err);
@@ -166,6 +174,8 @@ export class LeavetypeComponent implements OnInit {
 
       }
     )
+    
+
 
   }
 
