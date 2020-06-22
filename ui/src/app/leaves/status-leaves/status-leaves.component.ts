@@ -77,13 +77,16 @@ isFirstPage(): boolean {
     this.pageOfItems = pageOfItems;
   }
   getAllLeaves(){
-      this.leavesService.getLeavesByUsername(JSON.stringify({"emp_id":this.principle.getUsername() })).subscribe(
+    let data={
+      username:this.principle.getUsername()
+    }
+      this.leavesService.getLeavesByUsername(JSON.stringify(data)).subscribe(
         res=>{        
               if(res["status"] == 400){
                 this.router.navigate(['']);
                 //no leaves found//// 
               }else{
-                this.appendLeaves(res);
+                this.appendLeaves(res)
                 console.log(res)
               }
         },err=>{
@@ -95,11 +98,6 @@ isFirstPage(): boolean {
       this.leaves = [];     
       for(let index = 0; index<leavesData.length;index++){
           this.leaves.push(leavesData[index][1]);
-          if(!this.leaves[index].approved){
-            this.leaves[index].status = "Pending";
-          }else{
-            this.leaves[index].status = "Approved";
-          }
       }
       console.log(this.leaves)
   }

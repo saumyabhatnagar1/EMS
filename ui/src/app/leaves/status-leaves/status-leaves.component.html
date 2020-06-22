@@ -48,7 +48,11 @@
                     <p *ngIf="leave.admin_remark_date==null">NA</p>
                     <p *ngIf="leave.admin_remark_date!=null">{{leave.admin_remark_date}}</p>
                 </td>
-                <td>{{leave.status}}</td>
+                <td>
+                     <div *ngIf="leave.status==0">Pending</div>
+                     <div *ngIf="leave.status==1">Accepted</div>
+                     <div *ngIf="leave.status==2">Rejected</div>
+                </td>
             </tr>
         </ng-template>
 

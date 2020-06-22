@@ -160,10 +160,10 @@ saveLeaveStatus(){
     }
     let data=
       {
-        'emp_id':this.emp_id,
-        'date':this.date,
-        'admin_remark': $('#leavesDesc').val(),
-        'status': status,
+        emp_id:this.emp_id,
+        date:this.date,
+        admin_remark: $('#leavesDesc').val(),
+        status: status,
 
       }
       
