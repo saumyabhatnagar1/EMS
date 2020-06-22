@@ -6,16 +6,16 @@ from . import views
 
 urlpatterns = [
     path('accounts/createAccount/',
-         accountController.createAccount, name='create Account'),
+         accountController.createAccount, name='create Account'),#used
     path('accounts/getAccount/', views.getAccount, name='getAccount Account'),
     path('accounts/getAllAccounts/',
-         accountController.getAllAccounts, name='get All accounts'),
+         accountController.getAllAccounts, name='get All accounts'),#used
 
     path('principle/', principleController.index, name='principle'),
     path('account/profile', accountController.getUserProfile, name='profile'),
     path('accounts/', accountController.getAllAccounts, name='get all accounts'),
     path('account/updateProfile',
-         accountController.updateUserProfile, name='update Profile'),
+         accountController.updateUserProfile, name='update Profile'),#problem
     path('account/countEmployeeByGender', accountController.countEmployeeByGender, name='count employee by gender'),
 
     path('timesheets/add/', timesheetsController.add, name='add time sheet'),
@@ -39,7 +39,7 @@ urlpatterns = [
     path('leavetype/delete', leavesController.deleteLeaveType,
          name='delete leave type'),
     path('leaves/fetchAll', leavesController.findAllLeaves,
-         name='all leaves detail'),
+         name='all leaves detail'),#problem
     path('leavetype/findById', leavesController.getLeaveTypeById,
          name='leave type by id'),
 
@@ -60,10 +60,10 @@ urlpatterns = [
     path('task/getAllComments', projectController.getAllComments, name='get all comments'),
     path('project/addTeamMember',
          projectController.addTeamMember, name='add team member'),
-    path('project/getTeam', projectController.getTeamDetail, name='get team detail'),
+    path('project/getTeam', projectController.getTeamDetail, name='get team detail'),#to be used
     path('project/getFreeEmployee', projectController.getFreeEmployee, name='get free employees'),
-    path('project/updateProjectStatus', projectController.updateProjectStatus, name='update working status'),
-    path('project/getNumberOfProjects', projectController.getNumbersOfProjects, name='get numbers of projects'),
+    path('project/updateProjectStatus', projectController.updateProjectStatus, name='update working status'),#to be used
+    path('project/getNumberOfProjects', projectController.getNumbersOfProjects, name='get numbers of projects'),# to be used
 
     path('permission/add', permissionController.addPermission, name='add permission'),
     path('permission/get', permissionController.getPermissionDetail,
