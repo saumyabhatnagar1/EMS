@@ -16,7 +16,9 @@ import { SelectItem, MessageService } from 'primeng/api';
 
 })
 export class NewLeavesComponent implements OnInit{
-    public remainingLeaves:number=21;
+    public remainingLeaves:number=0;
+    public sick_remaining;
+    public vacation_remaining;
     leaves = [];
 
 
@@ -29,7 +31,8 @@ export class NewLeavesComponent implements OnInit{
     constructor(private messageservice:MessageService,private fb: FormBuilder,private activeRoute:ActivatedRoute,private notificationService:NotificationService,private leavesService:LeavesService,public principle:PrincipleService) { }
     
     ngOnInit(): void {
-      this.findLeaveType()
+      this.findLeaveType();
+      this.getRemainingLeaves();
       
     }
    
@@ -63,7 +66,7 @@ export class NewLeavesComponent implements OnInit{
       err=>{
         this.messageservice.add({severity:'error',summary:'Somer Error Occured'})
     });
-    
+    this.getRemainingLeaves();
   }
   public leave_types=[];
   findLeaveType(){
@@ -82,6 +85,26 @@ export class NewLeavesComponent implements OnInit{
         this.leave_types.push(leavesTypeData[index][1]);
     }
     console.log(this.leave_types)
+}
+
+getRemainingLeaves(){
+    let emp_id=this.principle.getUsername();
+  this.leavesService.getRemainingLeaves(emp_id).subscribe((response:any)=>{
+    console.log(response)
+    if(response && response.length>0){
+      this.remainingLeaves=0;
+      let keys = Object.keys(response[0]['leavesLeft']);
+      // keys.forEach((k)=>{
+      //   this.remainingLeaves+=response[0]['leavesLeft'][k];
+      // })
+      for(let i=0;i<keys.length;i++){
+        let a=keys[i]
+        this.remainingLeaves+=response[0]['leavesLeft'][a];
+      }
+   }
+  },error=>{
+    console.log(error);
+  })
 }
 
 

@@ -59,5 +59,15 @@ export class LeavesService{
     deleteLeaveType(data){
         return this.http.post(this.globalService.baseApiUrl+'leavetype/delete',data)
     }
+
+    
+
+    getRemainingLeaves(data){
+        const headers=new HttpHeaders({
+            'Content-type':'application/json',
+            'Authorization':'Bearer '+this.principle.getItem('jwt_token')
+        })
+        return this.http.get(this.globalService.baseApiUrl+'leaves/findByUsername?emp_id='+data,{headers:headers});
+    }
 }
 
