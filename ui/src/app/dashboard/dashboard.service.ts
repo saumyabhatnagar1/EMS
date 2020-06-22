@@ -41,6 +41,13 @@ export class DashboardService {
   })
   return this.http.get(this.globalservice.baseApiUrl+'getAllNotices/',{headers:headers});
   }
+  getWorkingHourByMonth(data){
+    const headers=new HttpHeaders({
+      'Content-type':'application/json',
+      'Authorization':'Bearer '+this.principle.getItem('jwt_token')
+  })
+  return this.http.post(this.globalservice.baseApiUrl+'timesheets/getByMonth',data,{headers:headers}) 
+  }
 
 
 

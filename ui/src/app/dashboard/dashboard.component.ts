@@ -63,11 +63,12 @@ export class DashboardComponent implements OnInit {
 
     
     this.getEmpByGender()
-    this.fetchAllTimesheets()
     this.getNotices()
     this.getNoticesByType('broadcast')
     this.getNoticesByType('event')
     this.get_profile()
+    this.getTimesheetByMonth()
+    
 
 
   }
@@ -127,7 +128,25 @@ export class DashboardComponent implements OnInit {
       "Approved",
     ]
   }
+  
+getTimesheetByMonth(){
 
+  let data={
+    year:2020,
+    month:6,
+    emp_id:this.principle.getUsername()
+  }
+  this.dashboardService.getWorkingHourByMonth(data).subscribe(
+    res=>{
+      
+      console.log(res)
+      this.appendTimesheets(res)
+    },
+    err=>{
+      console.log(err)
+    }
+  )
+}
   togglePolarMonthly() {
     this.togglePolar = false
     this.toggleButton = false
@@ -140,33 +159,21 @@ export class DashboardComponent implements OnInit {
   }
 
   addLabel(msg) {
-    let in_time_hour=+msg[3].split(':')[0]
-    let in_time_min=+msg[3].split(':')[1]
-    let out_time_min=+msg[4].split(':')[1]
-    let out_time_hour=+msg[4].split(':')[0]
-
-    // let working_time=`${out_time_hour-in_time_hour}:${Math.abs(out_time_min-in_time_min)}`
-    let working_time=out_time_hour-in_time_hour+Math.abs(out_time_min-in_time_min)
-
-    console.log(working_time)
-    this.dataArray.push(working_time)
-    this.labelArray.push(msg[1])
-    // for (let i = 0; i < msg.length; i++) {
-    //   let date = `${msg[i].date}-${msg[i].month}-${msg[i].year}`
-    //   this.labelArray.push(date)
-
-    //   let workingMinutes = +this.msg.hours * 60 + this.msg[i].timings.out_time.minutes - (+this.msg[i].timings.in_time.hours * 60 + this.msg[i].timings.in_time.minutes)
-    //   let workingHours = workingMinutes / 60
-    //   let working = Math.floor(workingMinutes / 60) + Math.floor(workingMinutes % 60) * 0.01
-     
-    //   this.dataArray.push(working)
+  
+    for(let i=0;i<msg.length;i++){
+      let out_hour=+msg[i].out_time.split(':')[0]
+      let out_min=+msg[i].out_time.split(':')[1]
+      let in_min=+msg[i].in_time.split(':')[1]
+      let in_hour=+msg[i].in_time.split(':')[0]
+    
+      let working_hours=`${Math.abs(out_hour-in_hour)}.${Math.abs(out_min-in_min)}`
+      console.log(working_hours)
+      this.dataArray.push(working_hours)
+      this.labelArray.push(msg[i].date)
+    }
 
 
-    // }
-
-
-
-    console.log(this.dataArray)
+    console.log(msg)
 
 
   }
@@ -195,16 +202,7 @@ export class DashboardComponent implements OnInit {
           }
         }
       ],
-      xAxes: [
-        {
-          gridLines: {
-            display: true
-          },
-          ticks: {
-            beginAtZero: false
-          }
-        }
-      ],
+      
       
     }
   };
@@ -232,25 +230,25 @@ export class DashboardComponent implements OnInit {
 
 
 
-  fetchAllTimesheets() {
-    let data={
-      emp_id:this.principle.getUsername(),
-      date:'2020-06-16'
-    }
-    this.dashboardService.fetchAllTimesheet(JSON.stringify(data)).subscribe(
-      res => {
-        this.msg = res
-        console.log(res)
-        this.appendTimesheets(res)
+  // fetchAllTimesheets() {
+  //   let data={
+  //     emp_id:this.principle.getUsername(),
+  //     date:'2020-06-16'
+  //   }
+  //   this.dashboardService.fetchAllTimesheet(JSON.stringify(data)).subscribe(
+  //     res => {
+  //       this.msg = res
+  //       console.log(res)
+  //       this.appendTimesheets(res)
 
-      },
-      err => {
-        console.log(err);
-      }
-    );
+  //     },
+  //     err => {
+  //       console.log(err);
+  //     }
+  //   );
 
 
-  }
+  // }
 
   public timesheets;
 
