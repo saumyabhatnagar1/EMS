@@ -14,10 +14,9 @@ def getLeaveDetail(username):
 def getLeavesLeft(username):
     leaves = leaveMapper.findLeaveDetail(username)
     leaveTypes = leaveMapper.getLeaveType()
-    leavesThisYear = leaves.filter(date__year=timezone.now().year)
     leavesLeft = {}
     for leaveType in leaveTypes:
-        temp = leavesThisYear.filter(leave_type__contains=leaveType.value).filter(date__year=timezone.now().year)
+        temp = leaves.filter(leave_type=str(leaveType.value)).filter(date__year=timezone.now().year)
         leavesLeft[leaveType.value] = leaveType.number_of_leaves - len(temp)
     return leavesLeft
 
