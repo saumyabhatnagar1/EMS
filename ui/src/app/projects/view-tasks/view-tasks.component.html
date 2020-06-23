@@ -11,7 +11,7 @@
             </div>
             <div class="col-sm">
                 <button pButton type="button" icon="pi pi-plus-circle" style="position: relative;float:right;"
-                    label="Add Tasks" (click)="showDialog()">
+                    label="Add Tasks" (click)="showDialog();getTeam()">
                 </button>
             </div>
         </div>
@@ -84,8 +84,8 @@
             </div>
 
             <div class="form-group">
-                <label for="employees">Assign To</label> <br>
-                <p-multiSelect formControlName="assignTo" [options]="employees" id="employees"></p-multiSelect>
+                <label for="projectTeam">Assign To</label> <br>
+                <p-multiSelect formControlName="assignTo" [options]="projectTeam" id="projectTeam"></p-multiSelect>
             </div>
 
         </form>
@@ -121,16 +121,16 @@
             (click)="addComment()"></button>
         <br><br>
         <div style="height:100px;overflow:auto">
-        <div *ngFor='let comment of comments;'>
+            <div *ngFor='let comment of comments;'>
 
-            <p><b> {{comment.username}} </b>, <span class="text-muted"> {{comment.date}}</span> </p>
-            <p>{{comment.comment}}</p>
-            <br>
-        </div>    
+                <p><b> {{comment.username}} </b>, <span class="text-muted"> {{comment.date}}</span> </p>
+                <p>{{comment.comment}}</p>
+                <br>
+            </div>
 
         </div>
 
-<!--         
+        <!--         
         <p-virtualScroller [value]="comments" scrollHeight="500px" [itemSize]="150">
             <ng-template pTemplate="item" let-comment>
                   <p>  {{comment.username}}</p>
