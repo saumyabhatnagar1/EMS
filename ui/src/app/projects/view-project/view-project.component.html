@@ -13,7 +13,8 @@
           </p>
           <form [formGroup]="addMemberForm">
             <div class="form-group">
-              <p-multiSelect formControlName="newTeamMember" [options]="employees" id="employees"></p-multiSelect>
+              <p-multiSelect formControlName="newTeamMember" [options]="freeEmployees" id="freeEmployees">
+              </p-multiSelect>
               <!-- <p-dropdown formControlName="newTeamMember" [options]="employees" id="employees"></p-dropdown> -->
             </div>
           </form>

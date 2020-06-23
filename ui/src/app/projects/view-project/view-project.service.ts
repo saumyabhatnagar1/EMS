@@ -34,4 +34,11 @@ export class ViewProjectService {
     })
     return this.http.post(this.globalService.baseApiUrl + 'project/addTeamMember', data, { headers: headers })
   }
+  getFreeEmployees() {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer ' + this.principle.getItem('jwt_token')
+    })
+    return this.http.get(this.globalService.baseApiUrl + 'project/getFreeEmployee', { headers: headers })
+  }
 }

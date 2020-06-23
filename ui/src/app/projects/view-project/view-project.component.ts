@@ -31,7 +31,7 @@ export class ViewProjectComponent implements OnInit {
     //this.addTeamMember()
     this.getProjectById()
     this.getEmployeeData()
-
+    this.getFreeEmployeeData()
 
   }
 
@@ -57,7 +57,7 @@ export class ViewProjectComponent implements OnInit {
         { label: res[i].name, value: res[i].username }
       )
     }
-    console.log(this.employees)
+    //console.log(this.employees)
   }
 
   getProjectById() {
@@ -84,7 +84,7 @@ export class ViewProjectComponent implements OnInit {
     }
     this.getTeamById()
 
-    console.log(this.project)
+    //console.log(this.project)
   }
 
   public teams1 = []
@@ -96,7 +96,7 @@ export class ViewProjectComponent implements OnInit {
 
     this.viewProjectService.getTeamById(JSON.stringify(data)).subscribe(
       res => {
-        console.log(res)
+        //console.log(res)
         this.teams = res;
         console.log(this.teams)
         let res1 = Object.entries(res)
@@ -121,22 +121,22 @@ export class ViewProjectComponent implements OnInit {
   addTeamMember() {
 
     let teamMember = this.addMemberForm.get('newTeamMember').value
-    console.log(teamMember)
+    //console.log(teamMember)
     let str = teamMember[0]
 
     for (let i = 1; i < teamMember.length; i++) {
       str = str + ',' + teamMember[i]
     }
-    console.log(str)
+    //console.log(str)
 
     let data = {
       'project_id': this.id,
       'emp_id': str
     }
-    console.log(data)
+    //console.log(data)
     this.viewProjectService.addTeamMember(JSON.stringify(data)).subscribe(
       res => {
-        console.log(res)
+        //console.log(res)
         this.messageservice.add({ severity: 'success', summary: 'New Team member added...', life: 2000 })
         // setTimeout(() => {
         //   window.location.reload()
@@ -149,14 +149,33 @@ export class ViewProjectComponent implements OnInit {
         console.log(err)
       }
     )
+  }
 
 
+  public freeEmployees: SelectItem[];
+  getFreeEmployeeData() {
+    this.viewProjectService.getFreeEmployees().subscribe(res => {
+      this.formatFreeEmployeesData(res)
+      console.log(res)
+      //this.employees = res;
 
+    }, err => {
+      console.log(err);
+    });
 
+  }
 
+  formatFreeEmployeesData(res) {
+    //console.log(res)
+    this.freeEmployees = []
 
-
-
+    for (let i = 0; i < res.length; i++) {
+      this.freeEmployees.push(
+        { label: res[i].username, value: res[i].username }
+      )
+    }
+    console.log(this.freeEmployees)
+    console.log("test")
   }
 
 
