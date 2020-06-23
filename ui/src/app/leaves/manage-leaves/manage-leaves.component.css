@@ -1,0 +1,11 @@
+
+
+button[type=button].disabled{
+    background:red;
+    }
+    .disabled {
+        background:red;
+    }
+    btn btn-primary disabled{
+        background:red;
+    }
