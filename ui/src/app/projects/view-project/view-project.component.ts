@@ -23,6 +23,13 @@ export class ViewProjectComponent implements OnInit {
   public project = []
   public value: number = 50;
   public project1: any;
+  public status: SelectItem[] = [
+    { label: 'Not Started', value: 0 },
+    { label: 'In Progress', value: 1 },
+    { label: 'Completed', value: 2 },
+    { label: 'Stuck', value: 3 },
+
+  ];
   ngOnInit(): void {
     this.activeRoute.paramMap.subscribe(params => {
       this.id = params.get('id')
@@ -178,7 +185,26 @@ export class ViewProjectComponent implements OnInit {
     console.log("test")
   }
 
+  public statusForm = new FormGroup({
+    'status': new FormControl(''),
 
+  })
+
+
+  updateProjectStatus(){
+    let data ={
+      'id' : this.id,
+      'status' : this.statusForm.get('status').value
+    }
+    this.viewProjectService.updateProjectStatus(data).subscribe(res =>{
+        console.log(res)
+        this.getProjectById()
+        this.messageservice.add({ severity: 'success', summary: 'Project Status updated...', life: 2000 })
+    },
+    err=>{
+       console.log(err) 
+    }) 
+   }
 
 }
 

@@ -41,4 +41,12 @@ export class ViewProjectService {
     })
     return this.http.get(this.globalService.baseApiUrl + 'project/getFreeEmployee', { headers: headers })
   }
+
+  updateProjectStatus(body){
+    const headers=new HttpHeaders({
+      'Content-type':'application/json',
+      'Authorization':'Bearer '+this.principle.getItem('jwt_token')
+  })
+    return this.http.post(this.globalService.baseApiUrl+'project/updateProjectStatus',body,{headers:headers});
+  }
 }

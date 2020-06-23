@@ -33,10 +33,10 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
         <td >{{project.name}}</td>
         <td>{{project.assignTo}}</td>
         <td>
-            <p *ngIf="project.status==0">New</p>
+            <p *ngIf="project.status==0">Not Started</p>
             <p *ngIf="project.status==1">In progress</p>
             <p *ngIf="project.status==2">Completed</p>
-            <p *ngIf="project.status==3">On Hold</p>
+            <p *ngIf="project.status==3">Stuck</p>
         </td>
         <td>{{project.deadline}}</td>
         <td>{{project.customer_id}}</td>
