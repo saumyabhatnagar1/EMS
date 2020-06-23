@@ -44,7 +44,7 @@ currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
         <div *ngIf="leave.status==1">Accepted</div>
         <div *ngIf="leave.status==2">Rejected</div>
       </td>
-        <td #id [attr.emp-id]="leave.emp_id" [attr.date]="leave.date"><button class="btn btn-primary" id="update" data-toggle="modal" type="button"    [disabled] ="leave.status == 1 || leave.status ==2" data-target="#modalForStatusUpdate" (click)="setEmpId(id)">Update Status</button></td>
+        <td #id [attr.emp-id]="leave.emp_id" [attr.date]="leave.date"><button class="btn-sm btn-primary"  id="update" data-toggle="modal" type="button" [class.show-disabled]="leave.status == 1 || leave.status ==2"   [disabled] ="leave.status == 1 || leave.status ==2" data-target="#modalForStatusUpdate" (click)="setEmpId(id)">Update Status</button></td>
     </tr>
 </ng-template>
 

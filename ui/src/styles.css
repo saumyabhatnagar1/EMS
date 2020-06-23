@@ -14,3 +14,10 @@ html body{
     height: 100%;
     background-color:#f2f2f2    ;
 }
+
+.show-disabled{
+    background-color: white !important;
+    color: grey !important;
+    border:1px solid grey ! important;
+    
+}

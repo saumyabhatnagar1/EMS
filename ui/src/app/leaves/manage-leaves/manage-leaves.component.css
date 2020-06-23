@@ -1,6 +1,6 @@
 
 
-button[type=button].disabled{
+/* button[type=button].disabled{
     background:red;
     }
     .disabled {
@@ -8,4 +8,10 @@ button[type=button].disabled{
     }
     btn btn-primary disabled{
         background:red;
+    } */
+
+    .show-disabled{
+        background-color: white !important;
+        color: grey !important;
+        border: none !important;
     }
