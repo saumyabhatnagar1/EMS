@@ -29,6 +29,8 @@ export class TimesheetsComponent implements OnInit {
   public username: string;
   public isSubmitted: boolean = false;
   public isAdmin: boolean = false;
+  msglength:number=-1;
+
   public timings = new FormGroup({
     in_hours: new FormControl('', Validators.required),
     in_minutes: new FormControl('', Validators.required),
@@ -70,7 +72,9 @@ export class TimesheetsComponent implements OnInit {
     this.timesheetsService.findTimeSheet(JSON.stringify(data)).subscribe(
       res => {
         console.log("message", res)
-        this.message = res["message"];
+        this.message = res
+        this.msglength=1
+
         if (res["data"]) {
           this.id = res["data"]["id"];
           this.timings.patchValue({ "in_hours": res["data"]["timings"]["in_time"]["hours"] });

@@ -34,10 +34,11 @@
     </div>
     <div class="col-sm-3" style="margin-top: 50px; margin-left: 50px;">
 
-      <div class="card row" style="border-radius: 20px; height: 20%;">
-        <div class="card-body" style="padding-left: 50px;">
+      <div *ngIf="msglength>0" class="card row" style="border-radius: 20px; height: 20%;">
+        <div  class="card-body" style="padding-left: 50px;">
           <h5 class="card-title">Status </h5>
-          <h6 class="card-subtitle mb-2 text-muted">{{message}}</h6>
+          <h6 class="card-subtitle mb-2 text-muted">In Time: {{message.in_time}}</h6>
+          <h6 class="card-subtitle mb-2 text-muted">Out Time: {{message.out_time}}</h6>
         </div>
       </div>
 
