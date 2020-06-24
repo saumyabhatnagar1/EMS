@@ -84,15 +84,15 @@
             <a routerLink="/profile" class="nav-link"><i class="material-icons">person</i>Profile</a>
           </li>
 
-          <li class="nav-item" [hidden]="isLoggedIn">
+          <!-- <li class="nav-item" [hidden]="isLoggedIn">
             <a routerLink="/workUpdate" class="nav-link"><i class="material-icons">laptop</i>
               Work-Update</a>
-          </li>
-         <!-- <li class="nav-item" [hidden]="isLoggedIn">
+          </li> -->
+          <!-- <li class="nav-item" [hidden]="isLoggedIn">
 
             <a routerLink="/projects" class="nav-link"><i class="material-icons">assessment</i>Projects</a>
           </li>  -->
-       
+
           <li class="nav-item dropdown" [hidden]="isLoggedIn">
             <a href="" class="nav-link dropdown-toggle" id="navbar-dropdown" role="button" data-toggle="dropdown">
               <i class="material-icons">assessment</i>Projects</a>
@@ -134,7 +134,7 @@
           <li class="nav-item" [hidden]="isLoggedIn">
 
             <a routerLink="/notice-board" class="nav-link"><i class="material-icons">notifications_paused</i>Notice</a>
-          </li> 
+          </li>
 
 
           <li class="nav-item" [hidden]="!isLoggedIn">

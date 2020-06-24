@@ -5,6 +5,8 @@ import { ProfileService } from '../../profile/profile.service';
 import { PrincipleService } from '../../util/principle.service';
 import { NotificationService } from '../../common/services/notification.service';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -30,7 +32,7 @@ export class EditEmployeeComponent implements OnInit {
     mobileNumber: new FormControl(''),
     country: new FormControl(''),
   });
-  constructor(private notificationService: NotificationService, private messageservice: MessageService, private principle: PrincipleService, private activeRoute: ActivatedRoute, private profileService: ProfileService) { }
+  constructor(private notificationService: NotificationService, private messageservice: MessageService, private principle: PrincipleService, private activeRoute: ActivatedRoute, private profileService: ProfileService, private router: Router) { }
 
   ngOnInit(): void {
     this.activeRoute.paramMap.subscribe(params => {
@@ -94,5 +96,7 @@ export class EditEmployeeComponent implements OnInit {
       console.log(err);
       this.notificationService.showFailed("Something went wrong in api");
     });
+    //this.router.navigate(['profile']);
   }
+
 }
