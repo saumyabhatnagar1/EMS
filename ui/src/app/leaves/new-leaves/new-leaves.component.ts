@@ -61,12 +61,13 @@ export class NewLeavesComponent implements OnInit{
 
     this.leavesService.newLeave(data).subscribe(
       res=>{
-        this.messageservice.add({severity:'success',summary:'Leave Request Submitted'})
+        this.messageservice.add({severity:'success',summary:'Leave Request Submitted'});
+        this.getRemainingLeaves();
       },
       err=>{
         this.messageservice.add({severity:'error',summary:'Somer Error Occured'})
     });
-    this.getRemainingLeaves();
+   
   }
   public leave_types=[];
   findLeaveType(){
