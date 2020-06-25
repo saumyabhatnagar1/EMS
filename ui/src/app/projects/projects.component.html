@@ -1,94 +1,102 @@
-<div class="container" >
-<p-toast></p-toast>
-<p-table #dt  [stacked]="true" scrollHeight="200px" [resizableColumns]="true" [autoLayout]="true"  [columns]="cols" [value]="projects"  [paginator]="true" [rows]="7"  [showCurrentPageReport]="true" [(first)]="first"
-currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+<div class="container">
+    <p-toast></p-toast>
+    <p-table #dt [stacked]="true" scrollHeight="200px" [resizableColumns]="true" [autoLayout]="true" [columns]="cols"
+        [value]="projects" [paginator]="true" [rows]="7" [showCurrentPageReport]="true" [(first)]="first"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
 
 
-<ng-template pTemplate="caption">
-    <div class="row">
-        <div class="col-sm">
-            <h2>List of Projects</h2>
-        </div>
-       <div class="col-sm">
-            <button pButton type="button" icon="pi pi-fw pi-user-plus" style="position: relative;float:right;" label="Add Project" (click)="showDialog()">
-            </button>
-        </div> 
-    </div>
-    <div style="text-align: right">        
-        <i class="pi pi-search" style="margin:5px 5px 0 0"></i>
-        <input type="text" pInputText size="37" placeholder="Search" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
-    </div>
-</ng-template>
-<ng-template pTemplate="header" let-columns>
-    <tr>
-        <th *ngFor="let col of columns" [style.width]="col.width" [pSortableColumn]="col.field">
-            {{col.header}}
-            <p-sortIcon [field]="col.field"></p-sortIcon>
-        </th>
-    </tr>
-</ng-template>
-<ng-template pTemplate="body" let-project>
-    <tr>
-        <!-- <td>{{employee.sno}}</td> -->
-        <td >{{project.name}}</td>
-        <td>{{project.assignTo}}</td>
-        <td>
-            <p *ngIf="project.status==0">Not Started</p>
-            <p *ngIf="project.status==1">In progress</p>
-            <p *ngIf="project.status==2">Completed</p>
-            <p *ngIf="project.status==3">Stuck</p>
-        </td>
-        <td>{{project.deadline}}</td>
-        <td>{{project.customer_id}}</td>
-        <td>{{project.complete_percentage}}</td>
-        <td>{{project.description}}</td>
-        <td>{{project.createdOn}}</td>
-        <td>
-            <div class="ui-toolbar-group-center">
-                
-                <button  pButton type="button" icon="pi pi-user-edit" class="ui-button-primary" (click)="viewProject(project.id)"></button>
-                <button  pButton type="button" icon="pi pi-times" class="ui-button-danger"></button>
+        <ng-template pTemplate="caption">
+            <div class="row">
+                <div class="col-sm">
+                    <h2>List of Projects</h2>
+                </div>
+                <div class="col-sm">
+                    <button pButton type="button" icon="pi pi-fw pi-user-plus" style="position: relative;float:right;"
+                        label="Add Project" (click)="showDialog()">
+                    </button>
+                </div>
             </div>
-        </td>
+            <div style="text-align: right">
+                <i class="pi pi-search" style="margin:5px 5px 0 0"></i>
+                <input type="text" pInputText size="37" placeholder="Search"
+                    (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns" [style.width]="col.width" [pSortableColumn]="col.field">
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-project>
+            <tr>
+                <!-- <td>{{employee.sno}}</td> -->
+                <td>{{project.name}}</td>
+                <td>{{project.assignTo}}</td>
+                <td>
+                    <p *ngIf="project.status==0">Not Started</p>
+                    <p *ngIf="project.status==1">In progress</p>
+                    <p *ngIf="project.status==2">Completed</p>
+                    <p *ngIf="project.status==3">Stuck</p>
+                </td>
+                <td>{{project.deadline}}</td>
+                <td>{{project.customer_id}}</td>
+                <!-- <td>{{project.complete_percentage}}</td> -->
+                <td>{{project.description}}</td>
+                <td>{{project.createdOn}}</td>
+                <td>
+                    <div class="ui-toolbar-group-center">
 
-    </tr>
-</ng-template>
-</p-table>
+                        <button pButton type="button" icon="pi pi-user-edit" class="ui-button-primary"
+                            (click)="viewProject(project.id)"></button>
+                        <button pButton type="button" icon="pi pi-times" class="ui-button-danger"></button>
+                    </div>
+                </td>
+
+            </tr>
+        </ng-template>
+    </p-table>
 </div>
 
-<p-dialog header="Create Project" [style]="{'width':'80vh'}"  [(visible)]="showCreateProject">
+<p-dialog header="Create Project" [style]="{'width':'80vh'}" [(visible)]="showCreateProject">
     <div class="">
         <form [formGroup]="projectForm">
-          <div class="form-group">
-            <label for="name">Project Name</label>
-            <input formControlName="name" type="text" class="form-control" required id="name" aria-describedby="nameHelp" placeholder="Enter Name">           
-          </div>
-          
-          <div class="form-group">
-            <label for="employees">Assign To</label> <br>
-          <p-multiSelect formControlName="assignTo" [options]="employees" id="employees" ></p-multiSelect>
-          </div>
-          <div class="form-group">
-            <label for="deadline">Deadline</label>
-            <input formControlName="deadline" type="date" class="form-control" required id="deadline" aria-describedby="nameHelp" placeholder="Enter Name">           
-          </div>
+            <div class="form-group">
+                <label for="name">Project Name</label>
+                <input formControlName="name" type="text" class="form-control" required id="name"
+                    aria-describedby="nameHelp" placeholder="Enter Name">
+            </div>
 
-          <div class="form-group">
-            <label for="description">Description</label>
-            <textarea type="text" formControlName="description" class="form-control" required id="description" aria-describedby="nameHelp" placeholder="Description"></textarea>  
-          </div>
-          <div class="form-group">
-            <label for="">Customer</label> <br>
-            <p-multiSelect formControlName="customer_id" [options]="users"></p-multiSelect>
-          </div>
+            <div class="form-group">
+                <label for="employees">Assign To</label> <br>
+                <p-multiSelect formControlName="assignTo" [options]="employees" id="employees"></p-multiSelect>
+            </div>
+            <div class="form-group">
+                <label for="deadline">Deadline</label>
+                <input formControlName="deadline" type="date" class="form-control" required id="deadline"
+                    aria-describedby="nameHelp" placeholder="Enter Name">
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea type="text" formControlName="description" class="form-control" required id="description"
+                    aria-describedby="nameHelp" placeholder="Description"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="">Customer</label> <br>
+                <p-multiSelect formControlName="customer_id" [options]="users"></p-multiSelect>
+            </div>
         </form>
-        
-        
+
+
     </div>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-        <button type="button" pButton icon="pi pi-times"  label="Cancel" (click)="closeDialog()"></button>
-        <button type="button" pButton icon="pi pi-check" label="Create" (click)="addNewProject();closeDialog()"></button>  
+            <button type="button" pButton icon="pi pi-times" label="Cancel" (click)="closeDialog()"></button>
+            <button type="button" pButton icon="pi pi-check" label="Create"
+                (click)="addNewProject();closeDialog()"></button>
         </div>
     </p-footer>
 </p-dialog>

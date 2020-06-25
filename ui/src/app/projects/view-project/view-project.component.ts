@@ -156,6 +156,7 @@ export class ViewProjectComponent implements OnInit {
         console.log(err)
       }
     )
+
   }
 
 
@@ -191,20 +192,20 @@ export class ViewProjectComponent implements OnInit {
   })
 
 
-  updateProjectStatus(){
-    let data ={
-      'id' : this.id,
-      'status' : this.statusForm.get('status').value
+  updateProjectStatus() {
+    let data = {
+      'id': this.id,
+      'status': this.statusForm.get('status').value
     }
-    this.viewProjectService.updateProjectStatus(data).subscribe(res =>{
-        console.log(res)
-        this.getProjectById()
-        this.messageservice.add({ severity: 'success', summary: 'Project Status updated...', life: 2000 })
+    this.viewProjectService.updateProjectStatus(data).subscribe(res => {
+      console.log(res)
+      this.getProjectById()
+      this.messageservice.add({ severity: 'success', summary: 'Project Status updated...', life: 2000 })
     },
-    err=>{
-       console.log(err) 
-    }) 
-   }
+      err => {
+        console.log(err)
+      })
+  }
 
 }
 
