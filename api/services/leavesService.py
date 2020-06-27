@@ -50,3 +50,8 @@ def findAllLeaveDetail():
 def getLeaveTypeById(leave_type):
     leave_type_data = leaveMapper.getLeaveTypeById(leave_type)
     return leave_type_data
+
+
+def filterLeavesByStatus(username, status):
+    leaves = leaveMapper.findLeaveDetail(username).filter(status=status)
+    return leaves

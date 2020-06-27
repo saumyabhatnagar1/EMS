@@ -82,3 +82,13 @@ def getLeaveTypeById(request):
     response = leavesService.getLeaveTypeById(leave_type)
     serializer = LeaveTypeSerializer(response)
     return JsonResponse(serializer.data, safe=False, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def filterLeavesByStatus(request):
+    status_detail = json.loads(request.body)['status']
+    username = request.user.username
+    leaves = leavesService.filterLeavesByStatus(username, status_detail)
+    serializer = LeaveSerializer(leaves, many=True)
+    return JsonResponse(serializer.data, safe=False, status=status.HTTP_200_OK)

@@ -42,6 +42,7 @@ urlpatterns = [
          name='all leaves detail'),#problem
     path('leavetype/findById', leavesController.getLeaveTypeById,
          name='leave type by id'),
+    path('leaves/filterByStatus', leavesController.filterLeavesByStatus, name='filter by status'),
 
     path('project/new', projectController.addProject, name='add project'),
     path('project/getAll', projectController.getProjects, name='get project'),
