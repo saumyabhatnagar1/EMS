@@ -4,6 +4,7 @@ import { GlobalsService } from './../common/services/globals.service';
 import { Injectable } from '@angular/core';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -48,6 +49,27 @@ export class DashboardService {
   })
   return this.http.post(this.globalservice.baseApiUrl+'timesheets/getByMonth',data,{headers:headers}) 
   }
+  getLeavesByStatus(data){
+    const headers=new HttpHeaders({
+      'Content-type':'application/json',
+      'Authorization':'Bearer '+this.principle.getItem('jwt_token')   
+  })
+  return this.http.post(this.globalservice.baseApiUrl+'leaves/filterByStatus',data,{headers:headers})
+  }
+  getLeavesByUsername(data){
+    const headers=new HttpHeaders({
+        'Content-type':'application/json',
+        'Authorization':'Bearer '+this.principle.getItem('jwt_token')
+    })
+    return this.http.get(this.globalservice.baseApiUrl+'leaves/findByUsername',{headers:headers});
+}
+getRemainingLeaves(data){
+  const headers=new HttpHeaders({
+      'Content-type':'application/json',
+      'Authorization':'Bearer '+this.principle.getItem('jwt_token')
+  })
+  return this.http.get(this.globalservice.baseApiUrl+'leaves/findByUsername?emp_id='+data,{headers:headers});
+}
 
 
 

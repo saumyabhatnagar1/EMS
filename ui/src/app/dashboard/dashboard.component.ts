@@ -25,6 +25,8 @@ export class DashboardComponent implements OnInit {
   toggleButton: boolean = false;
   genderdata = [];
   data: any;
+public leavesData=[]
+
 
 
 
@@ -68,6 +70,8 @@ export class DashboardComponent implements OnInit {
     this.getNoticesByType('event')
     this.get_profile()
     this.getTimesheetByMonth()
+    this.populateLeavesGraph()
+    
     
 
 
@@ -77,15 +81,9 @@ export class DashboardComponent implements OnInit {
   public dataArray = []
 
   togglePolar: boolean = false;
-
   dataMonthly = {
     datasets: [{
-      data: [
-        11,
-        16,
-        7,
-        3,
-      ],
+      data: this.leavesData,
       backgroundColor: [
         "#FF6384",
         "#a6f2f5",
@@ -95,21 +93,21 @@ export class DashboardComponent implements OnInit {
       label: 'My dataset'
     }],
     labels: [
-      "Leaves Left",
-      "Leaves Applied",
-      "Rejected",
       "Approved",
+      "Rejected",
+      "Leaves Applied",
+      "Leaves Rejected",
     ]
   }
-
-
-
-
+  
+  
+  
+  
   dataYearly = {
     datasets: [{
       data: [
-        100,
-        1,
+        20,
+        10,
         70,
         30,
       ],
@@ -128,6 +126,7 @@ export class DashboardComponent implements OnInit {
       "Approved",
     ]
   }
+
   
 getTimesheetByMonth(){
 
@@ -352,6 +351,88 @@ get_profile(){
   }
   );
 }
+
+
+populateLeavesGraph(){
+  this.getLeavesbyStatus(2)
+  this.getLeavesbyStatus(1)
+  this.getRemainingLeaves()
+  this.getTotalLeaves()
+  console.log(this.leavesData)
+
+
+}
+getTotalLeaves(){
+  let leavesApp;
+  this.dashboardService.getLeavesByUsername(JSON.stringify({username:this.principle.getUsername()})).subscribe(
+    res=>{        
+        leavesApp=res
+        this.leavesData.push(leavesApp.length)
+    },err=>{
+         console.log(err);
+  });
+
+}
+ getRemainingLeaves(){
+  let leavesRem;
+  let emp_id=this.principle.getUsername();
+  this.dashboardService.getRemainingLeaves(emp_id).subscribe((response:any)=>{
+    
+    if(response && response.length>0){
+      leavesRem=0;
+      let keys = Object.keys(response[0]['leavesLeft']);
+      // keys.forEach((k)=>{
+      //   this.remainingLeaves+=response[0]['leavesLeft'][k];
+      // })
+      for(let i=0;i<keys.length;i++){
+        let a=keys[i]
+        leavesRem+=response[0]['leavesLeft'][a];
+      }
+      console.log(leavesRem)
+      this.leavesData.push(leavesRem)
+      
+   }
+  },error=>{
+    console.log(error);
+  })
+
+}
+
+
+getLeavesbyStatus(status){
+  let leavesAcc;//object
+  let leavesRej;//object
+
+
+  let data={
+    username:this.principle.getUsername(),
+    status:status
+  }
+  this.dashboardService.getLeavesByStatus(JSON.stringify(data)).subscribe(
+    res=>{
+        if(status==1){
+          leavesAcc=res;
+          this.leavesData.push(leavesAcc.length)
+        }
+        else if(status==2){
+          leavesRej=res 
+          this.leavesData.push(leavesRej.length)
+        }
+
+    },
+    err=>{
+      console.log(err)
+    }
+  )
+  
+    
+    
+    console.log(this.leavesData)
+    
+
+}
+
+
 
 
 }
