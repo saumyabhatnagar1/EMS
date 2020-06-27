@@ -1,3 +1,4 @@
+import { ProfileService } from './../profile/profile.service';
 import { Component, OnInit } from '@angular/core';
 import { PrincipleService } from '../util/principle.service';
 import { AuthService } from '../util/auth.service';
@@ -14,14 +15,14 @@ declare var $: any
 export class NavbarComponent implements OnInit {
   public isLoggedIn: boolean = true;
   public username: string = "";
-  constructor(private principle: PrincipleService, private notificationService: NotificationService, private authService: AuthService, private router: Router) { }
+  constructor(private principle: PrincipleService, private notificationService: NotificationService, private authService: AuthService, private router: Router,private profile :ProfileService) { }
   ngOnInit(): void {
     if (this.principle.getUsername() != undefined) {
       this.isLoggedIn = false;
       this.username = this.principle.getUsername();
     }
     this.getRole()
-
+    this.get_profile()
     $(function () {
       // Sidebar toggle behavior
       $('#sidebarCollapse').on('click', function () {
@@ -37,6 +38,21 @@ export class NavbarComponent implements OnInit {
     this.role = this.principle.getRole()
     if (this.principle.getRole() === "ADMIN")
       this.ifHR = true
+  }
+profiledata:any;
+
+  get_profile(){
+    let data={
+      username:this.principle.getUsername()
+    }
+    this.profile.get_profile(JSON.stringify(data)).subscribe(
+      res=>{
+        this.profiledata=res;
+      },
+      err=>{
+        console.log(err)
+      }
+    )
   }
 
 

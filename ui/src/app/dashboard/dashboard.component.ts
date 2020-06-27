@@ -167,7 +167,7 @@ getTimesheetByMonth(){
       let in_hour=+msg[i].in_time.split(':')[0]
     
       let working_hours=`${Math.abs(out_hour-in_hour)}.${Math.abs(out_min-in_min)}`
-      console.log(working_hours)
+      
       this.dataArray.push(working_hours)
       this.labelArray.push(msg[i].date)
     }
@@ -325,7 +325,6 @@ getNoticesByType(type){
 getNotices(){
   this.noticeService.getAllNotices().subscribe(
     res => {
-      console.log(res)
       this.notices=res
       console.log(this.notices)
     },
