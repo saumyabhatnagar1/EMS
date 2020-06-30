@@ -4,7 +4,7 @@ import { PrincipleService } from '../util/principle.service';
 import { AuthService } from '../util/auth.service';
 import { Router } from '@angular/router';
 import { NotificationService } from '../common/services/notification.service';
-import {OverlayPanelModule} from 'primeng/overlaypanel';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 declare var $: any
 
 @Component({
@@ -15,7 +15,7 @@ declare var $: any
 export class NavbarComponent implements OnInit {
   public isLoggedIn: boolean = true;
   public username: string = "";
-  constructor(private principle: PrincipleService, private notificationService: NotificationService, private authService: AuthService, private router: Router,private profile :ProfileService) { }
+  constructor(private principle: PrincipleService, private notificationService: NotificationService, private authService: AuthService, private router: Router, private profile: ProfileService) { }
   ngOnInit(): void {
     if (this.principle.getUsername() != undefined) {
       this.isLoggedIn = false;
@@ -39,17 +39,26 @@ export class NavbarComponent implements OnInit {
     if (this.principle.getRole() === "ADMIN")
       this.ifHR = true
   }
-profiledata:any;
+  profiledata: any;
+  unameSidebar: any
+  roleSidebar: any
 
-  get_profile(){
-    let data={
-      username:this.principle.getUsername()
+  get_profile() {
+    let data = {
+      username: this.principle.getUsername()
     }
     this.profile.get_profile(JSON.stringify(data)).subscribe(
-      res=>{
-        this.profiledata=res;
+      res => {
+        console.log(res)
+        this.profiledata = res;
+        this.unameSidebar = this.profiledata.username
+        this.roleSidebar = this.profiledata.role
+
+        console.log(this.unameSidebar)
+        console.log(this.roleSidebar)
+
       },
-      err=>{
+      err => {
         console.log(err)
       }
     )
@@ -73,7 +82,7 @@ profiledata:any;
 
   public _toggleSidebar() {
     this._opened = !this._opened;
-    
+
   }
 
 

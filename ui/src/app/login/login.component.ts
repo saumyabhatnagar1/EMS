@@ -8,6 +8,7 @@ import { MessageService } from 'primeng/api';
 import { NavbarComponent } from './../navbar/navbar.component';
 
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -33,6 +34,7 @@ export class LoginComponent implements OnInit {
       "username": this.loginForm.get('email').value,
       "password": this.loginForm.get('password').value
     }
+    console.log("test")
     this._loginService.login(JSON.stringify(user_login_json)).subscribe(
       res => {
         if (res['token']) {
@@ -42,6 +44,7 @@ export class LoginComponent implements OnInit {
               this.principle.setUser(res);
               this.router.navigate(['']);
               this.navbar.isLoggedIn = false
+              this.navbar.get_profile();
 
             }
           }, err => {
@@ -57,4 +60,7 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+
+
+
 }

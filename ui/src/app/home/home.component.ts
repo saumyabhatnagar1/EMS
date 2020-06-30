@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {PrincipleService} from '../util/principle.service';
+import { PrincipleService } from '../util/principle.service';
 import { AuthService } from '../util/auth.service';
 
 
@@ -10,10 +10,16 @@ import { AuthService } from '../util/auth.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private principle:PrincipleService) { }
+  constructor(private principle: PrincipleService) { }
 
   ngOnInit(): void {
+    this.getRole()
+  }
 
+  role: any
+
+  getRole() {
+    this.role = this.principle.getRole()
   }
 
 }
